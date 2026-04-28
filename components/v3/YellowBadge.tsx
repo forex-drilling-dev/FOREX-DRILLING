@@ -7,20 +7,38 @@ type Props = {
 };
 
 /**
- * Asymmetric yellow label — squared on the left, generously rounded on the right.
- * Pattern source: agency reference, top-left "NESCIDIO" tag floating over the navy blob.
+ * Yellow asymmetric label that OVERLAPS the navy blob top-left.
  *
- * Sits as a floating accent — typically absolute-positioned over a blob/section.
+ * Exact spec from agency CSS:
+ *   font-size: 32px
+ *   font-weight: 900
+ *   letter-spacing: 2px
+ *   color: white
+ *   padding: 12px 35px
+ *   border-radius: 12px 30px 30px 12px   (squared left, rounded right)
+ *   box-shadow: 0 4px 6px rgba(0,0,0,0.1)
+ *
+ * Positioning is the caller's job (typically absolute, top:80 left:50,
+ * placed ABOVE the navy blob so it overlaps the blob's top edge — the
+ * shadow then anchors it visually onto the blob).
+ *
+ * z-index must be ABOVE the navy blob in the parent stacking context.
  */
 export function YellowBadge({ children, className }: Props) {
   return (
     <span
       className={cn(
-        "badge-asymmetric inline-flex items-center bg-amber text-white",
-        "px-8 py-3 font-display text-2xl font-black uppercase tracking-[0.12em]",
-        "shadow-card",
+        "inline-flex items-center bg-amber text-white",
+        "font-display font-black uppercase",
+        "px-[35px] py-[12px]",
         className,
       )}
+      style={{
+        fontSize: "32px",
+        letterSpacing: "2px",
+        borderRadius: "12px 30px 30px 12px",
+        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+      }}
     >
       {children}
     </span>

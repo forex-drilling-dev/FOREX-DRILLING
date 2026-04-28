@@ -1,43 +1,62 @@
 import { cn } from "@/lib/utils";
 
 type Props = {
-  /** Mono label above the big number, e.g. "EATEMPED" */
+  /** Mono-style label above the value, e.g. "EATEMPED" */
   label: string;
-  /** Big bold value */
+  /** Big bold numeric value */
   value: string | number;
   className?: string;
-  size?: number;
 };
 
 /**
- * Navy circular speech bubble with a triangular tail bottom-left.
- * Pattern source: agency reference — the dark navy "EATEMPED 15" callout.
+ * Dark-navy circular speech bubble with a triangular tail anchored bottom-left.
  *
- * Used for highlighting a single key stat or callout value.
+ * Exact spec from agency CSS:
+ *   width: 150px; height: 150px
+ *   background: dark-navy (#102142)
+ *   tail: position absolute, bottom: -15px, left: 20px,
+ *         border-width 35px 25px 0 0 (creates downward-pointing triangle)
+ *   label: 14px / weight 600 / letter-spacing 1px
+ *   value: 46px / weight 900 / line-height 1
+ *
+ * Positioning is the caller's job. In the agency hero it OVERLAPS the navy
+ * blob's right edge — the tail visually attaches it back onto the blob,
+ * making it read as a "callout" pulled out of the main panel rather than a
+ * floating widget.
  */
-export function SpeechBubble({ label, value, className, size = 160 }: Props) {
+export function SpeechBubble({ label, value, className }: Props) {
   return (
     <div
-      style={{ width: size, height: size }}
       className={cn(
         "relative flex flex-col items-center justify-center rounded-full",
-        "bg-deep-navy text-on-navy shadow-bubble",
+        "bg-deep-navy text-on-navy",
+        "h-[150px] w-[150px]",
         className,
       )}
+      style={{ boxShadow: "0 10px 20px rgba(16, 33, 66, 0.3)" }}
     >
-      <span className="font-display text-xs font-semibold uppercase tracking-[0.18em]">
+      <span
+        className="font-display font-semibold uppercase"
+        style={{ fontSize: "14px", letterSpacing: "1px" }}
+      >
         {label}
       </span>
-      <span className="mt-1 font-display text-5xl font-black leading-none">
+      <span
+        className="font-display font-black leading-none"
+        style={{ fontSize: "46px", marginTop: "5px" }}
+      >
         {value}
       </span>
-      {/* Tail — triangular pointer, bottom-left */}
+      {/* Tail — bottom-left, points back toward the navy blob */}
       <span
         aria-hidden
-        className="absolute bottom-[-14px] left-[18px] block h-0 w-0"
+        className="absolute block h-0 w-0"
         style={{
-          borderTop: "32px solid var(--color-deep-navy)",
-          borderRight: "22px solid transparent",
+          bottom: "-15px",
+          left: "20px",
+          borderWidth: "35px 25px 0 0",
+          borderStyle: "solid",
+          borderColor: "var(--color-deep-navy) transparent transparent transparent",
         }}
       />
     </div>
