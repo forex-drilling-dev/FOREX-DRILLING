@@ -1,14 +1,21 @@
-import { Barlow_Condensed, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Montserrat, IBM_Plex_Mono } from "next/font/google";
 
-/** Display — Barlow Condensed 700/800, uppercase headlines */
-export const fontDisplay = Barlow_Condensed({
+/**
+ * V3 — single typographic family.
+ * Montserrat covers display headings (700/800/900), section titles (600/700),
+ * and body copy (400/500). One font, full hierarchy via weight + size.
+ *
+ * Variable name preserved as `--font-display-family` so existing class refs
+ * (`font-display`, `font-sans`) keep working.
+ */
+export const fontDisplay = Montserrat({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-display-family",
   display: "swap",
 });
 
-/** Mono — IBM Plex Mono, labels / tags / data badges */
+/** Mono — IBM Plex Mono, kept for tags / data badges */
 export const fontMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -16,22 +23,5 @@ export const fontMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-/** Sans / body — Inter 300/400/500 */
-export const fontSans = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-sans-family",
-  display: "swap",
-});
-
-/**
- * Font swap protocol (when client files arrive):
- * 1. Drop .woff2 files into /public/fonts/
- * 2. Replace the Barlow_Condensed import with:
- *      import localFont from "next/font/local"
- *      export const fontDisplay = localFont({
- *        src: [{ path: "../public/fonts/forex-display-bold.woff2", weight: "700" }],
- *        variable: "--font-display-family",
- *      })
- * 3. --font-display CSS variable propagates everywhere automatically.
- */
+/** Aliased to fontDisplay so any `fontSans.variable` references still resolve */
+export const fontSans = fontDisplay;

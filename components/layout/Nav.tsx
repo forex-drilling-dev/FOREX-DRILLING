@@ -25,12 +25,16 @@ export function Nav() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 h-nav transition-colors duration-base ease-precise",
-        scrolled ? "bg-surface/90 backdrop-blur-md" : "bg-transparent",
+        "fixed inset-x-0 top-0 z-50 h-nav transition-shadow duration-base ease-precise",
+        "bg-white/95 backdrop-blur-md",
+        scrolled && "shadow-card",
       )}
     >
       <Container className="flex h-full items-center justify-between">
-        <Link href="/" className="font-mono text-mono-sm uppercase tracking-widest text-fore">
+        <Link
+          href="/"
+          className="font-display text-base font-extrabold uppercase tracking-[0.12em] text-deep-navy"
+        >
           FOREX <span className="text-amber">//</span> DRILLING
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -43,8 +47,8 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "font-mono text-mono-xs uppercase tracking-widest transition-colors duration-fast",
-                  active ? "text-amber" : "text-subtle hover:text-fore",
+                  "font-display text-xs font-bold uppercase tracking-[0.12em] transition-colors duration-fast",
+                  active ? "text-amber" : "text-deep-navy hover:text-amber",
                 )}
               >
                 {item.label}
@@ -59,7 +63,7 @@ export function Nav() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="font-mono text-mono-xs uppercase text-fore">
+          <span className="font-display text-xs font-bold uppercase tracking-[0.12em] text-deep-navy">
             {open ? "Close" : "Menu"}
           </span>
         </button>
@@ -67,12 +71,12 @@ export function Nav() {
 
       {open && (
         <div className="md:hidden">
-          <Container className="flex flex-col gap-4 border-t border-border bg-surface py-6">
+          <Container className="flex flex-col gap-4 border-t border-border bg-white py-6 shadow-card">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-mono text-mono-sm uppercase text-fore"
+                className="font-display text-sm font-bold uppercase tracking-[0.12em] text-deep-navy hover:text-amber"
               >
                 {item.label}
               </Link>
