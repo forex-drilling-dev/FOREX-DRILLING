@@ -9,7 +9,7 @@ export function Footer() {
       <Container>
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="font-display text-display-md leading-none">
+            <p className="font-display text-display-md leading-none text-fore">
               FOREX
               <br />
               DRILLING
@@ -19,11 +19,11 @@ export function Footer() {
             </p>
           </div>
           <div className="md:col-span-3">
-            <p className="font-mono text-mono-xs uppercase tracking-widest text-muted">Navigate</p>
+            <p className="font-mono text-mono-xs uppercase tracking-widest text-amber">Navigate</p>
             <ul className="mt-4 space-y-2">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-body text-fore hover:text-amber">
+                  <Link href={item.href} className="text-body text-muted hover:text-amber">
                     {item.label}
                   </Link>
                 </li>
@@ -31,11 +31,11 @@ export function Footer() {
             </ul>
           </div>
           <div className="md:col-span-4">
-            <p className="font-mono text-mono-xs uppercase tracking-widest text-muted">Contact</p>
-            <p className="mt-4 text-body text-fore">{site.footer.address}</p>
+            <p className="font-mono text-mono-xs uppercase tracking-widest text-amber">Contact</p>
+            <p className="mt-4 text-body text-muted">{site.footer.address}</p>
             <a
               href={`mailto:${site.footer.email}`}
-              className="mt-2 block text-body text-fore hover:text-amber"
+              className="mt-2 block text-body text-muted hover:text-amber"
             >
               {site.footer.email}
             </a>

@@ -26,7 +26,7 @@ export function Nav() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 h-nav transition-colors duration-base ease-precise",
-        scrolled ? "bg-black/90 backdrop-blur-md" : "bg-transparent",
+        scrolled ? "bg-surface/90 backdrop-blur-md" : "bg-transparent",
       )}
     >
       <Container className="flex h-full items-center justify-between">
@@ -67,7 +67,7 @@ export function Nav() {
 
       {open && (
         <div className="md:hidden">
-          <Container className="flex flex-col gap-4 border-t border-border bg-black py-6">
+          <Container className="flex flex-col gap-4 border-t border-border bg-surface py-6">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
