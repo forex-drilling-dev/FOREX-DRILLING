@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { fontDisplay, fontMono } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { CustomCursor } from "@/components/layout/CustomCursor";
 import { SkipLink } from "@/components/layout/SkipLink";
 import "./globals.css";
 
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="bg-black text-fore antialiased">
         <SkipLink />
-        <CustomCursor />
         <Nav />
         <main id="main">{children}</main>
         <Footer />

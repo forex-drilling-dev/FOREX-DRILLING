@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { services } from "@/content/services";
 import {
   NavyBlob,
   YellowBadge,
@@ -6,25 +8,28 @@ import {
   DrillBitPin,
   IndexNumber,
   YellowWave,
-  DotsTrio,
   Crosshair,
   CircleImageRing,
+  OverlayImageCard,
   BgGreyShape,
+  SectionLabel,
+  SectionHeading,
+  PillarCard,
+  ServiceListGroup,
+  QuoteBlock,
+  ProtocolGrid,
+  StepRow,
+  CtaBanner,
+  MarqueeStrip,
+  PrimaryButton,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Hero — editorial poster composition.
-//
-// This is NOT a responsive grid layout. It is a fixed-aspect 1200×850 stage
-// (matching the agency reference's canvas) with every element absolutely
-// positioned at exact pixels. The composition relies on overlap, off-canvas
-// bleed, and asymmetric weight distribution.
-//
-// Below the lg breakpoint we abandon the poster entirely and switch to a
-// vertical stacked flow that keeps the spirit (same shapes, same content,
-// same colour roles) without trying to scale the absolute positioning.
-//
-// The two layouts are rendered separately and toggled with hidden/lg:hidden.
+// HERO — editorial poster composition (1200×850 fixed canvas on lg+).
+// Mobile/tablet: separate stacked layout. Drill bit pins are positioned so
+// they NEVER overlap the navy panel text — they sit clearly above the image
+// portion of the card. DotsTrio removed (it was a palette indicator on the
+// agency mockup, not a real site element).
 // ─────────────────────────────────────────────────────────────────────────────
 
 function HeroPoster() {
@@ -33,98 +38,92 @@ function HeroPoster() {
       aria-labelledby="hero-title-desktop"
       className="relative mx-auto hidden h-[850px] max-w-[1200px] lg:block"
     >
-      {/* ── Background watermarks ─────────────────────────────────────── */}
-      {/* Pale grey hollow rounded rect — bleeds off right edge */}
+      {/* Background watermarks — flat, behind everything */}
       <BgGreyShape className="top-[50px] right-[-50px]" />
-
-      {/* Thin circle outline tucked behind the navy blob top-edge */}
       <div
         aria-hidden
         className="absolute top-[-50px] left-[350px] h-[200px] w-[200px] rounded-full border border-border"
       />
 
-      {/* ── Navy blob — anchored top-left, 580×420 ───────────────────── */}
-      {/* This is the GRAVITY CENTER. Everything orbits around it. */}
+      {/* Navy blob — gravity center, top-left */}
       <NavyBlob className="absolute top-[100px] left-0 h-[420px] w-[580px] z-[2]">
         <p
           id="hero-title-desktop"
-          className="font-display font-extrabold uppercase leading-[1.2] text-on-navy"
-          style={{ fontSize: "26px", letterSpacing: "0.5px" }}
+          className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
+          style={{ fontSize: "30px", letterSpacing: "0.5px" }}
         >
-          Specialist drilling.
+          Built to deliver.
         </p>
         <p
-          className="font-display font-extrabold uppercase leading-[1.2] text-amber"
-          style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "25px" }}
+          className="font-display font-extrabold uppercase leading-[1.1] text-amber"
+          style={{ fontSize: "30px", letterSpacing: "0.5px", marginBottom: "26px" }}
         >
-          Asia-Pacific delivery.
+          On challenging programs.
         </p>
         <p
           className="font-display font-normal text-on-navy-muted"
-          style={{ fontSize: "13px", lineHeight: "1.6", maxWidth: "350px" }}
+          style={{ fontSize: "13px", lineHeight: "1.65", maxWidth: "380px" }}
         >
-          Forex Drilling delivers safe, reliable, high-quality drilling services
-          across mining, exploration, and civil projects. Headquartered in Singapore,
-          operating in Papua New Guinea and the wider Asia-Pacific region — where
-          accuracy, safety, and resilience under pressure are non-negotiable.
+          Delivering safe, reliable and high-quality drilling services
+          across the Asia-Pacific region. Based in Singapore, operating in
+          Papua New Guinea — where accuracy, safety and resilience under
+          pressure are non-negotiable.
         </p>
       </NavyBlob>
 
-      {/* ── Yellow badge — overlaps top-left of navy blob ───────────── */}
+      {/* Yellow badge — floats above blob top edge */}
       <YellowBadge className="absolute top-[80px] left-[50px] z-[3]">
         FOREX
       </YellowBadge>
 
-      {/* ── Speech bubble — overlaps blob's right edge ───────────────── */}
-      {/* Tail bottom-left points back into the blob */}
+      {/* Speech bubble — overlaps blob's right edge, tail points back into blob */}
       <div className="absolute top-[170px] left-[480px] z-[4]">
-        <SpeechBubble label="METHODS" value="12" />
+        <SpeechBubble label="METHODS" value="12+" />
       </div>
 
-      {/* ── Three dots + crosshair — upper right indicator group ────── */}
-      <DotsTrio className="absolute top-[70px] right-[300px]" size={32} />
-      <div className="absolute top-[70px] right-[200px]">
-        <Crosshair size={36} />
+      {/* Crosshair only — no DotsTrio (palette ≠ design element) */}
+      <div className="absolute top-[80px] right-[180px]">
+        <Crosshair size={40} />
       </div>
 
-      {/* ── Center note — short callout ──────────────────────────────── */}
+      {/* Center note */}
       <div className="absolute top-[320px] left-[660px] max-w-[260px] z-[2]">
         <p
-          className="font-display font-extrabold leading-[1.3]"
-          style={{ fontSize: "16px", color: "var(--color-deep-navy)" }}
+          className="font-display font-extrabold leading-[1.3] text-deep-navy"
+          style={{ fontSize: "16px" }}
         >
-          Drilling, instrumentation, downhole &amp; data
+          Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
           className="font-display"
           style={{
-            fontSize: "15px",
-            marginTop: "5px",
+            fontSize: "14px",
+            marginTop: "6px",
             color: "var(--color-surface)",
-            opacity: 0.8,
+            opacity: 0.85,
+            lineHeight: "1.55",
           }}
         >
           A full spectrum of specialist capabilities in one mobilisation.
         </p>
       </div>
 
-      {/* ── Yellow wave — bottom-right, bleeds off-canvas ────────────── */}
+      {/* Yellow wave — bleeds off bottom-right */}
       <YellowWave className="bottom-[-50px] right-[-50px] z-[1]" />
 
-      {/* ── Rectangular image card — bottom-right ───────────────────── */}
+      {/* Rectangular image card — bottom-right */}
       <div className="absolute bottom-[120px] right-[100px] h-[250px] w-[580px] z-[5]">
-        {/* Offset navy outline behind */}
+        {/* Offset navy outline */}
         <div
           aria-hidden
           className="absolute -top-5 -left-5 h-[290px] w-[640px] rounded-[20px] border border-surface/30 z-[1]"
         />
-
-        {/* Drill bit pins — pinned to top of card, anchored to its left-third */}
-        <div className="absolute -top-[65px] left-[230px] z-[6] flex gap-5">
-          <DrillBitPin />
-          <DrillBitPin />
+        {/* Drill pins — positioned at 30% of card width, clearly above image only,
+            outside the navy panel area (which sits in the right 43%) */}
+        <div className="absolute -top-[60px] left-[140px] z-[6] flex gap-4">
+          <DrillBitPin size={42} />
+          <DrillBitPin size={42} />
         </div>
-
         {/* Image + overlay */}
         <div
           className="relative h-full w-full overflow-hidden rounded-xl z-[2]"
@@ -138,31 +137,28 @@ function HeroPoster() {
             className="object-cover"
             priority
           />
-          {/* Navy overlay panel — right side, ~250px wide */}
           <div
-            className="absolute inset-y-0 right-0 flex w-[250px] flex-col justify-center px-[25px] py-[25px]"
+            className="absolute inset-y-0 right-0 flex w-[250px] flex-col justify-center px-7"
             style={{ background: "rgba(16, 33, 66, 0.95)" }}
           >
             <p
               className="font-display font-extrabold uppercase leading-[1.4] text-amber"
-              style={{ fontSize: "14px", marginBottom: "15px" }}
+              style={{ fontSize: "13px", marginBottom: "14px", letterSpacing: "0.04em" }}
             >
-              Multi-rig site operations — night &amp; day
+              Multi-rig site operations<br />— night &amp; day
             </p>
             <p
               className="font-display font-normal text-on-navy-muted"
-              style={{ fontSize: "10px", lineHeight: "1.5" }}
+              style={{ fontSize: "11px", lineHeight: "1.55" }}
             >
               From greenfield exploration to active mine pits. Modern, versatile
-              rigs deployed with experienced crews. Structured maintenance,
-              disciplined field practice, and reliable data capture across every
-              shift — that&rsquo;s our standard.
+              rigs deployed with experienced crews and reliable data capture.
             </p>
           </div>
         </div>
       </div>
 
-      {/* ── Circle image with offset ring — bottom-left ─────────────── */}
+      {/* Circle operator photo — bottom-left */}
       <div className="absolute bottom-[120px] left-[100px] z-[5]">
         <CircleImageRing
           src="/images/rig-vertical-operator.jpg"
@@ -173,7 +169,7 @@ function HeroPoster() {
         />
       </div>
 
-      {/* ── Index number — bottom-left, beside circle ────────────────── */}
+      {/* Index marker */}
       <IndexNumber
         label="EST."
         index="17"
@@ -184,57 +180,55 @@ function HeroPoster() {
   );
 }
 
-// ─── Mobile / tablet stack ───────────────────────────────────────────────────
 function HeroStack() {
   return (
     <section
       aria-labelledby="hero-title-mobile"
-      className="relative mx-auto flex max-w-[640px] flex-col gap-12 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-20 lg:hidden"
+      className="relative mx-auto flex max-w-[640px] flex-col gap-12 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-16 lg:hidden"
     >
       <YellowBadge className="self-start">FOREX</YellowBadge>
 
       <NavyBlob
         className="-mt-7 ml-3 h-auto w-full max-w-[580px]"
-        style={{ padding: "60px 28px 40px 32px" }}
+        style={{ padding: "60px 28px 50px 32px" }}
       >
         <p
           id="hero-title-mobile"
-          className="font-display font-extrabold uppercase leading-[1.2] text-on-navy"
-          style={{ fontSize: "24px", letterSpacing: "0.5px" }}
+          className="font-display font-extrabold uppercase leading-[1.15] text-on-navy"
+          style={{ fontSize: "26px", letterSpacing: "0.5px" }}
         >
-          Specialist drilling.
+          Built to deliver.
         </p>
         <p
-          className="font-display font-extrabold uppercase leading-[1.2] text-amber"
-          style={{ fontSize: "24px", letterSpacing: "0.5px", marginBottom: "20px" }}
+          className="font-display font-extrabold uppercase leading-[1.15] text-amber"
+          style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
         >
-          Asia-Pacific delivery.
+          On challenging programs.
         </p>
         <p
           className="font-display font-normal text-on-navy-muted"
-          style={{ fontSize: "13px", lineHeight: "1.6" }}
+          style={{ fontSize: "13px", lineHeight: "1.65" }}
         >
-          Forex Drilling delivers safe, reliable, high-quality drilling services
-          across mining, exploration, and civil projects. Headquartered in
-          Singapore, operating in Papua New Guinea and the wider Asia-Pacific.
+          Delivering safe, reliable and high-quality drilling services
+          across the Asia-Pacific region. Based in Singapore, operating in
+          Papua New Guinea.
         </p>
       </NavyBlob>
 
-      <div className="flex items-center justify-center gap-8">
-        <SpeechBubble label="METHODS" value="12" />
-        <DotsTrio size={20} />
+      <div className="flex justify-center">
+        <SpeechBubble label="METHODS" value="12+" />
       </div>
 
-      <div className="flex flex-col items-start gap-2 px-2">
+      <div className="flex flex-col gap-2 px-2">
         <p
-          className="font-display font-extrabold leading-[1.3]"
-          style={{ fontSize: "16px", color: "var(--color-deep-navy)" }}
+          className="font-display font-extrabold leading-[1.3] text-deep-navy"
+          style={{ fontSize: "16px" }}
         >
-          Drilling, instrumentation, downhole &amp; data
+          Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
           className="font-display"
-          style={{ fontSize: "14px", color: "var(--color-surface)", opacity: 0.8 }}
+          style={{ fontSize: "14px", color: "var(--color-surface)", opacity: 0.85 }}
         >
           A full spectrum of specialist capabilities in one mobilisation.
         </p>
@@ -251,11 +245,10 @@ function HeroStack() {
         <IndexNumber label="EST." index="17" code="002" />
       </div>
 
-      {/* Image card — full-width on mobile */}
       <div className="relative mt-4">
         <div className="absolute -top-12 left-12 z-[6] flex gap-4">
-          <DrillBitPin size={48} />
-          <DrillBitPin size={48} />
+          <DrillBitPin size={42} />
+          <DrillBitPin size={42} />
         </div>
         <div
           className="relative aspect-[2.3/1] w-full overflow-hidden rounded-xl"
@@ -263,25 +256,25 @@ function HeroStack() {
         >
           <Image
             src="/images/hero-night-site.jpg"
-            alt="Multi-rig night drilling operation in Papua New Guinea"
+            alt="Multi-rig night drilling operation"
             fill
             sizes="100vw"
             className="object-cover"
             priority
           />
           <div
-            className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center px-5 py-5"
+            className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center px-5"
             style={{ background: "rgba(16, 33, 66, 0.95)" }}
           >
             <p
               className="font-display font-extrabold uppercase leading-[1.4] text-amber"
-              style={{ fontSize: "13px", marginBottom: "12px" }}
+              style={{ fontSize: "12px", marginBottom: "10px", letterSpacing: "0.04em" }}
             >
-              Multi-rig site operations
+              Multi-rig operations
             </p>
             <p
               className="font-display font-normal text-on-navy-muted"
-              style={{ fontSize: "10px", lineHeight: "1.5" }}
+              style={{ fontSize: "10px", lineHeight: "1.55" }}
             >
               Modern, versatile rigs with experienced crews — across mining,
               exploration, and civil projects.
@@ -293,13 +286,421 @@ function HeroStack() {
   );
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+// ─── INTRO — three-paragraph mission statement ──────────────────────────────
+
+function IntroSection() {
+  return (
+    <section className="relative bg-white py-24 md:py-32">
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+        <div className="flex flex-col gap-6 md:col-span-5">
+          <SectionLabel number="01" label="Mission" />
+          <SectionHeading
+            line1="Field-proven solutions"
+            line2="in demanding environments."
+          />
+        </div>
+        <div className="flex flex-col gap-6 md:col-span-7">
+          <p
+            className="font-display"
+            style={{ fontSize: "17px", lineHeight: "1.7", color: "var(--color-fore)" }}
+          >
+            Based in Singapore and operating across the Asia-Pacific region, Forex
+            Drilling provides specialised drilling services and solutions
+            supporting major mining operations, greenfield exploration projects,
+            civil infrastructure works, as well as environmental and groundwater
+            programs.
+          </p>
+          <p
+            className="font-display"
+            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          >
+            We operate in demanding environments where accuracy, safety and
+            reliability are critical — and where resilience in execution makes
+            the difference. Our focus is on delivering high-quality data,
+            maintaining strict operational standards, and supporting our
+            clients&rsquo; technical and operational decision-making.
+          </p>
+          <p
+            className="font-display font-medium"
+            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-deep-navy)" }}
+          >
+            We take ownership of our work, solve problems early, and deliver
+            what we commit to.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── SERVICES PREVIEW — 4 categories ─────────────────────────────────────────
+
+const serviceCategories = [
+  {
+    number: "01",
+    title: "Drilling Services",
+    summary: "Diamond, sonic, directional, RC, rotary, SPT, push tube, packer testing, downhole surveying.",
+    href: "/services#drilling",
+  },
+  {
+    number: "02",
+    title: "Instrumentation Installation",
+    summary: "Vibrating Wire Piezometers, inclinometers, standpipe piezometers — installed and commissioned.",
+    href: "/services#instrumentation",
+  },
+  {
+    number: "03",
+    title: "Downhole Services",
+    summary: "Geophysical logging, borehole surveying and deviation control, integrity verification.",
+    href: "/services#downhole",
+  },
+  {
+    number: "04",
+    title: "Data Acquisition & Digital",
+    summary: "Krux platforms for data capture and reporting. MWD systems for downhole telemetry.",
+    href: "/services#data",
+  },
+] as const;
+
+function ServicesPreview() {
+  return (
+    <section className="relative bg-deep py-24 md:py-32">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16">
+          <div className="flex max-w-[600px] flex-col gap-5">
+            <SectionLabel number="02" label="Capabilities" />
+            <SectionHeading
+              line1="A full spectrum"
+              line2="of specialist services."
+            />
+          </div>
+          <p
+            className="font-display max-w-[420px]"
+            style={{ fontSize: "15px", lineHeight: "1.65", color: "var(--color-muted)" }}
+          >
+            From diamond and sonic drilling to instrumentation, downhole services
+            and digital data systems — chosen to deliver reliable, high-quality
+            outcomes in demanding environments.
+          </p>
+        </div>
+
+        <div className="grid gap-px bg-border md:grid-cols-2">
+          {serviceCategories.map((cat) => (
+            <Link
+              key={cat.number}
+              href={cat.href}
+              className="group relative flex flex-col gap-5 bg-white p-9 transition-all duration-300 hover:bg-amber"
+            >
+              <p
+                className="font-display font-black"
+                style={{
+                  fontSize: "44px",
+                  lineHeight: "1",
+                  color: "var(--color-amber)",
+                }}
+              >
+                <span className="transition-colors duration-300 group-hover:text-deep-navy">
+                  {cat.number}
+                </span>
+              </p>
+              <h3
+                className="font-display font-extrabold uppercase text-deep-navy transition-colors duration-300 group-hover:text-deep-navy"
+                style={{ fontSize: "22px", letterSpacing: "0.04em" }}
+              >
+                {cat.title}
+              </h3>
+              <p
+                className="font-display max-w-[44ch] transition-colors duration-300 group-hover:text-deep-navy"
+                style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
+              >
+                {cat.summary}
+              </p>
+              <span
+                className="mt-3 inline-flex items-center gap-2 font-display font-bold uppercase text-amber transition-all duration-300 group-hover:text-deep-navy group-hover:gap-3"
+                style={{ fontSize: "12px", letterSpacing: "0.12em" }}
+              >
+                Explore
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex justify-center">
+          <PrimaryButton href="/services" variant="navy">
+            All Services ({services.length})
+          </PrimaryButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── ABOUT TEASER — pillars + portrait ───────────────────────────────────────
+
+function AboutTeaser() {
+  return (
+    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+      {/* Subtle background watermark — only on lg+, anchored bottom-left, bleeds */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute hidden lg:block"
+        style={{
+          bottom: "-80px",
+          left: "-100px",
+          width: "320px",
+          height: "320px",
+          borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+          background: "var(--color-amber)",
+          opacity: 0.08,
+        }}
+      />
+      <div className="relative mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+        {/* Left — image with floating badge + index */}
+        <div className="flex flex-col gap-8 md:col-span-5">
+          <div className="relative mx-auto w-fit">
+            <CircleImageRing
+              src="/images/rig-aerial.jpg"
+              alt="Drilling site aerial view"
+              size={380}
+              ringOffset={24}
+            />
+            {/* Floating yellow badge — overlaps bottom-right of circle, partially outside */}
+            <div className="absolute bottom-[40px] right-[-40px] z-10 hidden md:block">
+              <YellowBadge>FIELD-PROVEN</YellowBadge>
+            </div>
+          </div>
+          <IndexNumber
+            label="EST."
+            index="17"
+            code="003"
+            className="ml-4 md:ml-12"
+          />
+        </div>
+
+        {/* Right — heading + body + 3 pillars */}
+        <div className="flex flex-col gap-10 md:col-span-7">
+          <div className="flex flex-col gap-5">
+            <SectionLabel number="03" label="About Us" />
+            <SectionHeading
+              line1="Specialist drilling."
+              line2="Demanding environments."
+            />
+          </div>
+          <p
+            className="font-display"
+            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          >
+            Forex Drilling is a specialist drilling contractor supporting mining,
+            exploration, and civil projects with a broad range of drilling
+            services. Our team combines strong operational experience with a
+            clear understanding of geotechnical, hydrogeological, grade control,
+            structural geology, resource geology, and exploration requirements.
+          </p>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            <PillarCard number="01" title="Versatility">
+              Crews and equipment capable of covering multiple scopes — reducing
+              the need for multiple rigs on site.
+            </PillarCard>
+            <PillarCard number="02" title="Resilience">
+              Performance under pressure, adapting to changing ground conditions
+              and continuing safely and reliably.
+            </PillarCard>
+            <PillarCard number="03" title="Reliability">
+              Structured preventative maintenance, regular inspections, and
+              disciplined field practice deliver consistent output.
+            </PillarCard>
+          </div>
+
+          <div className="mt-2 flex flex-wrap items-center gap-4">
+            <PrimaryButton href="/about" variant="ghost-on-light">
+              Read our story
+            </PrimaryButton>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FLEET TEASER — image card with overlay ─────────────────────────────────
+
+function FleetTeaser() {
+  return (
+    <section className="relative bg-deep py-24 md:py-32">
+      <div className="mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+        <div className="flex flex-col gap-8 md:col-span-5">
+          <SectionLabel number="04" label="Fleet & Capabilities" />
+          <SectionHeading
+            line1="Modern equipment."
+            line2="Reliable performance."
+          />
+          <p
+            className="font-display"
+            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          >
+            Forex Drilling operates modern, versatile drilling equipment designed
+            to perform reliably in demanding environments — supported by experienced
+            crews, robust logistics, and a strong maintenance culture.
+          </p>
+          <ul className="flex flex-col gap-3 mt-2">
+            {[
+              "Scalable multi-rig deployment",
+              "Dual-head sonic / diamond capability",
+              "Active mine pit & remote greenfield ops",
+              "Rod and casing handling systems",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="flex shrink-0 pt-0.5" aria-hidden>
+                  <DrillBitPin size={20} />
+                </span>
+                <span
+                  className="font-display font-medium text-deep-navy"
+                  style={{ fontSize: "15px", lineHeight: "1.55" }}
+                >
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <PrimaryButton href="/fleet" variant="ghost-on-light" className="mt-4 self-start">
+            Explore the fleet
+          </PrimaryButton>
+        </div>
+        <div className="md:col-span-7 md:pt-6">
+          <OverlayImageCard
+            src="/images/rig-horizontal.jpg"
+            alt="Modern dual-head drilling rig"
+            title="Versatile, multi-method rigs"
+            body={
+              <>
+                Designed to deliver multiple scopes from a single mobilisation —
+                including dual-head sonic / diamond capability, in active mine pits
+                and remote greenfield locations.
+              </>
+            }
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── HSE STATEMENT — pull quote + protocol grid ─────────────────────────────
+
+const hseProtocols = [
+  { code: "SOP", label: "Standard Operating Procedures" },
+  { code: "JSA", label: "Job Safety Analysis" },
+  { code: "PTW", label: "Permit to Work" },
+  { code: "T5", label: "Take 5 Risk Assessment" },
+  { code: "TBX", label: "Toolbox Meetings" },
+  { code: "PPE", label: "Full PPE Compliance" },
+];
+
+function HseStatement() {
+  return (
+    <section className="relative bg-white py-24 md:py-32">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+        <div className="flex flex-col gap-5 max-w-[1000px]">
+          <SectionLabel number="05" label="Health, Safety & Environment" />
+          <QuoteBlock
+            line1="Safety is not a procedure."
+            line2="It's how we operate."
+          >
+            All activities operate in strict compliance with client safety
+            standards, site procedures, and regulatory requirements. Every role
+            is trained, certified, and competent — and we continuously invest
+            in better practices, equipment, and systems.
+          </QuoteBlock>
+        </div>
+        <ProtocolGrid items={hseProtocols} />
+        <PrimaryButton href="/hse" variant="ghost-on-light" className="self-start">
+          Our HSE approach
+        </PrimaryButton>
+      </div>
+    </section>
+  );
+}
+
+// ─── APPROACH — 4-step delivery model ───────────────────────────────────────
+
+const approachSteps = [
+  {
+    number: "01",
+    title: "Early Engagement",
+    body: "We engage at the planning stage to understand constraints, identify risks, and propose practical, solution-driven approaches.",
+  },
+  {
+    number: "02",
+    title: "Efficient Mobilisation",
+    body: "Structured mobilisation and setup to get productive on site as quickly as possible.",
+  },
+  {
+    number: "03",
+    title: "Reliable Execution",
+    body: "Day-to-day operations backed by structured reporting, KPIs, and close coordination with client teams.",
+  },
+  {
+    number: "04",
+    title: "Transparent Communication",
+    body: "Proactive issue resolution and clear reporting — addressing problems before they impact delivery.",
+  },
+];
+
+function ApproachSection() {
+  return (
+    <section className="relative bg-deep py-24 md:py-32">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+        <div className="flex flex-col gap-5 max-w-[700px]">
+          <SectionLabel number="06" label="Project Delivery Approach" />
+          <SectionHeading
+            line1="Hands-on,"
+            line2="solution-driven delivery."
+          />
+        </div>
+        <StepRow steps={approachSteps} />
+      </div>
+    </section>
+  );
+}
+
+// ─── PAGE ───────────────────────────────────────────────────────────────────
+
+const trustItems = [
+  "DIAMOND DRILLING",
+  "SONIC DRILLING",
+  "DIRECTIONAL DRILLING",
+  "RC DRILLING",
+  "INSTRUMENTATION",
+  "MWD SYSTEMS",
+  "KRUX DATA",
+  "GEOPHYSICAL LOGGING",
+  "SPT & PUSH TUBE",
+  "GROUNDWATER PROGRAMS",
+] as const;
 
 export default function HomePage() {
   return (
     <>
       <HeroPoster />
       <HeroStack />
+      <MarqueeStrip items={trustItems} />
+      <IntroSection />
+      <AboutTeaser />
+      <ServicesPreview />
+      <FleetTeaser />
+      <HseStatement />
+      <ApproachSection />
+      <CtaBanner
+        headline="Ready to discuss your program?"
+        body="Contact us to explore how Forex Drilling can support your next project — from planning through to execution."
+        cta="Get in Touch"
+        href="/contact"
+      />
     </>
   );
 }
