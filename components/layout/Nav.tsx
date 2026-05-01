@@ -37,7 +37,8 @@ export function Nav() {
           aria-label="Forex Drilling — home"
           className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-80"
         >
-          {/* Brand X icon — yellow + dark navy triangles */}
+          {/* Brand X icon — top/right/bottom yellow, left dark navy
+              (pointing right, forming the inner "bite" of the X) */}
           <svg
             width="36"
             height="36"
@@ -46,10 +47,10 @@ export function Nav() {
             aria-hidden
             className="shrink-0"
           >
-            <path d="M0 0 L100 0 L50 50 Z" fill="var(--color-amber)" />
+            <path d="M0 0 L100 0 L50 50 Z"     fill="var(--color-amber)" />
+            <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-amber)" />
             <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
-            <path d="M0 0 L0 100 L50 50 Z" fill="var(--color-deep-navy)" />
-            <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-deep-navy)" />
+            <path d="M0 0 L0 100 L50 50 Z"     fill="var(--color-deep-navy)" />
           </svg>
           <span
             className="font-display font-bold uppercase leading-[0.95] text-deep-navy"

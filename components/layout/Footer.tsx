@@ -37,11 +37,12 @@ export function Footer() {
           {/* Brand block */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-4">
+              {/* Top/right/bottom yellow + LEFT white (pointing right) */}
               <svg width="56" height="56" viewBox="0 0 100 100" fill="none" aria-hidden className="shrink-0">
-                <path d="M0 0 L100 0 L50 50 Z" fill="var(--color-amber)" />
+                <path d="M0 0 L100 0 L50 50 Z"     fill="var(--color-amber)" />
+                <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-amber)" />
                 <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
-                <path d="M0 0 L0 100 L50 50 Z" fill="#FFFFFF" />
-                <path d="M100 0 L100 100 L50 50 Z" fill="#FFFFFF" />
+                <path d="M0 0 L0 100 L50 50 Z"     fill="#FFFFFF" />
               </svg>
               <p
                 className="font-display font-bold uppercase leading-[0.95]"

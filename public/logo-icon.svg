@@ -1,12 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-  <!-- The X mark of Forex Drilling — two yellow triangles (top + bottom)
-       and two dark-navy triangles (left + right) that meet at center. -->
-  <!-- Top triangle (yellow) -->
-  <path d="M0 0 L100 0 L50 50 Z" fill="#E3AA00"/>
-  <!-- Bottom triangle (yellow) -->
+  <!-- Forex Drilling X icon — official structure:
+       TOP, RIGHT and BOTTOM triangles are yellow ocre (#E3AA00)
+       LEFT triangle is dark navy (#11284E), pointing right toward the centre.
+       Together: a bold yellow "<" shape with a navy bite on the left edge. -->
+  <path d="M0 0 L100 0 L50 50 Z"     fill="#E3AA00"/>
+  <path d="M100 0 L100 100 L50 50 Z" fill="#E3AA00"/>
   <path d="M0 100 L100 100 L50 50 Z" fill="#E3AA00"/>
-  <!-- Left triangle (dark navy) -->
-  <path d="M0 0 L0 100 L50 50 Z" fill="#11284E"/>
-  <!-- Right triangle (dark navy) -->
-  <path d="M100 0 L100 100 L50 50 Z" fill="#11284E"/>
+  <path d="M0 0 L0 100 L50 50 Z"     fill="#11284E"/>
 </svg>
