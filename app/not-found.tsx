@@ -21,7 +21,7 @@ export default function NotFound() {
         </h1>
         <p
           className="max-w-lg font-sans"
-          style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
         >
           The page you&rsquo;re looking for may have moved, or it never existed.
           Head back to the homepage to explore Forex Drilling&rsquo;s services.

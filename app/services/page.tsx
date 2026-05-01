@@ -68,12 +68,12 @@ function CategorySection({
   items: string[];
 }) {
   return (
-    <section id={id} className={`relative scroll-mt-[100px] py-24 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
-      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+    <section id={id} className={`relative scroll-mt-[100px] py-16 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
+      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number={number} label={label} />
           <SectionHeading line1={line1} line2={line2} />
-          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             {body}
           </p>
         </Reveal>
@@ -87,12 +87,12 @@ function CategorySection({
 
 function DataSection() {
   return (
-    <section id="data" className="relative scroll-mt-[100px] bg-white py-24 md:py-32">
+    <section id="data" className="relative scroll-mt-[100px] bg-white py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="04" label="Data Acquisition" />
           <SectionHeading line1="Krux" line2="& MWD." />
-          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Digital systems used on Forex Drilling programs.
           </p>
         </Reveal>

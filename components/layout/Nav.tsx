@@ -44,7 +44,7 @@ export function Nav() {
             width={989}
             height={200}
             priority
-            className="h-10 w-auto md:h-11"
+            className="h-7 w-auto sm:h-8 md:h-11"
           />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">

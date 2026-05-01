@@ -42,8 +42,8 @@ function AboutHero() {
 
 function WhoWeAre() {
   return (
-    <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+    <section className="relative bg-deep py-16 md:py-32">
+      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-4">
           <SectionLabel number="01" label="Who We Are" />
           <SectionHeading
@@ -54,7 +54,7 @@ function WhoWeAre() {
         <div className="flex flex-col gap-6 md:col-span-8">
           <p
             className="font-sans"
-            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}
           >
             Our team combines strong operational experience with a clear
             understanding of geotechnical, hydrogeological, grade control,
@@ -62,7 +62,7 @@ function WhoWeAre() {
           </p>
           <p
             className="font-sans"
-            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Each drilling program is executed with the objective of producing
             reliable, high-quality geological data that supports high-confidence
@@ -72,7 +72,7 @@ function WhoWeAre() {
           </p>
           <p
             className="font-sans"
-            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             We work closely with our clients from early stages through execution: understanding project constraints, identifying risks, and proposing
             practical, solution-driven approaches. From selecting the right
@@ -90,7 +90,7 @@ function WhoWeAre() {
 
 function OperatingModel() {
   return (
-    <section className="relative bg-white py-24 md:py-32">
+    <section className="relative bg-white py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="02" label="Operating Model" />
@@ -128,8 +128,8 @@ function OperatingModel() {
 
 function MaintenanceSection() {
   return (
-    <section className="relative overflow-hidden bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+    <section className="relative overflow-hidden bg-deep py-16 md:py-32">
+      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         <div className="md:col-span-6 md:order-2">
           <div className="relative">
             <div
@@ -159,7 +159,7 @@ function MaintenanceSection() {
           />
           <p
             className="font-sans"
-            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Equipment reliability is critical to performance. We place strong
             emphasis on maintenance, with structured preventative maintenance

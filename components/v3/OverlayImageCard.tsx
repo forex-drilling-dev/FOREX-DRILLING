@@ -38,21 +38,25 @@ export function OverlayImageCard({ src, alt, title, body, pins, className }: Pro
         </div>
       )}
 
-      {/* Image card */}
-      <div className="relative aspect-[2.3/1] w-full overflow-hidden rounded-xl shadow-image">
-        <Image
-          src={optimizedSrc(src)}
-          alt={alt}
-          fill
-          sizes="(min-width: 1024px) 600px, 100vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          {...(blurPlaceholder(src)
-            ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
-            : {})}
-        />
+      {/* Card — stacked on mobile (image then panel), overlay on md+ */}
+      <div className="relative w-full overflow-hidden rounded-xl shadow-image md:aspect-[2.3/1]">
+        {/* Image — fills the card on md+, takes its own aspect on mobile */}
+        <div className="relative aspect-[16/9] w-full md:absolute md:inset-0 md:aspect-auto">
+          <Image
+            src={optimizedSrc(src)}
+            alt={alt}
+            fill
+            sizes="(min-width: 1024px) 600px, 100vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            {...(blurPlaceholder(src)
+              ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
+              : {})}
+          />
+        </div>
 
-        {/* Navy overlay panel — right side */}
-        <div className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center bg-deep-navy/95 px-7 py-7">
+        {/* Navy panel — sits below the image on mobile, overlays the right
+            on md+ for the editorial cut-in effect. */}
+        <div className="flex flex-col justify-center bg-deep-navy/95 px-7 py-6 md:absolute md:inset-y-0 md:right-0 md:w-2/5 md:py-7">
           <h3
             className="mb-3 font-display font-bold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
             style={{ fontSize: "14px", letterSpacing: "0.04em" }}

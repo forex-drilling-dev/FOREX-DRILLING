@@ -21,12 +21,14 @@ export function SectionHeading({ line1, line2, className, as: Tag = "h2" }: Prop
   return (
     <Tag
       className={cn(
-        "font-display font-extrabold uppercase leading-[1.1] text-balance text-deep-navy",
+        "font-display font-extrabold uppercase leading-[0.95] tracking-[-0.005em] text-balance text-deep-navy",
         className,
       )}
       style={{
-        fontSize: "clamp(26px, 2.4vw, 38px)",
-        letterSpacing: "0.5px",
+        // Editorial scale: dominant on mobile (≈ 36px at 375vw) yet bounded
+        // on desktop so it doesn't blow out the column rhythm.
+        fontSize: "clamp(34px, 9.5vw, 46px)",
+        letterSpacing: "-0.005em",
       }}
     >
       {line1}

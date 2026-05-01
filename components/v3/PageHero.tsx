@@ -57,7 +57,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
           )}
           <p
             className="font-sans font-normal text-on-navy-muted"
-            style={{ fontSize: "14px", lineHeight: "1.7" }}
+            style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "300px" }}
           >
             {body}
           </p>

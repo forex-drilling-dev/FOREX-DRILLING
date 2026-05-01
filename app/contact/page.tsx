@@ -18,7 +18,7 @@ export default function ContactPage() {
     <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-32">
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
 
-      <div className="relative mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+      <div className="relative mx-auto grid grid-cols-1 max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         {/* Left — info */}
         <Reveal className="flex flex-col gap-8 md:col-span-5">
           <YellowBadge className="self-start">CONTACT</YellowBadge>
@@ -26,7 +26,7 @@ export default function ContactPage() {
 
           <p
             className="font-sans"
-            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Whether you have a program to discuss, a technical question, or want
             to understand how we can support your project, we&rsquo;re ready to engage.

@@ -31,14 +31,14 @@ export default function ProjectsPage() {
         }
       />
 
-      <section className="relative bg-deep py-24 md:py-32">
+      <section className="relative bg-deep py-16 md:py-32">
         <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:px-14">
           <Reveal className="flex flex-col gap-5 max-w-[700px]">
             <SectionLabel number="01" label="Case Studies" />
             <SectionHeading line1="Coming" line2="soon." />
             <p
               className="font-sans"
-              style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+              style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
             >
               Project case studies will be published here. To discuss specific
               programs or references in the meantime, please get in touch.

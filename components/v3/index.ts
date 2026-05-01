@@ -19,6 +19,7 @@ export { OverlayImageCard } from "./OverlayImageCard";
 // Editorial typography
 export { IndexNumber }      from "./IndexNumber";
 export { SectionLabel }     from "./SectionLabel";
+export { SectionDivider }   from "./SectionDivider";
 export { SectionHeading }   from "./SectionHeading";
 export { QuoteBlock }       from "./QuoteBlock";
 

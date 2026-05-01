@@ -33,16 +33,18 @@ export function NavyBlob({ children, className, style }: Props) {
       className={cn(
         "bg-surface text-on-navy",
         "px-[60px] pt-[90px] pb-[40px] pr-[40px]",
+        // Asymmetric corner radii — square top-left/bottom-left, small
+        // top-right, large elliptical swoop on bottom-right (the signature).
+        "rounded-tl-none rounded-bl-none rounded-tr-[20px]",
+        // Mobile gets a much tighter swoop (subtle accent only) so the
+        // panel reads as a clean rounded rectangle and content has full
+        // breathing room. Desktop keeps the dramatic 250×350 thumbprint.
+        "rounded-br-[40px_60px] md:rounded-br-[250px_350px]",
+        // Soft drop shadow nudges the panel forward in the composition.
+        "shadow-[5px_15px_30px_rgba(25,52,94,0.15)]",
         className,
       )}
-      style={{
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: "20px",
-        borderBottomRightRadius: "250px 350px",
-        borderBottomLeftRadius: 0,
-        boxShadow: "5px 15px 30px rgba(25, 52, 94, 0.15)",
-        ...style,
-      }}
+      style={style}
     >
       {children}
     </div>

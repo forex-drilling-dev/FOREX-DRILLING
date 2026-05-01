@@ -45,12 +45,12 @@ function QualityHero() {
 
 function QmSection() {
   return (
-    <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+    <section className="relative bg-deep py-16 md:py-32">
+      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="01" label="Quality Management" />
           <SectionHeading line1="Quality" line2="management." />
-          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Our quality approach focuses on the following:
           </p>
         </Reveal>
@@ -60,7 +60,7 @@ function QmSection() {
               <span className="flex shrink-0 pt-0.5" aria-hidden>
                 <DrillBitPin size={20} />
               </span>
-              <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "16px", lineHeight: "1.55" }}>
+              <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.55" }}>
                 {item}
               </span>
             </li>
@@ -73,12 +73,12 @@ function QmSection() {
 
 function DigitalSection() {
   return (
-    <section className="relative bg-white py-24 md:py-32">
+    <section className="relative bg-white py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="02" label="Digital Systems" />
           <SectionHeading line1="Krux" line2="& MWD." />
-          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Digital systems used on Forex Drilling programs.
           </p>
         </Reveal>

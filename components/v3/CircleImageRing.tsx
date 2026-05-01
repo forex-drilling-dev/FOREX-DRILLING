@@ -27,10 +27,17 @@ export function CircleImageRing({
   className,
 }: Props) {
   const ringSize = size + ringOffset * 2;
+  const innerInsetPct = (ringOffset / ringSize) * 100;
   return (
     <div
-      style={{ width: ringSize, height: ringSize }}
-      className={cn("relative shrink-0", className)}
+      style={{
+        // Target size, capped to the parent's width on small viewports so
+        // the circle never spills outside its column.
+        width: ringSize,
+        maxWidth: "100%",
+        aspectRatio: "1 / 1",
+      }}
+      className={cn("relative", className)}
     >
       {/* Navy outline ring, offset behind */}
       <div
@@ -39,7 +46,7 @@ export function CircleImageRing({
       />
       {/* White-bordered photo, centred over the ring */}
       <div
-        style={{ width: size, height: size, top: ringOffset, left: ringOffset }}
+        style={{ inset: `${innerInsetPct}%` }}
         className="absolute overflow-hidden rounded-full border-8 border-white shadow-card"
       >
         <Image
@@ -47,6 +54,9 @@ export function CircleImageRing({
           alt={alt}
           fill
           priority={priority}
+          // The wrapper never renders larger than `size`px (clamped by parent
+          // on mobile). Using a fixed-size hint stops the browser from
+          // fetching the largest 3840w variant for what is at most ~size px.
           sizes={`${size}px`}
           className="object-cover"
           {...(blurPlaceholder(src)

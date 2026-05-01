@@ -66,15 +66,15 @@ export default async function ServiceDetailPage({ params }: Params) {
       />
 
       {/* OVERVIEW */}
-      <section className="relative bg-deep py-24 md:py-32">
-        <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+      <section className="relative bg-deep py-16 md:py-32">
+        <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
           <Reveal className="flex flex-col gap-5 md:col-span-5">
             <SectionLabel number="01" label="Overview" />
             <SectionHeading line1="What we" line2="deliver." />
           </Reveal>
           <p
             className="font-sans md:col-span-7"
-            style={{ fontSize: "17px", lineHeight: "1.75", color: "var(--color-fore)" }}
+            style={{ fontSize: "clamp(15px, 4.4vw, 17px)", lineHeight: "1.75", color: "var(--color-fore)" }}
           >
             {service.body}
           </p>
@@ -82,8 +82,8 @@ export default async function ServiceDetailPage({ params }: Params) {
       </section>
 
       {/* APPLICATIONS */}
-      <section className="relative bg-white py-24 md:py-32">
-        <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+      <section className="relative bg-white py-16 md:py-32">
+        <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
           <Reveal className="flex flex-col gap-5 md:col-span-5">
             <SectionLabel number="02" label="Applications" />
             <SectionHeading line1="Where it" line2="fits." />
@@ -96,7 +96,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                 </span>
                 <span
                   className="font-sans font-medium text-deep-navy"
-                  style={{ fontSize: "16px", lineHeight: "1.55" }}
+                  style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.55" }}
                 >
                   {a}
                 </span>
@@ -108,7 +108,7 @@ export default async function ServiceDetailPage({ params }: Params) {
 
       {/* RELATED */}
       {related.length > 0 && (
-        <section className="relative bg-deep py-24 md:py-32">
+        <section className="relative bg-deep py-16 md:py-32">
           <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
             <Reveal className="flex flex-col gap-5 max-w-[700px]">
               <SectionLabel number="03" label="Related" />
