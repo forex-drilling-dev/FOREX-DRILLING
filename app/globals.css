@@ -119,11 +119,15 @@
   html {
     background: var(--color-black); /* white */
     color: var(--color-fore);
+    /* Safety net — prevent any absolute-positioned bleed elements from
+       creating horizontal scroll. */
+    overflow-x: hidden;
   }
 
   body {
     font-family: var(--font-sans);
     font-weight: 400;
+    overflow-x: hidden;
   }
 
   ::selection {

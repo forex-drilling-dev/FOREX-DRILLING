@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-32">
+    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-32">
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
       <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
 
