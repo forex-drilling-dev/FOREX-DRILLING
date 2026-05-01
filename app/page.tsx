@@ -142,19 +142,6 @@ function HeroPoster() {
         <YellowBadge>FOREX</YellowBadge>
       </div>
 
-      {/* Center note */}
-      <div
-        className="absolute top-[380px] z-[2] max-w-[280px]"
-        style={{ left: "clamp(620px, 50vw, 800px)" }}
-      >
-        <p
-          className="font-display font-extrabold leading-[1.3] text-deep-navy"
-          style={{ fontSize: "18px" }}
-        >
-          Drilling, instrumentation, downhole &amp; data.
-        </p>
-      </div>
-
       {/* Rectangular image card — anchored to viewport RIGHT, fluid width */}
       <div
         className="absolute bottom-[100px] z-[5] h-[260px]"
