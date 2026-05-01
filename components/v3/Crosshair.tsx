@@ -9,15 +9,10 @@ type Props = {
 
 /**
  * Cartographic registration mark — small crosshair (+) with optional
- * coordinate label. Replaces the previous bare-crosshair which read as
- * generic Figma decoration.
- *
- * Default coordinates: 06°S 145°E (Papua New Guinea — Forex's main ops).
- *
- * The coordinate label fronts the technical/industrial aesthetic and
- * grounds the decoration in the real-world geography of the company.
+ * coordinate label. The coordinate label is opt-in: pass `coords` only
+ * once real, verified coordinates are provided by the client.
  */
-export function Crosshair({ className, size = 30, coords = "06°S · 145°E" }: Props) {
+export function Crosshair({ className, size = 30, coords }: Props) {
   return (
     <div className={cn("flex items-start gap-3", className)} aria-hidden>
       <svg

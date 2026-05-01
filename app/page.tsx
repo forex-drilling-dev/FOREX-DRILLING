@@ -4,21 +4,17 @@ import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 import {
   NavyBlob,
   YellowBadge,
-  SpeechBubble,
   DrillBitPin,
   YellowWave,
-  Crosshair,
   CircleImageRing,
   OverlayImageCard,
   BgGreyShape,
   SectionLabel,
   SectionHeading,
   PillarCard,
-  ServiceListGroup,
   QuoteBlock,
   ProtocolGrid,
   CtaBanner,
-  StatStrip,
   PrimaryButton,
   Reveal,
 } from "@/components/v3";
@@ -38,7 +34,7 @@ function HeroPoster() {
   return (
     <section
       aria-labelledby="hero-title-desktop"
-      className="relative hidden h-[850px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
+      className="relative hidden h-screen min-h-[780px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
     >
       {/* Watermarks anchored to VIEWPORT right edge */}
       <BgGreyShape className="top-[120px] right-[-50px]" />
@@ -51,12 +47,35 @@ function HeroPoster() {
         style={{ left: "clamp(280px, 28vw, 460px)" }}
       />
 
-      {/* Crosshair coords — top-right of viewport, clear of the fixed nav */}
+      {/* Directional indicator — top-right, mono caps. Singapore HQ → Asia-Pacific
+          ops, both factual from brief. Replaces the previous (invented) coords. */}
       <div
-        className="absolute top-[160px]"
-        style={{ right: "clamp(140px, 16vw, 320px)" }}
+        className="absolute top-[160px] z-[3] flex flex-col items-end gap-1.5"
+        style={{ right: "clamp(80px, 10vw, 200px)" }}
       >
-        <Crosshair size={36} coords="06°S · 145°E" />
+        <span
+          className="font-mono uppercase text-deep-navy/55"
+          style={{ fontSize: "10px", letterSpacing: "0.22em" }}
+        >
+          Singapore
+        </span>
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          aria-hidden
+          className="text-amber"
+        >
+          <path d="M0 7 H30" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2.5" />
+          <path d="M28 2 L33 7 L28 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+        <span
+          className="font-mono uppercase text-deep-navy/80 font-bold"
+          style={{ fontSize: "11px", letterSpacing: "0.22em" }}
+        >
+          Asia-Pacific
+        </span>
       </div>
 
       {/* Navy blob — anchored to viewport LEFT, fluid width.
@@ -77,7 +96,7 @@ function HeroPoster() {
           className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
           style={{ fontSize: "clamp(28px, 2.2vw, 38px)", letterSpacing: "0.5px" }}
         >
-          Built to deliver.
+          Specialised drilling
         </p>
         <p
           className="font-display font-extrabold uppercase leading-[1.05] text-amber text-balance"
@@ -87,15 +106,31 @@ function HeroPoster() {
             marginBottom: "26px",
           }}
         >
-          On challenging drilling programs?
+          across the Asia-Pacific.
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "420px" }}
         >
-          Delivering safe, reliable and high-quality drilling services across
-          the Asia-Pacific region.
+          Based in Singapore, supporting mining, exploration, civil
+          infrastructure, and groundwater programs.
         </p>
+
+        {/* Scope strip — verbatim brief categories */}
+        <div className="mt-7 border-t border-amber/30 pt-4">
+          <p
+            className="font-mono uppercase text-on-navy-muted"
+            style={{ fontSize: "10.5px", letterSpacing: "0.22em" }}
+          >
+            <span className="text-amber">Mining</span>
+            <span className="mx-2 opacity-50">·</span>
+            <span className="text-amber">Exploration</span>
+            <span className="mx-2 opacity-50">·</span>
+            <span className="text-amber">Civil</span>
+            <span className="mx-2 opacity-50">·</span>
+            <span className="text-amber">Groundwater</span>
+          </p>
+        </div>
       </NavyBlob>
 
       {/* Yellow badge — floats above the navy blob top edge,
@@ -105,14 +140,6 @@ function HeroPoster() {
         style={{ left: "clamp(40px, 4vw, 80px)" }}
       >
         <YellowBadge>FOREX</YellowBadge>
-      </div>
-
-      {/* Speech bubble — overlaps blob right edge */}
-      <div
-        className="absolute top-[220px] z-[4]"
-        style={{ left: "clamp(440px, 36vw, 580px)" }}
-      >
-        <SpeechBubble label="SERVICES" value="12" />
       </div>
 
       {/* Center note */}
@@ -125,18 +152,6 @@ function HeroPoster() {
           style={{ fontSize: "18px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
-        </p>
-        <p
-          className="font-sans"
-          style={{
-            fontSize: "15px",
-            marginTop: "10px",
-            color: "var(--color-surface)",
-            opacity: 0.85,
-            lineHeight: "1.6",
-          }}
-        >
-          A full spectrum of specialist capabilities in one mobilisation.
         </p>
       </div>
 
@@ -166,7 +181,7 @@ function HeroPoster() {
         >
           <Image
             src={optimizedSrc("/images/hero-night-site.jpg")}
-            alt="Multi-rig night drilling operation in Papua New Guinea"
+            alt="Forex Drilling site operation"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
@@ -174,24 +189,6 @@ function HeroPoster() {
             placeholder="blur"
             blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
           />
-          <div
-            className="absolute inset-y-0 right-0 flex flex-col justify-center px-6"
-            style={{ background: "rgba(17, 40, 78, 0.95)", width: "44%" }}
-          >
-            <p
-              className="font-display font-bold uppercase leading-[1.4] text-amber"
-              style={{ fontSize: "14px", marginBottom: "14px", letterSpacing: "0.04em" }}
-            >
-              Multi-rig site operations<br />night and day
-            </p>
-            <p
-              className="font-sans font-normal text-on-navy-muted"
-              style={{ fontSize: "13px", lineHeight: "1.6" }}
-            >
-              From greenfield exploration to active mine pits. Modern, versatile
-              rigs deployed with experienced crews and reliable data capture.
-            </p>
-          </div>
         </div>
       </div>
 
@@ -232,26 +229,22 @@ function HeroStack() {
           className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
           style={{ fontSize: "26px", letterSpacing: "0.5px" }}
         >
-          Built to deliver.
+          Specialised drilling
         </p>
         <p
           className="font-display font-extrabold uppercase leading-[1.1] text-amber"
           style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
         >
-          On challenging drilling programs?
+          across the Asia-Pacific.
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "14px", lineHeight: "1.7" }}
         >
-          Delivering safe, reliable and high-quality drilling services across
-          the Asia-Pacific region.
+          Based in Singapore, supporting mining, exploration, civil
+          infrastructure, and groundwater programs.
         </p>
       </NavyBlob>
-
-      <div className="flex justify-center">
-        <SpeechBubble label="SERVICES" value="12" />
-      </div>
 
       <div className="flex flex-col gap-2 px-2">
         <p
@@ -259,12 +252,6 @@ function HeroStack() {
           style={{ fontSize: "18px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
-        </p>
-        <p
-          className="font-sans"
-          style={{ fontSize: "15px", color: "var(--color-surface)", opacity: 0.85 }}
-        >
-          A full spectrum of specialist capabilities in one mobilisation.
         </p>
       </div>
 
@@ -289,7 +276,7 @@ function HeroStack() {
         >
           <Image
             src={optimizedSrc("/images/hero-night-site.jpg")}
-            alt="Multi-rig night drilling operation"
+            alt="Forex Drilling site operation"
             fill
             sizes="100vw"
             className="object-cover"
@@ -297,24 +284,6 @@ function HeroStack() {
             placeholder="blur"
             blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
           />
-          <div
-            className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center px-5"
-            style={{ background: "rgba(16, 33, 66, 0.95)" }}
-          >
-            <p
-              className="font-display font-extrabold uppercase leading-[1.4] text-amber"
-              style={{ fontSize: "12px", marginBottom: "10px", letterSpacing: "0.04em" }}
-            >
-              Multi-rig operations
-            </p>
-            <p
-              className="font-sans font-normal text-on-navy-muted"
-              style={{ fontSize: "10px", lineHeight: "1.55" }}
-            >
-              Modern, versatile rigs with experienced crews, across mining,
-              exploration, and civil projects.
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -503,10 +472,6 @@ function AboutTeaser() {
               size={380}
               ringOffset={24}
             />
-            {/* Floating yellow badge — overlaps bottom-right of circle, partially outside */}
-            <div className="absolute bottom-[40px] right-[-40px] z-10 hidden md:block">
-              <YellowBadge>FIELD-PROVEN</YellowBadge>
-            </div>
           </div>
         </div>
 
@@ -725,19 +690,11 @@ function ApproachSection() {
 
 // ─── PAGE ───────────────────────────────────────────────────────────────────
 
-const keyFacts = [
-  { value: "12",        label: "Specialist Services" },
-  { value: "Singapore", label: "Headquarters" },
-  { value: "PNG",       label: "Field Operations" },
-  { value: "24/7",      label: "Site Coverage" },
-] as const;
-
 export default function HomePage() {
   return (
     <>
       <HeroPoster />
       <HeroStack />
-      <StatStrip items={keyFacts} />
       <IntroSection />
       <AboutTeaser />
       <ServicesPreview />
@@ -745,9 +702,9 @@ export default function HomePage() {
       <HseStatement />
       <ApproachSection />
       <CtaBanner
-        headline="Send us your scope."
-        body="We&rsquo;ll come back with a method mix, a mobilisation timeline, and a single point of contact. No middle layers."
-        cta="Start a conversation"
+        headline="Discuss your program."
+        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
+        cta="Get in touch"
         href="/contact"
       />
     </>

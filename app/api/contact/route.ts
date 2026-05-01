@@ -7,7 +7,7 @@ const schema = z.object({
   company: z.string().min(2),
   role:    z.string().min(2),
   country: z.string().min(2),
-  scope:   z.enum(["mining", "exploration", "civil", "environmental", "other"]),
+  scope:   z.enum(["mining", "exploration", "civil", "groundwater", "other"]),
   message: z.string().min(20),
 });
 

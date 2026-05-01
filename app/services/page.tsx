@@ -18,14 +18,13 @@ function ServicesHero() {
   return (
     <PageHero
       badge="SERVICES"
-      line1="A full spectrum"
-      line2="of capabilities."
-      photo={{ src: "/images/rig-meadow.jpg", alt: "Drilling rig in meadow setting" }}
+      line1="Drilling &"
+      line2="associated services."
+      photo={{ src: "/images/rig-meadow.jpg", alt: "Drilling rig" }}
       body={
         <>
-          A comprehensive range of drilling and associated services, chosen to
-          deliver reliable, high-quality outcomes across mining, exploration,
-          civil, and groundwater programs.
+          A comprehensive range of drilling and associated services, supporting
+          mining, exploration, civil infrastructure, and groundwater programs.
         </>
       }
     />
@@ -92,10 +91,9 @@ function DataSection() {
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="04" label="Data Acquisition" />
-          <SectionHeading line1="Krux & MWD." line2="Reliable, structured data." />
+          <SectionHeading line1="Krux" line2="& MWD." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-            Forex Drilling integrates advanced data acquisition systems to
-            improve accuracy, traceability, and overall drilling outcomes.
+            Digital systems used on Forex Drilling programs.
           </p>
         </Reveal>
 
@@ -104,20 +102,14 @@ function DataSection() {
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>Krux</h3>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Digital platform for data collection, reporting, and operational
-              monitoring, ensuring drilling data is captured accurately and
-              consistently throughout the project, with structured outputs ready
-              for client technical teams.
+              Data capture and reporting platform.
             </p>
           </div>
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Downhole Telemetry</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>MWD</h3>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Measurement While Drilling collects downhole parameters during
-              operations. When properly interpreted, this data provides valuable
-              insights into ground conditions, supports geological and
-              geotechnical understanding, and enhances decision-making.
+              Measurement While Drilling — downhole telemetry system.
             </p>
           </div>
         </div>
@@ -132,27 +124,27 @@ export default function ServicesPage() {
       <ServicesHero />
       <CategorySection
         id="drilling" bg="deep" number="01" label="Drilling Services"
-        line1="Drilling" line2="methods."
-        body="From diamond and sonic to RC and rotary, chosen to match the geology, access, and outcome required for each program."
+        line1="Drilling" line2="services."
+        body="Forex Drilling provides the following drilling services:"
         items={drillingItems}
       />
       <CategorySection
         id="instrumentation" bg="white" number="02" label="Instrumentation"
-        line1="Monitoring" line2="systems."
-        body="VWPs, inclinometers, and standpipe piezometers, installed, commissioned, and verified by experienced crews."
+        line1="Instrumentation" line2="installation."
+        body="Forex Drilling installs the following instrumentation:"
         items={instrumentationItems}
       />
       <CategorySection
         id="downhole" bg="deep" number="03" label="Downhole Services"
-        line1="Borehole" line2="integrity & data."
-        body="Geophysical logging and surveying to support geological understanding and verify borehole integrity."
+        line1="Downhole" line2="services."
+        body="Forex Drilling provides the following downhole services:"
         items={downholeItems}
       />
       <DataSection />
       <CtaBanner
-        headline="Multi-method program ahead?"
-        body="Send us the scope. We&rsquo;ll come back with a single mobilisation plan covering it: the right rigs, the right crews, in the right sequence."
-        cta="Discuss your scope"
+        headline="Discuss your program."
+        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
+        cta="Get in touch"
         href="/contact"
       />
     </>

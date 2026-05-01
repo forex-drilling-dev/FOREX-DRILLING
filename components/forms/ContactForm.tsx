@@ -10,7 +10,7 @@ const schema = z.object({
   company: z.string().min(2, "Please provide your company"),
   role:    z.string().min(2, "Please provide your role"),
   country: z.string().min(2, "Please provide your country"),
-  scope:   z.enum(["mining", "exploration", "civil", "environmental", "other"]),
+  scope:   z.enum(["mining", "exploration", "civil", "groundwater", "other"]),
   message: z.string().min(20, "Please share a few details (20+ chars)"),
 });
 type FormValues = z.infer<typeof schema>;
@@ -118,7 +118,7 @@ export function ContactForm() {
           <option value="mining">Mining</option>
           <option value="exploration">Exploration</option>
           <option value="civil">Civil</option>
-          <option value="environmental">Environmental</option>
+          <option value="groundwater">Groundwater</option>
           <option value="other">Other</option>
         </select>
       </label>

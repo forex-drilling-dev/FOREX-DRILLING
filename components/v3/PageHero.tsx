@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { NavyBlob } from "./NavyBlob";
 import { YellowBadge } from "./YellowBadge";
 import { CircleImageRing } from "./CircleImageRing";
-import { Crosshair } from "./Crosshair";
 import { BgGreyShape } from "./BgGreyShape";
 
 type Props = {
@@ -17,8 +16,6 @@ type Props = {
   body: ReactNode;
   /** Circle photo anchored at viewport right */
   photo: { src: string; alt: string };
-  /** Crosshair coordinate text, e.g. "06°S · 145°E" */
-  coords?: string;
 };
 
 /**
@@ -30,7 +27,7 @@ type Props = {
  * Use this for every inner page (about/services/fleet/hse/quality/projects)
  * so every hero shares the same spatial language as the homepage.
  */
-export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
+export function PageHero({ badge, line1, line2, body, photo }: Props) {
   return (
     <section className="relative w-full overflow-hidden bg-white">
       {/* ─── Mobile / tablet — stacked ─────────────────────────── */}
@@ -80,14 +77,6 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
       <div className="relative hidden h-[680px] pt-[var(--spacing-nav)] lg:block">
         {/* Background watermarks at viewport right edge */}
         <BgGreyShape className="top-[120px] right-[-50px]" />
-
-        {/* Crosshair coords */}
-        <div
-          className="absolute top-[160px]"
-          style={{ right: "clamp(140px, 16vw, 320px)" }}
-        >
-          <Crosshair size={36} coords={coords ?? "06°S · 145°E"} />
-        </div>
 
         {/* Yellow badge floating above blob top-left */}
         <div

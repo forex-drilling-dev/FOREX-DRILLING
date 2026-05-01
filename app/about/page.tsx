@@ -199,9 +199,9 @@ export default function AboutPage() {
       <OperatingModel />
       <MaintenanceSection />
       <CtaBanner
-        headline="Working on a complex program?"
-        body="We engage early. From scoping to crew handover, the same team owns delivery, with no middle layers and no surprises."
-        cta="Talk to the team"
+        headline="Discuss your program."
+        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
+        cta="Get in touch"
         href="/contact"
       />
     </>

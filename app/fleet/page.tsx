@@ -8,7 +8,6 @@ import {
   DrillBitPin,
   CtaBanner,
   Reveal,
-  StatCounter,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -94,16 +93,6 @@ function CapabilitiesSection() {
 }
 
 function MaintenanceSection() {
-  const stats: Array<{
-    value?: string;
-    counter?: { to: number; suffix?: string };
-    label: string;
-    description: string;
-  }> = [
-    { counter: { to: 95, suffix: "%" }, label: "Target Uptime", description: "Equipment availability target across active rigs" },
-    { value: "Daily", label: "Inspection Cadence", description: "Every rig, every shift, without exception" },
-    { value: "Field-First", label: "Maintenance Culture", description: "Preventative programs lead component management" },
-  ];
   return (
     <section className="relative overflow-hidden bg-white py-24 md:py-32">
       <div className="mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
@@ -124,33 +113,14 @@ function MaintenanceSection() {
 
         <Reveal className="flex flex-col gap-8 md:col-span-7 md:order-1">
           <SectionLabel number="02" label="Maintenance" />
-          <SectionHeading line1="Treated as a core" line2="operational priority." />
+          <SectionHeading line1="A core operational" line2="priority." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-            Structured preventative maintenance programs, disciplined daily
-            inspections, and proactive component management ensure high
-            equipment availability and consistent performance. This focus on
-            reliability directly supports productivity, reduces downtime, and
-            strengthens overall project delivery.
+            Equipment reliability is critical to performance. We place strong
+            emphasis on maintenance, with structured preventative maintenance
+            programs, regular inspections, and disciplined field practices,
+            supporting high rig availability, consistent productivity, and
+            dependable project delivery.
           </p>
-          <div className="grid gap-8 mt-2 sm:grid-cols-3">
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col gap-2 border-l-4 border-amber pl-5">
-                <p className="font-display font-black text-deep-navy" style={{ fontSize: "36px", lineHeight: "1" }}>
-                  {s.counter ? (
-                    <StatCounter to={s.counter.to} suffix={s.counter.suffix ?? ""} />
-                  ) : (
-                    s.value
-                  )}
-                </p>
-                <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
-                  {s.label}
-                </p>
-                <p className="font-sans" style={{ fontSize: "13px", lineHeight: "1.5", color: "var(--color-muted)" }}>
-                  {s.description}
-                </p>
-              </div>
-            ))}
-          </div>
         </Reveal>
       </div>
     </section>
@@ -164,9 +134,9 @@ export default function FleetPage() {
       <CapabilitiesSection />
       <MaintenanceSection />
       <CtaBanner
-        headline="Mobilisation to organise?"
-        body="Send us location, ground conditions, and target depth. We&rsquo;ll come back with the rig, the crew, and a timeline you can plan against."
-        cta="Contact operations"
+        headline="Discuss your program."
+        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
+        cta="Get in touch"
         href="/contact"
       />
     </>

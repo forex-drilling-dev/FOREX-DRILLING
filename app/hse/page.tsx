@@ -28,11 +28,11 @@ function HseHero() {
   return (
     <PageHero
       badge="HSE"
-      line1="Safety is not"
-      line2="a procedure."
+      line1="Health, Safety"
+      line2="& Environment."
       photo={{
         src: "/images/hero-night-site.jpg",
-        alt: "Forex Drilling night drilling operation",
+        alt: "Forex Drilling site operation",
       }}
       body={
         <>
@@ -49,9 +49,8 @@ function QuoteSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
-        <QuoteBlock line1="It&rsquo;s how we" line2="operate.">
-          Every role is trained, certified, and competent. We continuously
-          invest in better practices, equipment, and systems.
+        <QuoteBlock line1="Safety at the core" line2="of our operations.">
+          All personnel are trained, certified, and competent for their roles.
         </QuoteBlock>
       </div>
     </section>
@@ -115,9 +114,9 @@ export default function HsePage() {
       <ProtocolsSection />
       <CommitmentSection />
       <CtaBanner
-        headline="Audit ahead, or site induction needed?"
-        body="We operate to client procedures with full traceability: JSAs, PTWs, T5 sheets, daily toolbox records. We fit your safety system, not the other way round."
-        cta="Request HSE pack"
+        headline="Discuss your program."
+        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
+        cta="Get in touch"
         href="/contact"
       />
     </>
