@@ -19,7 +19,7 @@ export default function ContactPage() {
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
       <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
 
-      <div className="relative mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+      <div className="relative mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         {/* Left — info */}
         <div className="flex flex-col gap-8 md:col-span-5">
           <YellowBadge className="self-start">CONTACT</YellowBadge>

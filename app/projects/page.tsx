@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
       <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
         <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
         <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
+        <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
           <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
             <div className="relative md:col-span-7">
               <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">PROJECTS</YellowBadge>
@@ -63,7 +63,7 @@ export default async function ProjectsPage() {
 
       {/* CASE STUDIES */}
       <section className="relative bg-deep py-24 md:py-32">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+        <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
           <div className="flex flex-col gap-5 max-w-[700px]">
             <SectionLabel number="01" label="Case Studies" />
             <SectionHeading line1="Mining, exploration," line2="civil." />

@@ -34,7 +34,7 @@ export function CtaBanner({
         className,
       )}
     >
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-20 md:flex-row md:items-center md:justify-between md:gap-16 md:px-14 md:py-24">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-8 px-6 py-20 md:flex-row md:items-center md:justify-between md:gap-16 md:px-14 md:py-24">
         <div className="flex max-w-[640px] flex-col gap-5">
           <h2
             className={cn(

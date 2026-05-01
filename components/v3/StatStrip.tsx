@@ -23,7 +23,7 @@ export function StatStrip({ items }: Props) {
       aria-label="Key facts"
       className="relative bg-deep-navy"
     >
-      <div className="mx-auto grid max-w-[1280px] grid-cols-2 px-6 sm:grid-cols-4 md:px-14">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-2 px-6 sm:grid-cols-4 md:px-14">
         {items.map((s, i) => (
           <div
             key={s.label}

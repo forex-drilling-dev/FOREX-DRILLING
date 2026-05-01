@@ -31,62 +31,94 @@ import {
 // agency mockup, not a real site element).
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Hero is FULL-BLEED responsive on lg+. Elements anchor to viewport edges
+// using clamp() and right/left from the section borders directly. The
+// composition stays balanced across 1024px → 2560px viewports.
 function HeroPoster() {
   return (
     <section
       aria-labelledby="hero-title-desktop"
-      className="relative mx-auto hidden h-[850px] max-w-[1200px] overflow-hidden lg:block"
+      className="relative hidden h-[850px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
     >
-      {/* Background watermarks — flat, behind everything */}
-      <BgGreyShape className="top-[50px] right-[-50px]" />
+      {/* Watermarks anchored to VIEWPORT right edge */}
+      <BgGreyShape className="top-[80px] right-[-50px]" />
+      <YellowWave className="bottom-[-50px] right-[-50px] z-[1]" />
+
+      {/* Decorative thin circle outline (top-left of composition) */}
       <div
         aria-hidden
-        className="absolute top-[-50px] left-[350px] h-[200px] w-[200px] rounded-full border border-border"
+        className="absolute top-[-50px] h-[200px] w-[200px] rounded-full border border-border"
+        style={{ left: "clamp(280px, 28vw, 460px)" }}
       />
 
-      {/* Navy blob — gravity center, top-left */}
-      <NavyBlob className="absolute top-[100px] left-0 h-[420px] w-[580px] z-[2]">
+      {/* Crosshair coords — top-right of viewport */}
+      <div
+        className="absolute top-[120px]"
+        style={{ right: "clamp(140px, 16vw, 320px)" }}
+      >
+        <Crosshair size={36} coords="06°S · 145°E" />
+      </div>
+
+      {/* Navy blob — anchored to viewport LEFT, fluid width */}
+      <NavyBlob
+        className="absolute top-[100px] left-0 h-[440px] z-[2]"
+        style={{
+          width: "clamp(560px, 46vw, 720px)",
+          paddingLeft: "clamp(40px, 4vw, 80px)",
+          paddingRight: "clamp(40px, 4vw, 60px)",
+          paddingTop: "100px",
+          paddingBottom: "40px",
+        }}
+      >
         <p
           id="hero-title-desktop"
           className="font-display font-bold uppercase leading-[1.05] text-on-navy"
-          style={{ fontSize: "32px", letterSpacing: "0.5px" }}
+          style={{ fontSize: "clamp(28px, 2.4vw, 38px)", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
           className="font-display font-bold uppercase leading-[1.05] text-amber"
-          style={{ fontSize: "32px", letterSpacing: "0.5px", marginBottom: "28px" }}
+          style={{
+            fontSize: "clamp(28px, 2.4vw, 38px)",
+            letterSpacing: "0.5px",
+            marginBottom: "30px",
+          }}
         >
           On challenging<br />drilling programs?
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
-          style={{ fontSize: "14px", lineHeight: "1.65", maxWidth: "400px" }}
+          style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "420px" }}
         >
           Delivering safe, reliable and high-quality drilling services across
           the Asia-Pacific region.
         </p>
       </NavyBlob>
 
-      {/* Yellow badge — floats above blob top edge */}
-      <YellowBadge className="absolute top-[80px] left-[50px] z-[3]">
-        FOREX
-      </YellowBadge>
+      {/* Yellow badge — floats over blob top-left */}
+      <div
+        className="absolute top-[70px] z-[3]"
+        style={{ left: "clamp(40px, 4vw, 80px)" }}
+      >
+        <YellowBadge>FOREX</YellowBadge>
+      </div>
 
-      {/* Speech bubble — overlaps blob's right edge, tail points back into blob */}
-      <div className="absolute top-[170px] left-[480px] z-[4]">
+      {/* Speech bubble — overlaps blob right edge */}
+      <div
+        className="absolute top-[180px] z-[4]"
+        style={{ left: "clamp(440px, 36vw, 580px)" }}
+      >
         <SpeechBubble label="METHODS" value="12+" />
       </div>
 
-      {/* Crosshair only — no DotsTrio (palette ≠ design element) */}
-      <div className="absolute top-[80px] right-[180px]">
-        <Crosshair size={40} />
-      </div>
-
       {/* Center note */}
-      <div className="absolute top-[320px] left-[660px] max-w-[260px] z-[2]">
+      <div
+        className="absolute top-[340px] z-[2] max-w-[280px]"
+        style={{ left: "clamp(620px, 50vw, 800px)" }}
+      >
         <p
-          className="font-display font-extrabold leading-[1.3] text-deep-navy"
+          className="font-display font-bold leading-[1.3] text-deep-navy"
           style={{ fontSize: "16px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
@@ -95,7 +127,7 @@ function HeroPoster() {
           className="font-sans"
           style={{
             fontSize: "14px",
-            marginTop: "6px",
+            marginTop: "8px",
             color: "var(--color-surface)",
             opacity: 0.85,
             lineHeight: "1.55",
@@ -105,19 +137,22 @@ function HeroPoster() {
         </p>
       </div>
 
-      {/* Yellow wave — bleeds off bottom-right */}
-      <YellowWave className="bottom-[-50px] right-[-50px] z-[1]" />
-
-      {/* Rectangular image card — bottom-right */}
-      <div className="absolute bottom-[120px] right-[100px] h-[250px] w-[580px] z-[5]">
+      {/* Rectangular image card — anchored to viewport RIGHT, fluid width */}
+      <div
+        className="absolute bottom-[140px] z-[5] h-[260px]"
+        style={{
+          right: "clamp(40px, 5vw, 120px)",
+          width: "clamp(520px, 42vw, 680px)",
+        }}
+      >
         {/* Offset navy outline */}
         <div
           aria-hidden
-          className="absolute -top-5 -left-5 h-[290px] w-[640px] rounded-[20px] border border-surface/30 z-[1]"
+          className="absolute -top-5 -left-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-[20px] border border-surface/30 z-[1]"
         />
-        {/* Drill pins — positioned at 30% of card width, clearly above image only,
-            outside the navy panel area (which sits in the right 43%) */}
-        <div className="absolute -top-[60px] left-[140px] z-[6] flex gap-4">
+        {/* Drill pins — anchored over the IMAGE portion only (left 56%),
+            clearly away from the navy text panel on the right (44%) */}
+        <div className="absolute -top-[60px] left-[16%] z-[6] flex gap-4">
           <DrillBitPin size={42} />
           <DrillBitPin size={42} />
         </div>
@@ -130,16 +165,16 @@ function HeroPoster() {
             src="/images/hero-night-site.jpg"
             alt="Multi-rig night drilling operation in Papua New Guinea"
             fill
-            sizes="600px"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
             priority
           />
           <div
-            className="absolute inset-y-0 right-0 flex w-[250px] flex-col justify-center px-7"
-            style={{ background: "rgba(16, 33, 66, 0.95)" }}
+            className="absolute inset-y-0 right-0 flex flex-col justify-center px-6"
+            style={{ background: "rgba(17, 40, 78, 0.95)", width: "44%" }}
           >
             <p
-              className="font-display font-extrabold uppercase leading-[1.4] text-amber"
+              className="font-display font-bold uppercase leading-[1.4] text-amber"
               style={{ fontSize: "13px", marginBottom: "14px", letterSpacing: "0.04em" }}
             >
               Multi-rig site operations<br />— night &amp; day
@@ -155,17 +190,19 @@ function HeroPoster() {
         </div>
       </div>
 
-      {/* Circle operator photo — bottom-left */}
-      <div className="absolute bottom-[120px] left-[100px] z-[5]">
+      {/* Circle operator photo — anchored bottom-left, fluid offset */}
+      <div
+        className="absolute bottom-[140px] z-[5]"
+        style={{ left: "clamp(60px, 7vw, 160px)" }}
+      >
         <CircleImageRing
           src="/images/rig-vertical-operator.jpg"
           alt="Forex Drilling crew on site"
-          size={300}
-          ringOffset={20}
+          size={280}
+          ringOffset={18}
           priority
         />
       </div>
-
     </section>
   );
 }
@@ -279,7 +316,7 @@ function HeroStack() {
 function IntroSection() {
   return (
     <section className="relative bg-white py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-6 md:col-span-5">
           <SectionLabel number="01" label="Mission" />
           <SectionHeading
@@ -353,7 +390,7 @@ const serviceCategories = [
 function ServicesPreview() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16">
           <Reveal className="flex max-w-[600px] flex-col gap-5">
             <SectionLabel number="02" label="Capabilities" />
@@ -446,7 +483,7 @@ function AboutTeaser() {
           opacity: 0.08,
         }}
       />
-      <div className="relative mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+      <div className="relative mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         {/* Left — image with floating badge + index */}
         <div className="flex flex-col gap-8 md:col-span-5">
           <div className="relative mx-auto w-fit">
@@ -514,7 +551,7 @@ function AboutTeaser() {
 function FleetTeaser() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         <Reveal className="flex flex-col gap-8 md:col-span-5">
           <SectionLabel number="04" label="Fleet & Capabilities" />
           <SectionHeading
@@ -586,7 +623,7 @@ const hseProtocols = [
 function HseStatement() {
   return (
     <section className="relative bg-white py-24 md:py-32">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[1000px]">
           <SectionLabel number="05" label="Health, Safety & Environment" />
           <QuoteBlock
@@ -620,7 +657,7 @@ const deliveryFocus = [
 function ApproachSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="06" label="Project Delivery Approach" />
           <SectionHeading

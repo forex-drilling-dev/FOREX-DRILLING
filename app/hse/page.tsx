@@ -32,7 +32,7 @@ function HseHero() {
     <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
       <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
+      <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="relative md:col-span-7">
             <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">HSE</YellowBadge>
@@ -68,7 +68,7 @@ function HseHero() {
 function QuoteSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto max-w-[1280px] px-6 md:px-14">
+      <div className="mx-auto max-w-[1500px] px-6 md:px-14">
         <QuoteBlock line1="It&rsquo;s how we" line2="operate.">
           Every role is trained, certified, and competent — and we continuously
           invest in better practices, equipment, and systems.
@@ -81,7 +81,7 @@ function QuoteSection() {
 function ProtocolsSection() {
   return (
     <section className="relative bg-white py-24 md:py-32">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <div className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="01" label="Protocols" />
           <SectionHeading line1="Structured systems" line2="on every job." />
@@ -99,7 +99,7 @@ function ProtocolsSection() {
 function CommitmentSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <div className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="02" label="Commitment" />
           <SectionHeading line1="Continuous" line2="improvement, embedded." />
