@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import { Tag } from "@/components/ui/Tag";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getProjects } from "@/lib/sanity";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { padNumber } from "@/lib/utils";
+import {
+  NavyBlob,
+  YellowBadge,
+  CircleImageRing,
+  IndexNumber,
+  SectionLabel,
+  SectionHeading,
+  CtaBanner,
+  Crosshair,
+  BgGreyShape,
+} from "@/components/v3";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Selected drilling programs across Asia-Pacific.",
+  description: "Selected drilling programs across the Asia-Pacific region.",
 };
 
 export const revalidate = 60;
@@ -21,60 +26,117 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <section className="pt-[calc(var(--spacing-nav)+6rem)] pb-24">
-        <Container className="flex flex-col gap-10">
-          <Tag>Projects</Tag>
-          <h1 className="max-w-5xl font-display text-display-xl uppercase leading-[0.88] text-balance text-fore">
-            Selected <span className="text-ocre-400">field programs.</span>
-          </h1>
-        </Container>
+      {/* HERO */}
+      <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
+        <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
+        <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
+        <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
+          <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+            <div className="relative md:col-span-7">
+              <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">PROJECTS</YellowBadge>
+              <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
+                <p className="font-display font-extrabold uppercase leading-[1.1] text-on-navy" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px" }}>
+                  Selected
+                </p>
+                <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
+                  field programs.
+                </p>
+                <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+                  Across mining, exploration, civil works, and groundwater
+                  programs in the Asia-Pacific region — delivered with
+                  structured operations, reliable data capture, and a strong
+                  safety culture.
+                </p>
+              </NavyBlob>
+            </div>
+            <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
+              <CircleImageRing
+                src="/images/rig-aerial.jpg"
+                alt="Aerial view of drilling site"
+                size={300}
+                ringOffset={20}
+                priority
+              />
+              <IndexNumber label="EST." index="17" code="008" className="mr-4" />
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="border-y border-border bg-deep py-24">
-        <Container className="flex flex-col gap-12">
-          <SectionHeader index="01" label="Case Studies" title="Mining, exploration, civil." />
-          <Stagger className="grid gap-px bg-border md:grid-cols-2">
+      {/* CASE STUDIES */}
+      <section className="relative bg-deep py-24 md:py-32">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+          <div className="flex flex-col gap-5 max-w-[700px]">
+            <SectionLabel number="01" label="Case Studies" />
+            <SectionHeading line1="Mining, exploration," line2="civil." />
+          </div>
+
+          <div className="grid gap-px bg-border md:grid-cols-2">
             {projects.map((p, i) => (
-              <StaggerItem key={p.slug}>
-                <Link
-                  href={`/projects#${p.slug}`}
-                  id={p.slug}
-                  className="group flex h-full flex-col bg-black transition-colors duration-base hover:bg-surface"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={p.cover}
-                      alt={p.title}
-                      fill
-                      sizes="(min-width:768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-slow group-hover:scale-105"
-                    />
-                    <span className="absolute left-6 top-6 bg-amber px-3 py-1 font-mono text-mono-xs uppercase tracking-widest text-black">
-                      {p.scope}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-4 p-8">
-                    <span className="font-mono text-mono-xs uppercase tracking-widest text-amber">
-                      {padNumber(i + 1)} — {p.location}
-                    </span>
-                    <h3 className="font-display text-display-sm uppercase text-fore">{p.title}</h3>
-                    <p className="text-body text-muted">{p.outcomes}</p>
-                    <ul className="mt-2 flex flex-wrap gap-2">
-                      {p.methods.map((m) => (
-                        <li key={m} className="border border-border px-3 py-1 font-mono text-mono-xs uppercase tracking-widest text-muted">
-                          {m}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Link>
-              </StaggerItem>
+              <Link
+                key={p.slug}
+                id={p.slug}
+                href={`/projects#${p.slug}`}
+                className="group flex h-full flex-col bg-white transition-shadow duration-300 hover:shadow-deep"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={p.cover}
+                    alt={p.title}
+                    fill
+                    sizes="(min-width:768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span
+                    className="absolute left-6 top-6 bg-amber px-4 py-1.5 font-display font-bold uppercase text-white"
+                    style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                  >
+                    {p.scope}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-4 p-7">
+                  <span
+                    className="font-display font-bold uppercase text-amber"
+                    style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                  >
+                    {String(i + 1).padStart(2, "0")} — {p.location}
+                  </span>
+                  <h3
+                    className="font-display font-extrabold uppercase text-deep-navy"
+                    style={{ fontSize: "22px", letterSpacing: "0.04em", lineHeight: "1.15" }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p
+                    className="font-display"
+                    style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
+                  >
+                    {p.outcomes}
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {p.methods.map((m) => (
+                      <li
+                        key={m}
+                        className="border border-border px-3 py-1 font-display font-medium uppercase text-deep-navy"
+                        style={{ fontSize: "10px", letterSpacing: "0.12em" }}
+                      >
+                        {m}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Link>
             ))}
-          </Stagger>
-        </Container>
+          </div>
+        </div>
       </section>
 
-      <CtaBanner headline="Have a program to share with us?" cta="Get in Touch" href="/contact" />
+      <CtaBanner
+        headline="Have a program to share?"
+        body="We engage early to understand constraints, identify risks, and propose practical, solution-driven approaches."
+        cta="Get in Touch"
+        href="/contact"
+      />
     </>
   );
 }

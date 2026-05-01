@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { services, getService } from "@/content/services";
-import { Container } from "@/components/ui/Container";
-import { Tag } from "@/components/ui/Tag";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ServiceCard } from "@/components/sections/ServiceCard";
-import { CtaBanner } from "@/components/sections/CtaBanner";
-import { padNumber } from "@/lib/utils";
-import { FadeIn } from "@/components/motion/FadeIn";
-import { Check } from "lucide-react";
+import { services, getService, type ServiceCategory } from "@/content/services";
+import {
+  NavyBlob,
+  YellowBadge,
+  CircleImageRing,
+  IndexNumber,
+  SectionLabel,
+  SectionHeading,
+  DrillBitPin,
+  CtaBanner,
+  BgGreyShape,
+  Crosshair,
+} from "@/components/v3";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -26,6 +31,20 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
+const categoryHero: Record<ServiceCategory, string> = {
+  drilling: "/images/rig-vertical-clean.jpg",
+  instrumentation: "/images/rig-aerial.jpg",
+  downhole: "/images/drill-head-closeup.jpg",
+  data: "/images/rig-horizontal.jpg",
+};
+
+const categoryLabel: Record<ServiceCategory, string> = {
+  drilling: "DRILLING",
+  instrumentation: "INSTRUMENTATION",
+  downhole: "DOWNHOLE",
+  data: "DATA ACQUISITION",
+};
+
 export default async function ServiceDetailPage({ params }: Params) {
   const { slug } = await params;
   const service = getService(slug);
@@ -35,71 +54,150 @@ export default async function ServiceDetailPage({ params }: Params) {
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
+  const idx = services.findIndex((s) => s.slug === service.slug);
+  const code = String(idx + 1).padStart(3, "0");
+  const heroPhoto = categoryHero[service.category];
+
   return (
     <>
-      <section className="pt-[calc(var(--spacing-nav)+6rem)] pb-24">
-        <Container className="flex flex-col gap-10">
-          <Tag>{service.category.toUpperCase()}</Tag>
-          <h1 className="max-w-5xl font-display text-display-xl uppercase leading-[0.9] text-balance">
-            {service.title}
-          </h1>
-          <p className="max-w-3xl text-body-lg text-subtle">{service.summary}</p>
-        </Container>
+      {/* HERO */}
+      <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
+        <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
+        <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
+        <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
+          <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+            <div className="relative md:col-span-7">
+              <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">
+                {categoryLabel[service.category]}
+              </YellowBadge>
+              <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
+                <p
+                  className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
+                  style={{ fontSize: "clamp(28px, 4vw, 40px)", letterSpacing: "0.5px", marginBottom: "24px" }}
+                >
+                  {service.title}
+                </p>
+                <p
+                  className="font-display font-normal text-on-navy-muted"
+                  style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}
+                >
+                  {service.summary}
+                </p>
+              </NavyBlob>
+            </div>
+            <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
+              <CircleImageRing
+                src={heroPhoto}
+                alt={`${service.title} — illustration`}
+                size={300}
+                ringOffset={20}
+                priority
+              />
+              <IndexNumber label="EST." index="17" code={code} className="mr-4" />
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="border-y border-border bg-deep py-24">
-        <Container className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <SectionHeader index="01" label="Overview" title="What we deliver." />
+      {/* OVERVIEW */}
+      <section className="relative bg-deep py-24 md:py-32">
+        <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+          <div className="flex flex-col gap-5 md:col-span-5">
+            <SectionLabel number="01" label="Overview" />
+            <SectionHeading line1="What we" line2="deliver." />
           </div>
-          <FadeIn as="p" className="text-body-lg text-subtle md:col-span-8">
+          <p
+            className="font-display md:col-span-7"
+            style={{ fontSize: "17px", lineHeight: "1.75", color: "var(--color-fore)" }}
+          >
             {service.body}
-          </FadeIn>
-        </Container>
+          </p>
+        </div>
       </section>
 
-      <section className="py-24">
-        <Container className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <SectionHeader index="02" label="Applications" title="Where it fits." />
+      {/* APPLICATIONS */}
+      <section className="relative bg-white py-24 md:py-32">
+        <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+          <div className="flex flex-col gap-5 md:col-span-5">
+            <SectionLabel number="02" label="Applications" />
+            <SectionHeading line1="Where it" line2="fits." />
           </div>
-          <ul className="flex flex-col gap-4 md:col-span-8">
-            {service.applications.map((a, i) => (
-              <FadeIn
-                as="li"
-                key={a}
-                delay={i * 0.05}
-                className="flex items-start gap-4 border-t border-border pt-4"
-              >
-                <Check className="h-5 w-5 shrink-0 text-amber" aria-hidden />
-                <span className="text-body-lg text-fore">{a}</span>
-              </FadeIn>
+          <ul className="flex flex-col gap-4 md:col-span-7">
+            {service.applications.map((a) => (
+              <li key={a} className="flex items-start gap-4 border-t border-border pt-4">
+                <span className="flex shrink-0 pt-0.5" aria-hidden>
+                  <DrillBitPin size={20} />
+                </span>
+                <span
+                  className="font-display font-medium text-deep-navy"
+                  style={{ fontSize: "16px", lineHeight: "1.55" }}
+                >
+                  {a}
+                </span>
+              </li>
             ))}
           </ul>
-        </Container>
+        </div>
       </section>
 
+      {/* RELATED */}
       {related.length > 0 && (
-        <section className="bg-deep py-24">
-          <Container className="flex flex-col gap-12">
-            <SectionHeader index="03" label="Related" title="Services we often deploy together." />
+        <section className="relative bg-deep py-24 md:py-32">
+          <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+            <div className="flex flex-col gap-5 max-w-[700px]">
+              <SectionLabel number="03" label="Related" />
+              <SectionHeading line1="Services we" line2="often deploy together." />
+            </div>
             <div className="grid gap-px bg-border md:grid-cols-3">
               {related.map((s, i) => (
-                <ServiceCard
+                <Link
                   key={s.slug}
-                  index={padNumber(i + 1)}
-                  title={s.title}
-                  summary={s.summary}
                   href={`/services/${s.slug}`}
-                  className="h-full"
-                />
+                  className="group relative flex h-full flex-col gap-5 bg-white p-7 transition-all duration-300 hover:bg-amber"
+                >
+                  <p
+                    className="font-display font-black"
+                    style={{ fontSize: "36px", lineHeight: "1", color: "var(--color-amber)" }}
+                  >
+                    <span className="transition-colors duration-300 group-hover:text-deep-navy">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </p>
+                  <h3
+                    className="font-display font-extrabold uppercase text-deep-navy"
+                    style={{ fontSize: "18px", letterSpacing: "0.04em" }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p
+                    className="font-display"
+                    style={{ fontSize: "13px", lineHeight: "1.6", color: "var(--color-muted)" }}
+                  >
+                    {s.summary}
+                  </p>
+                  <span
+                    className="mt-auto inline-flex items-center gap-2 font-display font-bold uppercase text-amber transition-all duration-300 group-hover:text-deep-navy group-hover:gap-3"
+                    style={{ fontSize: "11px", letterSpacing: "0.12em" }}
+                  >
+                    Explore
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </span>
+                </Link>
               ))}
             </div>
-          </Container>
+          </div>
         </section>
       )}
 
-      <CtaBanner headline="Have a program that needs this scope?" cta="Request a Quote" href="/contact" />
+      <CtaBanner
+        headline="Have a program that needs this scope?"
+        body="Tell us about your project — we&rsquo;ll propose the right approach."
+        cta="Request a Quote"
+        href="/contact"
+      />
     </>
   );
 }

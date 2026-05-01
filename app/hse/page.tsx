@@ -1,92 +1,148 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Container } from "@/components/ui/Container";
-import { Tag } from "@/components/ui/Tag";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ProtocolBadge } from "@/components/sections/ProtocolBadge";
-import { CtaBanner } from "@/components/sections/CtaBanner";
-import { FadeIn } from "@/components/motion/FadeIn";
+import {
+  NavyBlob,
+  YellowBadge,
+  CircleImageRing,
+  IndexNumber,
+  SectionLabel,
+  SectionHeading,
+  QuoteBlock,
+  ProtocolGrid,
+  CtaBanner,
+  Crosshair,
+  BgGreyShape,
+} from "@/components/v3";
 
 export const metadata: Metadata = {
   title: "HSE — Health, Safety & Environment",
-  description: "Safety is at the core of our operations. Structured systems, certified personnel, and continuous improvement.",
+  description:
+    "Safety is at the core of our operations. Structured systems, certified personnel, and continuous improvement.",
 };
 
 const protocols = [
   { code: "SOP", label: "Standard Operating Procedures" },
   { code: "JSA", label: "Job Safety Analysis" },
   { code: "PTW", label: "Permit to Work" },
-  { code: "T5",  label: "Take 5 Risk Assessment" },
+  { code: "T5", label: "Take 5 Risk Assessment" },
   { code: "TBX", label: "Toolbox Meetings" },
   { code: "PPE", label: "Full PPE Compliance" },
 ];
 
+function HseHero() {
+  return (
+    <section className="relative bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
+      <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
+      <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-14">
+        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+          <div className="relative md:col-span-7">
+            <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">HSE</YellowBadge>
+            <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
+              <p className="font-display font-extrabold uppercase leading-[1.1] text-on-navy" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px" }}>
+                Safety is not
+              </p>
+              <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
+                a procedure.
+              </p>
+              <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+                Forex Drilling operates in strict compliance with client safety
+                standards, site procedures, and regulatory requirements. Every
+                activity is conducted under structured safety management systems.
+              </p>
+            </NavyBlob>
+          </div>
+          <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
+            <CircleImageRing
+              src="/images/hero-night-site.jpg"
+              alt="Forex Drilling night drilling operation"
+              size={300}
+              ringOffset={20}
+              priority
+            />
+            <IndexNumber label="EST." index="17" code="006" className="mr-4" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function QuoteSection() {
+  return (
+    <section className="relative bg-deep py-24 md:py-32">
+      <div className="mx-auto max-w-[1280px] px-6 md:px-14">
+        <QuoteBlock line1="It&rsquo;s how we" line2="operate.">
+          Every role is trained, certified, and competent — and we continuously
+          invest in better practices, equipment, and systems.
+        </QuoteBlock>
+      </div>
+    </section>
+  );
+}
+
+function ProtocolsSection() {
+  return (
+    <section className="relative bg-white py-24 md:py-32">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
+        <div className="flex flex-col gap-5 max-w-[700px]">
+          <SectionLabel number="01" label="Protocols" />
+          <SectionHeading line1="Structured systems" line2="on every job." />
+          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            All activities are conducted under structured safety management
+            systems including the following:
+          </p>
+        </div>
+        <ProtocolGrid items={protocols} />
+      </div>
+    </section>
+  );
+}
+
+function CommitmentSection() {
+  return (
+    <section className="relative bg-deep py-24 md:py-32">
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+        <div className="flex flex-col gap-5 md:col-span-5">
+          <SectionLabel number="02" label="Commitment" />
+          <SectionHeading line1="Continuous" line2="improvement, embedded." />
+        </div>
+        <div className="flex flex-col gap-6 md:col-span-7">
+          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}>
+            All personnel are trained, certified, and competent for their roles.
+            We actively participate in client-led safety reviews, audits, and
+            continuous improvement processes.
+          </p>
+          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            We are committed to continuously improving safety performance through
+            the adoption of better practices, technologies, and equipment. This
+            includes the implementation of rod handling systems and other
+            innovations aimed at reducing manual handling, minimizing exposure
+            to hazards, and improving overall operational safety.
+          </p>
+          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            Environmental responsibility is integrated into our operations
+            through proper waste management, site protection measures, and full
+            compliance with environmental regulations.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HsePage() {
   return (
     <>
-      {/* Hero — night site image */}
-      <section className="relative overflow-hidden pt-[calc(var(--spacing-nav)+6rem)] pb-24">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/images/hero-night-site.jpg"
-            alt=""
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
-        </div>
-        <Container className="flex flex-col gap-10">
-          <Tag>HSE</Tag>
-          <h1 className="max-w-5xl font-display text-display-xl uppercase leading-[0.88] text-balance text-fore">
-            Safety is not a procedure.<br />
-            <span className="text-ocre-400">It&rsquo;s how we operate.</span>
-          </h1>
-          <p className="max-w-2xl text-body-lg text-muted">
-            Forex Drilling operates in strict compliance with client safety standards, site procedures, and regulatory
-            requirements. Every activity is conducted under structured safety management systems.
-          </p>
-        </Container>
-      </section>
-
-      {/* Protocol badges */}
-      <section className="border-y border-border bg-surface py-24">
-        <Container className="flex flex-col gap-12">
-          <SectionHeader index="01" label="Protocols" title="Structured systems on every job." />
-          <div className="grid gap-px bg-border md:grid-cols-3 lg:grid-cols-6">
-            {protocols.map((p) => (
-              <ProtocolBadge key={p.code} code={p.code} label={p.label} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Commitment */}
-      <section className="py-24">
-        <Container className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <SectionHeader index="02" label="Commitment" title="Continuous improvement, embedded." />
-          </div>
-          <FadeIn className="flex flex-col gap-6 text-body-lg text-muted md:col-span-7">
-            <p>
-              All personnel are trained, certified, and competent for their roles. We actively participate in client-led
-              safety reviews, audits, and continuous improvement processes.
-            </p>
-            <p>
-              We are committed to continuously improving safety performance through the adoption of better practices,
-              technologies, and equipment. This includes rod handling systems and other innovations aimed at reducing
-              manual handling, minimizing exposure to hazards, and improving overall operational safety.
-            </p>
-            <p>
-              Environmental responsibility is integrated into our operations through proper waste management, site protection
-              measures, and full compliance with environmental regulations.
-            </p>
-          </FadeIn>
-        </Container>
-      </section>
-
-      <CtaBanner headline="Looking for a safety-first drilling partner?" cta="Talk to Us" href="/contact" />
+      <HseHero />
+      <QuoteSection />
+      <ProtocolsSection />
+      <CommitmentSection />
+      <CtaBanner
+        headline="Looking for a safety-first drilling partner?"
+        body="Discuss your safety standards with us — we operate in strict compliance and continuously invest in better practices."
+        cta="Talk to Us"
+        href="/contact"
+      />
     </>
   );
 }
