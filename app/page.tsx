@@ -42,27 +42,29 @@ function HeroPoster() {
       className="relative hidden h-[850px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
     >
       {/* Watermarks anchored to VIEWPORT right edge */}
-      <BgGreyShape className="top-[80px] right-[-50px]" />
+      <BgGreyShape className="top-[120px] right-[-50px]" />
       <YellowWave className="bottom-[-50px] right-[-50px] z-[1]" />
 
       {/* Decorative thin circle outline (top-left of composition) */}
       <div
         aria-hidden
-        className="absolute top-[-50px] h-[200px] w-[200px] rounded-full border border-border"
+        className="absolute top-[40px] h-[200px] w-[200px] rounded-full border border-border"
         style={{ left: "clamp(280px, 28vw, 460px)" }}
       />
 
-      {/* Crosshair coords — top-right of viewport */}
+      {/* Crosshair coords — top-right of viewport, clear of the fixed nav */}
       <div
-        className="absolute top-[120px]"
+        className="absolute top-[160px]"
         style={{ right: "clamp(140px, 16vw, 320px)" }}
       >
         <Crosshair size={36} coords="06°S · 145°E" />
       </div>
 
-      {/* Navy blob — anchored to viewport LEFT, fluid width */}
+      {/* Navy blob — anchored to viewport LEFT, fluid width.
+          Top:140 leaves clear vertical space below the fixed nav (h:80) so
+          the badge that overlaps it (at top:110) can sit in front of it. */}
       <NavyBlob
-        className="absolute top-[100px] left-0 h-[440px] z-[2]"
+        className="absolute top-[140px] left-0 h-[440px] z-[2]"
         style={{
           width: "clamp(560px, 46vw, 720px)",
           paddingLeft: "clamp(40px, 4vw, 80px)",
@@ -97,9 +99,10 @@ function HeroPoster() {
         </p>
       </NavyBlob>
 
-      {/* Yellow badge — floats over blob top-left */}
+      {/* Yellow badge — floats above the navy blob top edge,
+          clear of the fixed nav (h:80) — top:110 leaves a 30px gap below it. */}
       <div
-        className="absolute top-[70px] z-[3]"
+        className="absolute top-[110px] z-[3]"
         style={{ left: "clamp(40px, 4vw, 80px)" }}
       >
         <YellowBadge>FOREX</YellowBadge>
@@ -107,7 +110,7 @@ function HeroPoster() {
 
       {/* Speech bubble — overlaps blob right edge */}
       <div
-        className="absolute top-[180px] z-[4]"
+        className="absolute top-[220px] z-[4]"
         style={{ left: "clamp(440px, 36vw, 580px)" }}
       >
         <SpeechBubble label="METHODS" value="12+" />
@@ -115,7 +118,7 @@ function HeroPoster() {
 
       {/* Center note */}
       <div
-        className="absolute top-[340px] z-[2] max-w-[280px]"
+        className="absolute top-[380px] z-[2] max-w-[280px]"
         style={{ left: "clamp(620px, 50vw, 800px)" }}
       >
         <p
