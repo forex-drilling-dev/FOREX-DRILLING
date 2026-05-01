@@ -116,13 +116,6 @@ export function Footer() {
             </p>
           </div>
         </div>
-
-        <div className="relative my-12 h-px w-full bg-white/15" />
-
-        <div className="relative flex flex-col justify-between gap-4 font-mono text-xs uppercase tracking-[0.12em] text-on-navy-muted/70 md:flex-row">
-          <span>© {new Date().getFullYear()} Forex Drilling Pte Ltd</span>
-          <span>Built in Singapore · Field-proven across Asia-Pacific</span>
-        </div>
       </Container>
     </footer>
   );
