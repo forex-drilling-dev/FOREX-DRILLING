@@ -50,7 +50,7 @@ function QuoteSection() {
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
         <QuoteBlock line1="It&rsquo;s how we" line2="operate.">
-          Every role is trained, certified, and competent — and we continuously
+          Every role is trained, certified, and competent. We continuously
           invest in better practices, equipment, and systems.
         </QuoteBlock>
       </div>
@@ -86,8 +86,7 @@ function CommitmentSection() {
         </Reveal>
         <div className="flex flex-col gap-6 md:col-span-7">
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}>
-            All personnel are trained, certified, and competent for their roles.
-            We actively participate in client-led safety reviews, audits, and
+            All personnel are trained, certified, and competent for their roles. They actively participate in client-led safety reviews, audits, and
             continuous improvement processes.
           </p>
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
@@ -117,7 +116,7 @@ export default function HsePage() {
       <CommitmentSection />
       <CtaBanner
         headline="Audit ahead, or site induction needed?"
-        body="We operate to client procedures with full traceability — JSAs, PTWs, T5 sheets, daily toolbox records. We fit your safety system, not the other way round."
+        body="We operate to client procedures with full traceability: JSAs, PTWs, T5 sheets, daily toolbox records. We fit your safety system, not the other way round."
         cta="Request HSE pack"
         href="/contact"
       />

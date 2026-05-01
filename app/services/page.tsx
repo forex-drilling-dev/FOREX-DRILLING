@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "A comprehensive range of drilling and associated services — drilling, instrumentation, downhole, and data acquisition.",
+    "A comprehensive range of drilling and associated services: drilling, instrumentation, downhole, and data acquisition.",
 };
 
 function ServicesHero() {
@@ -23,7 +23,7 @@ function ServicesHero() {
       photo={{ src: "/images/rig-meadow.jpg", alt: "Drilling rig in meadow setting" }}
       body={
         <>
-          A comprehensive range of drilling and associated services — chosen to
+          A comprehensive range of drilling and associated services, chosen to
           deliver reliable, high-quality outcomes across mining, exploration,
           civil, and groundwater programs.
         </>
@@ -42,7 +42,7 @@ const drillingItems = [
   "Standard Penetration Testing (SPT)",
   "Push tube sampling",
   "Pumping and packer testing",
-  "Downhole surveying — gyro, core orientation, deviation control",
+  "Downhole surveying (gyro, core orientation, deviation control)",
 ];
 const instrumentationItems = [
   "Vibrating Wire Piezometers (VWP)",
@@ -105,7 +105,7 @@ function DataSection() {
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>Krux</h3>
             <p className="mt-5 font-display" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Digital platform for data collection, reporting, and operational
-              monitoring — ensuring drilling data is captured accurately and
+              monitoring, ensuring drilling data is captured accurately and
               consistently throughout the project, with structured outputs ready
               for client technical teams.
             </p>
@@ -133,13 +133,13 @@ export default function ServicesPage() {
       <CategorySection
         id="drilling" bg="deep" number="01" label="Drilling Services"
         line1="Drilling" line2="methods."
-        body="From diamond and sonic to RC and rotary — chosen to match the geology, access, and outcome required for each program."
+        body="From diamond and sonic to RC and rotary, chosen to match the geology, access, and outcome required for each program."
         items={drillingItems}
       />
       <CategorySection
         id="instrumentation" bg="white" number="02" label="Instrumentation"
         line1="Monitoring" line2="systems."
-        body="VWPs, inclinometers, and standpipe piezometers — installed, commissioned, and verified by experienced crews."
+        body="VWPs, inclinometers, and standpipe piezometers, installed, commissioned, and verified by experienced crews."
         items={instrumentationItems}
       />
       <CategorySection
@@ -151,7 +151,7 @@ export default function ServicesPage() {
       <DataSection />
       <CtaBanner
         headline="Multi-method program ahead?"
-        body="Send us the scope. We&rsquo;ll come back with a single mobilisation plan covering it — the right rigs, the right crews, in the right sequence."
+        body="Send us the scope. We&rsquo;ll come back with a single mobilisation plan covering it: the right rigs, the right crews, in the right sequence."
         cta="Build a method mix"
         href="/contact"
       />

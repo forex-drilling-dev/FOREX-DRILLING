@@ -160,7 +160,7 @@ export default async function ServiceDetailPage({ params }: Params) {
 
       <CtaBanner
         headline="Got a hole that needs this method?"
-        body="Send target depth, ground conditions, and timeline — we&rsquo;ll come back with rig selection, crew composition, and a quote."
+        body="Send target depth, ground conditions, and timeline. We&rsquo;ll come back with rig selection, crew composition, and a quote."
         cta="Request a quote"
         href="/contact"
       />

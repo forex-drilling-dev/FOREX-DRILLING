@@ -53,23 +53,9 @@ export function Footer() {
               </p>
             </div>
             <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
-              Specialised drilling services across the Asia-Pacific region —
-              Singapore HQ, Papua New Guinea field operations.
+              Specialised drilling services across the Asia-Pacific region.
+              Singapore headquarters, Papua New Guinea field operations.
             </p>
-
-            {/* "EN OPS" status indicator */}
-            <div className="mt-8 inline-flex items-center gap-3 rounded-sm border border-white/10 bg-white/5 py-2 pl-3 pr-5">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
-              </span>
-              <span
-                className="font-mono uppercase text-on-navy-muted"
-                style={{ fontSize: "10px", letterSpacing: "0.18em" }}
-              >
-                In Operations · PNG Highlands
-              </span>
-            </div>
           </div>
 
           {/* Navigate */}
@@ -105,15 +91,6 @@ export function Footer() {
             >
               {site.footer.email}
             </a>
-
-            {/* Coordinates */}
-            <p
-              className="mt-6 font-mono uppercase text-on-navy-muted/60"
-              style={{ fontSize: "10px", letterSpacing: "0.18em" }}
-            >
-              01°20′N · 103°50′E (SG)<br />
-              06°00′S · 145°00′E (PNG)
-            </p>
           </div>
         </div>
       </Container>

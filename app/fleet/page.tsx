@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: "Fleet & Capabilities",
   description:
-    "Modern, versatile drilling equipment designed to perform reliably in demanding environments — supported by experienced crews and a strong maintenance culture.",
+    "Modern, versatile drilling equipment designed to perform reliably in demanding environments, supported by experienced crews and a strong maintenance culture.",
 };
 
 function FleetHero() {
@@ -30,7 +30,7 @@ function FleetHero() {
       body={
         <>
           Forex Drilling operates modern, versatile drilling equipment designed
-          to perform reliably in demanding environments — supported by
+          to perform reliably in demanding environments, supported by
           experienced crews, robust logistics, and a strong maintenance culture.
         </>
       }
@@ -55,7 +55,7 @@ function CapabilitiesSection() {
             <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Our equipment is supported by experienced crews, robust logistics,
               and a strong maintenance culture. Designed to provide resilience
-              in the field — maintaining performance even under challenging
+              in the field, maintaining performance even under challenging
               ground conditions, logistical constraints, and operational
               pressures.
             </p>
@@ -67,8 +67,8 @@ function CapabilitiesSection() {
               title="Multi-method, scalable rigs"
               body={
                 <>
-                  Designed to deliver multiple scopes from a single mobilisation
-                  — including dual-head sonic / diamond capability for difficult
+                  Designed to deliver multiple scopes from a single mobilisation,
+                  including dual-head sonic / diamond capability for difficult
                   ground.
                 </>
               }

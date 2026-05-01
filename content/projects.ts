@@ -42,7 +42,7 @@ export const projects: Project[] = [
     scope: "groundwater",
     methods: ["Sonic Drilling", "Standpipe Piezometers", "Pumping Tests"],
     outcomes:
-      "Installed monitoring network across multi-site catchment — sonic-cased holes paired with standpipe piezometers, fully commissioned with baseline pump-test data delivered to client hydrogeology team.",
+      "Installed monitoring network across multi-site catchment: sonic-cased holes paired with standpipe piezometers, fully commissioned with baseline pump-test data delivered to client hydrogeology team.",
     cover: "/images/rig-meadow.jpg",
   },
   {
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     scope: "exploration",
     methods: ["Multi-Rig Deployment", "Diamond Drilling", "MWD"],
     outcomes:
-      "Mobilised concurrent rigs across remote highland terrain — fly-camp logistics, full crew rotation, real-time data via Krux. Programme completed on schedule with full reporting traceability.",
+      "Mobilised concurrent rigs across remote highland terrain. Fly-camp logistics, full crew rotation, real-time data via Krux. Programme completed on schedule with full reporting traceability.",
     cover: "/images/site-aerial-trees.jpg",
   },
 ];

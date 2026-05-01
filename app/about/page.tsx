@@ -29,7 +29,7 @@ function AboutHero() {
         <>
           Forex Drilling is a specialist drilling contractor supporting mining,
           exploration, and civil projects with a broad range of drilling services.
-          Headquartered in Singapore and operating across the Asia-Pacific region —
+          Headquartered in Singapore and operating across the Asia-Pacific region,
           structured to deliver efficient, field-proven solutions in remote and
           challenging environments.
         </>
@@ -74,8 +74,7 @@ function WhoWeAre() {
             className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
-            We work closely with our clients from early stages through execution
-            — understanding project constraints, identifying risks, and proposing
+            We work closely with our clients from early stages through execution: understanding project constraints, identifying risks, and proposing
             practical, solution-driven approaches. From selecting the right
             drilling methods to delivering fully integrated or turnkey projects
             when required, we consistently aim to go beyond minimum requirements
@@ -109,7 +108,7 @@ function OperatingModel() {
             project execution in often complex environments.
           </PillarCard>
           <PillarCard number="02" title="Resilience">
-            Built into how we operate — through our people, our equipment, and
+            Built into how we operate, through our people, our equipment, and
             our systems. We are structured to maintain performance under
             pressure, adapt to changing ground conditions, and continue
             delivering safely and reliably in challenging environments.
@@ -201,7 +200,7 @@ export default function AboutPage() {
       <MaintenanceSection />
       <CtaBanner
         headline="Working on a complex program?"
-        body="We engage early. From scoping to crew handover, the same team owns delivery — no middle layers, no surprises."
+        body="We engage early. From scoping to crew handover, the same team owns delivery, with no middle layers and no surprises."
         cta="Talk to the team"
         href="/contact"
       />

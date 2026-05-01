@@ -96,7 +96,7 @@ export const services: Service[] = [
     slug: "instrumentation-installation",
     title: "Instrumentation Installation",
     category: "instrumentation",
-    summary: "VWPs, inclinometers, and standpipe piezometers — installed and commissioned.",
+    summary: "VWPs, inclinometers, and standpipe piezometers, installed and commissioned.",
     body: "We install Vibrating Wire Piezometers, inclinometers, standpipe piezometers, and associated monitoring systems. Each installation is documented and commissioned to ensure data integrity from day one.",
     applications: ["Slope stability monitoring", "Groundwater monitoring", "Ground deformation tracking"],
     related: ["horizontal-drilling", "pumping-packer-testing", "geophysical-logging"],

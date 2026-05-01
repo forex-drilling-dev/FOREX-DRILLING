@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
         body={
           <>
             Across mining, exploration, civil works, and groundwater programs
-            in the Asia-Pacific region — delivered with structured operations,
+            in the Asia-Pacific region. Delivered with structured operations,
             reliable data capture, and a strong safety culture.
           </>
         }
@@ -79,7 +79,7 @@ export default async function ProjectsPage() {
                     className="font-display font-bold uppercase text-amber"
                     style={{ fontSize: "11px", letterSpacing: "0.18em" }}
                   >
-                    {String(i + 1).padStart(2, "0")} — {p.location}
+                    {String(i + 1).padStart(2, "0")} · {p.location}
                   </span>
                   <h3
                     className="font-display font-extrabold uppercase text-deep-navy"
@@ -113,7 +113,7 @@ export default async function ProjectsPage() {
 
       <CtaBanner
         headline="Planning a program in the region?"
-        body="Tell us where, when, and what. We&rsquo;ll propose how. Mining, exploration, civil, groundwater — we&rsquo;ve drilled them all."
+        body="Tell us where, when, and what. We&rsquo;ll propose how. Mining, exploration, civil, groundwater. We&rsquo;ve drilled them all."
         cta="Discuss your program"
         href="/contact"
       />

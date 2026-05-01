@@ -183,7 +183,7 @@ function HeroPoster() {
               className="font-display font-bold uppercase leading-[1.4] text-amber"
               style={{ fontSize: "14px", marginBottom: "14px", letterSpacing: "0.04em" }}
             >
-              Multi-rig site operations<br />— night &amp; day
+              Multi-rig site operations<br />night and day
             </p>
             <p
               className="font-sans font-normal text-on-navy-muted"
@@ -312,7 +312,7 @@ function HeroStack() {
               className="font-sans font-normal text-on-navy-muted"
               style={{ fontSize: "10px", lineHeight: "1.55" }}
             >
-              Modern, versatile rigs with experienced crews — across mining,
+              Modern, versatile rigs with experienced crews, across mining,
               exploration, and civil projects.
             </p>
           </div>
@@ -351,7 +351,7 @@ function IntroSection() {
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             We operate in demanding environments where accuracy, safety and
-            reliability are critical — and where resilience in execution makes
+            reliability are critical, and where resilience in execution makes
             the difference. Our focus is on delivering high-quality data,
             maintaining strict operational standards, and supporting our
             clients&rsquo; technical and operational decision-making.
@@ -381,7 +381,7 @@ const serviceCategories = [
   {
     number: "02",
     title: "Instrumentation Installation",
-    summary: "Vibrating Wire Piezometers, inclinometers, standpipe piezometers — installed and commissioned.",
+    summary: "Vibrating Wire Piezometers, inclinometers, standpipe piezometers, installed and commissioned.",
     href: "/services#instrumentation",
   },
   {
@@ -414,8 +414,8 @@ function ServicesPreview() {
             className="font-sans max-w-[420px]"
             style={{ fontSize: "15px", lineHeight: "1.65", color: "var(--color-muted)" }}
           >
-            From diamond and sonic drilling to instrumentation, downhole services
-            and digital data systems — chosen to deliver reliable, high-quality
+            From diamond and sonic drilling to instrumentation, downhole services,
+            and digital data systems chosen to deliver reliable, high-quality
             outcomes in demanding environments.
           </p>
         </div>
@@ -533,7 +533,7 @@ function AboutTeaser() {
 
           <div className="grid gap-5 md:grid-cols-3">
             <PillarCard number="01" title="Versatility">
-              Crews and equipment capable of covering multiple scopes — reducing
+              Crews and equipment capable of covering multiple scopes. This reduces
               the need for multiple rigs on site.
             </PillarCard>
             <PillarCard number="02" title="Resilience">
@@ -574,7 +574,7 @@ function FleetTeaser() {
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Forex Drilling operates modern, versatile drilling equipment designed
-            to perform reliably in demanding environments — supported by experienced
+            to perform reliably in demanding environments, supported by experienced
             crews, robust logistics, and a strong maintenance culture.
           </p>
           <ul className="flex flex-col gap-3 mt-2">
@@ -608,7 +608,7 @@ function FleetTeaser() {
             title="Versatile, multi-method rigs"
             body={
               <>
-                Designed to deliver multiple scopes from a single mobilisation —
+                Designed to deliver multiple scopes from a single mobilisation,
                 including dual-head sonic / diamond capability, in active mine pits
                 and remote greenfield locations.
               </>
@@ -715,7 +715,7 @@ function ApproachSection() {
             style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Where required, we go beyond drilling execution to support broader
-            project needs — contributing to planning, problem-solving, and
+            project needs. We contribute to planning, problem-solving, and
             overall project performance.
           </p>
         </div>

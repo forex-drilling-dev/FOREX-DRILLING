@@ -13,7 +13,7 @@ export const site = {
     { label: "Contact", href: "/contact" },
   ],
   footer: {
-    address: "Singapore — Operations in Papua New Guinea",
+    address: "Singapore. Operations in Papua New Guinea",
     email: "contact@forexdrilling.com",
   },
 } as const;

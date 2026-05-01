@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Discuss your drilling program with the Forex Drilling team — based in Singapore, operating across the Asia-Pacific region.",
+    "Discuss your drilling program with the Forex Drilling team. Based in Singapore, operating across the Asia-Pacific region.",
 };
 
 export default function ContactPage() {
@@ -30,7 +30,7 @@ export default function ContactPage() {
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Whether you have a program to discuss, a technical question, or want
-            to understand how we can support your project — we&rsquo;re ready to engage.
+            to understand how we can support your project, we&rsquo;re ready to engage.
             Tell us about scope, location, and timeline, and we&rsquo;ll get back to
             you within one business day.
           </p>

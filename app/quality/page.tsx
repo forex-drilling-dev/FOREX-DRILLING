@@ -52,7 +52,7 @@ function QmSection() {
           <SectionLabel number="01" label="Quality Management" />
           <SectionHeading line1="Structured." line2="Documented. Auditable." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-            We operate with clear performance metrics — productivity tracking,
+            We operate with clear performance metrics: productivity tracking,
             structured reporting, and regular performance reviews. Continuous
             improvement is embedded across our operations.
           </p>
@@ -83,7 +83,7 @@ function DigitalSection() {
           <SectionHeading line1="Krux & MWD." line2="Real-time, reliable data." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We leverage digital data capture and monitoring systems to ensure
-            accurate, real-time data collection — enhancing data quality,
+            accurate, real-time data collection, enhancing data quality,
             improving traceability, and providing additional insight into
             subsurface conditions when interpreted alongside geological and
             geotechnical analysis.
@@ -162,7 +162,7 @@ export default function QualityPage() {
       <StatsSection />
       <CtaBanner
         headline="Program needs audit-ready data?"
-        body="Krux, MWD, KPIs — every meter logged, every shift reported. We plug straight into your technical teams&rsquo; workflow."
+        body="Krux, MWD, KPIs. Every meter logged, every shift reported. We plug straight into your technical teams&rsquo; workflow."
         cta="See QM approach"
         href="/contact"
       />
