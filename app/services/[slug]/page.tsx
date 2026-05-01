@@ -3,16 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, getService, type ServiceCategory } from "@/content/services";
 import {
-  NavyBlob,
-  YellowBadge,
-  CircleImageRing,
+  PageHero,
   SectionLabel,
   SectionHeading,
   DrillBitPin,
   CtaBanner,
   Reveal,
-  BgGreyShape,
-  Crosshair,
 } from "@/components/v3";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -56,45 +52,18 @@ export default async function ServiceDetailPage({ params }: Params) {
 
   const heroPhoto = categoryHero[service.category];
 
+  // Service detail uses one-line title (the service name itself), so we
+  // pass an empty string for line2 — PageHero gracefully handles single-line
+  // titles via the line2 yellow accent.
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
-        <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
-        <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-        <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
-          <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-            <div className="relative md:col-span-7">
-              <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">
-                {categoryLabel[service.category]}
-              </YellowBadge>
-              <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
-                <p
-                  className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
-                  style={{ fontSize: "clamp(28px, 4vw, 40px)", letterSpacing: "0.5px", marginBottom: "24px" }}
-                >
-                  {service.title}
-                </p>
-                <p
-                  className="font-sans font-normal text-on-navy-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}
-                >
-                  {service.summary}
-                </p>
-              </NavyBlob>
-            </div>
-            <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
-              <CircleImageRing
-                src={heroPhoto}
-                alt={`${service.title} — illustration`}
-                size={300}
-                ringOffset={20}
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge={categoryLabel[service.category]}
+        line1={service.title}
+        line2=""
+        photo={{ src: heroPhoto, alt: `${service.title} — illustration` }}
+        body={service.summary}
+      />
 
       {/* OVERVIEW */}
       <section className="relative bg-deep py-24 md:py-32">

@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import {
-  NavyBlob,
-  YellowBadge,
-  CircleImageRing,
+  PageHero,
   SectionLabel,
   SectionHeading,
   QuoteBlock,
   ProtocolGrid,
   CtaBanner,
   Reveal,
-  Crosshair,
-  BgGreyShape,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -30,39 +26,22 @@ const protocols = [
 
 function HseHero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
-      <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
-      <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-      <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
-        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-          <div className="relative md:col-span-7">
-            <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">HSE</YellowBadge>
-            <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
-              <p className="font-display font-extrabold uppercase leading-[1.1] text-on-navy" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px" }}>
-                Safety is not
-              </p>
-              <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
-                a procedure.
-              </p>
-              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
-                Forex Drilling operates in strict compliance with client safety
-                standards, site procedures, and regulatory requirements. Every
-                activity is conducted under structured safety management systems.
-              </p>
-            </NavyBlob>
-          </div>
-          <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
-            <CircleImageRing
-              src="/images/hero-night-site.jpg"
-              alt="Forex Drilling night drilling operation"
-              size={300}
-              ringOffset={20}
-              priority
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+      badge="HSE"
+      line1="Safety is not"
+      line2="a procedure."
+      photo={{
+        src: "/images/hero-night-site.jpg",
+        alt: "Forex Drilling night drilling operation",
+      }}
+      body={
+        <>
+          Forex Drilling operates in strict compliance with client safety
+          standards, site procedures, and regulatory requirements. Every
+          activity is conducted under structured safety management systems.
+        </>
+      }
+    />
   );
 }
 

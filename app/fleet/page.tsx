@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  NavyBlob,
-  YellowBadge,
-  CircleImageRing,
+  PageHero,
   SectionLabel,
   SectionHeading,
   OverlayImageCard,
   DrillBitPin,
   CtaBanner,
   Reveal,
-  Crosshair,
-  BgGreyShape,
   StatCounter,
 } from "@/components/v3";
 
@@ -23,40 +19,22 @@ export const metadata: Metadata = {
 
 function FleetHero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
-      <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
-      <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-      <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
-        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-          <div className="relative md:col-span-7">
-            <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">FLEET</YellowBadge>
-            <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
-              <p className="font-display font-extrabold uppercase leading-[1.1] text-on-navy" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px" }}>
-                Modern equipment.
-              </p>
-              <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
-                Reliable performance.
-              </p>
-              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
-                Forex Drilling operates modern, versatile drilling equipment
-                designed to perform reliably in demanding environments. Supported
-                by experienced crews, robust logistics, and a strong maintenance
-                culture.
-              </p>
-            </NavyBlob>
-          </div>
-          <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
-            <CircleImageRing
-              src="/images/site-operations.jpg"
-              alt="Forex Drilling site operations — crew with rig in field"
-              size={320}
-              ringOffset={22}
-              priority
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+      badge="FLEET"
+      line1="Modern equipment."
+      line2="Reliable performance."
+      photo={{
+        src: "/images/site-operations.jpg",
+        alt: "Forex Drilling site operations — crew with rig in field",
+      }}
+      body={
+        <>
+          Forex Drilling operates modern, versatile drilling equipment designed
+          to perform reliably in demanding environments — supported by
+          experienced crews, robust logistics, and a strong maintenance culture.
+        </>
+      }
+    />
   );
 }
 

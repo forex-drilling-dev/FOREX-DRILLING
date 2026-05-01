@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  NavyBlob,
-  YellowBadge,
-  CircleImageRing,
+  PageHero,
   SectionLabel,
   SectionHeading,
   PillarCard,
   CtaBanner,
   Reveal,
-  Crosshair,
-  BgGreyShape,
   DrillBitPin,
 } from "@/components/v3";
 
@@ -20,64 +16,25 @@ export const metadata: Metadata = {
     "Forex Drilling is a specialist drilling contractor supporting mining, exploration, and civil projects across the Asia-Pacific region.",
 };
 
-// ─── HERO — editorial poster spread ─────────────────────────────────────────
+// ─── HERO — shared full-bleed editorial poster (PageHero) ────────────────────
 
 function AboutHero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-20 md:pb-32">
-      <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
-      <Crosshair size={36} className="absolute top-[120px] right-[120px] hidden lg:block" />
-
-      <div className="relative mx-auto max-w-[1500px] px-6 md:px-14">
-        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-          <div className="relative md:col-span-7">
-            <YellowBadge className="relative z-20 -mb-6 ml-4 lg:-mb-8">
-              ABOUT
-            </YellowBadge>
-
-            <NavyBlob className="relative z-10 h-auto w-full max-w-[640px]">
-              <p
-                className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
-                style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px" }}
-              >
-                Specialist drilling.
-              </p>
-              <p
-                className="font-display font-extrabold uppercase leading-[1.1] text-amber"
-                style={{
-                  fontSize: "clamp(28px, 4vw, 38px)",
-                  letterSpacing: "0.5px",
-                  marginBottom: "26px",
-                }}
-              >
-                Built for the field.
-              </p>
-              <p
-                className="font-sans font-normal text-on-navy-muted"
-                style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}
-              >
-                Forex Drilling is a specialist drilling contractor supporting
-                mining, exploration, and civil projects with a broad range of
-                drilling services. Headquartered in Singapore and operating
-                across the Asia-Pacific region, the company is structured to
-                deliver efficient, field-proven solutions in remote and
-                challenging environments.
-              </p>
-            </NavyBlob>
-          </div>
-
-          <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
-            <CircleImageRing
-              src="/images/rig-forest.jpg"
-              alt="Drilling rig in forested terrain"
-              size={320}
-              ringOffset={22}
-              priority
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+      badge="ABOUT"
+      line1="Specialist drilling."
+      line2="Built for the field."
+      photo={{ src: "/images/rig-forest.jpg", alt: "Drilling rig in forested terrain" }}
+      body={
+        <>
+          Forex Drilling is a specialist drilling contractor supporting mining,
+          exploration, and civil projects with a broad range of drilling services.
+          Headquartered in Singapore and operating across the Asia-Pacific region —
+          structured to deliver efficient, field-proven solutions in remote and
+          challenging environments.
+        </>
+      }
+    />
   );
 }
 
