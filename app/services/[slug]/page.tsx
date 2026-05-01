@@ -6,7 +6,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   DrillBitPin,
@@ -54,8 +53,6 @@ export default async function ServiceDetailPage({ params }: Params) {
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
-  const idx = services.findIndex((s) => s.slug === service.slug);
-  const code = String(idx + 1).padStart(3, "0");
   const heroPhoto = categoryHero[service.category];
 
   return (
@@ -93,7 +90,6 @@ export default async function ServiceDetailPage({ params }: Params) {
                 ringOffset={20}
                 priority
               />
-              <IndexNumber label="EST." index="17" code={code} className="mr-4" />
             </div>
           </div>
         </div>

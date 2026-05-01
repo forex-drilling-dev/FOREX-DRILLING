@@ -3,7 +3,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   QuoteBlock,
@@ -59,7 +58,6 @@ function HseHero() {
               ringOffset={20}
               priority
             />
-            <IndexNumber label="EST." index="17" code="006" className="mr-4" />
           </div>
         </div>
       </div>

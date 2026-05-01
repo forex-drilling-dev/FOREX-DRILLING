@@ -6,7 +6,6 @@ import {
   YellowBadge,
   SpeechBubble,
   DrillBitPin,
-  IndexNumber,
   YellowWave,
   Crosshair,
   CircleImageRing,
@@ -169,13 +168,6 @@ function HeroPoster() {
         />
       </div>
 
-      {/* Index marker */}
-      <IndexNumber
-        label="EST."
-        index="17"
-        code="002"
-        className="absolute bottom-[50px] left-[70px] z-[5]"
-      />
     </section>
   );
 }
@@ -242,7 +234,6 @@ function HeroStack() {
           ringOffset={16}
           priority
         />
-        <IndexNumber label="EST." index="17" code="002" />
       </div>
 
       <div className="relative mt-4">
@@ -473,12 +464,6 @@ function AboutTeaser() {
               <YellowBadge>FIELD-PROVEN</YellowBadge>
             </div>
           </div>
-          <IndexNumber
-            label="EST."
-            index="17"
-            code="003"
-            className="ml-4 md:ml-12"
-          />
         </div>
 
         {/* Right — heading + body + 3 pillars */}

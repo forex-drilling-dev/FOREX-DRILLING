@@ -6,7 +6,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   CtaBanner,
@@ -57,7 +56,6 @@ export default async function ProjectsPage() {
                 ringOffset={20}
                 priority
               />
-              <IndexNumber label="EST." index="17" code="008" className="mr-4" />
             </div>
           </div>
         </div>

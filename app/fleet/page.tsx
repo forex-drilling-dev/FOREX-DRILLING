@@ -4,7 +4,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   OverlayImageCard,
@@ -52,7 +51,6 @@ function FleetHero() {
               ringOffset={20}
               priority
             />
-            <IndexNumber label="EST." index="17" code="005" className="mr-4" />
           </div>
         </div>
       </div>

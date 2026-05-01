@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fontDisplay, fontMono } from "@/lib/fonts";
+import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fontDisplay.variable} ${fontMono.variable}`}
+      className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
     >
       <body className="bg-black text-fore antialiased">
         <SkipLink />

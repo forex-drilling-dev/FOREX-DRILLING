@@ -33,9 +33,29 @@ export function Nav() {
       <Container className="flex h-full items-center justify-between">
         <Link
           href="/"
-          className="font-display text-base font-extrabold uppercase tracking-[0.12em] text-deep-navy"
+          aria-label="Forex Drilling — home"
+          className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-80"
         >
-          FOREX <span className="text-amber">//</span> DRILLING
+          {/* Brand X icon — yellow + dark navy triangles */}
+          <svg
+            width="36"
+            height="36"
+            viewBox="0 0 100 100"
+            fill="none"
+            aria-hidden
+            className="shrink-0"
+          >
+            <path d="M0 0 L100 0 L50 50 Z" fill="var(--color-amber)" />
+            <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
+            <path d="M0 0 L0 100 L50 50 Z" fill="var(--color-deep-navy)" />
+            <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-deep-navy)" />
+          </svg>
+          <span
+            className="font-display font-bold uppercase leading-[0.95] text-deep-navy"
+            style={{ fontSize: "16px", letterSpacing: "0.04em" }}
+          >
+            Forex<br />Drilling
+          </span>
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {site.nav.map((item) => {

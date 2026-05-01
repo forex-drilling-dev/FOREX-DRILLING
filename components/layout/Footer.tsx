@@ -8,13 +8,31 @@ export function Footer() {
       <Container>
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="font-display text-3xl font-extrabold uppercase leading-[0.95] tracking-wide md:text-4xl">
-              FOREX
-              <br />
-              <span className="text-amber">DRILLING</span>
-            </p>
-            <p className="mt-6 max-w-sm font-display text-sm font-normal leading-relaxed text-on-navy-muted">
-              Specialized drilling services across the Asia-Pacific region.
+            <div className="flex items-center gap-4">
+              <svg
+                width="56"
+                height="56"
+                viewBox="0 0 100 100"
+                fill="none"
+                aria-hidden
+                className="shrink-0"
+              >
+                <path d="M0 0 L100 0 L50 50 Z" fill="var(--color-amber)" />
+                <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
+                <path d="M0 0 L0 100 L50 50 Z" fill="#FFFFFF" />
+                <path d="M100 0 L100 100 L50 50 Z" fill="#FFFFFF" />
+              </svg>
+              <p
+                className="font-display font-bold uppercase leading-[0.95]"
+                style={{ fontSize: "28px", letterSpacing: "0.02em" }}
+              >
+                Forex<br />
+                <span className="text-amber">Drilling</span>
+              </p>
+            </div>
+            <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
+              Specialised drilling services across the Asia-Pacific region —
+              based in Singapore, operating in Papua New Guinea.
             </p>
           </div>
 
@@ -27,7 +45,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="font-display text-sm font-medium text-on-navy-muted transition-colors duration-fast hover:text-amber"
+                    className="font-sans text-sm font-medium text-on-navy-muted transition-colors duration-fast hover:text-amber"
                   >
                     {item.label}
                   </Link>

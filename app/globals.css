@@ -5,29 +5,33 @@
   /* ─── V3 — Light editorial palette (agency spec) ──────────────── */
   /* Token names kept identical so existing class refs auto-update.  */
   /* Page background is now WHITE; navy + yellow are accents.        */
+  /* OFFICIAL BRAND PALETTE — confirmed by client charte graphique */
   --color-black:     #FFFFFF;   /* page bg — white */
-  --color-deep:      #F8F9FB;   /* alternate section bg — near white */
-  --color-surface:   #19345E;   /* primary navy — bandeaux, panels */
-  --color-deep-navy: #102142;   /* dark navy — accents, speech bubbles */
+  --color-deep:      #F4F5F7;   /* alternate section bg — soft grey */
+  --color-surface:   #163767;   /* PRIMARY NAVY — R22 V55 B103 — bandeaux, panels */
+  --color-deep-navy: #11284E;   /* DARK NAVY    — R17 V40 B78  — accents, footer */
   --color-border:    #E5E7EB;   /* hairlines — light grey */
-  --color-amber:     #E5AB1B;   /* yellow — primary accent, CTAs */
-  --color-amber-dim: #B8851A;   /* dark yellow — hover */
-  --color-fore:      #102142;   /* primary text on white = dark navy */
-  --color-muted:     #4B5563;   /* secondary text */
-  --color-subtle:    #9CA3AF;   /* tertiary / line grey */
+  --color-amber:     #E3AA00;   /* OCRE YELLOW  — R227 V170 B0 — primary accent, CTAs */
+  --color-amber-dim: #B58800;   /* darker yellow — hover */
+  --color-fore:      #11284E;   /* primary text on white = dark navy */
+  --color-muted:     #475467;   /* secondary text */
+  --color-subtle:    #98A2B3;   /* tertiary / line grey */
 
   /* Inverse text — for use on navy bandeaux */
   --color-on-navy:        #FFFFFF;
   --color-on-navy-muted:  #CBD5E1;
 
-  /* Aliases preserved from V2 for transition */
-  --color-ocre-400:  #F4C13C;   /* bright yellow — highlight glow */
-  --color-ocre-600:  #B8851A;
+  /* Aliases preserved for utility classes */
+  --color-ocre-400:  #F0BD30;   /* bright yellow — highlight glow */
+  --color-ocre-600:  #B58800;
 
-  /* ─── Font — Montserrat single family ─────────────────────────── */
-  --font-display: var(--font-display-family), "Montserrat", Impact, sans-serif;
+  /* ─── Fonts — official brand stack ─────────────────────────────── */
+  /* Goldman — geometric display for logo, H1/H2, uppercase labels */
+  --font-display: var(--font-display-family), "Goldman", Impact, sans-serif;
+  /* Parkinsans — humanist body copy */
+  --font-sans:    var(--font-body-family), "Parkinsans", system-ui, sans-serif;
+  /* IBM Plex Mono — technical labels only */
   --font-mono:    var(--font-mono-family), ui-monospace, monospace;
-  --font-sans:    var(--font-display-family), "Montserrat", system-ui, sans-serif;
 
   /* ─── Type scale — Montserrat heavyweights ─────────────────────── */
   --text-display-xl: clamp(48px, 6.5vw, 96px);
@@ -118,7 +122,7 @@
   }
 
   body {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-weight: 400;
   }
 

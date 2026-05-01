@@ -3,7 +3,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   ServiceListGroup,
@@ -49,7 +48,6 @@ function ServicesHero() {
               size={300}
               ringOffset={20}
             />
-            <IndexNumber label="EST." index="17" code="004" className="mr-4" />
           </div>
         </div>
       </div>

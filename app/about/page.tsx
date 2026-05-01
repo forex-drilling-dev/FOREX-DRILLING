@@ -4,7 +4,6 @@ import {
   NavyBlob,
   YellowBadge,
   CircleImageRing,
-  IndexNumber,
   SectionLabel,
   SectionHeading,
   PillarCard,
@@ -73,7 +72,6 @@ function AboutHero() {
               size={300}
               ringOffset={20}
             />
-            <IndexNumber label="EST." index="17" code="003" className="mr-4" />
           </div>
         </div>
       </div>
