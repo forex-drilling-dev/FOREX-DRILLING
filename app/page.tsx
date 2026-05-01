@@ -143,7 +143,7 @@ function HeroPoster() {
 
       {/* Rectangular image card — anchored to viewport RIGHT, fluid width */}
       <div
-        className="absolute bottom-[140px] z-[5] h-[260px]"
+        className="absolute bottom-[100px] z-[5] h-[260px]"
         style={{
           right: "clamp(40px, 5vw, 120px)",
           width: "clamp(520px, 42vw, 680px)",
@@ -196,15 +196,18 @@ function HeroPoster() {
         </div>
       </div>
 
-      {/* Circle operator photo — anchored bottom-left, fluid offset */}
+      {/* Circle operator photo — anchored bottom-left.
+          bottom:60 keeps the circle clearly BELOW the navy blob's body
+          paragraph (the blob's body text wraps to 3-4 lines and was being
+          covered when the circle sat higher). */}
       <div
-        className="absolute bottom-[140px] z-[5]"
+        className="absolute bottom-[60px] z-[5]"
         style={{ left: "clamp(60px, 7vw, 160px)" }}
       >
         <CircleImageRing
           src="/images/rig-vertical-operator.jpg"
           alt="Forex Drilling crew on site"
-          size={280}
+          size={260}
           ringOffset={18}
           priority
         />
