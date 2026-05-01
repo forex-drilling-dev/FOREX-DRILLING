@@ -37,7 +37,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
           className="-mt-7 ml-3 h-auto w-full max-w-[580px]"
           style={{ padding: "60px 28px 50px 32px" }}
         >
-          <p
+          <h1
             className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
             style={{
               fontSize: "26px",
@@ -46,17 +46,17 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             }}
           >
             {line1}
-          </p>
-          {line2 && (
-            <p
-              className="font-display font-extrabold uppercase leading-[1.1] text-amber"
-              style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
-            >
-              {line2}
-            </p>
-          )}
+            {line2 && (
+              <>
+                <br />
+                <span className="text-amber" style={{ marginTop: "20px" }}>
+                  {line2}
+                </span>
+              </>
+            )}
+          </h1>
           <p
-            className="font-sans font-normal text-on-navy-muted"
+            className="mt-5 font-sans font-normal text-on-navy-muted"
             style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "300px" }}
           >
             {body}
@@ -97,7 +97,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             paddingBottom: "40px",
           }}
         >
-          <p
+          <h1
             className="font-display font-extrabold uppercase leading-[1.05] text-on-navy"
             style={{
               fontSize: "clamp(32px, 2.6vw, 44px)",
@@ -106,21 +106,15 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             }}
           >
             {line1}
-          </p>
-          {line2 && (
-            <p
-              className="font-display font-extrabold uppercase leading-[1.05] text-amber"
-              style={{
-                fontSize: "clamp(32px, 2.6vw, 44px)",
-                letterSpacing: "0.5px",
-                marginBottom: "28px",
-              }}
-            >
-              {line2}
-            </p>
-          )}
+            {line2 && (
+              <>
+                <br />
+                <span className="text-amber">{line2}</span>
+              </>
+            )}
+          </h1>
           <p
-            className="font-sans font-normal text-on-navy-muted"
+            className="mt-7 font-sans font-normal text-on-navy-muted"
             style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "440px" }}
           >
             {body}

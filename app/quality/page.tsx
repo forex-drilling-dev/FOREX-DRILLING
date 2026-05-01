@@ -110,9 +110,9 @@ export default function QualityPage() {
       <QmSection />
       <DigitalSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Need audit-ready drilling data?"
+        body="Krux platforms and MWD systems integrated from day one. Every meter logged, every shift reported — straight into your technical team&rsquo;s workflow."
+        cta="Discuss your standards"
         href="/contact"
       />
     </>

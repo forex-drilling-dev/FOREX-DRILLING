@@ -114,9 +114,9 @@ export default function HsePage() {
       <ProtocolsSection />
       <CommitmentSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Audit ahead, or site induction needed?"
+        body="We operate to client procedures with full traceability — JSAs, PTWs, T5 sheets, and daily toolbox records. We fit your safety system, not the other way round."
+        cta="Request HSE pack"
         href="/contact"
       />
     </>

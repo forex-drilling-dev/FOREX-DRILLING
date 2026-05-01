@@ -142,9 +142,9 @@ export default function ServicesPage() {
       />
       <DataSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Need a specific drilling method?"
+        body="Diamond, sonic, RC, directional, or a multi-method mix — tell us the scope and we&rsquo;ll come back with the right approach."
+        cta="Discuss your scope"
         href="/contact"
       />
     </>

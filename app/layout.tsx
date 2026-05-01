@@ -3,21 +3,30 @@ import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import "./globals.css";
+
+const SITE_URL = "https://forexdrilling.com";
 
 export const metadata: Metadata = {
   title: {
-    default: "Forex Drilling — Specialized Drilling Services",
+    default:
+      "Forex Drilling — Specialty Drilling Contractor | Singapore & Asia-Pacific",
     template: "%s — Forex Drilling",
   },
   description:
-    "Safe, reliable, high-quality drilling services across the Asia-Pacific region. Based in Singapore with operations in Papua New Guinea.",
-  metadataBase: new URL("https://forexdrilling.com"),
+    "Specialty drilling services for mining, exploration, civil, and groundwater programs across the Asia-Pacific. Headquartered in Singapore, operating in Papua New Guinea.",
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    title: "Forex Drilling",
-    description: "Specialized drilling services across the Asia-Pacific region.",
-    images: ["/og-default.jpg"],
+    siteName: "Forex Drilling",
+    title:
+      "Forex Drilling — Specialty Drilling Contractor | Singapore & Asia-Pacific",
+    description:
+      "Specialty drilling services for mining, exploration, civil, and groundwater programs across the Asia-Pacific.",
+    locale: "en_SG",
+    url: "/",
   },
 };
 
@@ -32,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main">{children}</main>
         <Footer />
+        <OrganizationSchema />
       </body>
     </html>
   );

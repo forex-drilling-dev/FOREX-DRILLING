@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/fleet`,    priority: 0.8, changeFrequency: "monthly" as const },
     { url: `${BASE}/hse`,      priority: 0.8, changeFrequency: "monthly" as const },
     { url: `${BASE}/quality`,  priority: 0.8, changeFrequency: "monthly" as const },
-    { url: `${BASE}/projects`, priority: 0.8, changeFrequency: "weekly" as const  },
+    // /projects is currently a placeholder (noindex) — exclude until populated.
     { url: `${BASE}/contact`,  priority: 0.7, changeFrequency: "yearly" as const  },
   ];
 

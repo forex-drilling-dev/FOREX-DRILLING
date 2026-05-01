@@ -199,9 +199,9 @@ export default function AboutPage() {
       <OperatingModel />
       <MaintenanceSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Get to know the team."
+        body="Singapore HQ, field operations across the Asia-Pacific. Tell us about your program and we&rsquo;ll get back within one business day."
+        cta="Talk to us"
         href="/contact"
       />
     </>

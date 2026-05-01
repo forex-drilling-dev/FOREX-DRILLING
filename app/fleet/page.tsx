@@ -134,9 +134,9 @@ export default function FleetPage() {
       <CapabilitiesSection />
       <MaintenanceSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Mobilisation to organise?"
+        body="Send us location, ground conditions, and target depth — we&rsquo;ll come back with the right rig configuration and a timeline you can plan against."
+        cta="Contact operations"
         href="/contact"
       />
     </>

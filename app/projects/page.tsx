@@ -10,6 +10,9 @@ import {
 export const metadata: Metadata = {
   title: "Projects",
   description: "Selected drilling programs across the Asia-Pacific region.",
+  // Page is currently a placeholder while real client case studies are
+  // pending — keep it out of the index until the content is published.
+  robots: { index: false, follow: true },
 };
 
 export default function ProjectsPage() {
@@ -48,9 +51,9 @@ export default function ProjectsPage() {
       </section>
 
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Planning a program in the region?"
+        body="Mining, exploration, civil, groundwater. Tell us where, when, and what — we&rsquo;ll propose how."
+        cta="Discuss your program"
         href="/contact"
       />
     </>

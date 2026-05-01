@@ -93,29 +93,21 @@ function HeroPoster() {
           paddingBottom: "40px",
         }}
       >
-        <p
+        <h1
           id="hero-title-desktop"
           className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
           style={{ fontSize: "clamp(28px, 2.2vw, 38px)", letterSpacing: "0.5px" }}
         >
-          Specialised drilling
-        </p>
+          Built to deliver
+          <br />
+          <span className="text-amber">on challenging drilling programs?</span>
+        </h1>
         <p
-          className="font-display font-extrabold uppercase leading-[1.05] text-amber text-balance"
-          style={{
-            fontSize: "clamp(28px, 2.2vw, 38px)",
-            letterSpacing: "0.5px",
-            marginBottom: "26px",
-          }}
-        >
-          across the Asia-Pacific.
-        </p>
-        <p
-          className="font-sans font-normal text-on-navy-muted"
+          className="mt-6 font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "420px" }}
         >
-          Based in Singapore, supporting mining, exploration, civil
-          infrastructure, and groundwater programs.
+          Delivering safe, reliable and high-quality drilling services across
+          the Asia-Pacific region.
         </p>
 
         {/* Scope strip — verbatim brief categories */}
@@ -198,7 +190,7 @@ function HeroPoster() {
         >
           <Image
             src={optimizedSrc("/images/hero-night-site.jpg")}
-            alt="Forex Drilling site operation"
+            alt="Multi-rig night drilling operation in Papua New Guinea"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
@@ -219,7 +211,7 @@ function HeroPoster() {
       >
         <CircleImageRing
           src="/images/rig-vertical-operator.jpg"
-          alt="Forex Drilling crew on site"
+          alt="Forex Drilling rig operator working a vertical drill"
           size={260}
           ringOffset={18}
           priority
@@ -244,16 +236,16 @@ function HeroStack() {
           className="font-display font-extrabold uppercase leading-[0.95] tracking-[-0.005em] text-on-navy text-balance"
           style={{ fontSize: "clamp(30px, 8.5vw, 36px)" }}
         >
-          Specialised drilling
+          Built to deliver
           <br />
-          <span className="text-amber">across the Asia-Pacific.</span>
+          <span className="text-amber">on challenging drilling programs?</span>
         </h1>
         <p
           className="mt-5 font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "15px", lineHeight: "1.65" }}
         >
-          Based in Singapore, supporting mining, exploration, civil
-          infrastructure, and groundwater programs.
+          Delivering safe, reliable and high-quality drilling services across
+          the Asia-Pacific region.
         </p>
 
         {/* Scope strip — verbatim brief categories */}
@@ -285,7 +277,7 @@ function HeroStack() {
         >
           <Image
             src={optimizedSrc("/images/hero-night-site.jpg")}
-            alt="Forex Drilling site operation"
+            alt="Multi-rig night drilling operation in Papua New Guinea"
             fill
             sizes="100vw"
             className="object-cover"
@@ -719,9 +711,9 @@ export default function HomePage() {
       <HseStatement />
       <ApproachSection />
       <CtaBanner
-        headline="Discuss your program."
-        body="Tell us about scope, location, and timeline. We&rsquo;ll get back to you within one business day."
-        cta="Get in touch"
+        headline="Send us your scope."
+        body="We&rsquo;ll come back with a method mix, a mobilisation timeline, and a single point of contact. No middle layers."
+        cta="Start a conversation"
         href="/contact"
       />
     </>
