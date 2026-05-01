@@ -17,10 +17,10 @@ import {
   ServiceListGroup,
   QuoteBlock,
   ProtocolGrid,
-  StepRow,
   CtaBanner,
   StatStrip,
   PrimaryButton,
+  Reveal,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -48,25 +48,23 @@ function HeroPoster() {
       <NavyBlob className="absolute top-[100px] left-0 h-[420px] w-[580px] z-[2]">
         <p
           id="hero-title-desktop"
-          className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
-          style={{ fontSize: "30px", letterSpacing: "0.5px" }}
+          className="font-display font-bold uppercase leading-[1.05] text-on-navy"
+          style={{ fontSize: "32px", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
-          className="font-display font-extrabold uppercase leading-[1.1] text-amber"
-          style={{ fontSize: "30px", letterSpacing: "0.5px", marginBottom: "26px" }}
+          className="font-display font-bold uppercase leading-[1.05] text-amber"
+          style={{ fontSize: "32px", letterSpacing: "0.5px", marginBottom: "28px" }}
         >
-          On challenging programs.
+          On challenging<br />drilling programs?
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
-          style={{ fontSize: "13px", lineHeight: "1.65", maxWidth: "380px" }}
+          style={{ fontSize: "14px", lineHeight: "1.65", maxWidth: "400px" }}
         >
-          Delivering safe, reliable and high-quality drilling services
-          across the Asia-Pacific region. Based in Singapore, operating in
-          Papua New Guinea — where accuracy, safety and resilience under
-          pressure are non-negotiable.
+          Delivering safe, reliable and high-quality drilling services across
+          the Asia-Pacific region.
         </p>
       </NavyBlob>
 
@@ -186,24 +184,23 @@ function HeroStack() {
       >
         <p
           id="hero-title-mobile"
-          className="font-display font-extrabold uppercase leading-[1.15] text-on-navy"
+          className="font-display font-bold uppercase leading-[1.1] text-on-navy"
           style={{ fontSize: "26px", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
-          className="font-display font-extrabold uppercase leading-[1.15] text-amber"
+          className="font-display font-bold uppercase leading-[1.1] text-amber"
           style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
         >
-          On challenging programs.
+          On challenging drilling programs?
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "13px", lineHeight: "1.65" }}
         >
-          Delivering safe, reliable and high-quality drilling services
-          across the Asia-Pacific region. Based in Singapore, operating in
-          Papua New Guinea.
+          Delivering safe, reliable and high-quality drilling services across
+          the Asia-Pacific region.
         </p>
       </NavyBlob>
 
@@ -283,13 +280,13 @@ function IntroSection() {
   return (
     <section className="relative bg-white py-24 md:py-32">
       <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <div className="flex flex-col gap-6 md:col-span-5">
+        <Reveal className="flex flex-col gap-6 md:col-span-5">
           <SectionLabel number="01" label="Mission" />
           <SectionHeading
             line1="Field-proven solutions"
             line2="in demanding environments."
           />
-        </div>
+        </Reveal>
         <div className="flex flex-col gap-6 md:col-span-7">
           <p
             className="font-sans"
@@ -358,13 +355,13 @@ function ServicesPreview() {
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16">
-          <div className="flex max-w-[600px] flex-col gap-5">
+          <Reveal className="flex max-w-[600px] flex-col gap-5">
             <SectionLabel number="02" label="Capabilities" />
             <SectionHeading
               line1="A full spectrum"
               line2="of specialist services."
             />
-          </div>
+          </Reveal>
           <p
             className="font-sans max-w-[420px]"
             style={{ fontSize: "15px", lineHeight: "1.65", color: "var(--color-muted)" }}
@@ -468,13 +465,13 @@ function AboutTeaser() {
 
         {/* Right — heading + body + 3 pillars */}
         <div className="flex flex-col gap-10 md:col-span-7">
-          <div className="flex flex-col gap-5">
+          <Reveal className="flex flex-col gap-5">
             <SectionLabel number="03" label="About Us" />
             <SectionHeading
               line1="Specialist drilling."
               line2="Demanding environments."
             />
-          </div>
+          </Reveal>
           <p
             className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
@@ -518,7 +515,7 @@ function FleetTeaser() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto grid max-w-[1280px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
-        <div className="flex flex-col gap-8 md:col-span-5">
+        <Reveal className="flex flex-col gap-8 md:col-span-5">
           <SectionLabel number="04" label="Fleet & Capabilities" />
           <SectionHeading
             line1="Modern equipment."
@@ -555,7 +552,7 @@ function FleetTeaser() {
           <PrimaryButton href="/fleet" variant="ghost-on-light" className="mt-4 self-start">
             Explore the fleet
           </PrimaryButton>
-        </div>
+        </Reveal>
         <div className="md:col-span-7 md:pt-6">
           <OverlayImageCard
             src="/images/rig-horizontal.jpg"
@@ -590,18 +587,17 @@ function HseStatement() {
   return (
     <section className="relative bg-white py-24 md:py-32">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
-        <div className="flex flex-col gap-5 max-w-[1000px]">
+        <Reveal className="flex flex-col gap-5 max-w-[1000px]">
           <SectionLabel number="05" label="Health, Safety & Environment" />
           <QuoteBlock
-            line1="Safety is not a procedure."
-            line2="It's how we operate."
+            line1="Safety is at the core"
+            line2="of our operations."
           >
-            All activities operate in strict compliance with client safety
-            standards, site procedures, and regulatory requirements. Every role
-            is trained, certified, and competent — and we continuously invest
-            in better practices, equipment, and systems.
+            Forex Drilling operates in strict compliance with client safety
+            standards, site procedures, and regulatory requirements. All
+            activities are conducted under structured safety management systems.
           </QuoteBlock>
-        </div>
+        </Reveal>
         <ProtocolGrid items={hseProtocols} />
         <PrimaryButton href="/hse" variant="ghost-on-light" className="self-start">
           Our HSE approach
@@ -611,43 +607,70 @@ function HseStatement() {
   );
 }
 
-// ─── APPROACH — 4-step delivery model ───────────────────────────────────────
+// ─── APPROACH — verbatim Project Delivery model from client brief ──────────
 
-const approachSteps = [
-  {
-    number: "01",
-    title: "Early Engagement",
-    body: "We engage at the planning stage to understand constraints, identify risks, and propose practical, solution-driven approaches.",
-  },
-  {
-    number: "02",
-    title: "Efficient Mobilisation",
-    body: "Structured mobilisation and setup to get productive on site as quickly as possible.",
-  },
-  {
-    number: "03",
-    title: "Reliable Execution",
-    body: "Day-to-day operations backed by structured reporting, KPIs, and close coordination with client teams.",
-  },
-  {
-    number: "04",
-    title: "Transparent Communication",
-    body: "Proactive issue resolution and clear reporting — addressing problems before they impact delivery.",
-  },
+const deliveryFocus = [
+  "Alignment with client technical and operational objectives",
+  "Efficient mobilisation and setup",
+  "Reliable day-to-day operations and structured reporting",
+  "Close coordination with client technical and operational teams",
+  "Transparent communication and proactive issue resolution",
 ];
 
 function ApproachSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-6 md:px-14">
-        <div className="flex flex-col gap-5 max-w-[700px]">
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+        <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="06" label="Project Delivery Approach" />
           <SectionHeading
-            line1="Hands-on,"
-            line2="solution-driven delivery."
+            line1="Drilling is critical"
+            line2="to project success."
           />
+          <p
+            className="mt-2 font-sans"
+            style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          >
+            We maintain a hands-on, solution-driven approach throughout each
+            project. We engage early, understand project challenges in detail,
+            and remain actively involved to ensure issues are addressed before
+            they impact delivery.
+          </p>
+        </Reveal>
+
+        <div className="flex flex-col gap-6 md:col-span-7">
+          <p
+            className="font-sans font-medium uppercase text-amber"
+            style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+          >
+            Our delivery model focuses on
+          </p>
+          <ul className="flex flex-col gap-3">
+            {deliveryFocus.map((item, i) => (
+              <Reveal key={item} delay={i * 80}>
+                <li className="flex items-start gap-4 border-t border-border pt-4">
+                  <span className="flex shrink-0 pt-0.5" aria-hidden>
+                    <DrillBitPin size={20} />
+                  </span>
+                  <span
+                    className="font-sans font-medium text-deep-navy"
+                    style={{ fontSize: "16px", lineHeight: "1.55" }}
+                  >
+                    {item}
+                  </span>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+          <p
+            className="mt-4 font-sans"
+            style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          >
+            Where required, we go beyond drilling execution to support broader
+            project needs — contributing to planning, problem-solving, and
+            overall project performance.
+          </p>
         </div>
-        <StepRow steps={approachSteps} />
       </div>
     </section>
   );
