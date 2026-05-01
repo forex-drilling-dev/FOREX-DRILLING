@@ -9,8 +9,10 @@ import {
   OverlayImageCard,
   DrillBitPin,
   CtaBanner,
+  Reveal,
   Crosshair,
   BgGreyShape,
+  StatCounter,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -45,10 +47,10 @@ function FleetHero() {
           </div>
           <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
             <CircleImageRing
-              src="/images/rig-vertical-clean.jpg"
-              alt="Forex Drilling rig — vertical product shot"
-              size={300}
-              ringOffset={20}
+              src="/images/site-operations.jpg"
+              alt="Forex Drilling site operations — crew with rig in field"
+              size={320}
+              ringOffset={22}
               priority
             />
           </div>
@@ -69,7 +71,7 @@ function CapabilitiesSection() {
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <div className="grid gap-16 md:grid-cols-12 md:gap-20">
-          <div className="flex flex-col gap-6 md:col-span-5">
+          <Reveal className="flex flex-col gap-6 md:col-span-5">
             <SectionLabel number="01" label="Capabilities" />
             <SectionHeading line1="Scalable, versatile," line2="resilient." />
             <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
@@ -79,7 +81,7 @@ function CapabilitiesSection() {
               ground conditions, logistical constraints, and operational
               pressures.
             </p>
-          </div>
+          </Reveal>
           <div className="md:col-span-7 md:pt-6">
             <OverlayImageCard
               src="/images/rig-horizontal.jpg"
@@ -114,8 +116,13 @@ function CapabilitiesSection() {
 }
 
 function MaintenanceSection() {
-  const stats = [
-    { value: "95%", label: "Target Uptime", description: "Equipment availability target across active rigs" },
+  const stats: Array<{
+    value?: string;
+    counter?: { to: number; suffix?: string };
+    label: string;
+    description: string;
+  }> = [
+    { counter: { to: 95, suffix: "%" }, label: "Target Uptime", description: "Equipment availability target across active rigs" },
     { value: "Daily", label: "Inspection Cadence", description: "Every rig, every shift, without exception" },
     { value: "Field-First", label: "Maintenance Culture", description: "Preventative programs lead component management" },
   ];
@@ -137,7 +144,7 @@ function MaintenanceSection() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-8 md:col-span-7 md:order-1">
+        <Reveal className="flex flex-col gap-8 md:col-span-7 md:order-1">
           <SectionLabel number="02" label="Maintenance" />
           <SectionHeading line1="Treated as a core" line2="operational priority." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
@@ -151,7 +158,11 @@ function MaintenanceSection() {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col gap-2 border-l-4 border-amber pl-5">
                 <p className="font-display font-black text-deep-navy" style={{ fontSize: "36px", lineHeight: "1" }}>
-                  {s.value}
+                  {s.counter ? (
+                    <StatCounter to={s.counter.to} suffix={s.counter.suffix ?? ""} />
+                  ) : (
+                    s.value
+                  )}
                 </p>
                 <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
                   {s.label}
@@ -162,7 +173,7 @@ function MaintenanceSection() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

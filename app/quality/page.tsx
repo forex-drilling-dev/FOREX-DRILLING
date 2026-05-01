@@ -7,8 +7,10 @@ import {
   SectionHeading,
   DrillBitPin,
   CtaBanner,
+  Reveal,
   Crosshair,
   BgGreyShape,
+  StatCounter,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -67,7 +69,7 @@ function QmSection() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <div className="flex flex-col gap-5 md:col-span-5">
+        <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="01" label="Quality Management" />
           <SectionHeading line1="Structured." line2="Documented. Auditable." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
@@ -75,7 +77,7 @@ function QmSection() {
             structured reporting, and regular performance reviews. Continuous
             improvement is embedded across our operations.
           </p>
-        </div>
+        </Reveal>
         <ul className="flex flex-col gap-4 md:col-span-7">
           {qmItems.map((item) => (
             <li key={item} className="flex items-start gap-4 border-t border-border pt-5">
@@ -97,7 +99,7 @@ function DigitalSection() {
   return (
     <section className="relative bg-white py-24 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <div className="flex flex-col gap-5 max-w-[760px]">
+        <Reveal className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="02" label="Digital Systems" />
           <SectionHeading line1="Krux & MWD." line2="Real-time, reliable data." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
@@ -107,7 +109,7 @@ function DigitalSection() {
             subsurface conditions when interpreted alongside geological and
             geotechnical analysis.
           </p>
-        </div>
+        </Reveal>
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
@@ -135,8 +137,13 @@ function DigitalSection() {
 }
 
 function StatsSection() {
-  const stats = [
-    { value: "100%", label: "Reporting Coverage", description: "Every shift, every hole" },
+  const stats: Array<{
+    value?: string;
+    counter?: { to: number; suffix?: string };
+    label: string;
+    description: string;
+  }> = [
+    { counter: { to: 100, suffix: "%" }, label: "Reporting Coverage", description: "Every shift, every hole" },
     { value: "Real-Time", label: "Data Capture", description: "Krux + MWD integrated" },
     { value: "Continuous", label: "Improvement", description: "KPI-driven reviews on every program" },
   ];
@@ -147,7 +154,11 @@ function StatsSection() {
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col gap-2 border-l-4 border-amber pl-6">
               <p className="font-display font-black text-deep-navy" style={{ fontSize: "44px", lineHeight: "1" }}>
-                {s.value}
+                {s.counter ? (
+                  <StatCounter to={s.counter.to} suffix={s.counter.suffix ?? ""} />
+                ) : (
+                  s.value
+                )}
               </p>
               <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
                 {s.label}

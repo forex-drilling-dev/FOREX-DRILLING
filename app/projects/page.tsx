@@ -9,6 +9,7 @@ import {
   SectionLabel,
   SectionHeading,
   CtaBanner,
+  Reveal,
   Crosshair,
   BgGreyShape,
 } from "@/components/v3";
@@ -50,10 +51,10 @@ export default async function ProjectsPage() {
             </div>
             <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
               <CircleImageRing
-                src="/images/rig-aerial.jpg"
-                alt="Aerial view of drilling site"
-                size={300}
-                ringOffset={20}
+                src="/images/site-aerial-trees.jpg"
+                alt="Aerial view — drilling site amongst trees"
+                size={320}
+                ringOffset={22}
                 priority
               />
             </div>
@@ -64,10 +65,10 @@ export default async function ProjectsPage() {
       {/* CASE STUDIES */}
       <section className="relative bg-deep py-24 md:py-32">
         <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-          <div className="flex flex-col gap-5 max-w-[700px]">
+          <Reveal className="flex flex-col gap-5 max-w-[700px]">
             <SectionLabel number="01" label="Case Studies" />
             <SectionHeading line1="Mining, exploration," line2="civil." />
-          </div>
+          </Reveal>
 
           <div className="grid gap-px bg-border md:grid-cols-2">
             {projects.map((p, i) => (

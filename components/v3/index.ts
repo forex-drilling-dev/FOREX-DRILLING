@@ -36,3 +36,4 @@ export { PrimaryButton }    from "./PrimaryButton";
 
 // Animation
 export { Reveal }           from "./Reveal";
+export { StatCounter }      from "./StatCounter";

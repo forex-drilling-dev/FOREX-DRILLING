@@ -24,6 +24,7 @@ export function Nav() {
 
   return (
     <header
+      data-nav
       className={cn(
         "fixed inset-x-0 top-0 z-50 h-nav transition-shadow duration-base ease-precise",
         "bg-white/95 backdrop-blur-md",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { services } from "@/content/services";
+import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 import {
   NavyBlob,
   YellowBadge,
@@ -162,12 +163,14 @@ function HeroPoster() {
           style={{ boxShadow: "var(--shadow-image)" }}
         >
           <Image
-            src="/images/hero-night-site.jpg"
+            src={optimizedSrc("/images/hero-night-site.jpg")}
             alt="Multi-rig night drilling operation in Papua New Guinea"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
             priority
+            placeholder="blur"
+            blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
           />
           <div
             className="absolute inset-y-0 right-0 flex flex-col justify-center px-6"
@@ -280,12 +283,14 @@ function HeroStack() {
           style={{ boxShadow: "var(--shadow-image)" }}
         >
           <Image
-            src="/images/hero-night-site.jpg"
+            src={optimizedSrc("/images/hero-night-site.jpg")}
             alt="Multi-rig night drilling operation"
             fill
             sizes="100vw"
             className="object-cover"
             priority
+            placeholder="blur"
+            blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
           />
           <div
             className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center px-5"

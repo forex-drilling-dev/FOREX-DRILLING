@@ -10,6 +10,7 @@ import {
   SectionHeading,
   DrillBitPin,
   CtaBanner,
+  Reveal,
   BgGreyShape,
   Crosshair,
 } from "@/components/v3";
@@ -98,10 +99,10 @@ export default async function ServiceDetailPage({ params }: Params) {
       {/* OVERVIEW */}
       <section className="relative bg-deep py-24 md:py-32">
         <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-          <div className="flex flex-col gap-5 md:col-span-5">
+          <Reveal className="flex flex-col gap-5 md:col-span-5">
             <SectionLabel number="01" label="Overview" />
             <SectionHeading line1="What we" line2="deliver." />
-          </div>
+          </Reveal>
           <p
             className="font-sans md:col-span-7"
             style={{ fontSize: "17px", lineHeight: "1.75", color: "var(--color-fore)" }}
@@ -114,10 +115,10 @@ export default async function ServiceDetailPage({ params }: Params) {
       {/* APPLICATIONS */}
       <section className="relative bg-white py-24 md:py-32">
         <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-          <div className="flex flex-col gap-5 md:col-span-5">
+          <Reveal className="flex flex-col gap-5 md:col-span-5">
             <SectionLabel number="02" label="Applications" />
             <SectionHeading line1="Where it" line2="fits." />
-          </div>
+          </Reveal>
           <ul className="flex flex-col gap-4 md:col-span-7">
             {service.applications.map((a) => (
               <li key={a} className="flex items-start gap-4 border-t border-border pt-4">
@@ -140,10 +141,10 @@ export default async function ServiceDetailPage({ params }: Params) {
       {related.length > 0 && (
         <section className="relative bg-deep py-24 md:py-32">
           <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-            <div className="flex flex-col gap-5 max-w-[700px]">
+            <Reveal className="flex flex-col gap-5 max-w-[700px]">
               <SectionLabel number="03" label="Related" />
               <SectionHeading line1="Services we" line2="often deploy together." />
-            </div>
+            </Reveal>
             <div className="grid gap-px bg-border md:grid-cols-3">
               {related.map((s, i) => (
                 <Link

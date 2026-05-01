@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 
 type Props = {
   src: string;
@@ -42,12 +43,15 @@ export function CircleImageRing({
         className="absolute overflow-hidden rounded-full border-8 border-white shadow-card"
       >
         <Image
-          src={src}
+          src={optimizedSrc(src)}
           alt={alt}
           fill
           priority={priority}
           sizes={`${size}px`}
           className="object-cover"
+          {...(blurPlaceholder(src)
+            ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
+            : {})}
         />
       </div>
     </div>

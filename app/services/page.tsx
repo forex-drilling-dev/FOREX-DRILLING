@@ -7,6 +7,7 @@ import {
   SectionHeading,
   ServiceListGroup,
   CtaBanner,
+  Reveal,
   Crosshair,
   BgGreyShape,
 } from "@/components/v3";
@@ -43,10 +44,11 @@ function ServicesHero() {
           </div>
           <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
             <CircleImageRing
-              src="/images/rig-vertical-clean.jpg"
-              alt="Forex Drilling rig — vertical product shot"
-              size={300}
-              ringOffset={20}
+              src="/images/rig-meadow.jpg"
+              alt="Drilling rig in meadow setting"
+              size={320}
+              ringOffset={22}
+              priority
             />
           </div>
         </div>
@@ -94,13 +96,13 @@ function CategorySection({
   return (
     <section id={id} className={`relative scroll-mt-[100px] py-24 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
       <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <div className="flex flex-col gap-5 md:col-span-5">
+        <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number={number} label={label} />
           <SectionHeading line1={line1} line2={line2} />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             {body}
           </p>
-        </div>
+        </Reveal>
         <div className="md:col-span-7">
           <ServiceListGroup title="" items={items} />
         </div>
@@ -113,14 +115,14 @@ function DataSection() {
   return (
     <section id="data" className="relative scroll-mt-[100px] bg-white py-24 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <div className="flex flex-col gap-5 max-w-[760px]">
+        <Reveal className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="04" label="Data Acquisition" />
           <SectionHeading line1="Krux & MWD." line2="Reliable, structured data." />
           <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Forex Drilling integrates advanced data acquisition systems to
             improve accuracy, traceability, and overall drilling outcomes.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <div className="border-l-4 border-amber pl-8">

@@ -8,6 +8,7 @@ import {
   SectionHeading,
   PillarCard,
   CtaBanner,
+  Reveal,
   Crosshair,
   BgGreyShape,
   DrillBitPin,
@@ -67,10 +68,11 @@ function AboutHero() {
 
           <div className="flex flex-col items-end gap-6 md:col-span-5 md:pt-12">
             <CircleImageRing
-              src="/images/sunset-rig.jpg"
-              alt="Drilling rig at sunset"
-              size={300}
-              ringOffset={20}
+              src="/images/rig-forest.jpg"
+              alt="Drilling rig in forested terrain"
+              size={320}
+              ringOffset={22}
+              priority
             />
           </div>
         </div>
@@ -85,13 +87,13 @@ function WhoWeAre() {
   return (
     <section className="relative bg-deep py-24 md:py-32">
       <div className="mx-auto grid max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <div className="flex flex-col gap-5 md:col-span-4">
+        <Reveal className="flex flex-col gap-5 md:col-span-4">
           <SectionLabel number="01" label="Who We Are" />
           <SectionHeading
             line1="Strong field"
             line2="experience."
           />
-        </div>
+        </Reveal>
         <div className="flex flex-col gap-6 md:col-span-8">
           <p
             className="font-sans"
@@ -134,13 +136,13 @@ function OperatingModel() {
   return (
     <section className="relative bg-white py-24 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <div className="flex flex-col gap-5 max-w-[700px]">
+        <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="02" label="Operating Model" />
           <SectionHeading
             line1="Three pillars"
             line2="underpin everything."
           />
-        </div>
+        </Reveal>
 
         <div className="grid gap-5 md:grid-cols-3">
           <PillarCard number="01" title="Versatility">
@@ -193,7 +195,7 @@ function MaintenanceSection() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 md:col-span-6 md:order-1">
+        <Reveal className="flex flex-col gap-6 md:col-span-6 md:order-1">
           <SectionLabel number="03" label="Equipment Reliability" />
           <SectionHeading
             line1="Maintenance"
@@ -227,7 +229,7 @@ function MaintenanceSection() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

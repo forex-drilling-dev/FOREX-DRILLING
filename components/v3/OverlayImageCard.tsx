@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 
 type Props = {
   src: string;
@@ -40,11 +41,14 @@ export function OverlayImageCard({ src, alt, title, body, pins, className }: Pro
       {/* Image card */}
       <div className="relative aspect-[2.3/1] w-full overflow-hidden rounded-xl shadow-image">
         <Image
-          src={src}
+          src={optimizedSrc(src)}
           alt={alt}
           fill
           sizes="(min-width: 1024px) 600px, 100vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          {...(blurPlaceholder(src)
+            ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
+            : {})}
         />
 
         {/* Navy overlay panel — right side */}
