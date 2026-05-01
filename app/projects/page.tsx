@@ -40,7 +40,7 @@ export default async function ProjectsPage() {
                 <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
                   field programs.
                 </p>
-                <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+                <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
                   Across mining, exploration, civil works, and groundwater
                   programs in the Asia-Pacific region — delivered with
                   structured operations, reliable data capture, and a strong
@@ -106,7 +106,7 @@ export default async function ProjectsPage() {
                     {p.title}
                   </h3>
                   <p
-                    className="font-display"
+                    className="font-sans"
                     style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
                   >
                     {p.outcomes}
@@ -115,7 +115,7 @@ export default async function ProjectsPage() {
                     {p.methods.map((m) => (
                       <li
                         key={m}
-                        className="border border-border px-3 py-1 font-display font-medium uppercase text-deep-navy"
+                        className="border border-border px-3 py-1 font-sans font-medium uppercase text-deep-navy"
                         style={{ fontSize: "10px", letterSpacing: "0.12em" }}
                       >
                         {m}

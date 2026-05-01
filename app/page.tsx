@@ -60,7 +60,7 @@ function HeroPoster() {
           On challenging programs.
         </p>
         <p
-          className="font-display font-normal text-on-navy-muted"
+          className="font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "13px", lineHeight: "1.65", maxWidth: "380px" }}
         >
           Delivering safe, reliable and high-quality drilling services
@@ -94,7 +94,7 @@ function HeroPoster() {
           Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
-          className="font-display"
+          className="font-sans"
           style={{
             fontSize: "14px",
             marginTop: "6px",
@@ -147,7 +147,7 @@ function HeroPoster() {
               Multi-rig site operations<br />— night &amp; day
             </p>
             <p
-              className="font-display font-normal text-on-navy-muted"
+              className="font-sans font-normal text-on-navy-muted"
               style={{ fontSize: "11px", lineHeight: "1.55" }}
             >
               From greenfield exploration to active mine pits. Modern, versatile
@@ -198,7 +198,7 @@ function HeroStack() {
           On challenging programs.
         </p>
         <p
-          className="font-display font-normal text-on-navy-muted"
+          className="font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "13px", lineHeight: "1.65" }}
         >
           Delivering safe, reliable and high-quality drilling services
@@ -219,7 +219,7 @@ function HeroStack() {
           Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
-          className="font-display"
+          className="font-sans"
           style={{ fontSize: "14px", color: "var(--color-surface)", opacity: 0.85 }}
         >
           A full spectrum of specialist capabilities in one mobilisation.
@@ -264,7 +264,7 @@ function HeroStack() {
               Multi-rig operations
             </p>
             <p
-              className="font-display font-normal text-on-navy-muted"
+              className="font-sans font-normal text-on-navy-muted"
               style={{ fontSize: "10px", lineHeight: "1.55" }}
             >
               Modern, versatile rigs with experienced crews — across mining,
@@ -292,7 +292,7 @@ function IntroSection() {
         </div>
         <div className="flex flex-col gap-6 md:col-span-7">
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "17px", lineHeight: "1.7", color: "var(--color-fore)" }}
           >
             Based in Singapore and operating across the Asia-Pacific region, Forex
@@ -302,7 +302,7 @@ function IntroSection() {
             programs.
           </p>
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             We operate in demanding environments where accuracy, safety and
@@ -312,7 +312,7 @@ function IntroSection() {
             clients&rsquo; technical and operational decision-making.
           </p>
           <p
-            className="font-display font-medium"
+            className="font-sans font-medium"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-deep-navy)" }}
           >
             We take ownership of our work, solve problems early, and deliver
@@ -366,7 +366,7 @@ function ServicesPreview() {
             />
           </div>
           <p
-            className="font-display max-w-[420px]"
+            className="font-sans max-w-[420px]"
             style={{ fontSize: "15px", lineHeight: "1.65", color: "var(--color-muted)" }}
           >
             From diamond and sonic drilling to instrumentation, downhole services
@@ -401,7 +401,7 @@ function ServicesPreview() {
                 {cat.title}
               </h3>
               <p
-                className="font-display max-w-[44ch] transition-colors duration-300 group-hover:text-deep-navy"
+                className="font-sans max-w-[44ch] transition-colors duration-300 group-hover:text-deep-navy"
                 style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
               >
                 {cat.summary}
@@ -476,7 +476,7 @@ function AboutTeaser() {
             />
           </div>
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Forex Drilling is a specialist drilling contractor supporting mining,
@@ -525,7 +525,7 @@ function FleetTeaser() {
             line2="Reliable performance."
           />
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Forex Drilling operates modern, versatile drilling equipment designed
@@ -544,7 +544,7 @@ function FleetTeaser() {
                   <DrillBitPin size={20} />
                 </span>
                 <span
-                  className="font-display font-medium text-deep-navy"
+                  className="font-sans font-medium text-deep-navy"
                   style={{ fontSize: "15px", lineHeight: "1.55" }}
                 >
                   {item}

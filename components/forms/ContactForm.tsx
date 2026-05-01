@@ -68,7 +68,7 @@ export function ContactForm() {
     "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-amber";
   const labelCls =
     "font-display font-bold uppercase text-amber";
-  const errCls = "mt-1 font-display font-medium text-amber";
+  const errCls = "mt-1 font-sans font-medium text-amber";
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-8" noValidate>

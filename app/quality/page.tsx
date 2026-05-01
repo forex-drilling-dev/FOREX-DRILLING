@@ -41,7 +41,7 @@ function QualityHero() {
               <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
                 consistent delivery.
               </p>
-              <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
                 Forex Drilling is committed to delivering high-quality drilling
                 services supported by structured quality systems, KPI-driven
                 reviews, and continuous improvement.
@@ -70,7 +70,7 @@ function QmSection() {
         <div className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="01" label="Quality Management" />
           <SectionHeading line1="Structured." line2="Documented. Auditable." />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We operate with clear performance metrics — productivity tracking,
             structured reporting, and regular performance reviews. Continuous
             improvement is embedded across our operations.
@@ -82,7 +82,7 @@ function QmSection() {
               <span className="flex shrink-0 pt-0.5" aria-hidden>
                 <DrillBitPin size={20} />
               </span>
-              <span className="font-display font-medium text-deep-navy" style={{ fontSize: "16px", lineHeight: "1.55" }}>
+              <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "16px", lineHeight: "1.55" }}>
                 {item}
               </span>
             </li>
@@ -100,7 +100,7 @@ function DigitalSection() {
         <div className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="02" label="Digital Systems" />
           <SectionHeading line1="Krux & MWD." line2="Real-time, reliable data." />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We leverage digital data capture and monitoring systems to ensure
             accurate, real-time data collection — enhancing data quality,
             improving traceability, and providing additional insight into
@@ -152,7 +152,7 @@ function StatsSection() {
               <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
                 {s.label}
               </p>
-              <p className="font-display" style={{ fontSize: "13px", lineHeight: "1.55", color: "var(--color-muted)" }}>
+              <p className="font-sans" style={{ fontSize: "13px", lineHeight: "1.55", color: "var(--color-muted)" }}>
                 {s.description}
               </p>
             </div>

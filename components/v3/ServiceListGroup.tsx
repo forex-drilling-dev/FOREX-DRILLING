@@ -28,7 +28,7 @@ export function ServiceListGroup({ title, items, description, className }: Props
       </h3>
       {description && (
         <div
-          className="font-display font-normal max-w-[60ch]"
+          className="font-sans font-normal max-w-[60ch]"
           style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
         >
           {description}
@@ -41,7 +41,7 @@ export function ServiceListGroup({ title, items, description, className }: Props
               <DrillBitPin size={20} />
             </span>
             <span
-              className="font-display font-medium text-deep-navy"
+              className="font-sans font-medium text-deep-navy"
               style={{ fontSize: "14px", lineHeight: "1.6" }}
             >
               {item}

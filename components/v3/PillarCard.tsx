@@ -41,7 +41,7 @@ export function PillarCard({ number, title, children, className }: Props) {
         {title}
       </h3>
       <p
-        className="font-display font-normal"
+        className="font-sans font-normal"
         style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
       >
         {children}

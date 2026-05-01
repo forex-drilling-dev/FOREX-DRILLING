@@ -33,7 +33,7 @@ function ServicesHero() {
               <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
                 of capabilities.
               </p>
-              <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
                 Forex Drilling provides a comprehensive range of drilling and
                 associated services — chosen to deliver reliable, high-quality
                 outcomes in demanding environments across mining, exploration,
@@ -97,7 +97,7 @@ function CategorySection({
         <div className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number={number} label={label} />
           <SectionHeading line1={line1} line2={line2} />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             {body}
           </p>
         </div>
@@ -116,7 +116,7 @@ function DataSection() {
         <div className="flex flex-col gap-5 max-w-[760px]">
           <SectionLabel number="04" label="Data Acquisition" />
           <SectionHeading line1="Krux & MWD." line2="Reliable, structured data." />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Forex Drilling integrates advanced data acquisition systems to
             improve accuracy, traceability, and overall drilling outcomes.
           </p>

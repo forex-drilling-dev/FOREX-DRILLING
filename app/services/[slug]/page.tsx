@@ -75,7 +75,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                   {service.title}
                 </p>
                 <p
-                  className="font-display font-normal text-on-navy-muted"
+                  className="font-sans font-normal text-on-navy-muted"
                   style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}
                 >
                   {service.summary}
@@ -103,7 +103,7 @@ export default async function ServiceDetailPage({ params }: Params) {
             <SectionHeading line1="What we" line2="deliver." />
           </div>
           <p
-            className="font-display md:col-span-7"
+            className="font-sans md:col-span-7"
             style={{ fontSize: "17px", lineHeight: "1.75", color: "var(--color-fore)" }}
           >
             {service.body}
@@ -125,7 +125,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                   <DrillBitPin size={20} />
                 </span>
                 <span
-                  className="font-display font-medium text-deep-navy"
+                  className="font-sans font-medium text-deep-navy"
                   style={{ fontSize: "16px", lineHeight: "1.55" }}
                 >
                   {a}
@@ -166,7 +166,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                     {s.title}
                   </h3>
                   <p
-                    className="font-display"
+                    className="font-sans"
                     style={{ fontSize: "13px", lineHeight: "1.6", color: "var(--color-muted)" }}
                   >
                     {s.summary}

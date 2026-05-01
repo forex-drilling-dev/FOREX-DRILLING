@@ -35,7 +35,7 @@ function FleetHero() {
               <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
                 Reliable performance.
               </p>
-              <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
                 Forex Drilling operates modern, versatile drilling equipment
                 designed to perform reliably in demanding environments. Supported
                 by experienced crews, robust logistics, and a strong maintenance
@@ -72,7 +72,7 @@ function CapabilitiesSection() {
           <div className="flex flex-col gap-6 md:col-span-5">
             <SectionLabel number="01" label="Capabilities" />
             <SectionHeading line1="Scalable, versatile," line2="resilient." />
-            <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Our equipment is supported by experienced crews, robust logistics,
               and a strong maintenance culture. Designed to provide resilience
               in the field — maintaining performance even under challenging
@@ -102,7 +102,7 @@ function CapabilitiesSection() {
               <span className="flex shrink-0 pt-0.5" aria-hidden>
                 <DrillBitPin size={20} />
               </span>
-              <span className="font-display font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.55" }}>
+              <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.55" }}>
                 {item}
               </span>
             </li>
@@ -140,7 +140,7 @@ function MaintenanceSection() {
         <div className="flex flex-col gap-8 md:col-span-7 md:order-1">
           <SectionLabel number="02" label="Maintenance" />
           <SectionHeading line1="Treated as a core" line2="operational priority." />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Structured preventative maintenance programs, disciplined daily
             inspections, and proactive component management ensure high
             equipment availability and consistent performance. This focus on
@@ -156,7 +156,7 @@ function MaintenanceSection() {
                 <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
                   {s.label}
                 </p>
-                <p className="font-display" style={{ fontSize: "13px", lineHeight: "1.5", color: "var(--color-muted)" }}>
+                <p className="font-sans" style={{ fontSize: "13px", lineHeight: "1.5", color: "var(--color-muted)" }}>
                   {s.description}
                 </p>
               </div>

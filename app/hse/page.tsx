@@ -43,7 +43,7 @@ function HseHero() {
               <p className="font-display font-extrabold uppercase leading-[1.1] text-amber" style={{ fontSize: "clamp(28px, 4vw, 38px)", letterSpacing: "0.5px", marginBottom: "26px" }}>
                 a procedure.
               </p>
-              <p className="font-display font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
+              <p className="font-sans font-normal text-on-navy-muted" style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}>
                 Forex Drilling operates in strict compliance with client safety
                 standards, site procedures, and regulatory requirements. Every
                 activity is conducted under structured safety management systems.
@@ -85,7 +85,7 @@ function ProtocolsSection() {
         <div className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="01" label="Protocols" />
           <SectionHeading line1="Structured systems" line2="on every job." />
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             All activities are conducted under structured safety management
             systems including the following:
           </p>
@@ -105,19 +105,19 @@ function CommitmentSection() {
           <SectionHeading line1="Continuous" line2="improvement, embedded." />
         </div>
         <div className="flex flex-col gap-6 md:col-span-7">
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}>
             All personnel are trained, certified, and competent for their roles.
             We actively participate in client-led safety reviews, audits, and
             continuous improvement processes.
           </p>
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We are committed to continuously improving safety performance through
             the adoption of better practices, technologies, and equipment. This
             includes the implementation of rod handling systems and other
             innovations aimed at reducing manual handling, minimizing exposure
             to hazards, and improving overall operational safety.
           </p>
-          <p className="font-display" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+          <p className="font-sans" style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Environmental responsibility is integrated into our operations
             through proper waste management, site protection measures, and full
             compliance with environmental regulations.

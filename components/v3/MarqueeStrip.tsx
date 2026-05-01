@@ -21,7 +21,7 @@ export function MarqueeStrip({ items }: Props) {
         {[...items, ...items].map((item, i) => (
           <span
             key={i}
-            className="flex shrink-0 items-center gap-4 font-display font-medium uppercase text-on-navy-muted"
+            className="flex shrink-0 items-center gap-4 font-sans font-medium uppercase text-on-navy-muted"
             style={{ fontSize: "13px", letterSpacing: "0.18em" }}
           >
             {item}

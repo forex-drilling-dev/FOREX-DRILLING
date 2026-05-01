@@ -26,7 +26,7 @@ export default function ContactPage() {
           <SectionHeading line1="Let&rsquo;s discuss" line2="your program." />
 
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Whether you have a program to discuss, a technical question, or want

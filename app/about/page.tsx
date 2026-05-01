@@ -52,7 +52,7 @@ function AboutHero() {
                 Built for the field.
               </p>
               <p
-                className="font-display font-normal text-on-navy-muted"
+                className="font-sans font-normal text-on-navy-muted"
                 style={{ fontSize: "13px", lineHeight: "1.7", maxWidth: "440px" }}
               >
                 Forex Drilling is a specialist drilling contractor supporting
@@ -94,7 +94,7 @@ function WhoWeAre() {
         </div>
         <div className="flex flex-col gap-6 md:col-span-8">
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-fore)" }}
           >
             Our team combines strong operational experience with a clear
@@ -102,7 +102,7 @@ function WhoWeAre() {
             structural geology, resource geology, and exploration requirements.
           </p>
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Each drilling program is executed with the objective of producing
@@ -112,7 +112,7 @@ function WhoWeAre() {
             and informs critical engineering decisions.
           </p>
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             We work closely with our clients from early stages through execution
@@ -200,7 +200,7 @@ function MaintenanceSection() {
             line2="is a core priority."
           />
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "16px", lineHeight: "1.7", color: "var(--color-muted)" }}
           >
             Equipment reliability is critical to performance. We place strong
@@ -219,7 +219,7 @@ function MaintenanceSection() {
                   <DrillBitPin size={20} />
                 </span>
                 <span
-                  className="font-display font-medium text-deep-navy"
+                  className="font-sans font-medium text-deep-navy"
                   style={{ fontSize: "15px", lineHeight: "1.55" }}
                 >
                   {item}
