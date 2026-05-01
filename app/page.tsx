@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { services } from "@/content/services";
 import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 import {
   NavyBlob,
@@ -467,7 +466,7 @@ function ServicesPreview() {
 
         <div className="flex justify-center">
           <PrimaryButton href="/services" variant="navy">
-            All Services ({services.length})
+            Explore all services
           </PrimaryButton>
         </div>
       </div>
