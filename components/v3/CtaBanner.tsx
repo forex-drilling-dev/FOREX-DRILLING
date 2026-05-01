@@ -48,7 +48,7 @@ export function CtaBanner({
           {body && (
             <p
               className={cn(
-                "font-display",
+                "font-sans",
                 isAmber ? "text-deep-navy/80" : "text-on-navy-muted",
               )}
               style={{ fontSize: "16px", lineHeight: "1.65" }}

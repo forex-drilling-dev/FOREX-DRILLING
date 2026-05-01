@@ -54,14 +54,14 @@ export function OverlayImageCard({ src, alt, title, body, pins, className }: Pro
         {/* Navy overlay panel — right side */}
         <div className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center bg-deep-navy/95 px-7 py-7">
           <h3
-            className="mb-3 font-display font-extrabold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
+            className="mb-3 font-display font-bold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
             style={{ fontSize: "14px", letterSpacing: "0.04em" }}
           >
             {title}
           </h3>
           <div
             className="font-sans font-normal leading-relaxed text-on-navy-muted"
-            style={{ fontSize: "11px" }}
+            style={{ fontSize: "13px" }}
           >
             {body}
           </div>

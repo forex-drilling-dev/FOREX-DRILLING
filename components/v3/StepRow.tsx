@@ -51,7 +51,7 @@ export function StepRow({ steps, className }: Props) {
             {step.title}
           </h3>
           <p
-            className="font-display"
+            className="font-sans"
             style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
           >
             {step.body}

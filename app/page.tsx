@@ -75,13 +75,13 @@ function HeroPoster() {
       >
         <p
           id="hero-title-desktop"
-          className="font-display font-bold uppercase leading-[1.05] text-on-navy text-balance"
+          className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
           style={{ fontSize: "clamp(28px, 2.2vw, 38px)", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
-          className="font-display font-bold uppercase leading-[1.05] text-amber text-balance"
+          className="font-display font-extrabold uppercase leading-[1.05] text-amber text-balance"
           style={{
             fontSize: "clamp(28px, 2.2vw, 38px)",
             letterSpacing: "0.5px",
@@ -122,7 +122,7 @@ function HeroPoster() {
         style={{ left: "clamp(620px, 50vw, 800px)" }}
       >
         <p
-          className="font-display font-bold leading-[1.3] text-deep-navy"
+          className="font-display font-extrabold leading-[1.3] text-deep-navy"
           style={{ fontSize: "18px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
@@ -230,13 +230,13 @@ function HeroStack() {
       >
         <p
           id="hero-title-mobile"
-          className="font-display font-bold uppercase leading-[1.1] text-on-navy"
+          className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
           style={{ fontSize: "26px", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
-          className="font-display font-bold uppercase leading-[1.1] text-amber"
+          className="font-display font-extrabold uppercase leading-[1.1] text-amber"
           style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
         >
           On challenging drilling programs?

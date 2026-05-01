@@ -5,6 +5,7 @@ import {
   SectionHeading,
   Crosshair,
   BgGreyShape,
+  Reveal,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function ContactPage() {
 
       <div className="relative mx-auto grid max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         {/* Left — info */}
-        <div className="flex flex-col gap-8 md:col-span-5">
+        <Reveal className="flex flex-col gap-8 md:col-span-5">
           <YellowBadge className="self-start">CONTACT</YellowBadge>
           <SectionHeading line1="Let&rsquo;s discuss" line2="your program." />
 
@@ -44,7 +45,7 @@ export default function ContactPage() {
                 Headquarters
               </dt>
               <dd
-                className="mt-2 font-display text-deep-navy"
+                className="mt-2 font-sans text-deep-navy"
                 style={{ fontSize: "16px" }}
               >
                 Singapore
@@ -58,7 +59,7 @@ export default function ContactPage() {
                 Operations
               </dt>
               <dd
-                className="mt-2 font-display text-deep-navy"
+                className="mt-2 font-sans text-deep-navy"
                 style={{ fontSize: "16px" }}
               >
                 Papua New Guinea · Asia-Pacific
@@ -72,7 +73,7 @@ export default function ContactPage() {
                 Scope
               </dt>
               <dd
-                className="mt-2 font-display text-deep-navy"
+                className="mt-2 font-sans text-deep-navy"
                 style={{ fontSize: "16px" }}
               >
                 Mining · Exploration · Civil · Groundwater
@@ -88,7 +89,7 @@ export default function ContactPage() {
               <dd className="mt-2">
                 <a
                   href="mailto:contact@forexdrilling.com"
-                  className="font-display text-deep-navy transition-colors duration-200 hover:text-amber"
+                  className="font-sans text-deep-navy transition-colors duration-200 hover:text-amber"
                   style={{ fontSize: "16px" }}
                 >
                   contact@forexdrilling.com
@@ -96,12 +97,12 @@ export default function ContactPage() {
               </dd>
             </div>
           </dl>
-        </div>
+        </Reveal>
 
         {/* Right — form */}
-        <div className="md:col-span-7">
+        <Reveal className="md:col-span-7" delay={120}>
           <ContactForm />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

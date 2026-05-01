@@ -41,7 +41,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           style={{ padding: "60px 28px 50px 32px" }}
         >
           <p
-            className="font-display font-bold uppercase leading-[1.1] text-on-navy"
+            className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
             style={{
               fontSize: "26px",
               letterSpacing: "0.5px",
@@ -52,7 +52,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           </p>
           {line2 && (
             <p
-              className="font-display font-bold uppercase leading-[1.1] text-amber"
+              className="font-display font-extrabold uppercase leading-[1.1] text-amber"
               style={{ fontSize: "26px", letterSpacing: "0.5px", marginBottom: "20px" }}
             >
               {line2}
@@ -109,7 +109,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           }}
         >
           <p
-            className="font-display font-bold uppercase leading-[1.05] text-on-navy"
+            className="font-display font-extrabold uppercase leading-[1.05] text-on-navy"
             style={{
               fontSize: "clamp(32px, 2.6vw, 44px)",
               letterSpacing: "0.5px",
@@ -120,7 +120,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           </p>
           {line2 && (
             <p
-              className="font-display font-bold uppercase leading-[1.05] text-amber"
+              className="font-display font-extrabold uppercase leading-[1.05] text-amber"
               style={{
                 fontSize: "clamp(32px, 2.6vw, 44px)",
                 letterSpacing: "0.5px",

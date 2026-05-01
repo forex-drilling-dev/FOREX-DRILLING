@@ -31,7 +31,7 @@ export function QuoteBlock({ line1, line2, children, className }: Props) {
       </p>
       {children && (
         <div
-          className="font-display max-w-[55ch]"
+          className="font-sans max-w-[55ch]"
           style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}
         >
           {children}

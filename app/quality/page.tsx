@@ -93,7 +93,7 @@ function DigitalSection() {
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>Krux</h3>
-            <p className="mt-5 font-display" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Real-time data collection, reporting, and operational monitoring.
               Drilling data is captured accurately and consistently across the
               program, with structured outputs ready for client technical teams.
@@ -102,7 +102,7 @@ function DigitalSection() {
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Downhole Telemetry</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>MWD</h3>
-            <p className="mt-5 font-display" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Measurement While Drilling collects downhole parameters during
               operations. When interpreted alongside geological and geotechnical
               data, it provides valuable insight into ground conditions and
