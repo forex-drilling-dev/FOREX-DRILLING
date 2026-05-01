@@ -152,7 +152,7 @@ export default function ServicesPage() {
       <CtaBanner
         headline="Multi-method program ahead?"
         body="Send us the scope. We&rsquo;ll come back with a single mobilisation plan covering it: the right rigs, the right crews, in the right sequence."
-        cta="Build a method mix"
+        cta="Discuss your scope"
         href="/contact"
       />
     </>

@@ -163,7 +163,7 @@ export default function QualityPage() {
       <CtaBanner
         headline="Program needs audit-ready data?"
         body="Krux, MWD, KPIs. Every meter logged, every shift reported. We plug straight into your technical teams&rsquo; workflow."
-        cta="See QM approach"
+        cta="Discuss your standards"
         href="/contact"
       />
     </>

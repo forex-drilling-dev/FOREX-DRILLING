@@ -112,7 +112,7 @@ function HeroPoster() {
         className="absolute top-[220px] z-[4]"
         style={{ left: "clamp(440px, 36vw, 580px)" }}
       >
-        <SpeechBubble label="METHODS" value="12+" />
+        <SpeechBubble label="SERVICES" value="12" />
       </div>
 
       {/* Center note */}
@@ -250,7 +250,7 @@ function HeroStack() {
       </NavyBlob>
 
       <div className="flex justify-center">
-        <SpeechBubble label="METHODS" value="12+" />
+        <SpeechBubble label="SERVICES" value="12" />
       </div>
 
       <div className="flex flex-col gap-2 px-2">
@@ -726,7 +726,7 @@ function ApproachSection() {
 // ─── PAGE ───────────────────────────────────────────────────────────────────
 
 const keyFacts = [
-  { value: "12+",       label: "Drilling Methods" },
+  { value: "12",        label: "Specialist Services" },
   { value: "Singapore", label: "Headquarters" },
   { value: "PNG",       label: "Field Operations" },
   { value: "24/7",      label: "Site Coverage" },
