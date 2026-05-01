@@ -136,9 +136,9 @@ export default function HsePage() {
       <ProtocolsSection />
       <CommitmentSection />
       <CtaBanner
-        headline="Looking for a safety-first drilling partner?"
-        body="Discuss your safety standards with us — we operate in strict compliance and continuously invest in better practices."
-        cta="Talk to Us"
+        headline="Audit ahead, or site induction needed?"
+        body="We operate to client procedures with full traceability — JSAs, PTWs, T5 sheets, daily toolbox records. We fit your safety system, not the other way round."
+        cta="Request HSE pack"
         href="/contact"
       />
     </>

@@ -19,7 +19,7 @@ import {
   ProtocolGrid,
   StepRow,
   CtaBanner,
-  MarqueeStrip,
+  StatStrip,
   PrimaryButton,
 } from "@/components/v3";
 
@@ -35,7 +35,7 @@ function HeroPoster() {
   return (
     <section
       aria-labelledby="hero-title-desktop"
-      className="relative mx-auto hidden h-[850px] max-w-[1200px] lg:block"
+      className="relative mx-auto hidden h-[850px] max-w-[1200px] overflow-hidden lg:block"
     >
       {/* Background watermarks — flat, behind everything */}
       <BgGreyShape className="top-[50px] right-[-50px]" />
@@ -655,17 +655,11 @@ function ApproachSection() {
 
 // ─── PAGE ───────────────────────────────────────────────────────────────────
 
-const trustItems = [
-  "DIAMOND DRILLING",
-  "SONIC DRILLING",
-  "DIRECTIONAL DRILLING",
-  "RC DRILLING",
-  "INSTRUMENTATION",
-  "MWD SYSTEMS",
-  "KRUX DATA",
-  "GEOPHYSICAL LOGGING",
-  "SPT & PUSH TUBE",
-  "GROUNDWATER PROGRAMS",
+const keyFacts = [
+  { value: "12+",       label: "Drilling Methods" },
+  { value: "Singapore", label: "Headquarters" },
+  { value: "PNG",       label: "Field Operations" },
+  { value: "24/7",      label: "Site Coverage" },
 ] as const;
 
 export default function HomePage() {
@@ -673,7 +667,7 @@ export default function HomePage() {
     <>
       <HeroPoster />
       <HeroStack />
-      <MarqueeStrip items={trustItems} />
+      <StatStrip items={keyFacts} />
       <IntroSection />
       <AboutTeaser />
       <ServicesPreview />
@@ -681,9 +675,9 @@ export default function HomePage() {
       <HseStatement />
       <ApproachSection />
       <CtaBanner
-        headline="Ready to discuss your program?"
-        body="Contact us to explore how Forex Drilling can support your next project — from planning through to execution."
-        cta="Get in Touch"
+        headline="Send us your scope."
+        body="We&rsquo;ll come back with a method mix, a mobilisation timeline, and a single point of contact. No middle layers."
+        cta="Start a conversation"
         href="/contact"
       />
     </>

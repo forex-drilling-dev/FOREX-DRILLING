@@ -173,9 +173,9 @@ export default function ServicesPage() {
       />
       <DataSection />
       <CtaBanner
-        headline="Need a custom scope?"
-        body="Tell us about your program — we&rsquo;ll propose the right combination of methods, crews, and equipment."
-        cta="Get in Touch"
+        headline="Multi-method program ahead?"
+        body="Send us the scope. We&rsquo;ll come back with a single mobilisation plan covering it — the right rigs, the right crews, in the right sequence."
+        cta="Build a method mix"
         href="/contact"
       />
     </>

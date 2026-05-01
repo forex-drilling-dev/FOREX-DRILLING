@@ -18,23 +18,21 @@ type Props = {
  * Rectangular image card with a translucent navy overlay panel anchored to the
  * right side, plus an offset navy outline behind the card.
  *
- * Pattern source: agency reference, bottom-right "VOLUM ARUM QUOS EX" image card.
- *
- * The panel covers ~45% of the card width and contains a yellow heading + body text.
- * The outline behind creates a subtle "stacked" feel without being a multi-card stack.
+ * On hover: image zooms subtly, the offset outline shifts slightly to enhance
+ * the "stacked" depth effect, the navy panel's amber title nudges right.
  */
 export function OverlayImageCard({ src, alt, title, body, pins, className }: Props) {
   return (
-    <div className={cn("relative", className)}>
-      {/* Offset navy outline behind */}
+    <div className={cn("group relative", className)}>
+      {/* Offset navy outline behind — animates on hover */}
       <div
         aria-hidden
-        className="absolute -left-5 -top-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30"
+        className="absolute -left-5 -top-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30 transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2"
       />
 
-      {/* Pins anchored above the card top-left */}
+      {/* Pins anchored above the card top-left — small lift on hover */}
       {pins && (
-        <div className="absolute -top-12 left-12 z-20 flex gap-3">
+        <div className="absolute -top-12 left-12 z-20 flex gap-3 transition-transform duration-300 ease-out group-hover:-translate-y-1">
           {pins}
         </div>
       )}
@@ -46,15 +44,21 @@ export function OverlayImageCard({ src, alt, title, body, pins, className }: Pro
           alt={alt}
           fill
           sizes="(min-width: 1024px) 600px, 100vw"
-          className="object-cover"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
         {/* Navy overlay panel — right side */}
         <div className="absolute inset-y-0 right-0 flex w-2/5 flex-col justify-center bg-deep-navy/95 px-7 py-7">
-          <h3 className="mb-3 font-display text-sm font-extrabold uppercase leading-snug tracking-wide text-amber">
+          <h3
+            className="mb-3 font-display font-extrabold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
+            style={{ fontSize: "14px", letterSpacing: "0.04em" }}
+          >
             {title}
           </h3>
-          <div className="font-display text-[11px] font-normal leading-relaxed text-on-navy-muted">
+          <div
+            className="font-sans font-normal leading-relaxed text-on-navy-muted"
+            style={{ fontSize: "11px" }}
+          >
             {body}
           </div>
         </div>

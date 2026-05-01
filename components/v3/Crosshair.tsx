@@ -3,33 +3,48 @@ import { cn } from "@/lib/utils";
 type Props = {
   className?: string;
   size?: number;
+  /** Optional coordinate label rendered next to the crosshair */
+  coords?: string;
 };
 
 /**
- * Cartographic crosshair (+) — two short dashed lines crossing.
- * Pattern source: agency reference, top-right registration mark.
+ * Cartographic registration mark — small crosshair (+) with optional
+ * coordinate label. Replaces the previous bare-crosshair which read as
+ * generic Figma decoration.
  *
- * Use SPARINGLY — never in a regular grid (becomes generic Figma wallpaper).
- * Best as a single accent in a corner with negative space around it.
+ * Default coordinates: 06°S 145°E (Papua New Guinea — Forex's main ops).
+ *
+ * The coordinate label fronts the technical/industrial aesthetic and
+ * grounds the decoration in the real-world geography of the company.
  */
-export function Crosshair({ className, size = 30 }: Props) {
+export function Crosshair({ className, size = 30, coords = "06°S · 145°E" }: Props) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 30 30"
-      fill="none"
-      className={cn("text-subtle", className)}
-      aria-hidden
-    >
-      <line
-        x1="15" y1="2" x2="15" y2="28"
-        stroke="currentColor" strokeWidth="2" strokeDasharray="3 3"
-      />
-      <line
-        x1="2" y1="15" x2="28" y2="15"
-        stroke="currentColor" strokeWidth="2" strokeDasharray="3 3"
-      />
-    </svg>
+    <div className={cn("flex items-start gap-3", className)} aria-hidden>
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 30 30"
+        fill="none"
+        className="shrink-0 text-deep-navy/40"
+      >
+        <line
+          x1="15" y1="2" x2="15" y2="28"
+          stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 3"
+        />
+        <line
+          x1="2" y1="15" x2="28" y2="15"
+          stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 3"
+        />
+        <circle cx="15" cy="15" r="3" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      </svg>
+      {coords && (
+        <span
+          className="font-mono uppercase text-deep-navy/50"
+          style={{ fontSize: "10px", letterSpacing: "0.12em", marginTop: "2px" }}
+        >
+          {coords}
+        </span>
+      )}
+    </div>
   );
 }

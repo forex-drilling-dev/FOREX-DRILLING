@@ -28,7 +28,11 @@ export { ServiceListGroup } from "./ServiceListGroup";
 export { ProtocolGrid }     from "./ProtocolGrid";
 export { StepRow }          from "./StepRow";
 export { MarqueeStrip }     from "./MarqueeStrip";
+export { StatStrip }        from "./StatStrip";
 export { CtaBanner }        from "./CtaBanner";
 
 // CTAs
 export { PrimaryButton }    from "./PrimaryButton";
+
+// Animation
+export { Reveal }           from "./Reveal";

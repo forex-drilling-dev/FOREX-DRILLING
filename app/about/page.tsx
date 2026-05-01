@@ -241,9 +241,9 @@ export default function AboutPage() {
       <OperatingModel />
       <MaintenanceSection />
       <CtaBanner
-        headline="Want to work with us?"
-        body="From planning through to execution — let's discuss how Forex Drilling can support your next project."
-        cta="Contact the Team"
+        headline="Working on a complex program?"
+        body="We engage early. From scoping to crew handover, the same team owns delivery — no middle layers, no surprises."
+        cta="Talk to the team"
         href="/contact"
       />
     </>

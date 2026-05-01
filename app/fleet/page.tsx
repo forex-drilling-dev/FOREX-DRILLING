@@ -175,9 +175,9 @@ export default function FleetPage() {
       <CapabilitiesSection />
       <MaintenanceSection />
       <CtaBanner
-        headline="Need a rig on site?"
-        body="Tell us your scope and timeline — we&rsquo;ll propose the right rig, crew, and method mix."
-        cta="Contact Operations"
+        headline="Mobilisation to organise?"
+        body="Send us location, ground conditions, and target depth. We&rsquo;ll come back with the rig, the crew, and a timeline you can plan against."
+        cta="Contact operations"
         href="/contact"
       />
     </>

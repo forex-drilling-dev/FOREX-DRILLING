@@ -171,9 +171,9 @@ export default function QualityPage() {
       <DigitalSection />
       <StatsSection />
       <CtaBanner
-        headline="Need auditable, structured delivery?"
-        body="Tell us about your reporting standards — we&rsquo;ll show how Krux and MWD integrate with your technical teams."
-        cta="Start a Conversation"
+        headline="Program needs audit-ready data?"
+        body="Krux, MWD, KPIs — every meter logged, every shift reported. We plug straight into your technical teams&rsquo; workflow."
+        cta="See QM approach"
         href="/contact"
       />
     </>

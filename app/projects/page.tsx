@@ -130,9 +130,9 @@ export default async function ProjectsPage() {
       </section>
 
       <CtaBanner
-        headline="Have a program to share?"
-        body="We engage early to understand constraints, identify risks, and propose practical, solution-driven approaches."
-        cta="Get in Touch"
+        headline="Planning a program in the region?"
+        body="Tell us where, when, and what. We&rsquo;ll propose how. Mining, exploration, civil, groundwater — we&rsquo;ve drilled them all."
+        cta="Discuss your program"
         href="/contact"
       />
     </>

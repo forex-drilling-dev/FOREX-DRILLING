@@ -189,9 +189,9 @@ export default async function ServiceDetailPage({ params }: Params) {
       )}
 
       <CtaBanner
-        headline="Have a program that needs this scope?"
-        body="Tell us about your project — we&rsquo;ll propose the right approach."
-        cta="Request a Quote"
+        headline="Got a hole that needs this method?"
+        body="Send target depth, ground conditions, and timeline — we&rsquo;ll come back with rig selection, crew composition, and a quote."
+        cta="Request a quote"
         href="/contact"
       />
     </>
