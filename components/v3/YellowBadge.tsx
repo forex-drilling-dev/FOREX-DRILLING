@@ -30,13 +30,13 @@ export function YellowBadge({ children, className }: Props) {
       className={cn(
         "inline-flex items-center bg-amber text-white",
         "font-display font-black uppercase",
-        "px-[35px] py-[12px]",
+        "px-7 py-2.5",
         className,
       )}
       style={{
-        fontSize: "32px",
-        letterSpacing: "2px",
-        borderRadius: "12px 30px 30px 12px",
+        fontSize: "22px",
+        letterSpacing: "0.12em",
+        borderRadius: "10px 24px 24px 10px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
       }}
     >

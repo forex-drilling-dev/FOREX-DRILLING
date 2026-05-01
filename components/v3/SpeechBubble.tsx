@@ -37,13 +37,13 @@ export function SpeechBubble({ label, value, className }: Props) {
     >
       <span
         className="font-display font-semibold uppercase"
-        style={{ fontSize: "14px", letterSpacing: "1px" }}
+        style={{ fontSize: "11px", letterSpacing: "0.18em" }}
       >
         {label}
       </span>
       <span
         className="font-display font-black leading-none"
-        style={{ fontSize: "46px", marginTop: "5px" }}
+        style={{ fontSize: "38px", marginTop: "6px" }}
       >
         {value}
       </span>

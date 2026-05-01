@@ -76,14 +76,14 @@ function HeroPoster() {
         <p
           id="hero-title-desktop"
           className="font-display font-bold uppercase leading-[1.05] text-on-navy"
-          style={{ fontSize: "clamp(28px, 2.4vw, 38px)", letterSpacing: "0.5px" }}
+          style={{ fontSize: "clamp(34px, 2.8vw, 46px)", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
           className="font-display font-bold uppercase leading-[1.05] text-amber"
           style={{
-            fontSize: "clamp(28px, 2.4vw, 38px)",
+            fontSize: "clamp(34px, 2.8vw, 46px)",
             letterSpacing: "0.5px",
             marginBottom: "30px",
           }}

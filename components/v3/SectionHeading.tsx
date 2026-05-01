@@ -25,7 +25,7 @@ export function SectionHeading({ line1, line2, className, as: Tag = "h2" }: Prop
         className,
       )}
       style={{
-        fontSize: "clamp(28px, 3.5vw, 44px)",
+        fontSize: "clamp(26px, 2.4vw, 38px)",
         letterSpacing: "0.5px",
       }}
     >

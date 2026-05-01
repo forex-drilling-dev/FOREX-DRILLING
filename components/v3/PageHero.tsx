@@ -111,7 +111,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           <p
             className="font-display font-bold uppercase leading-[1.05] text-on-navy"
             style={{
-              fontSize: "clamp(28px, 2.4vw, 40px)",
+              fontSize: "clamp(32px, 2.6vw, 44px)",
               letterSpacing: "0.5px",
               marginBottom: line2 ? 0 : "28px",
             }}
@@ -122,7 +122,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
             <p
               className="font-display font-bold uppercase leading-[1.05] text-amber"
               style={{
-                fontSize: "clamp(28px, 2.4vw, 40px)",
+                fontSize: "clamp(32px, 2.6vw, 44px)",
                 letterSpacing: "0.5px",
                 marginBottom: "28px",
               }}
