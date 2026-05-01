@@ -60,7 +60,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           )}
           <p
             className="font-sans font-normal text-on-navy-muted"
-            style={{ fontSize: "13px", lineHeight: "1.65" }}
+            style={{ fontSize: "14px", lineHeight: "1.7" }}
           >
             {body}
           </p>
@@ -132,7 +132,7 @@ export function PageHero({ badge, line1, line2, body, photo, coords }: Props) {
           )}
           <p
             className="font-sans font-normal text-on-navy-muted"
-            style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "440px" }}
+            style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "440px" }}
           >
             {body}
           </p>

@@ -75,24 +75,24 @@ function HeroPoster() {
       >
         <p
           id="hero-title-desktop"
-          className="font-display font-bold uppercase leading-[1.05] text-on-navy"
-          style={{ fontSize: "clamp(34px, 2.8vw, 46px)", letterSpacing: "0.5px" }}
+          className="font-display font-bold uppercase leading-[1.05] text-on-navy text-balance"
+          style={{ fontSize: "clamp(28px, 2.2vw, 38px)", letterSpacing: "0.5px" }}
         >
           Built to deliver.
         </p>
         <p
-          className="font-display font-bold uppercase leading-[1.05] text-amber"
+          className="font-display font-bold uppercase leading-[1.05] text-amber text-balance"
           style={{
-            fontSize: "clamp(34px, 2.8vw, 46px)",
+            fontSize: "clamp(28px, 2.2vw, 38px)",
             letterSpacing: "0.5px",
-            marginBottom: "30px",
+            marginBottom: "26px",
           }}
         >
-          On challenging<br />drilling programs?
+          On challenging drilling programs?
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
-          style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "420px" }}
+          style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "420px" }}
         >
           Delivering safe, reliable and high-quality drilling services across
           the Asia-Pacific region.
@@ -123,18 +123,18 @@ function HeroPoster() {
       >
         <p
           className="font-display font-bold leading-[1.3] text-deep-navy"
-          style={{ fontSize: "16px" }}
+          style={{ fontSize: "18px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
           className="font-sans"
           style={{
-            fontSize: "14px",
-            marginTop: "8px",
+            fontSize: "15px",
+            marginTop: "10px",
             color: "var(--color-surface)",
             opacity: 0.85,
-            lineHeight: "1.55",
+            lineHeight: "1.6",
           }}
         >
           A full spectrum of specialist capabilities in one mobilisation.
@@ -181,13 +181,13 @@ function HeroPoster() {
           >
             <p
               className="font-display font-bold uppercase leading-[1.4] text-amber"
-              style={{ fontSize: "13px", marginBottom: "14px", letterSpacing: "0.04em" }}
+              style={{ fontSize: "14px", marginBottom: "14px", letterSpacing: "0.04em" }}
             >
               Multi-rig site operations<br />— night &amp; day
             </p>
             <p
               className="font-sans font-normal text-on-navy-muted"
-              style={{ fontSize: "11px", lineHeight: "1.55" }}
+              style={{ fontSize: "13px", lineHeight: "1.6" }}
             >
               From greenfield exploration to active mine pits. Modern, versatile
               rigs deployed with experienced crews and reliable data capture.
@@ -240,7 +240,7 @@ function HeroStack() {
         </p>
         <p
           className="font-sans font-normal text-on-navy-muted"
-          style={{ fontSize: "13px", lineHeight: "1.65" }}
+          style={{ fontSize: "14px", lineHeight: "1.7" }}
         >
           Delivering safe, reliable and high-quality drilling services across
           the Asia-Pacific region.
@@ -254,13 +254,13 @@ function HeroStack() {
       <div className="flex flex-col gap-2 px-2">
         <p
           className="font-display font-extrabold leading-[1.3] text-deep-navy"
-          style={{ fontSize: "16px" }}
+          style={{ fontSize: "18px" }}
         >
           Drilling, instrumentation, downhole &amp; data.
         </p>
         <p
           className="font-sans"
-          style={{ fontSize: "14px", color: "var(--color-surface)", opacity: 0.85 }}
+          style={{ fontSize: "15px", color: "var(--color-surface)", opacity: 0.85 }}
         >
           A full spectrum of specialist capabilities in one mobilisation.
         </p>

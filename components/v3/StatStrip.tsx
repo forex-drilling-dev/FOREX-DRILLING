@@ -40,7 +40,7 @@ export function StatStrip({ items }: Props) {
             </p>
             <p
               className="font-sans font-medium uppercase text-on-navy-muted"
-              style={{ fontSize: "11px", letterSpacing: "0.18em", marginTop: "8px" }}
+              style={{ fontSize: "12px", letterSpacing: "0.18em", marginTop: "10px" }}
             >
               {s.label}
             </p>
