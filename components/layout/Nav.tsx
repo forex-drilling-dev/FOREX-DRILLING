@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -35,29 +36,16 @@ export function Nav() {
         <Link
           href="/"
           aria-label="Forex Drilling — home"
-          className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-80"
+          className="flex items-center transition-opacity duration-200 hover:opacity-80"
         >
-          {/* Brand X icon — top/right/bottom yellow, left dark navy
-              (pointing right, forming the inner "bite" of the X) */}
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 100 100"
-            fill="none"
-            aria-hidden
-            className="shrink-0"
-          >
-            <path d="M0 0 L100 0 L50 50 Z"     fill="var(--color-amber)" />
-            <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-amber)" />
-            <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
-            <path d="M0 0 L0 100 L50 50 Z"     fill="var(--color-deep-navy)" />
-          </svg>
-          <span
-            className="font-display font-bold uppercase leading-[0.95] text-deep-navy"
-            style={{ fontSize: "16px", letterSpacing: "0.04em" }}
-          >
-            Forex<br />Drilling
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Forex Drilling"
+            width={989}
+            height={200}
+            priority
+            className="h-10 w-auto md:h-11"
+          />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {site.nav.map((item) => {
