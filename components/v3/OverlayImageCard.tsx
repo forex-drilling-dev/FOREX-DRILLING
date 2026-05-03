@@ -62,10 +62,20 @@ export function OverlayImageCard({
         </div>
       )}
 
-      {/* Card — stacked on mobile (image then panel), overlay on md+ */}
+      {/* Card — stacked on mobile (image then panel), side-by-side on md+.
+          When imageFit="contain" the image is constrained to the left 3/5
+          (no overlap with the panel) so portrait subjects render in full. */}
       <div className={cn("relative w-full overflow-hidden rounded-xl shadow-image", aspectClass)}>
-        {/* Image — fills the card on md+, takes its own aspect on mobile */}
-        <div className={cn("relative w-full md:absolute md:inset-0 md:aspect-auto", mobileAspectClass, imageFit === "contain" && "bg-deep-navy")}>
+        {/* Image area — full card on md+ with cover, left 3/5 with contain */}
+        <div
+          className={cn(
+            "relative w-full md:absolute md:top-0 md:bottom-0 md:left-0 md:w-auto md:aspect-auto",
+            mobileAspectClass,
+            imageFit === "contain"
+              ? "bg-deep-navy md:right-[40%]"
+              : "md:right-0",
+          )}
+        >
           <Image
             src={optimizedSrc(src)}
             alt={alt}
@@ -78,8 +88,8 @@ export function OverlayImageCard({
           />
         </div>
 
-        {/* Navy panel — sits below the image on mobile, overlays the right
-            on md+ for the editorial cut-in effect. */}
+        {/* Navy panel — sits below the image on mobile, on the right
+            on md+ (overlay if cover, adjacent if contain). */}
         <div className="flex flex-col justify-center bg-deep-navy/95 px-7 py-6 md:absolute md:inset-y-0 md:right-0 md:w-2/5 md:py-7">
           <h3
             className="mb-3 font-display font-bold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
