@@ -14,8 +14,8 @@ import { useRef } from "react";
  * as a deliberate beat. After all words have settled, a thin amber rule
  * draws underneath the second line as the final accent.
  *
- * The animation runs once (`once: true` on useInView) so re-scrolling
- * past the section does not re-trigger it.
+ * The animation replays every time the section re-enters the viewport
+ * so the editorial moment lands fresh on each scroll-back.
  */
 
 const FIRST_LINE = ["Built", "on", "Drilling."];
@@ -44,7 +44,7 @@ const ruleTransition: Transition = {
 
 export function TaglineAnimated() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+  const inView = useInView(ref, { margin: "-15% 0px" });
 
   return (
     <div

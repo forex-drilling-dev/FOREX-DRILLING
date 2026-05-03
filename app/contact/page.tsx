@@ -47,21 +47,7 @@ export default function ContactPage() {
                 className="mt-2 font-sans text-deep-navy"
                 style={{ fontSize: "16px" }}
               >
-                Singapore
-              </dd>
-            </div>
-            <div>
-              <dt
-                className="font-display font-bold uppercase text-amber"
-                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
-              >
-                Operations
-              </dt>
-              <dd
-                className="mt-2 font-sans text-deep-navy"
-                style={{ fontSize: "16px" }}
-              >
-                Papua New Guinea · Asia-Pacific
+                Singapore &mdash; Papua New Guinea
               </dd>
             </div>
             <div>
