@@ -3,12 +3,13 @@ import { z } from "zod";
 import { resend, contactFromEmail, contactToEmail } from "@/lib/resend";
 
 const schema = z.object({
-  name:    z.string().min(2),
-  company: z.string().min(2),
-  role:    z.string().min(2),
-  country: z.string().min(2),
+  name:    z.string().min(2).max(120).regex(/^[^\r\n]+$/, "Invalid name"),
+  email:   z.string().email().max(200),
+  company: z.string().min(2).max(200).regex(/^[^\r\n]+$/, "Invalid company"),
+  role:    z.string().min(2).max(120).regex(/^[^\r\n]+$/, "Invalid role"),
+  country: z.string().min(2).max(120).regex(/^[^\r\n]+$/, "Invalid country"),
   scope:   z.enum(["mining", "exploration", "civil", "groundwater", "other"]),
-  message: z.string().min(20),
+  message: z.string().min(20).max(5000),
 });
 
 export async function POST(req: Request) {
@@ -28,8 +29,15 @@ export async function POST(req: Request) {
     from:    contactFromEmail,
     to:      contactToEmail,
     subject: `New enquiry — ${data.company} (${data.scope})`,
-    replyTo: data.name,
-    text:    `Name: ${data.name}\nCompany: ${data.company}\nRole: ${data.role}\nCountry: ${data.country}\nScope: ${data.scope}\n\n${data.message}`,
+    replyTo: `${data.name} <${data.email}>`,
+    text:
+      `Name: ${data.name}\n` +
+      `Email: ${data.email}\n` +
+      `Company: ${data.company}\n` +
+      `Role: ${data.role}\n` +
+      `Country: ${data.country}\n` +
+      `Scope: ${data.scope}\n\n` +
+      data.message,
   });
 
   if (error) {

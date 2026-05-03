@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const schema = z.object({
   name:    z.string().min(2, "Please provide your name"),
+  email:   z.string().email("Please provide a valid email"),
   company: z.string().min(2, "Please provide your company"),
   role:    z.string().min(2, "Please provide your role"),
   country: z.string().min(2, "Please provide your country"),
@@ -83,6 +84,21 @@ export function ContactForm() {
 
         <label className="flex flex-col gap-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
+            Email *
+          </span>
+          <input
+            {...register("email")}
+            type="email"
+            autoComplete="email"
+            className={inputCls}
+            style={{ fontSize: "15px" }}
+            placeholder="you@company.com"
+          />
+          {errors.email && <span className={errCls} style={{ fontSize: "12px" }}>{errors.email.message}</span>}
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Company *
           </span>
           <input {...register("company")} className={inputCls} style={{ fontSize: "15px" }} placeholder="Organisation" />
@@ -97,7 +113,7 @@ export function ContactForm() {
           {errors.role && <span className={errCls} style={{ fontSize: "12px" }}>{errors.role.message}</span>}
         </label>
 
-        <label className="flex flex-col gap-2">
+        <label className="flex flex-col gap-2 md:col-span-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Country *
           </span>
