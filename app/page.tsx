@@ -8,6 +8,7 @@ import {
   CircleImageRing,
   BgGreyShape,
   CtaBanner,
+  TaglineAnimated,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -281,19 +282,12 @@ function HeroStack() {
   );
 }
 
-// ─── TAGLINE STRIP — full-viewport editorial moment between hero and CTA ────
+// ─── TAGLINE STRIP — full-viewport editorial moment with mask-reveal anim ───
 
 function TaglineStrip() {
   return (
     <section className="relative flex min-h-screen items-center justify-center bg-white px-6 py-24 md:px-14">
-      <p
-        className="text-center font-display font-extrabold uppercase leading-[1] text-balance text-deep-navy"
-        style={{ fontSize: "clamp(40px, 8vw, 88px)", letterSpacing: "-0.01em" }}
-      >
-        Built on Drilling.
-        <br />
-        <span className="text-amber">Driven by Delivery.</span>
-      </p>
+      <TaglineAnimated />
     </section>
   );
 }
