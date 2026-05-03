@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 
-type Props = {
+interface Props {
   src: string;
   alt: string;
   /** Card title shown in the navy overlay panel — yellow text */
@@ -17,7 +17,7 @@ type Props = {
   /** Card aspect ratio on md+ screens — default 2.3/1 landscape; portrait images may want 4/3 or 1/1 */
   aspect?: "wide" | "balanced" | "square";
   className?: string;
-};
+}
 
 /**
  * Rectangular image card with a translucent navy overlay panel anchored to

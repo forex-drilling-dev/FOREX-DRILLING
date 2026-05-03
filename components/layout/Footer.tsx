@@ -18,13 +18,13 @@ export function Footer() {
         }}
       >
         <svg width="100%" height="100%" viewBox="0 0 180 560" fill="none" preserveAspectRatio="none">
-          <rect x="46" y="40" width="88" height="32" rx="4" stroke="#FFFFFF" strokeWidth="6" fill="none" />
-          <path d="M58 80 V440 L90 510 L122 440 V80" stroke="#FFFFFF" strokeWidth="6" fill="none" strokeLinejoin="round" />
+          <rect x="46" y="40" width="88" height="32" rx="4" stroke="currentColor" strokeWidth="6" fill="none" />
+          <path d="M58 80 V440 L90 510 L122 440 V80" stroke="currentColor" strokeWidth="6" fill="none" strokeLinejoin="round" />
           {Array.from({ length: 14 }).map((_, i) => (
             <path
               key={i}
               d={`M40 ${110 + i * 24} L140 ${118 + i * 24}`}
-              stroke="#FFFFFF"
+              stroke="currentColor"
               strokeWidth="5"
               strokeLinecap="round"
             />
@@ -42,7 +42,7 @@ export function Footer() {
                 <path d="M0 0 L100 0 L50 50 Z"     fill="var(--color-amber)" />
                 <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-amber)" />
                 <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
-                <path d="M0 0 L0 100 L50 50 Z"     fill="#FFFFFF" />
+                <path d="M0 0 L0 100 L50 50 Z"     fill="currentColor" />
               </svg>
               <p
                 className="font-display font-bold uppercase leading-[0.95]"
