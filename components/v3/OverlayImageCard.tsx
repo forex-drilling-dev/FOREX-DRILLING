@@ -12,6 +12,10 @@ type Props = {
   body: ReactNode;
   /** Optional pinned elements (typically <DrillBitPin />) anchored top-left of the card */
   pins?: ReactNode;
+  /** "cover" (default) crops to fill the card; "contain" shows the full image with letterboxing */
+  imageFit?: "cover" | "contain";
+  /** Card aspect ratio on md+ screens — default 2.3/1 landscape; portrait images may want 4/3 or 1/1 */
+  aspect?: "wide" | "balanced" | "square";
   className?: string;
 };
 
@@ -22,7 +26,27 @@ type Props = {
  * On hover: image zooms subtly, the offset outline shifts slightly to enhance
  * the "stacked" depth effect, the navy panel's amber title nudges right.
  */
-export function OverlayImageCard({ src, alt, title, body, pins, className }: Props) {
+export function OverlayImageCard({
+  src,
+  alt,
+  title,
+  body,
+  pins,
+  imageFit = "cover",
+  aspect = "wide",
+  className,
+}: Props) {
+  const aspectClass =
+    aspect === "square"
+      ? "md:aspect-square"
+      : aspect === "balanced"
+        ? "md:aspect-[4/3]"
+        : "md:aspect-[2.3/1]";
+  const mobileAspectClass =
+    aspect === "square" || aspect === "balanced"
+      ? "aspect-[4/5]"
+      : "aspect-[16/9]";
+  const fitClass = imageFit === "contain" ? "object-contain" : "object-cover";
   return (
     <div className={cn("group relative", className)}>
       {/* Offset navy outline behind — animates on hover */}
@@ -39,15 +63,15 @@ export function OverlayImageCard({ src, alt, title, body, pins, className }: Pro
       )}
 
       {/* Card — stacked on mobile (image then panel), overlay on md+ */}
-      <div className="relative w-full overflow-hidden rounded-xl shadow-image md:aspect-[2.3/1]">
+      <div className={cn("relative w-full overflow-hidden rounded-xl shadow-image", aspectClass)}>
         {/* Image — fills the card on md+, takes its own aspect on mobile */}
-        <div className="relative aspect-[16/9] w-full md:absolute md:inset-0 md:aspect-auto">
+        <div className={cn("relative w-full md:absolute md:inset-0 md:aspect-auto", mobileAspectClass, imageFit === "contain" && "bg-deep-navy")}>
           <Image
             src={optimizedSrc(src)}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 600px, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className={cn(fitClass, "transition-transform duration-700 ease-out group-hover:scale-105")}
             {...(blurPlaceholder(src)
               ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
               : {})}

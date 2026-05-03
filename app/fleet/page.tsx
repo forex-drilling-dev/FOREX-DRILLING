@@ -64,6 +64,8 @@ function CapabilitiesSection() {
               src="/images/rig-vertical-orange.jpg"
               alt="Dual-head sonic / diamond drill rig with mast deployed"
               title="Multi-method, scalable rigs"
+              aspect="balanced"
+              imageFit="contain"
               body={
                 <>
                   Designed to deliver multiple scopes from a single mobilisation,
@@ -99,15 +101,15 @@ function MaintenanceSection() {
         <div className="md:col-span-5 md:order-2">
           <div className="relative">
             <div aria-hidden className="absolute -top-5 -left-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30" />
-            {/* Use object-contain in a 4/3 frame so the full sunset rig photo
-                is visible — no aggressive cropping. The white background fills
-                any letterbox gaps cleanly. */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-deep-navy" style={{ boxShadow: "var(--shadow-image)" }}>
+            {/* Portrait sunset photo shown in full — no aggressive cropping.
+                Use a 3/4 (portrait) frame with object-cover so the rig fills
+                the frame cleanly without letterboxing. */}
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-deep-navy" style={{ boxShadow: "var(--shadow-image)" }}>
               <Image
                 src="/images/rig-sunset.jpg"
                 alt="Forex Drilling rig at sunset, multiple drills on a maintenance pad"
                 fill
-                sizes="(min-width:768px) 45vw, 100vw"
+                sizes="(min-width:768px) 40vw, 100vw"
                 className="object-cover"
               />
             </div>
