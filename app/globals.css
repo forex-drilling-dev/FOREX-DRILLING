@@ -179,6 +179,19 @@ header[data-nav] {
   }
 }
 
+/* ─── Homepage scroll snap ───────────────────────────────────────
+   Applied via the HomeScrollSnap client component while "/" is mounted.
+   Hero and tagline sections lock to the top of the viewport on scroll;
+   sections after the snap targets (CTA, footer) remain free-scrolling
+   thanks to proximity mode. */
+html.home-scroll-snap {
+  scroll-snap-type: y proximity;
+}
+html.home-scroll-snap .home-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 /* ─── Utilities ──────────────────────────────────────────────── */
 @layer utilities {
   .text-balance     { text-wrap: balance; }

@@ -9,6 +9,7 @@ import {
   BgGreyShape,
   CtaBanner,
   TaglineAnimated,
+  HomeScrollSnap,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -26,7 +27,7 @@ function HeroPoster() {
   return (
     <section
       aria-labelledby="hero-title-desktop"
-      className="relative hidden h-screen min-h-[780px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
+      className="home-snap relative hidden h-screen min-h-[780px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
     >
       {/* Watermarks anchored to VIEWPORT right edge */}
       <BgGreyShape className="top-[120px] right-[-50px]" />
@@ -216,7 +217,7 @@ function HeroStack() {
   return (
     <section
       aria-labelledby="hero-title-mobile"
-      className="relative mx-auto flex max-w-[460px] flex-col items-center gap-7 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-16 lg:hidden"
+      className="home-snap relative mx-auto flex min-h-screen max-w-[460px] flex-col items-center justify-center gap-7 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-16 lg:hidden"
     >
       <NavyBlob
         className="h-auto w-full"
@@ -286,7 +287,7 @@ function HeroStack() {
 
 function TaglineStrip() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center bg-white px-6 py-24 md:px-14">
+    <section className="home-snap relative flex min-h-screen items-center justify-center bg-white px-6 py-24 md:px-14">
       <TaglineAnimated />
     </section>
   );
@@ -300,6 +301,7 @@ export default function HomePage() {
   // their respective inner pages and are reached via the nav.
   return (
     <>
+      <HomeScrollSnap />
       <HeroPoster />
       <HeroStack />
       <TaglineStrip />
