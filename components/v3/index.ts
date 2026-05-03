@@ -15,6 +15,7 @@ export { DrillBitPin }      from "./DrillBitPin";
 // Imagery
 export { CircleImageRing }  from "./CircleImageRing";
 export { OverlayImageCard } from "./OverlayImageCard";
+export { OperationsMap }    from "./OperationsMap";
 
 // Editorial typography
 export { IndexNumber }      from "./IndexNumber";

@@ -5,7 +5,6 @@ import {
   SectionHeading,
   QuoteBlock,
   ProtocolGrid,
-  CtaBanner,
   Reveal,
 } from "@/components/v3";
 
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 
 const protocols = [
   { code: "SOP", label: "Standard Operating Procedures" },
-  { code: "JSA", label: "Job Safety Analysis" },
+  { code: "JSA", label: "Job Safety & Environmental Analysis" },
   { code: "PTW", label: "Permit to Work" },
   { code: "T5", label: "Take 5 Risk Assessment" },
   { code: "TBX", label: "Toolbox Meetings" },
@@ -113,12 +112,6 @@ export default function HsePage() {
       <QuoteSection />
       <ProtocolsSection />
       <CommitmentSection />
-      <CtaBanner
-        headline="Audit ahead, or site induction needed?"
-        body="We operate to client procedures with full traceability — JSAs, PTWs, T5 sheets, and daily toolbox records. We fit your safety system, not the other way round."
-        cta="Request HSE pack"
-        href="/contact"
-      />
     </>
   );
 }

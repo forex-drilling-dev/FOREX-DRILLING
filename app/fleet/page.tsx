@@ -61,8 +61,8 @@ function CapabilitiesSection() {
           </Reveal>
           <div className="md:col-span-7 md:pt-6">
             <OverlayImageCard
-              src="/images/rig-horizontal.jpg"
-              alt="Modern dual-head drilling rig"
+              src="/images/rig-vertical-orange.jpg"
+              alt="Dual-head sonic / diamond drill rig with mast deployed"
               title="Multi-method, scalable rigs"
               body={
                 <>
@@ -99,10 +99,13 @@ function MaintenanceSection() {
         <div className="md:col-span-5 md:order-2">
           <div className="relative">
             <div aria-hidden className="absolute -top-5 -left-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30" />
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl" style={{ boxShadow: "var(--shadow-image)" }}>
+            {/* Use object-contain in a 4/3 frame so the full sunset rig photo
+                is visible — no aggressive cropping. The white background fills
+                any letterbox gaps cleanly. */}
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-deep-navy" style={{ boxShadow: "var(--shadow-image)" }}>
               <Image
-                src="/images/drill-head-closeup.jpg"
-                alt="Drill head — maintenance close-up"
+                src="/images/rig-sunset.jpg"
+                alt="Forex Drilling rig at sunset, multiple drills on a maintenance pad"
                 fill
                 sizes="(min-width:768px) 45vw, 100vw"
                 className="object-cover"
@@ -117,9 +120,17 @@ function MaintenanceSection() {
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Equipment reliability is critical to performance. We place strong
             emphasis on maintenance, with structured preventative maintenance
-            programs, regular inspections, and disciplined field practices,
-            supporting high rig availability, consistent productivity, and
-            dependable project delivery.
+            programs, disciplined daily inspections, and proactive component
+            management to ensure high equipment availability and consistent
+            performance. This focus on reliability directly supports
+            productivity, reduces downtime, and strengthens overall project
+            delivery.
+          </p>
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            Our fleet and operational approach are designed to provide
+            resilience in the field — maintaining performance even under
+            challenging ground conditions, logistical constraints, and
+            operational pressures.
           </p>
         </Reveal>
       </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   PageHero,
   SectionLabel,
@@ -7,7 +6,6 @@ import {
   PillarCard,
   CtaBanner,
   Reveal,
-  DrillBitPin,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -124,72 +122,6 @@ function OperatingModel() {
   );
 }
 
-// ─── MAINTENANCE — image + text spread ─────────────────────────────────────
-
-function MaintenanceSection() {
-  return (
-    <section className="relative overflow-hidden bg-deep py-16 md:py-32">
-      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
-        <div className="md:col-span-6 md:order-2">
-          <div className="relative">
-            <div
-              aria-hidden
-              className="absolute -top-5 -left-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30"
-            />
-            <div
-              className="relative aspect-[4/3] w-full overflow-hidden rounded-xl"
-              style={{ boxShadow: "var(--shadow-image)" }}
-            >
-              <Image
-                src="/images/drill-head-closeup.jpg"
-                alt="Drill head — maintenance close-up"
-                fill
-                sizes="(min-width:768px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        <Reveal className="flex flex-col gap-6 md:col-span-6 md:order-1">
-          <SectionLabel number="03" label="Equipment Reliability" />
-          <SectionHeading
-            line1="Maintenance"
-            line2="is a core priority."
-          />
-          <p
-            className="font-sans"
-            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
-          >
-            Equipment reliability is critical to performance. We place strong
-            emphasis on maintenance, with structured preventative maintenance
-            programs, regular inspections, and disciplined field practices.
-          </p>
-          <ul className="flex flex-col gap-3 mt-2">
-            {[
-              "High rig availability",
-              "Consistent productivity",
-              "Dependable project delivery",
-              "Performance under changing ground conditions",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <span className="flex shrink-0 pt-0.5" aria-hidden>
-                  <DrillBitPin size={20} />
-                </span>
-                <span
-                  className="font-sans font-medium text-deep-navy"
-                  style={{ fontSize: "15px", lineHeight: "1.55" }}
-                >
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
 
 export default function AboutPage() {
   return (
@@ -197,7 +129,6 @@ export default function AboutPage() {
       <AboutHero />
       <WhoWeAre />
       <OperatingModel />
-      <MaintenanceSection />
       <CtaBanner
         headline="Get to know the team."
         body="Singapore HQ, field operations across the Asia-Pacific. Tell us about your program and we&rsquo;ll get back within one business day."

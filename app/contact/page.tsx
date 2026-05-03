@@ -5,6 +5,7 @@ import {
   SectionHeading,
   BgGreyShape,
   Reveal,
+  OperationsMap,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -86,11 +87,11 @@ export default function ContactPage() {
               </dt>
               <dd className="mt-2">
                 <a
-                  href="mailto:contact@forexdrilling.com"
+                  href="mailto:admin@forexdrilling.com"
                   className="font-sans text-deep-navy transition-colors duration-200 hover:text-amber"
                   style={{ fontSize: "16px" }}
                 >
-                  contact@forexdrilling.com
+                  admin@forexdrilling.com
                 </a>
               </dd>
             </div>
@@ -100,6 +101,19 @@ export default function ContactPage() {
         {/* Right — form */}
         <Reveal className="md:col-span-7" delay={120}>
           <ContactForm />
+        </Reveal>
+
+        {/* Operations map — full width below the form/info columns */}
+        <Reveal className="md:col-span-12" delay={180}>
+          <div className="mt-4 flex flex-col gap-4 md:mt-8">
+            <p
+              className="font-display font-bold uppercase text-amber"
+              style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+            >
+              Where we operate
+            </p>
+            <OperationsMap />
+          </div>
         </Reveal>
       </div>
     </section>

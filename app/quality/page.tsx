@@ -4,7 +4,6 @@ import {
   SectionLabel,
   SectionHeading,
   DrillBitPin,
-  CtaBanner,
   Reveal,
 } from "@/components/v3";
 
@@ -75,26 +74,51 @@ function DigitalSection() {
   return (
     <section className="relative bg-white py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <Reveal className="flex flex-col gap-5 max-w-[760px]">
+        <Reveal className="flex flex-col gap-5 max-w-[820px]">
           <SectionLabel number="02" label="Digital Systems" />
           <SectionHeading line1="Krux" line2="& MWD." />
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-            Digital systems used on Forex Drilling programs.
+            We leverage digital data capture and monitoring systems to ensure
+            accurate, real-time data collection. These systems enhance data
+            quality, improve traceability, and provide additional insight into
+            subsurface conditions when interpreted alongside geological and
+            geotechnical analysis.
           </p>
         </Reveal>
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
-            <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>Krux</h3>
+            <a
+              href="https://www.kruxanalytics.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block transition-opacity hover:opacity-80"
+              aria-label="Krux Analytics — opens in new tab"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/krux-logo.svg"
+                alt="Krux Analytics"
+                width={180}
+                height={56}
+                className="h-12 w-auto md:h-14"
+              />
+            </a>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Data capture and reporting platform.
+              Digital platform for data collection, reporting, and operational
+              monitoring, ensuring drilling data is captured accurately and
+              consistently throughout the project, with structured outputs
+              ready for client technical teams.
             </p>
           </div>
           <div className="border-l-4 border-amber pl-8">
             <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Downhole Telemetry</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>MWD</h3>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Measurement While Drilling — downhole telemetry system.
+              Measurement While Drilling collects downhole parameters during
+              operations. When properly interpreted, this data provides
+              valuable insights into ground conditions, supports geological
+              and geotechnical understanding, and enhances decision-making.
             </p>
           </div>
         </div>
@@ -109,12 +133,6 @@ export default function QualityPage() {
       <QualityHero />
       <QmSection />
       <DigitalSection />
-      <CtaBanner
-        headline="Need audit-ready drilling data?"
-        body="Krux platforms and MWD systems integrated from day one. Every meter logged, every shift reported — straight into your technical team&rsquo;s workflow."
-        cta="Discuss your standards"
-        href="/contact"
-      />
     </>
   );
 }

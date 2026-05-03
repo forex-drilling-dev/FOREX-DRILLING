@@ -23,7 +23,7 @@ const organizationSchema = {
   logo: `${SITE_URL}/logo.png`,
   description:
     "Specialty drilling contractor delivering safe, reliable and high-quality drilling services across the Asia-Pacific region.",
-  email: "contact@forexdrilling.com",
+  email: "admin@forexdrilling.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Singapore",
@@ -57,7 +57,7 @@ const localBusinessSchema = {
   name: "Forex Drilling",
   url: SITE_URL,
   image: `${SITE_URL}/opengraph-image`,
-  email: "contact@forexdrilling.com",
+  email: "admin@forexdrilling.com",
   priceRange: "$$$",
   address: {
     "@type": "PostalAddress",

@@ -36,9 +36,19 @@ export default function ProjectsPage() {
 
       <section className="relative bg-deep py-16 md:py-32">
         <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:px-14">
-          <Reveal className="flex flex-col gap-5 max-w-[700px]">
+          <Reveal className="flex flex-col gap-5 max-w-[820px]">
             <SectionLabel number="01" label="Case Studies" />
             <SectionHeading line1="Coming" line2="soon." />
+            <p
+              className="font-sans"
+              style={{ fontSize: "clamp(15px, 4.2vw, 17px)", lineHeight: "1.7", color: "var(--color-fore)" }}
+            >
+              From planning through to execution, our objective is to deliver
+              outcomes that meet both technical requirements and operational
+              expectations. We engage early, understand project challenges in
+              detail, and remain actively involved to ensure issues are
+              addressed before they impact delivery.
+            </p>
             <p
               className="font-sans"
               style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
