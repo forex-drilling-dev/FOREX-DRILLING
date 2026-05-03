@@ -281,20 +281,19 @@ function HeroStack() {
   );
 }
 
-// ─── TAGLINE STRIP — narrow band between hero and CTA banner ────────────────
+// ─── TAGLINE STRIP — full-viewport editorial moment between hero and CTA ────
 
 function TaglineStrip() {
   return (
-    <section className="relative bg-white py-14 md:py-20">
-      <div className="mx-auto max-w-[1100px] px-6 text-center md:px-14">
-        <p
-          className="font-display font-extrabold uppercase leading-[1.1] text-balance text-deep-navy"
-          style={{ fontSize: "clamp(28px, 5vw, 44px)", letterSpacing: "-0.005em" }}
-        >
-          Built on Drilling.{" "}
-          <span className="text-amber">Driven by Delivery.</span>
-        </p>
-      </div>
+    <section className="relative flex min-h-screen items-center justify-center bg-white px-6 py-24 md:px-14">
+      <p
+        className="text-center font-display font-extrabold uppercase leading-[1] text-balance text-deep-navy"
+        style={{ fontSize: "clamp(40px, 8vw, 88px)", letterSpacing: "-0.01em" }}
+      >
+        Built on Drilling.
+        <br />
+        <span className="text-amber">Driven by Delivery.</span>
+      </p>
     </section>
   );
 }
