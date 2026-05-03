@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 
 export function Footer() {
   return (
-    <footer className="relative mt-32 overflow-hidden bg-deep-navy py-20 text-on-navy">
+    <footer className="relative overflow-hidden bg-deep-navy py-20 text-on-navy">
       {/* Watermark — large threaded rod (vis) bleeding off bottom-right */}
       <div
         aria-hidden
