@@ -23,8 +23,8 @@ function FleetHero() {
       line1="Modern equipment."
       line2="Reliable performance."
       photo={{
-        src: "/images/site-operations.jpg",
-        alt: "Forex Drilling site operations — crew with rig in field",
+        src: "/images/rig-sunset.jpg",
+        alt: "Forex Drilling rig at sunset, multiple drills on a maintenance pad",
       }}
       body={
         <>
@@ -101,13 +101,13 @@ function MaintenanceSection() {
         <div className="md:col-span-5 md:order-2">
           <div className="relative">
             <div aria-hidden className="absolute -top-5 -left-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30" />
-            {/* Portrait sunset photo shown in full — no aggressive cropping.
-                Use a 3/4 (portrait) frame with object-cover so the rig fills
-                the frame cleanly without letterboxing. */}
+            {/* Portrait drill-head close-up — the original "A core operational
+                priority" photo. 3/4 (portrait) frame matches the photo's
+                native aspect so the rig fills cleanly without cropping. */}
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-deep-navy" style={{ boxShadow: "var(--shadow-image)" }}>
               <Image
-                src="/images/rig-sunset.jpg"
-                alt="Forex Drilling rig at sunset, multiple drills on a maintenance pad"
+                src="/images/drill-head-closeup.jpg"
+                alt="Close-up of an orange Forex Drilling rotary drill head with hydraulic lines"
                 fill
                 sizes="(min-width:768px) 40vw, 100vw"
                 className="object-cover"

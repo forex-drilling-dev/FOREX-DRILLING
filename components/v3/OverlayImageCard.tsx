@@ -20,11 +20,8 @@ type Props = {
 };
 
 /**
- * Rectangular image card with a translucent navy overlay panel anchored to the
- * right side, plus an offset navy outline behind the card.
- *
- * On hover: image zooms subtly, the offset outline shifts slightly to enhance
- * the "stacked" depth effect, the navy panel's amber title nudges right.
+ * Rectangular image card with a translucent navy overlay panel anchored to
+ * the right side. Static — no hover effects, no offset outline behind.
  */
 export function OverlayImageCard({
   src,
@@ -48,24 +45,15 @@ export function OverlayImageCard({
       : "aspect-[16/9]";
   const fitClass = imageFit === "contain" ? "object-contain" : "object-cover";
   return (
-    <div className={cn("group relative", className)}>
-      {/* Offset navy outline behind — animates on hover */}
-      <div
-        aria-hidden
-        className="absolute -left-5 -top-5 h-[calc(100%+40px)] w-[calc(100%+40px)] rounded-2xl border border-surface/30 transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2"
-      />
-
-      {/* Pins anchored above the card top-left — small lift on hover */}
+    <div className={cn("relative", className)}>
       {pins && (
-        <div className="absolute -top-12 left-12 z-20 flex gap-3 transition-transform duration-300 ease-out group-hover:-translate-y-1">
-          {pins}
-        </div>
+        <div className="absolute -top-12 left-12 z-20 flex gap-3">{pins}</div>
       )}
 
       {/* Card — stacked on mobile (image then panel), side-by-side on md+.
           When imageFit="contain" the image is constrained to the left 3/5
           (no overlap with the panel) so portrait subjects render in full. */}
-      <div className={cn("relative w-full overflow-hidden rounded-xl shadow-image", aspectClass)}>
+      <div className={cn("relative w-full overflow-hidden rounded-xl", aspectClass)}>
         {/* Image area — full card on md+ with cover, left 3/5 with contain */}
         <div
           className={cn(
@@ -81,18 +69,17 @@ export function OverlayImageCard({
             alt={alt}
             fill
             sizes="(min-width: 1024px) 600px, 100vw"
-            className={cn(fitClass, "transition-transform duration-700 ease-out group-hover:scale-105")}
+            className={fitClass}
             {...(blurPlaceholder(src)
               ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
               : {})}
           />
         </div>
 
-        {/* Navy panel — sits below the image on mobile, on the right
-            on md+ (overlay if cover, adjacent if contain). */}
+        {/* Navy panel — below the image on mobile, on the right on md+ */}
         <div className="flex flex-col justify-center bg-deep-navy/95 px-7 py-6 md:absolute md:inset-y-0 md:right-0 md:w-2/5 md:py-7">
           <h3
-            className="mb-3 font-display font-bold uppercase leading-snug tracking-wide text-amber transition-transform duration-300 ease-out group-hover:translate-x-1"
+            className="mb-3 font-display font-bold uppercase leading-snug tracking-wide text-amber"
             style={{ fontSize: "14px", letterSpacing: "0.04em" }}
           >
             {title}
