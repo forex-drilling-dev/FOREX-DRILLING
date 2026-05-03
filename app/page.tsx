@@ -156,12 +156,15 @@ function HeroPoster() {
         </p>
       </div>
 
-      {/* Rectangular image card — anchored to viewport RIGHT, fluid width */}
+      {/* Rectangular image card — anchored to viewport RIGHT, fluid width.
+          Sized to fill the vertical gap between the upper-right service note
+          and the bottom of the hero so the right column doesn't feel empty. */}
       <div
-        className="absolute bottom-[100px] z-[5] h-[260px]"
+        className="absolute bottom-[80px] z-[5]"
         style={{
           right: "clamp(40px, 5vw, 120px)",
-          width: "clamp(520px, 42vw, 680px)",
+          width: "clamp(560px, 46vw, 760px)",
+          height: "clamp(320px, 36vh, 440px)",
         }}
       >
         {/* Offset navy outline */}
