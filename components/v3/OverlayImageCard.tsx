@@ -43,25 +43,24 @@ export function OverlayImageCard({
     aspect === "square" || aspect === "balanced"
       ? "aspect-[4/5]"
       : "aspect-[16/9]";
-  const fitClass = imageFit === "contain" ? "object-contain" : "object-cover";
+  // Two layout modes on md+:
+  //  - "cover" (default): image fills the whole card, navy panel overlays the right 2/5.
+  //  - "contain": image gets its own left 3/5 area beside the panel — but uses
+  //    object-cover so it fills its area cleanly with no letterbox stripes
+  //    (slight top/bottom crop is acceptable).
   return (
     <div className={cn("relative", className)}>
       {pins && (
         <div className="absolute -top-12 left-12 z-20 flex gap-3">{pins}</div>
       )}
 
-      {/* Card — stacked on mobile (image then panel), side-by-side on md+.
-          When imageFit="contain" the image is constrained to the left 3/5
-          (no overlap with the panel) so portrait subjects render in full. */}
+      {/* Card — stacked on mobile (image then panel), side-by-side on md+. */}
       <div className={cn("relative w-full overflow-hidden rounded-xl", aspectClass)}>
-        {/* Image area — full card on md+ with cover, left 3/5 with contain */}
         <div
           className={cn(
             "relative w-full md:absolute md:top-0 md:bottom-0 md:left-0 md:w-auto md:aspect-auto",
             mobileAspectClass,
-            imageFit === "contain"
-              ? "bg-deep-navy md:right-[40%]"
-              : "md:right-0",
+            imageFit === "contain" ? "md:right-[40%]" : "md:right-0",
           )}
         >
           <Image
@@ -69,7 +68,7 @@ export function OverlayImageCard({
             alt={alt}
             fill
             sizes="(min-width: 1024px) 600px, 100vw"
-            className={fitClass}
+            className="object-cover"
             {...(blurPlaceholder(src)
               ? { placeholder: "blur" as const, blurDataURL: blurPlaceholder(src) }
               : {})}
