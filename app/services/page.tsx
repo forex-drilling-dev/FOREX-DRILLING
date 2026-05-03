@@ -42,7 +42,7 @@ const drillingItems = [
   "Push tube sampling",
   "Pumping and packer testing",
   "Downhole surveying (gyro, core orientation, deviation control)",
-  "Gas and hot ground drilling (well control)",
+  "Gas and hot ground drilling (H2S and well control)",
 ];
 const instrumentationItems = [
   "Vibrating Wire Piezometers (VWP)",

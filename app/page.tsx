@@ -88,11 +88,11 @@ function HeroPoster() {
         <h1
           id="hero-title-desktop"
           className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
-          style={{ fontSize: "clamp(28px, 2.2vw, 38px)", letterSpacing: "0.5px" }}
+          style={{ fontSize: "clamp(30px, 2.6vw, 44px)", letterSpacing: "-0.005em" }}
         >
-          Built to deliver
+          Built on Drilling.
           <br />
-          <span className="text-amber">on challenging drilling programs?</span>
+          <span className="text-amber">Driven by Delivery.</span>
         </h1>
         <p
           className="mt-6 font-sans font-normal text-on-navy-muted"
@@ -229,11 +229,11 @@ function HeroStack() {
         <h1
           id="hero-title-mobile"
           className="font-display font-extrabold uppercase leading-[0.95] tracking-[-0.005em] text-on-navy text-balance"
-          style={{ fontSize: "clamp(30px, 8.5vw, 36px)" }}
+          style={{ fontSize: "clamp(30px, 8.5vw, 40px)" }}
         >
-          Built to deliver
+          Built on Drilling.
           <br />
-          <span className="text-amber">on challenging drilling programs?</span>
+          <span className="text-amber">Driven by Delivery.</span>
         </h1>
         <p
           className="mt-5 font-sans font-normal text-on-navy-muted"

@@ -43,14 +43,34 @@ function CapabilitiesSection() {
   ];
   return (
     <section className="relative bg-deep py-16 md:py-32">
-      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <div className="grid gap-16 md:grid-cols-12 md:gap-20">
-          <Reveal className="flex flex-col gap-6 md:col-span-5">
-            <SectionLabel number="01" label="Key Capabilities" />
-            <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Key capabilities include:
-            </p>
+      <div className="mx-auto max-w-[1500px] px-6 md:px-14">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-20">
+          {/* Left column — section label + intro + bullet list. Bullets sit
+              in this column (instead of below, full-width) so the white
+              space next to the right-hand image card is filled. */}
+          <Reveal className="flex flex-col gap-8 md:col-span-5">
+            <div className="flex flex-col gap-5">
+              <SectionLabel number="01" label="Key Capabilities" />
+              <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
+                Key capabilities include:
+              </p>
+            </div>
+            <ul className="flex flex-col gap-4">
+              {items.map((item) => (
+                <li key={item} className="flex items-start gap-3 border-t border-border pt-5">
+                  <span className="flex shrink-0 pt-0.5" aria-hidden>
+                    <DrillBitPin size={20} />
+                  </span>
+                  <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.55" }}>
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
+
+          {/* Right column — image card. md:pt-6 keeps it visually aligned
+              with the left section label baseline. */}
           <div className="md:col-span-7 md:pt-6">
             <OverlayImageCard
               src="/images/rig-vertical-orange.jpg"
@@ -68,19 +88,6 @@ function CapabilitiesSection() {
             />
           </div>
         </div>
-
-        <ul className="grid gap-5 md:grid-cols-2">
-          {items.map((item) => (
-            <li key={item} className="flex items-start gap-3 border-t border-border pt-5">
-              <span className="flex shrink-0 pt-0.5" aria-hidden>
-                <DrillBitPin size={20} />
-              </span>
-              <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.55" }}>
-                {item}
-              </span>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

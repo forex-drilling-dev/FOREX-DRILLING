@@ -73,11 +73,11 @@ export default function ContactPage() {
               </dt>
               <dd className="mt-2">
                 <a
-                  href="mailto:admin@forex-drilling.com"
+                  href="mailto:admin@forexdrilling.com"
                   className="font-sans text-deep-navy transition-colors duration-200 hover:text-amber"
                   style={{ fontSize: "16px" }}
                 >
-                  admin@forex-drilling.com
+                  admin@forexdrilling.com
                 </a>
               </dd>
             </div>
