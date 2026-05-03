@@ -9,7 +9,7 @@ type Props = {
 
 /**
  * Editorial grid of protocol badges — each is a code + label cell.
- * Used for HSE protocols (SOP / JSA / PTW / Take 5 / TBX / PPE).
+ * Used for HSE protocols (SOP / JSEA / PTW / Take 5 / TBX / PPE).
  *
  * Layout: 3-up tablet, 6-up desktop. Each badge has a thin navy border
  * and the code in heavy display weight, label in muted.

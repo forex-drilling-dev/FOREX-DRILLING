@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const protocols = [
   { code: "SOP", label: "Standard Operating Procedures" },
-  { code: "JSA", label: "Job Safety & Environmental Analysis" },
+  { code: "JSEA", label: "Job Safety & Environmental Analysis" },
   { code: "PTW", label: "Permit to Work" },
   { code: "T5", label: "Take 5 Risk Assessment" },
   { code: "TBX", label: "Toolbox Meetings" },
