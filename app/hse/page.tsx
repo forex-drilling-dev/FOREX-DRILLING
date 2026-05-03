@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   PageHero,
   SectionLabel,
-  SectionHeading,
   QuoteBlock,
   ProtocolGrid,
   Reveal,
@@ -36,8 +35,8 @@ function HseHero() {
       body={
         <>
           Forex Drilling operates in strict compliance with client safety
-          standards, site procedures, and regulatory requirements. Every
-          activity is conducted under structured safety management systems.
+          standards, site procedures, and regulatory requirements. All
+          activities are conducted under structured safety management systems.
         </>
       }
     />
@@ -48,7 +47,7 @@ function QuoteSection() {
   return (
     <section className="relative bg-deep py-16 md:py-32">
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
-        <QuoteBlock line1="Safety at the core" line2="of our operations.">
+        <QuoteBlock line1="Safety is at the" line2="core of our operations.">
           All personnel are trained, certified, and competent for their roles.
         </QuoteBlock>
       </div>
@@ -62,10 +61,9 @@ function ProtocolsSection() {
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="01" label="Protocols" />
-          <SectionHeading line1="Structured systems" line2="on every job." />
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             All activities are conducted under structured safety management
-            systems including the following:
+            systems including:
           </p>
         </Reveal>
         <ProtocolGrid items={protocols} />
@@ -80,12 +78,12 @@ function CommitmentSection() {
       <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-5">
           <SectionLabel number="02" label="Commitment" />
-          <SectionHeading line1="Continuous" line2="improvement, embedded." />
         </Reveal>
         <div className="flex flex-col gap-6 md:col-span-7">
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}>
-            All personnel are trained, certified, and competent for their roles. They actively participate in client-led safety reviews, audits, and
-            continuous improvement processes.
+            All personnel are trained, certified, and competent for their
+            roles. We actively participate in client-led safety reviews,
+            audits, and continuous improvement processes.
           </p>
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We are committed to continuously improving safety performance through

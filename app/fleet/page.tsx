@@ -3,10 +3,8 @@ import Image from "next/image";
 import {
   PageHero,
   SectionLabel,
-  SectionHeading,
   OverlayImageCard,
   DrillBitPin,
-  CtaBanner,
   Reveal,
 } from "@/components/v3";
 
@@ -20,8 +18,8 @@ function FleetHero() {
   return (
     <PageHero
       badge="FLEET"
-      line1="Modern equipment."
-      line2="Reliable performance."
+      line1="Fleet &"
+      line2="Capabilities."
       photo={{
         src: "/images/rig-sunset.jpg",
         alt: "Forex Drilling rig at sunset, multiple drills on a maintenance pad",
@@ -29,8 +27,7 @@ function FleetHero() {
       body={
         <>
           Forex Drilling operates modern, versatile drilling equipment designed
-          to perform reliably in demanding environments, supported by
-          experienced crews, robust logistics, and a strong maintenance culture.
+          to perform reliably in demanding environments.
         </>
       }
     />
@@ -49,14 +46,9 @@ function CapabilitiesSection() {
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <div className="grid gap-16 md:grid-cols-12 md:gap-20">
           <Reveal className="flex flex-col gap-6 md:col-span-5">
-            <SectionLabel number="01" label="Capabilities" />
-            <SectionHeading line1="Scalable, versatile," line2="resilient." />
+            <SectionLabel number="01" label="Key Capabilities" />
             <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Our equipment is supported by experienced crews, robust logistics,
-              and a strong maintenance culture. Designed to provide resilience
-              in the field, maintaining performance even under challenging
-              ground conditions, logistical constraints, and operational
-              pressures.
+              Key capabilities include:
             </p>
           </Reveal>
           <div className="md:col-span-7 md:pt-6">
@@ -118,19 +110,21 @@ function MaintenanceSection() {
 
         <Reveal className="flex flex-col gap-8 md:col-span-7 md:order-1">
           <SectionLabel number="02" label="Maintenance" />
-          <SectionHeading line1="A core operational" line2="priority." />
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}>
+            Our equipment is supported by experienced crews, robust logistics,
+            and a strong maintenance culture.
+          </p>
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-            Equipment reliability is critical to performance. We place strong
-            emphasis on maintenance, with structured preventative maintenance
-            programs, disciplined daily inspections, and proactive component
-            management to ensure high equipment availability and consistent
-            performance. This focus on reliability directly supports
-            productivity, reduces downtime, and strengthens overall project
-            delivery.
+            Maintenance is treated as a core operational priority. Structured
+            preventative maintenance programs, disciplined daily inspections,
+            and proactive component management ensure high equipment
+            availability and consistent performance. This focus on reliability
+            directly supports productivity, reduces downtime, and strengthens
+            overall project delivery.
           </p>
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Our fleet and operational approach are designed to provide
-            resilience in the field — maintaining performance even under
+            resilience in the field &mdash; maintaining performance even under
             challenging ground conditions, logistical constraints, and
             operational pressures.
           </p>
@@ -146,12 +140,6 @@ export default function FleetPage() {
       <FleetHero />
       <CapabilitiesSection />
       <MaintenanceSection />
-      <CtaBanner
-        headline="Mobilisation to organise?"
-        body="Send us location, ground conditions, and target depth — we&rsquo;ll come back with the right rig configuration and a timeline you can plan against."
-        cta="Contact operations"
-        href="/contact"
-      />
     </>
   );
 }
