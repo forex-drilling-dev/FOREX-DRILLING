@@ -50,8 +50,12 @@ export function OperationsMap({ className }: Props) {
 
         {/* Stylised coastlines — hand-traced approximation, fill = surface (lighter navy) */}
         <g fill="var(--color-surface)" stroke="rgba(255,255,255,0.18)" strokeWidth="1">
-          {/* Malay peninsula + Singapore tip */}
-          <path d="M 90 180 Q 105 200 100 230 L 110 250 Q 115 252 118 248 L 122 246 L 116 242 L 112 230 Q 118 215 116 195 L 110 170 Q 100 165 90 180 Z" />
+          {/* Malay peninsula + Singapore tip — shifted 13px north of the
+              equator line at y=250, so the southern tip lands at y=239
+              (~1.27°N) and Singapore (at 1.35°N) sits cleanly above the
+              equator instead of below. Path is the original curve translated
+              uniformly upward so the silhouette stays identical. */}
+          <path d="M 90 167 Q 105 187 100 217 L 110 237 Q 115 239 118 235 L 122 233 L 116 229 L 112 217 Q 118 202 116 182 L 110 157 Q 100 152 90 167 Z" />
           {/* Sumatra */}
           <path d="M 95 250 Q 130 275 175 300 Q 200 305 215 295 Q 200 270 165 255 Q 130 245 95 250 Z" />
           {/* Java */}
@@ -72,7 +76,7 @@ export function OperationsMap({ className }: Props) {
 
         {/* Great-circle path — Singapore → Port Moresby */}
         <path
-          d="M 118 252 Q 360 200 660 332"
+          d="M 118 238 Q 360 200 660 332"
           fill="none"
           stroke="var(--color-amber)"
           strokeWidth="1.5"
@@ -80,11 +84,11 @@ export function OperationsMap({ className }: Props) {
           opacity="0.85"
         />
 
-        {/* Singapore marker — HQ. Sits at the southern tip of the drawn
-            Malay peninsula. Label drops BELOW the marker, into clear ocean,
-            so it doesn't overlap the coastline or the great-circle path
-            heading east. */}
-        <g transform="translate(118, 252)">
+        {/* Singapore marker — HQ. Placed at 1.35°N (~12px above the
+            equator line at y=250), aligned with the southern tip of the
+            Malay peninsula path. Label drops BELOW the marker, into clear
+            ocean. */}
+        <g transform="translate(118, 238)">
           <circle r="14" fill="var(--color-amber)" opacity="0.18" />
           <circle r="8" fill="var(--color-amber)" opacity="0.32" />
           <circle r="4" fill="var(--color-amber)" stroke="#FFFFFF" strokeWidth="1.5" />
