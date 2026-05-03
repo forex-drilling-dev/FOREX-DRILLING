@@ -72,7 +72,7 @@ export function OperationsMap({ className }: Props) {
 
         {/* Great-circle path — Singapore → Port Moresby */}
         <path
-          d="M 138 240 Q 360 195 660 332"
+          d="M 118 252 Q 360 200 660 332"
           fill="none"
           stroke="var(--color-amber)"
           strokeWidth="1.5"
@@ -80,29 +80,34 @@ export function OperationsMap({ className }: Props) {
           opacity="0.85"
         />
 
-        {/* Singapore marker — HQ (filled diamond) */}
-        <g transform="translate(138, 240)">
+        {/* Singapore marker — HQ. Sits at the southern tip of the drawn
+            Malay peninsula. Label drops BELOW the marker, into clear ocean,
+            so it doesn't overlap the coastline or the great-circle path
+            heading east. */}
+        <g transform="translate(118, 252)">
           <circle r="14" fill="var(--color-amber)" opacity="0.18" />
           <circle r="8" fill="var(--color-amber)" opacity="0.32" />
           <circle r="4" fill="var(--color-amber)" stroke="#FFFFFF" strokeWidth="1.5" />
           <text
-            x="14"
-            y="-8"
+            x="0"
+            y="28"
+            textAnchor="middle"
             fontFamily="monospace"
-            fontSize="10"
-            letterSpacing="2"
+            fontSize="9"
+            letterSpacing="1.5"
             fill="var(--color-amber)"
             fontWeight="700"
           >
             SINGAPORE
           </text>
           <text
-            x="14"
-            y="6"
+            x="0"
+            y="42"
+            textAnchor="middle"
             fontFamily="monospace"
-            fontSize="9"
-            letterSpacing="2"
-            fill="rgba(255,255,255,0.6)"
+            fontSize="8"
+            letterSpacing="1.5"
+            fill="rgba(255,255,255,0.55)"
           >
             HQ · 1.35° N
           </text>
