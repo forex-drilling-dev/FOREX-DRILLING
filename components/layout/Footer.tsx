@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
@@ -34,35 +35,15 @@ export function Footer() {
 
       <Container>
         <div className="relative grid gap-12 md:grid-cols-12">
-          {/* Brand block — official logo redrawn inline as SVG so the
-              wordmark renders white on the dark footer (the logo.png has
-              navy text on white bg and no light variant exists in /public,
-              so we can't just <Image> it without either a white block or
-              losing the amber). Amber X-mark + white "FOREX DRILLING"
-              wordmark on transparent bg. */}
+          {/* Brand block — official logo asset (same file as the Nav). */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-4" aria-label="Forex Drilling">
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 100 100"
-                fill="none"
-                aria-hidden
-                className="shrink-0"
-              >
-                <path d="M0 0 L100 0 L50 50 Z"     fill="var(--color-amber)" />
-                <path d="M100 0 L100 100 L50 50 Z" fill="var(--color-amber)" />
-                <path d="M0 100 L100 100 L50 50 Z" fill="var(--color-amber)" />
-                <path d="M0 0 L0 100 L50 50 Z"     fill="currentColor" />
-              </svg>
-              <p
-                className="font-display font-bold uppercase leading-[0.95] text-on-navy"
-                style={{ fontSize: "28px", letterSpacing: "0.02em" }}
-              >
-                Forex<br />
-                Drilling
-              </p>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Forex Drilling"
+              width={989}
+              height={200}
+              className="h-12 w-auto md:h-14"
+            />
             <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
               Specialised drilling services across the Asia-Pacific region.
               Singapore headquarters, Papua New Guinea field operations.
