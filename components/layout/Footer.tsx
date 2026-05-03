@@ -42,7 +42,7 @@ export function Footer() {
               alt="Forex Drilling"
               width={989}
               height={200}
-              className="h-12 w-auto md:h-14"
+              className="h-12 w-auto rounded-lg md:h-14"
             />
             <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
               Specialised drilling services across the Asia-Pacific region.
