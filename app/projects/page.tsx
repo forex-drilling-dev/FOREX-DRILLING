@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   PageHero,
   SectionLabel,
-  SectionHeading,
   Reveal,
   DrillBitPin,
 } from "@/components/v3";
@@ -28,9 +27,14 @@ function DeliveryApproachSection() {
   return (
     <section className="relative bg-white py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-12 px-6 md:gap-16 md:px-14">
-        <Reveal className="flex max-w-[820px] flex-col gap-5">
+        <Reveal className="flex max-w-[820px] flex-col gap-6">
           <SectionLabel number="01" label="Project Delivery Approach" />
-          <SectionHeading line1="Drilling is critical" line2="to project success." />
+          <p
+            className="font-display font-extrabold uppercase text-deep-navy"
+            style={{ fontSize: "clamp(28px, 5vw, 40px)", lineHeight: "1.05", letterSpacing: "-0.005em" }}
+          >
+            We understand that drilling is critical to project success.
+          </p>
           <p
             className="font-sans"
             style={{ fontSize: "clamp(15px, 4.2vw, 17px)", lineHeight: "1.7", color: "var(--color-deep-navy)" }}
