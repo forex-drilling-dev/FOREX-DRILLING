@@ -179,18 +179,11 @@ header[data-nav] {
   }
 }
 
-/* ─── Homepage scroll snap ───────────────────────────────────────
-   Applied via the HomeScrollSnap client component while "/" is mounted.
-   Hero and tagline sections lock to the top of the viewport on scroll;
-   sections after the snap targets (CTA, footer) remain free-scrolling
-   thanks to proximity mode. */
-html.home-scroll-snap {
-  scroll-snap-type: y proximity;
-}
-html.home-scroll-snap .home-snap {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
+/* ─── Homepage section snap ──────────────────────────────────────
+   The actual snap behavior lives in components/v3/HomeScrollSnap.tsx —
+   it intercepts wheel / keyboard / touch input and animates a smooth
+   scroll between the .home-snap sections. The class on each section is
+   the target selector for the listener. */
 
 /* ─── Utilities ──────────────────────────────────────────────── */
 @layer utilities {
