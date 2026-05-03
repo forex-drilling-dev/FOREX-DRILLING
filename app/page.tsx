@@ -172,7 +172,7 @@ function HeroPoster() {
         {/* Drill pins — anchored over the IMAGE portion only (left 56%),
             clearly away from the navy text panel on the right (44%) */}
         <div className="absolute -top-[60px] left-[16%] z-[6] flex gap-4">
-          <DrillBitPin size={42} />
+          <DrillBitPin size={42} className="rotate-180" />
           <DrillBitPin size={42} />
         </div>
         {/* Image + overlay */}
@@ -260,7 +260,7 @@ function HeroStack() {
       {/* Multi-rig site image — featured, full width */}
       <div className="relative w-full mt-2">
         <div className="absolute -top-9 left-1/2 -translate-x-1/2 z-[6] flex gap-3">
-          <DrillBitPin size={32} />
+          <DrillBitPin size={32} className="rotate-180" />
           <DrillBitPin size={32} />
         </div>
         <div
