@@ -93,7 +93,7 @@ export default function ProjectsPage() {
         line2="Approach."
         photo={{
           src: "/images/site-aerial-trees.jpg",
-          alt: "Drilling site",
+          alt: "Aerial view of a Forex Drilling site cleared in dense forested terrain",
         }}
         body={
           <>

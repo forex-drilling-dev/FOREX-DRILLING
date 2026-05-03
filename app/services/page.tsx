@@ -20,7 +20,7 @@ function ServicesHero() {
       badge="SERVICES"
       line1="Drilling &"
       line2="associated services."
-      photo={{ src: "/images/rig-meadow.jpg", alt: "Drilling rig" }}
+      photo={{ src: "/images/rig-meadow.jpg", alt: "Forex Drilling rig deployed in open meadow terrain" }}
       body={
         <>
           A comprehensive range of drilling and associated services, supporting

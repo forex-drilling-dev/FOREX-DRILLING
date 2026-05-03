@@ -6,7 +6,7 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import "./globals.css";
 
-const SITE_URL = "https://forexdrilling.com";
+const SITE_URL = "https://forex-drilling.com";
 
 export const metadata: Metadata = {
   title: {

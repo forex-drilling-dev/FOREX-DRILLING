@@ -28,7 +28,7 @@ function QualityHero() {
       line2="Performance."
       photo={{
         src: "/images/drill-head-closeup.jpg",
-        alt: "Drill head close-up",
+        alt: "Close-up of an orange Forex Drilling rotary drill head with hydraulic lines",
       }}
       body={
         <>

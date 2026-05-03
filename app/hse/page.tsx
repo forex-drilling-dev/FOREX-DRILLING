@@ -30,7 +30,7 @@ function HseHero() {
       line2="& Environment."
       photo={{
         src: "/images/hero-night-site.jpg",
-        alt: "Forex Drilling site operation",
+        alt: "Forex Drilling multi-rig night operation on a Papua New Guinea site",
       }}
       body={
         <>

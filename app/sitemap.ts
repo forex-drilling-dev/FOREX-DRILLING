@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 
-const BASE = "https://forexdrilling.com";
+const BASE = "https://forex-drilling.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

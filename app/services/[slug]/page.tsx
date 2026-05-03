@@ -34,6 +34,13 @@ const categoryHero: Record<ServiceCategory, string> = {
   data: "/images/rig-horizontal.jpg",
 };
 
+const categoryHeroAlt: Record<ServiceCategory, string> = {
+  drilling: "Forex Drilling vertical drill rig with mast deployed on a prepared pad",
+  instrumentation: "Aerial view of a Forex Drilling site with instrumentation equipment",
+  downhole: "Close-up of an orange Forex Drilling rotary drill head with hydraulic lines",
+  data: "Forex Drilling truck-mounted horizontal rig in operation",
+};
+
 const categoryLabel: Record<ServiceCategory, string> = {
   drilling: "DRILLING",
   instrumentation: "INSTRUMENTATION",
@@ -61,7 +68,7 @@ export default async function ServiceDetailPage({ params }: Params) {
         badge={categoryLabel[service.category]}
         line1={service.title}
         line2=""
-        photo={{ src: heroPhoto, alt: `${service.title} — illustration` }}
+        photo={{ src: heroPhoto, alt: categoryHeroAlt[service.category] }}
         body={service.summary}
       />
 

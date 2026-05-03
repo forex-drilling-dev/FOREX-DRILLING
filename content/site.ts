@@ -14,6 +14,6 @@ export const site = {
   ],
   footer: {
     address: "Singapore. Operations in Papua New Guinea",
-    email: "admin@forexdrilling.com",
+    email: "admin@forex-drilling.com",
   },
 } as const;

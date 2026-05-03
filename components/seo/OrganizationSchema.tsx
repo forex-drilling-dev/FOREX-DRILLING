@@ -12,7 +12,7 @@
 
 import { JsonLd } from "./JsonLd";
 
-const SITE_URL = "https://forexdrilling.com";
+const SITE_URL = "https://forex-drilling.com";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -23,7 +23,7 @@ const organizationSchema = {
   logo: `${SITE_URL}/logo.png`,
   description:
     "Specialty drilling contractor delivering safe, reliable and high-quality drilling services across the Asia-Pacific region.",
-  email: "admin@forexdrilling.com",
+  email: "admin@forex-drilling.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Singapore",
@@ -57,7 +57,7 @@ const localBusinessSchema = {
   name: "Forex Drilling",
   url: SITE_URL,
   image: `${SITE_URL}/opengraph-image`,
-  email: "admin@forexdrilling.com",
+  email: "admin@forex-drilling.com",
   priceRange: "$$$",
   address: {
     "@type": "PostalAddress",

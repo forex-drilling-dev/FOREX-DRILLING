@@ -73,12 +73,12 @@ export function TaglineAnimated() {
   );
 }
 
-type LineProps = {
+interface LineProps {
   words: string[];
   inView: boolean;
   startDelay: number;
   accent?: boolean;
-};
+}
 
 function Line({ words, inView, startDelay, accent = false }: LineProps) {
   return (
