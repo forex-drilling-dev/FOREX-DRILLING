@@ -3,6 +3,8 @@ import { services } from "@/content/services";
 
 const BASE = "https://forex-drilling.com";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: BASE,               priority: 1.0, changeFrequency: "monthly" as const },

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+export const dynamic = "force-static";
 export const alt = "Forex Drilling · Specialized drilling services";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -58,6 +58,7 @@ export default function OgImage() {
         {/* Headline */}
         <div
           style={{
+            display: "flex",
             color: WHITE,
             fontSize: 80,
             fontWeight: 800,
@@ -67,7 +68,7 @@ export default function OgImage() {
             marginBottom: 32,
           }}
         >
-          FOREX{" "}
+          <span>FOREX&nbsp;</span>
           <span style={{ color: AMBER_HI }}>DRILLING.</span>
         </div>
 

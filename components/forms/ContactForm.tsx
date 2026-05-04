@@ -24,15 +24,22 @@ export function ContactForm() {
   });
   const [status, setStatus] = useState<Status>("idle");
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit((data) => {
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error();
+      const subject = `New enquiry — ${data.company} (${data.scope})`;
+      const body =
+        `Name: ${data.name}\n` +
+        `Email: ${data.email}\n` +
+        `Company: ${data.company}\n` +
+        `Role: ${data.role}\n` +
+        `Country: ${data.country}\n` +
+        `Scope: ${data.scope}\n\n` +
+        `${data.message}`;
+      const href = `mailto:admin@forexdrilling.com?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
       setStatus("success");
       reset();
     } catch {
