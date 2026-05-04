@@ -47,7 +47,21 @@ export default function ContactPage() {
                 className="mt-2 font-sans text-deep-navy"
                 style={{ fontSize: "16px" }}
               >
-                Singapore &mdash; Papua New Guinea
+                Singapore
+              </dd>
+            </div>
+            <div>
+              <dt
+                className="font-display font-bold uppercase text-amber"
+                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+              >
+                Presence
+              </dt>
+              <dd
+                className="mt-2 font-sans text-deep-navy"
+                style={{ fontSize: "16px" }}
+              >
+                Singapore &amp; Papua New Guinea
               </dd>
             </div>
             <div>

@@ -3,7 +3,7 @@ import {
   PageHero,
   SectionLabel,
   SectionHeading,
-  ServiceListGroup,
+  DrillBitPin,
   CtaBanner,
   Reveal,
 } from "@/components/v3";
@@ -56,9 +56,7 @@ const downholeItems = [
   "Borehole integrity verification",
 ];
 
-function CategorySection({
-  id, bg, number, label, line1, line2, body, items,
-}: {
+interface CategorySectionProps {
   id: string;
   bg: "white" | "deep";
   number: string;
@@ -67,11 +65,18 @@ function CategorySection({
   line2: string;
   body: string;
   items: string[];
-}) {
+}
+
+function CategorySection({
+  id, bg, number, label, line1, line2, body, items,
+}: CategorySectionProps) {
   return (
     <section id={id} className={`relative scroll-mt-[100px] py-16 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
-      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <Reveal className="flex flex-col gap-5 md:col-span-5">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:gap-14 md:px-14">
+        {/* Header — full-width, label + heading on top so the bullet list
+            below can spread into 2 cols. Avoids the empty left-column gap
+            the previous side-by-side layout produced. */}
+        <Reveal className="flex max-w-[820px] flex-col gap-5">
           <SectionLabel number={number} label={label} />
           <SectionHeading line1={line1} line2={line2} />
           {body && (
@@ -80,9 +85,23 @@ function CategorySection({
             </p>
           )}
         </Reveal>
-        <div className="md:col-span-7">
-          <ServiceListGroup title="" items={items} />
-        </div>
+
+        {/* Bullet list — 2 cols on md+, 1 col on mobile */}
+        <ul className="grid gap-x-12 gap-y-3 md:grid-cols-2">
+          {items.map((item) => (
+            <li key={item} className="flex items-start gap-3 border-t border-border pt-4">
+              <span className="flex shrink-0 pt-0.5" aria-hidden>
+                <DrillBitPin size={20} />
+              </span>
+              <span
+                className="font-sans font-medium text-deep-navy"
+                style={{ fontSize: "15px", lineHeight: "1.55" }}
+              >
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

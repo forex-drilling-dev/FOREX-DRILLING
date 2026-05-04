@@ -26,7 +26,6 @@ export { QuoteBlock }       from "./QuoteBlock";
 
 // Content blocks
 export { PillarCard }       from "./PillarCard";
-export { ServiceListGroup } from "./ServiceListGroup";
 export { ProtocolGrid }     from "./ProtocolGrid";
 export { StepRow }          from "./StepRow";
 export { MarqueeStrip }     from "./MarqueeStrip";
