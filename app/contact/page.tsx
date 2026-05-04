@@ -41,7 +41,7 @@ export default function ContactPage() {
                 className="font-display font-bold uppercase text-amber"
                 style={{ fontSize: "11px", letterSpacing: "0.18em" }}
               >
-                Headquarters
+                Headquarter
               </dt>
               <dd
                 className="mt-2 font-sans text-deep-navy"

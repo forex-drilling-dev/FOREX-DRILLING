@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -5,296 +10,298 @@ interface Props {
 }
 
 /**
- * Operations map — Singapore HQ → Papua New Guinea field operations.
+ * Operations map — interactive vector map (MapLibre GL + OpenFreeMap free
+ * tiles), recoloured at runtime to the brand palette so the map reads
+ * Google-Maps-detailed but stays consistent with the rest of the site.
  *
- * Stylised but geographically grounded SVG. Coastlines are simplified
- * silhouettes of the real region (Indochina + Malay peninsula, Sumatra,
- * Java, Borneo, Sulawesi, Philippines, PNG/New Britain, northern
- * Australia) so the markers sit in recognisable context. We deliberately
- * keep the line work flat and brand-aligned — navy ocean, surface-navy
- * land, white hairlines, amber accents — rather than embedding a third-
- * party tiled map.
- *
- * Coordinate frame:
- *   ViewBox 800 × 500
- *   Equator at y = 250 (dashed guide)
- *   Scale ≈ 8.8 px per degree latitude, ≈ 12.5 px per degree longitude
- *   Covers ~94°E – 158°E and ~28°N – 28°S
+ * No third-party API key is required: OpenFreeMap (https://openfreemap.org)
+ * provides the OSM-derived vector tiles publicly, free of charge.
  *
  * Anchored coordinates:
- *   Singapore     1.35° N, 103.82° E  →  x = 118, y = 238
- *   Port Moresby -9.44° S, 147.18° E  →  x = 660, y = 332
+ *   Singapore     1.35° N, 103.82° E   — HQ marker
+ *   Port Moresby  9.44° S, 147.18° E   — Operations marker
+ *   Dashed amber line traces the great-circle Singapore → Port Moresby.
+ *
+ * Performance: lazy-init in a useEffect, single instance, cleaned up on
+ * unmount. cooperativeGestures keeps Cmd/two-finger scroll required so
+ * the map never traps page scroll.
  */
+const SINGAPORE: [number, number] = [103.82, 1.35];
+const PORT_MORESBY: [number, number] = [147.18, -9.44];
+
+// Brand palette mirrors app/globals.css tokens
+const C_OCEAN     = "#11284E";       // --color-deep-navy
+const C_OCEAN_2   = "#0A1A36";       // slightly deeper for water bodies
+const C_LAND      = "#163767";       // --color-surface
+const C_LAND_DIM  = "#1A3F75";       // brighter sub-area highlight
+const C_AMBER     = "#E3AA00";       // markers, great-circle
+const C_BORDER    = "rgba(255,255,255,0.18)";
+const C_ROAD      = "rgba(255,255,255,0.10)";
+const C_LABEL     = "rgba(255,255,255,0.78)";
+const C_HALO      = "#0A1A36";
+
 export function OperationsMap({ className }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<maplibregl.Map | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    if (mapRef.current) return; // singleton — useEffect can fire twice in dev
+
+    const map = new maplibregl.Map({
+      container: containerRef.current,
+      style: "https://tiles.openfreemap.org/styles/positron",
+      center: [125, -3],
+      zoom: 3.2,
+      attributionControl: { compact: true },
+      cooperativeGestures: true,
+      pitchWithRotate: false,
+      dragRotate: false,
+    });
+    mapRef.current = map;
+
+    map.on("load", () => {
+      const style = map.getStyle();
+      const layers = style?.layers ?? [];
+
+      for (const layer of layers) {
+        const id = layer.id;
+        const type = layer.type;
+        try {
+          if (type === "background") {
+            map.setPaintProperty(id, "background-color", C_OCEAN);
+            continue;
+          }
+          if (type === "fill") {
+            const isWater = /water|ocean|sea|lake|river/i.test(id);
+            if (isWater) {
+              map.setPaintProperty(id, "fill-color", C_OCEAN_2);
+              map.setPaintProperty(id, "fill-opacity", 1);
+            } else if (/park|forest|wood|grass|landcover/i.test(id)) {
+              map.setPaintProperty(id, "fill-color", C_LAND_DIM);
+              map.setPaintProperty(id, "fill-opacity", 0.4);
+            } else {
+              map.setPaintProperty(id, "fill-color", C_LAND);
+              map.setPaintProperty(id, "fill-opacity", 0.92);
+            }
+            continue;
+          }
+          if (type === "line") {
+            const isBoundary = /admin|boundary|country|state/i.test(id);
+            const isWaterLine = /water|river|stream|coast/i.test(id);
+            if (isBoundary) {
+              map.setPaintProperty(id, "line-color", C_BORDER);
+              map.setPaintProperty(id, "line-width", 0.7);
+              map.setPaintProperty(id, "line-opacity", 1);
+            } else if (isWaterLine) {
+              map.setPaintProperty(id, "line-color", "rgba(255,255,255,0.10)");
+            } else {
+              map.setPaintProperty(id, "line-color", C_ROAD);
+              map.setPaintProperty(id, "line-opacity", 0.6);
+            }
+            continue;
+          }
+          if (type === "symbol") {
+            map.setPaintProperty(id, "text-color", C_LABEL);
+            map.setPaintProperty(id, "text-halo-color", C_HALO);
+            map.setPaintProperty(id, "text-halo-width", 1.2);
+          }
+        } catch {
+          // some layers don't accept certain paint keys — ignore quietly
+        }
+      }
+
+      // Great-circle route Singapore → Port Moresby
+      map.addSource("route", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: greatCircle(SINGAPORE, PORT_MORESBY, 64),
+          },
+        },
+      });
+      map.addLayer({
+        id: "route-line",
+        type: "line",
+        source: "route",
+        layout: { "line-cap": "round" },
+        paint: {
+          "line-color": C_AMBER,
+          "line-width": 1.6,
+          "line-dasharray": [0.7, 1.7],
+          "line-opacity": 0.9,
+        },
+      });
+
+      // Markers
+      new maplibregl.Marker({ element: makeMarker("SINGAPORE", "HQ · 1.35° N", "below") })
+        .setLngLat(SINGAPORE)
+        .addTo(map);
+
+      new maplibregl.Marker({ element: makeMarker("PORT MORESBY", "OPERATIONS · 9.44° S", "left") })
+        .setLngLat(PORT_MORESBY)
+        .addTo(map);
+
+      // Frame both markers
+      const bounds = new maplibregl.LngLatBounds()
+        .extend(SINGAPORE)
+        .extend(PORT_MORESBY);
+      map.fitBounds(bounds, { padding: 90, maxZoom: 5, duration: 0 });
+    });
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         "relative w-full overflow-hidden rounded-2xl bg-deep-navy",
+        "aspect-[16/10] min-h-[340px]",
         className,
       )}
-    >
-      <svg
-        viewBox="0 0 800 500"
-        className="block h-auto w-full"
-        role="img"
-        aria-label="Map of Southeast Asia and the Pacific showing Forex Drilling Singapore headquarters and Papua New Guinea operations"
-      >
-        {/* Ocean grid — subtle navy-on-navy texture */}
-        <defs>
-          <pattern id="oceanGrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="0.6" fill="rgba(255,255,255,0.08)" />
-          </pattern>
-        </defs>
-        <rect width="800" height="500" fill="url(#oceanGrid)" />
-
-        {/* Latitude guides — equator (solid dash) and Tropic of Capricorn (lighter) */}
-        <line x1="0" y1="250" x2="800" y2="250" stroke="rgba(255,255,255,0.14)" strokeWidth="1" strokeDasharray="3 6" />
-        <line x1="0" y1="455" x2="800" y2="455" stroke="rgba(255,255,255,0.07)" strokeWidth="1" strokeDasharray="3 6" />
-        <text x="14" y="244" fontFamily="monospace" fontSize="9" letterSpacing="2" fill="rgba(255,255,255,0.4)">0°</text>
-        <text x="14" y="449" fontFamily="monospace" fontSize="9" letterSpacing="2" fill="rgba(255,255,255,0.25)">23°S</text>
-
-        {/* Longitude marker — 120°E meridian */}
-        <line x1="320" y1="0" x2="320" y2="500" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="2 8" />
-        <text x="324" y="14" fontFamily="monospace" fontSize="9" letterSpacing="2" fill="rgba(255,255,255,0.25)">120°E</text>
-
-        {/* ─── Land masses ──────────────────────────────────────────── */}
-        <g fill="var(--color-surface)" stroke="rgba(255,255,255,0.22)" strokeWidth="1" strokeLinejoin="round">
-
-          {/* Indochina + Malay Peninsula
-              One continuous landmass: Vietnam east coast on the right,
-              Thailand/Cambodia/Myanmar on the west, narrowing south
-              through the Kra isthmus to the Malay peninsula and Singapore. */}
-          <path d="
-            M 0 0
-            L 215 0
-            L 210 22 L 198 48 L 188 78 L 184 110 L 178 138
-            L 168 160 L 152 170 L 138 168 L 122 158 L 108 146
-            L 94 140 L 80 132
-            L 65 140 L 56 156 L 50 178 L 48 196
-            L 56 218 L 70 232 L 86 240 L 102 244 L 112 243
-            L 118 240
-            L 120 237
-            L 117 230
-            L 110 215
-            L 100 196
-            L 92 170
-            L 88 142
-            L 90 110
-            L 100 78
-            L 116 50
-            L 138 24
-            L 168 6
-            L 215 0 Z
-          " />
-
-          {/* Sumatra — diagonal NW-SE island, parallel to peninsula but
-              clearly south of it */}
-          <path d="
-            M 50 218
-            Q 90 248 145 280
-            Q 195 312 232 322
-            Q 240 326 244 320
-            L 232 308
-            Q 190 290 145 262
-            Q 100 232 65 215
-            L 50 218 Z
-          " />
-
-          {/* Java — long horizontal thin island */}
-          <path d="
-            M 232 326
-            Q 280 332 330 333
-            L 380 332
-            Q 392 333 396 329
-            L 384 322
-            Q 340 316 290 316
-            L 245 318
-            L 232 326 Z
-          " />
-
-          {/* Bali + Lombok + Sumbawa — thin chain east of Java */}
-          <path d="M 400 328 L 415 327 L 425 329 L 432 327 L 442 329 L 458 327 L 470 329 L 478 332 L 470 334 L 458 333 L 442 334 L 425 334 L 412 333 L 400 332 L 400 328 Z" />
-
-          {/* Borneo — large rounded landmass at the centre */}
-          <path d="
-            M 220 195
-            Q 260 188 300 198
-            Q 332 215 342 248
-            Q 340 280 318 300
-            Q 282 312 248 302
-            Q 218 286 210 250
-            Q 208 218 220 195 Z
-          " />
-
-          {/* Sulawesi — characteristic K-shape with northern, southwestern
-              and southeastern arms branching from a central neck */}
-          <path d="
-            M 372 210
-            Q 380 218 380 232
-            L 376 248
-            L 384 245
-            L 392 235
-            Q 398 222 395 208
-            L 388 200
-            Q 378 200 372 210 Z
-
-            M 376 252
-            L 372 268
-            Q 368 280 374 282
-            L 380 280
-            L 386 290
-            L 390 305
-            L 384 315
-            L 392 318
-            Q 400 312 402 295
-            L 400 278
-            L 394 268
-            L 388 260
-            L 380 256
-            L 376 252 Z
-          " />
-
-          {/* Philippines — three island clusters: Luzon (north), Visayas
-              (centre), Mindanao (south) */}
-          {/* Luzon */}
-          <path d="M 348 88 Q 365 90 372 110 Q 376 138 370 158 Q 358 152 352 130 Q 348 108 348 88 Z" />
-          {/* Mindoro + Visayas archipelago — rendered as a small cluster */}
-          <path d="M 360 172 Q 372 174 378 184 Q 382 198 374 202 Q 365 200 360 188 L 360 172 Z" />
-          <path d="M 384 188 L 392 190 L 396 200 L 390 204 L 382 200 L 384 188 Z" />
-          {/* Mindanao (large southern island) */}
-          <path d="
-            M 372 220
-            Q 392 222 408 232
-            Q 418 245 412 258
-            Q 396 264 380 258
-            Q 368 250 366 235
-            L 372 220 Z
-          " />
-
-          {/* Halmahera + Spice Islands — small cluster east of Sulawesi */}
-          <path d="M 425 215 L 432 218 L 432 235 L 425 240 L 420 230 L 425 215 Z" />
-          <path d="M 440 248 L 448 250 L 448 258 L 440 258 L 440 248 Z" />
-
-          {/* Papua New Guinea — bird-shape with Vogelkop head on the west,
-              long body extending east, narrow tail toward Port Moresby */}
-          <path d="
-            M 442 250
-            L 455 244
-            L 470 248
-            L 478 256
-            L 472 268
-            Q 462 272 454 268
-            L 458 276
-            L 478 282
-            L 510 290
-            L 545 297
-            L 580 304
-            L 620 314
-            L 655 326
-            L 685 338
-            Q 700 346 695 354
-            Q 678 356 660 348
-            Q 622 340 580 330
-            Q 540 322 502 312
-            L 470 302
-            Q 452 292 446 278
-            Q 440 264 442 250 Z
-          " />
-
-          {/* New Britain — PNG island east */}
-          <path d="
-            M 670 308
-            Q 696 304 710 312
-            Q 712 318 706 322
-            Q 690 322 678 318
-            L 670 308 Z
-          " />
-
-          {/* Solomon Islands chain — small dots east of New Britain */}
-          <path d="M 720 320 L 725 318 L 730 321 L 727 325 L 722 324 L 720 320 Z" />
-          <path d="M 738 326 L 745 326 L 746 332 L 740 333 L 738 326 Z" />
-
-          {/* Northern Australia — Cape York peninsula visible, Gulf of
-              Carpentaria as a notch */}
-          <path d="
-            M 0 408
-            L 80 402
-            Q 175 388 270 380
-            Q 320 376 360 380
-            Q 395 388 425 400
-            L 442 416
-            L 450 432
-            L 458 422
-            Q 465 410 470 396
-            L 478 380
-            L 488 370
-            L 500 366
-            L 510 372
-            L 518 388
-            L 528 400
-            Q 555 404 590 402
-            Q 640 398 695 398
-            Q 745 400 800 404
-            L 800 500
-            L 0 500
-            L 0 408 Z
-          " />
-        </g>
-
-        {/* Region labels — discreet monospace, low opacity */}
-        <g fontFamily="monospace" fontSize="8" letterSpacing="2" fill="rgba(255,255,255,0.32)">
-          <text x="262" y="64">SOUTH CHINA SEA</text>
-          <text x="278" y="252">JAVA SEA</text>
-          <text x="525" y="262">BANDA SEA</text>
-          <text x="608" y="190">PHILIPPINE SEA</text>
-          <text x="538" y="450">CORAL SEA</text>
-          <text x="220" y="478">AUSTRALIA</text>
-        </g>
-
-        {/* Great-circle path — Singapore → Port Moresby */}
-        <path
-          d="M 118 238 Q 360 200 660 332"
-          fill="none"
-          stroke="var(--color-amber)"
-          strokeWidth="1.5"
-          strokeDasharray="2 5"
-          opacity="0.85"
-        />
-
-        {/* ─── Markers ──────────────────────────────────────────────── */}
-
-        {/* Singapore HQ — at southern tip of Malay peninsula, 1.35°N */}
-        <g transform="translate(118, 238)">
-          <circle r="14" fill="var(--color-amber)" opacity="0.18" />
-          <circle r="8" fill="var(--color-amber)" opacity="0.32" />
-          <circle r="4" fill="var(--color-amber)" stroke="#FFFFFF" strokeWidth="1.5" />
-          <text x="0" y="28" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="1.5" fill="var(--color-amber)" fontWeight="700">
-            SINGAPORE
-          </text>
-          <text x="0" y="42" textAnchor="middle" fontFamily="monospace" fontSize="8" letterSpacing="1.5" fill="rgba(255,255,255,0.55)">
-            HQ · 1.35° N
-          </text>
-        </g>
-
-        {/* Port Moresby — Operations, 9.44°S */}
-        <g transform="translate(660, 332)">
-          <circle r="18" fill="var(--color-amber)" opacity="0.16" />
-          <circle r="11" fill="var(--color-amber)" opacity="0.3" />
-          <circle r="6" fill="var(--color-amber)" stroke="#FFFFFF" strokeWidth="1.5" />
-          <text x="-14" y="-12" textAnchor="end" fontFamily="monospace" fontSize="10" letterSpacing="2" fill="var(--color-amber)" fontWeight="700">
-            PORT MORESBY
-          </text>
-          <text x="-14" y="2" textAnchor="end" fontFamily="monospace" fontSize="9" letterSpacing="2" fill="rgba(255,255,255,0.6)">
-            OPERATIONS · 9.44° S
-          </text>
-        </g>
-
-        {/* North indicator (compass) */}
-        <g transform="translate(740, 440)" fill="rgba(255,255,255,0.45)">
-          <path d="M 0 -14 L 6 8 L 0 4 L -6 8 Z" fill="var(--color-amber)" />
-          <text x="0" y="22" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="2">N</text>
-        </g>
-      </svg>
-    </div>
+      role="img"
+      aria-label="Map of Southeast Asia and the Pacific showing Forex Drilling Singapore headquarters and Papua New Guinea operations"
+    />
   );
+}
+
+/**
+ * Build a brand-styled marker as a real DOM tree (no innerHTML, no
+ * template strings injected into the document) so the security hook
+ * stays happy and we get type-safe element creation.
+ */
+function makeMarker(
+  title: string,
+  sub: string,
+  labelAt: "below" | "left",
+): HTMLElement {
+  const root = document.createElement("div");
+  root.style.position = "relative";
+  root.style.width = "0";
+  root.style.height = "0";
+  root.style.pointerEvents = "none";
+
+  const pulses = document.createElement("div");
+  pulses.style.position = "absolute";
+  pulses.style.left = "0";
+  pulses.style.top = "0";
+  pulses.style.transform = "translate(-50%, -50%)";
+  pulses.style.width = "36px";
+  pulses.style.height = "36px";
+  pulses.style.borderRadius = "9999px";
+  pulses.style.background = "rgba(227,170,0,0.18)";
+
+  const ring = document.createElement("div");
+  ring.style.position = "absolute";
+  ring.style.left = "0";
+  ring.style.top = "0";
+  ring.style.transform = "translate(-50%, -50%)";
+  ring.style.width = "18px";
+  ring.style.height = "18px";
+  ring.style.borderRadius = "9999px";
+  ring.style.background = "rgba(227,170,0,0.34)";
+
+  const dot = document.createElement("div");
+  dot.style.position = "absolute";
+  dot.style.left = "0";
+  dot.style.top = "0";
+  dot.style.transform = "translate(-50%, -50%)";
+  dot.style.width = "10px";
+  dot.style.height = "10px";
+  dot.style.borderRadius = "9999px";
+  dot.style.background = C_AMBER;
+  dot.style.border = "1.5px solid #FFFFFF";
+  dot.style.boxShadow = "0 1px 4px rgba(0,0,0,0.35)";
+
+  const label = document.createElement("div");
+  label.style.position = "absolute";
+  label.style.left = "0";
+  label.style.top = "0";
+  if (labelAt === "below") {
+    label.style.transform = "translate(-50%, 16px)";
+    label.style.textAlign = "center";
+  } else {
+    label.style.transform = "translate(calc(-100% - 16px), -50%)";
+    label.style.textAlign = "right";
+  }
+  label.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  label.style.lineHeight = "1.3";
+  label.style.whiteSpace = "nowrap";
+  label.style.pointerEvents = "none";
+
+  const titleEl = document.createElement("div");
+  titleEl.style.fontSize = "10px";
+  titleEl.style.letterSpacing = "0.14em";
+  titleEl.style.fontWeight = "700";
+  titleEl.style.color = C_AMBER;
+  titleEl.textContent = title;
+
+  const subEl = document.createElement("div");
+  subEl.style.fontSize = "9px";
+  subEl.style.letterSpacing = "0.12em";
+  subEl.style.color = "rgba(255,255,255,0.78)";
+  subEl.style.textShadow = `0 0 6px ${C_HALO}, 0 0 6px ${C_HALO}`;
+  subEl.textContent = sub;
+
+  label.appendChild(titleEl);
+  label.appendChild(subEl);
+
+  root.appendChild(pulses);
+  root.appendChild(ring);
+  root.appendChild(dot);
+  root.appendChild(label);
+  return root;
+}
+
+/**
+ * Sample N points along the great-circle path between two lon/lat pairs.
+ * Spherical interpolation (slerp on the unit sphere) so the line curves
+ * correctly across the projection.
+ */
+function greatCircle(
+  a: [number, number],
+  b: [number, number],
+  steps: number,
+): [number, number][] {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const toDeg = (r: number) => (r * 180) / Math.PI;
+
+  const lon1 = toRad(a[0]);
+  const lat1 = toRad(a[1]);
+  const lon2 = toRad(b[0]);
+  const lat2 = toRad(b[1]);
+
+  const d =
+    2 *
+    Math.asin(
+      Math.sqrt(
+        Math.sin((lat2 - lat1) / 2) ** 2 +
+          Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2,
+      ),
+    );
+
+  const points: [number, number][] = [];
+  for (let i = 0; i <= steps; i++) {
+    const f = i / steps;
+    if (d === 0) {
+      points.push([a[0], a[1]]);
+      continue;
+    }
+    const A = Math.sin((1 - f) * d) / Math.sin(d);
+    const B = Math.sin(f * d) / Math.sin(d);
+    const x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
+    const y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
+    const z = A * Math.sin(lat1) + B * Math.sin(lat2);
+    const lat = Math.atan2(z, Math.sqrt(x * x + y * y));
+    const lon = Math.atan2(y, x);
+    points.push([toDeg(lon), toDeg(lat)]);
+  }
+  return points;
 }

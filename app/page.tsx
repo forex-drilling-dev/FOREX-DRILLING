@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { blurPlaceholder, optimizedSrc } from "@/lib/images";
+import { cn } from "@/lib/utils";
 import {
   NavyBlob,
   YellowBadge,
@@ -10,6 +12,7 @@ import {
   CtaBanner,
   TaglineAnimated,
   HomeScrollSnap,
+  Reveal,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -296,18 +299,156 @@ function TaglineStrip() {
   );
 }
 
+// ─── EXPLORE — quick navigation grid into every inner page ─────────────────
+// Six section cards (About / Services / Fleet / HSE / Quality / Projects)
+// each closing on a CTA arrow link. Lets the homepage act as a hub for the
+// rest of the site without dumping detailed copy here.
+
+const exploreCards = [
+  {
+    label: "About",
+    title: "Specialist drilling.",
+    body: "Singapore HQ, Asia-Pacific operations. Mining, exploration, civil and groundwater programs.",
+    href: "/about",
+  },
+  {
+    label: "Services",
+    title: "Drilling & associated services.",
+    body: "Diamond, sonic, RC, directional and horizontal drilling. Instrumentation, downhole, and Krux + MWD data acquisition.",
+    href: "/services",
+  },
+  {
+    label: "Fleet",
+    title: "Modern, versatile equipment.",
+    body: "Multi-method scalable rigs, dual-head sonic / diamond capability, strong maintenance culture.",
+    href: "/fleet",
+  },
+  {
+    label: "HSE",
+    title: "Safety at the core.",
+    body: "Structured systems: SOP, JSEA, PTW, Take 5, toolbox meetings, full PPE compliance.",
+    href: "/hse",
+  },
+  {
+    label: "Quality",
+    title: "Quality & performance.",
+    body: "Quality Management Plans, accurate logging, core recovery optimisation, continuous monitoring.",
+    href: "/quality",
+  },
+  {
+    label: "Projects",
+    title: "Project delivery approach.",
+    body: "Drilling is critical to project success — alignment, mobilisation, structured reporting, proactive issue resolution.",
+    href: "/projects",
+  },
+] as const;
+
+function ExploreSection() {
+  return (
+    <section className="relative bg-deep py-16 md:py-32">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-12 px-6 md:gap-16 md:px-14">
+        <Reveal className="flex max-w-[820px] flex-col gap-4">
+          <p
+            className="font-display font-bold uppercase text-amber"
+            style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+          >
+            Explore
+          </p>
+          <h2
+            className="font-display font-extrabold uppercase leading-[1.05] text-deep-navy text-balance"
+            style={{ fontSize: "clamp(28px, 4vw, 44px)", letterSpacing: "-0.005em" }}
+          >
+            What we do, how we deliver.
+          </h2>
+        </Reveal>
+
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {exploreCards.map((card) => (
+            <li key={card.href}>
+              <ExploreCard {...card} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+interface ExploreCardProps {
+  label: string;
+  title: string;
+  body: string;
+  href: string;
+}
+
+function ExploreCard({ label, title, body, href }: ExploreCardProps) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group relative flex h-full flex-col justify-between gap-8 rounded-xl border border-border bg-white p-7",
+        "transition-all duration-200 ease-out",
+        "hover:-translate-y-0.5 hover:border-amber/40 hover:shadow-lg",
+        "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber",
+      )}
+    >
+      <div className="flex flex-col gap-4">
+        <p
+          className="font-display font-bold uppercase text-amber"
+          style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+        >
+          {label}
+        </p>
+        <h3
+          className="font-display font-extrabold uppercase leading-[1.1] text-deep-navy"
+          style={{ fontSize: "22px", letterSpacing: "-0.005em" }}
+        >
+          {title}
+        </h3>
+        <p
+          className="font-sans text-muted"
+          style={{ fontSize: "14px", lineHeight: "1.6" }}
+        >
+          {body}
+        </p>
+      </div>
+
+      <span
+        className="flex items-center gap-2 font-display font-bold uppercase text-deep-navy transition-colors group-hover:text-amber"
+        style={{ fontSize: "11px", letterSpacing: "0.16em" }}
+      >
+        <span>Read more</span>
+        <svg
+          width="18"
+          height="12"
+          viewBox="0 0 18 12"
+          fill="none"
+          aria-hidden
+          className="transition-transform duration-200 group-hover:translate-x-1"
+        >
+          <path
+            d="M1 6h15m-5-5 5 5-5 5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </Link>
+  );
+}
+
 // ─── PAGE ───────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  // Homepage = hero + tagline strip + CTA banner. The detailed sections
-  // (Mission, About, Capabilities, Fleet, HSE, Project Delivery) live on
-  // their respective inner pages and are reached via the nav.
   return (
     <>
       <HomeScrollSnap />
       <HeroPoster />
       <HeroStack />
       <TaglineStrip />
+      <ExploreSection />
       <CtaBanner
         headline="Send us your scope."
         body="We&rsquo;ll come back with a method mix, a mobilisation timeline, and a single point of contact. No middle layers."
