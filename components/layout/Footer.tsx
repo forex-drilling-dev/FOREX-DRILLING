@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
@@ -35,14 +34,18 @@ export function Footer() {
 
       <Container>
         <div className="relative grid gap-12 md:grid-cols-12">
-          {/* Brand block — official logo asset (same file as the Nav). */}
+          {/* Brand block — official white mark-only logo on navy bg. Tagline
+              cropped: it lives once in the homepage hero, the footer doesn't
+              need to repeat it. Pure-vector <img>, sharp at any scale. */}
           <div className="md:col-span-5">
-            <Image
-              src="/logo.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-white-mark.svg"
               alt="Forex Drilling"
-              width={989}
+              width={880}
               height={200}
-              className="h-12 w-auto rounded-lg md:h-14"
+              decoding="async"
+              className="h-10 w-auto select-none md:h-12"
             />
             <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
               Specialised drilling services across the Asia-Pacific region.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   PageHero,
   SectionLabel,
+  SectionHeading,
   DrillBitPin,
   Reveal,
   SectionLink,
@@ -45,29 +46,40 @@ function QmSection() {
   return (
     <section className="relative bg-deep py-16 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-12 px-6 md:gap-16 md:px-14">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
-          <Reveal className="flex flex-col gap-5 md:col-span-5">
-            <SectionLabel number="01" label="Quality Management" />
-            <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-              Our approach includes:
-            </p>
-          </Reveal>
-          <ul className="flex flex-col gap-4 md:col-span-7">
-            {qmItems.map((item) => (
-              <li key={item} className="flex items-center gap-4 border-t border-border pt-5">
-                <span className="flex shrink-0" aria-hidden>
-                  <DrillBitPin size={20} />
-                </span>
-                <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.55" }}>
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Intro — full-width header so the items list below can breathe.
+            Mirrors the services/page.tsx pattern that fixed the empty
+            left-column gap of the original side-by-side layout. */}
+        <Reveal className="flex max-w-[820px] flex-col gap-5">
+          <SectionLabel number="01" label="Quality Management" />
+          <SectionHeading line1="Our approach" line2="includes." />
+        </Reveal>
+
+        {/* Items list — 2 cols on md+, 1 col on mobile.
+            5 items split 3 / 2 — kept as a single ul for AT semantics. */}
+        <ul className="grid gap-x-12 gap-y-2 md:grid-cols-2">
+          {qmItems.map((item) => (
+            <li
+              key={item}
+              className="flex items-center gap-4 border-t border-border py-5"
+            >
+              <span className="flex shrink-0" aria-hidden>
+                <DrillBitPin size={20} />
+              </span>
+              <span
+                className="font-sans font-medium text-deep-navy"
+                style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.55" }}
+              >
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
 
         <Reveal className="flex max-w-[820px] flex-col gap-5">
-          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}>
+          <p
+            className="font-sans"
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}
+          >
             We operate with clear performance metrics, including productivity
             tracking, structured reporting, and regular performance reviews.
             Continuous improvement is embedded in our operations to ensure
@@ -95,8 +107,8 @@ function DigitalSection() {
           </p>
         </Reveal>
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-          <div className="border-l-4 border-amber pl-8">
-            <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
+          <div className="border-l-4 border-[var(--color-amber-dim)] pl-8">
+            <p className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}>Digital Platform</p>
             <a
               href="https://www.kruxanalytics.com"
               target="_blank"
@@ -119,8 +131,8 @@ function DigitalSection() {
               captured accurately and consistently throughout the project.
             </p>
           </div>
-          <div className="border-l-4 border-amber pl-8">
-            <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Downhole Telemetry</p>
+          <div className="border-l-4 border-[var(--color-amber-dim)] pl-8">
+            <p className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}>Downhole Telemetry</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>MWD</h3>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               We also utilise Measurement While Drilling (MWD) systems to

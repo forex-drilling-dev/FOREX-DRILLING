@@ -27,7 +27,7 @@ import {
 function HeroPoster() {
   return (
     <section
-      aria-labelledby="hero-title-desktop"
+      aria-label="Hero"
       className="home-snap relative hidden h-screen min-h-[780px] w-full overflow-hidden bg-white pt-[var(--spacing-nav)] lg:block"
     >
       {/* Watermarks anchored to VIEWPORT right edge */}
@@ -86,15 +86,18 @@ function HeroPoster() {
           paddingBottom: "40px",
         }}
       >
-        <h1
-          id="hero-title-desktop"
+        {/* Visual title only — the semantic <h1> lives once at page level
+            (see HomePage). Both responsive variants use aria-hidden to avoid
+            duplicate headings in the static DOM. */}
+        <p
+          aria-hidden="true"
           className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
           style={{ fontSize: "clamp(30px, 2.6vw, 44px)", letterSpacing: "-0.005em" }}
         >
           Built on Drilling.
           <br />
           <span className="text-amber">Driven by Delivery.</span>
-        </h1>
+        </p>
         <p
           className="mt-6 font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "420px" }}
@@ -220,22 +223,23 @@ function HeroPoster() {
 function HeroStack() {
   return (
     <section
-      aria-labelledby="hero-title-mobile"
+      aria-label="Hero"
       className="home-snap relative mx-auto flex min-h-screen max-w-[460px] flex-col items-center justify-center gap-7 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-16 lg:hidden"
     >
       <NavyBlob
         className="h-auto w-full"
         style={{ padding: "36px 28px 36px 28px" }}
       >
-        <h1
-          id="hero-title-mobile"
+        {/* Visual title only — see comment in HeroPoster. */}
+        <p
+          aria-hidden="true"
           className="font-display font-extrabold uppercase leading-[0.95] tracking-[-0.005em] text-on-navy text-balance"
           style={{ fontSize: "clamp(30px, 8.5vw, 40px)" }}
         >
           Built on Drilling.
           <br />
           <span className="text-amber">Driven by Delivery.</span>
-        </h1>
+        </p>
         <p
           className="mt-5 font-sans font-normal text-on-navy-muted"
           style={{ fontSize: "15px", lineHeight: "1.65" }}
@@ -304,6 +308,9 @@ export default function HomePage() {
   return (
     <>
       <HomeScrollSnap />
+      {/* Single canonical h1 — visual hero blobs (HeroPoster + HeroStack) use
+          aria-hidden divs so the static DOM has exactly one <h1>. */}
+      <h1 className="sr-only">Built on Drilling. Driven by Delivery.</h1>
       <HeroPoster />
       <HeroStack />
       <TaglineStrip />

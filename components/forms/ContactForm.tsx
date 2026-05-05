@@ -73,10 +73,11 @@ export function ContactForm() {
   }
 
   const inputCls =
-    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-amber";
+    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-[var(--color-amber-dim)]";
+  // amber-dim (#B58800) — passes WCAG AA on the white form bg.
   const labelCls =
-    "font-display font-bold uppercase text-amber";
-  const errCls = "mt-1 font-sans font-medium text-amber";
+    "font-display font-bold uppercase text-[var(--color-amber-dim)]";
+  const errCls = "mt-1 font-sans font-medium text-[var(--color-amber-dim)]";
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-8" noValidate>
@@ -85,8 +86,19 @@ export function ContactForm() {
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Name *
           </span>
-          <input {...register("name")} className={inputCls} style={{ fontSize: "15px" }} placeholder="Your full name" />
-          {errors.name && <span className={errCls} style={{ fontSize: "12px" }}>{errors.name.message}</span>}
+          <input
+            {...register("name")}
+            className={inputCls}
+            style={{ fontSize: "15px" }}
+            placeholder="Your full name"
+            aria-invalid={errors.name ? "true" : "false"}
+            aria-describedby={errors.name ? "name-error" : undefined}
+          />
+          {errors.name && (
+            <span id="name-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+              {errors.name.message}
+            </span>
+          )}
         </label>
 
         <label className="flex flex-col gap-2">
@@ -100,32 +112,71 @@ export function ContactForm() {
             className={inputCls}
             style={{ fontSize: "15px" }}
             placeholder="you@company.com"
+            aria-invalid={errors.email ? "true" : "false"}
+            aria-describedby={errors.email ? "email-error" : undefined}
           />
-          {errors.email && <span className={errCls} style={{ fontSize: "12px" }}>{errors.email.message}</span>}
+          {errors.email && (
+            <span id="email-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+              {errors.email.message}
+            </span>
+          )}
         </label>
 
         <label className="flex flex-col gap-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Company *
           </span>
-          <input {...register("company")} className={inputCls} style={{ fontSize: "15px" }} placeholder="Organisation" />
-          {errors.company && <span className={errCls} style={{ fontSize: "12px" }}>{errors.company.message}</span>}
+          <input
+            {...register("company")}
+            className={inputCls}
+            style={{ fontSize: "15px" }}
+            placeholder="Organisation"
+            aria-invalid={errors.company ? "true" : "false"}
+            aria-describedby={errors.company ? "company-error" : undefined}
+          />
+          {errors.company && (
+            <span id="company-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+              {errors.company.message}
+            </span>
+          )}
         </label>
 
         <label className="flex flex-col gap-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Role
           </span>
-          <input {...register("role")} className={inputCls} style={{ fontSize: "15px" }} placeholder="Your position" />
-          {errors.role && <span className={errCls} style={{ fontSize: "12px" }}>{errors.role.message}</span>}
+          <input
+            {...register("role")}
+            className={inputCls}
+            style={{ fontSize: "15px" }}
+            placeholder="Your position"
+            aria-invalid={errors.role ? "true" : "false"}
+            aria-describedby={errors.role ? "role-error" : undefined}
+          />
+          {errors.role && (
+            <span id="role-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+              {errors.role.message}
+            </span>
+          )}
         </label>
 
         <label className="flex flex-col gap-2 md:col-span-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Country *
           </span>
-          <input {...register("country")} className={inputCls} style={{ fontSize: "15px" }} placeholder="Project location" />
-          {errors.country && <span className={errCls} style={{ fontSize: "12px" }}>{errors.country.message}</span>}
+          <input
+            {...register("country")}
+            className={inputCls}
+            style={{ fontSize: "15px" }}
+            placeholder="Project location"
+            aria-invalid={errors.country ? "true" : "false"}
+            aria-describedby={errors.country ? "country-error" : undefined}
+          />
+          {errors.country && (
+            <span id="country-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+              {errors.country.message}
+            </span>
+          )}
         </label>
       </div>
 
@@ -156,8 +207,14 @@ export function ContactForm() {
           className={cn(inputCls, "resize-none")}
           style={{ fontSize: "15px", lineHeight: "1.55" }}
           placeholder="Scope, location, timeline, key constraints…"
+          aria-invalid={errors.message ? "true" : "false"}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
-        {errors.message && <span className={errCls} style={{ fontSize: "12px" }}>{errors.message.message}</span>}
+        {errors.message && (
+          <span id="message-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
+            {errors.message.message}
+          </span>
+        )}
       </label>
 
       <div className="flex flex-wrap items-center gap-6">
@@ -180,8 +237,9 @@ export function ContactForm() {
         </button>
         {status === "error" && (
           <span
-            className="font-display font-bold uppercase text-amber"
-            style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+            role="alert"
+            className="font-display font-bold uppercase"
+            style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
           >
             Something went wrong. Please try again.
           </span>

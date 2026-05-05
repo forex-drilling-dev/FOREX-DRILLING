@@ -22,7 +22,9 @@ export function SectionLabel({ number, label, className }: Props) {
       style={{
         fontSize: "13px",
         letterSpacing: "0.18em",
-        color: "var(--color-amber)",
+        // amber-dim (#B58800) clears WCAG AA against white / light-grey
+        // section bgs. Brand amber (#E3AA00) stays for accents on navy.
+        color: "var(--color-amber-dim)",
       }}
     >
       {number} <span className="text-deep-navy/40">&ndash;</span> {label}

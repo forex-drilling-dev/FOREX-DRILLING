@@ -6,6 +6,7 @@ import {
   PageHero,
   SectionLabel,
   SectionHeading,
+  SectionLink,
   DrillBitPin,
   CtaBanner,
   Reveal,
@@ -130,7 +131,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                 >
                   <p
                     className="font-display font-black"
-                    style={{ fontSize: "36px", lineHeight: "1", color: "var(--color-amber)" }}
+                    style={{ fontSize: "36px", lineHeight: "1", color: "var(--color-amber-dim)" }}
                   >
                     <span className="transition-colors duration-300 group-hover:text-deep-navy">
                       {String(i + 1).padStart(2, "0")}
@@ -149,7 +150,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                     {s.summary}
                   </p>
                   <span
-                    className="mt-auto inline-flex items-center gap-2 font-display font-bold uppercase text-amber transition-all duration-300 group-hover:text-deep-navy group-hover:gap-3"
+                    className="mt-auto inline-flex items-center gap-2 font-display font-bold uppercase text-[var(--color-amber-dim)] transition-all duration-300 group-hover:text-deep-navy group-hover:gap-3"
                     style={{ fontSize: "11px", letterSpacing: "0.12em" }}
                   >
                     Explore
@@ -171,6 +172,14 @@ export default async function ServiceDetailPage({ params }: Params) {
         cta="Request a quote"
         href="/contact"
       />
+
+      {/* Continue the next-page flow — services detail rejoins the natural
+          journey at /fleet (the rigs that run these methods). */}
+      <section className="relative bg-deep py-14 md:py-20">
+        <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
+          <SectionLink href="/fleet" label="Fleet" />
+        </div>
+      </section>
     </>
   );
 }

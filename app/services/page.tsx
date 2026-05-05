@@ -123,8 +123,8 @@ function DataSection() {
         </Reveal>
 
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-          <div className="border-l-4 border-amber pl-8">
-            <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Digital Platform</p>
+          <div className="border-l-4 border-[var(--color-amber-dim)] pl-8">
+            <p className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}>Digital Platform</p>
             <a
               href="https://www.kruxanalytics.com"
               target="_blank"
@@ -148,8 +148,8 @@ function DataSection() {
               ready for client technical teams.
             </p>
           </div>
-          <div className="border-l-4 border-amber pl-8">
-            <p className="font-display font-bold uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Downhole Telemetry</p>
+          <div className="border-l-4 border-[var(--color-amber-dim)] pl-8">
+            <p className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}>Downhole Telemetry</p>
             <h3 className="mt-3 font-display font-black uppercase text-deep-navy" style={{ fontSize: "36px", letterSpacing: "-0.005em", lineHeight: "1" }}>MWD</h3>
             <p className="mt-5 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
               Measurement While Drilling collects downhole parameters during

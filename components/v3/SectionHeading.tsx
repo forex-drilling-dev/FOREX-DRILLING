@@ -35,7 +35,8 @@ export function SectionHeading({ line1, line2, className, as: Tag = "h2" }: Prop
       {line2 && (
         <>
           <br />
-          <span className="text-amber">{line2}</span>
+          {/* amber-dim — passes WCAG AA on white/light-grey section bgs */}
+          <span style={{ color: "var(--color-amber-dim)" }}>{line2}</span>
         </>
       )}
     </Tag>

@@ -23,7 +23,7 @@ export default function ContactPage() {
         {/* Left — info */}
         <Reveal className="flex flex-col gap-8 md:col-span-5">
           <YellowBadge className="self-start">CONTACT</YellowBadge>
-          <SectionHeading line1="Let&rsquo;s discuss" line2="your program." />
+          <SectionHeading as="h1" line1="Let&rsquo;s discuss" line2="your program." />
 
           <p
             className="font-sans"
@@ -38,8 +38,8 @@ export default function ContactPage() {
           <dl className="mt-2 flex flex-col gap-6 border-t border-border pt-8">
             <div>
               <dt
-                className="font-display font-bold uppercase text-amber"
-                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
               >
                 Headquarters
               </dt>
@@ -52,8 +52,8 @@ export default function ContactPage() {
             </div>
             <div>
               <dt
-                className="font-display font-bold uppercase text-amber"
-                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
               >
                 Presence
               </dt>
@@ -66,8 +66,8 @@ export default function ContactPage() {
             </div>
             <div>
               <dt
-                className="font-display font-bold uppercase text-amber"
-                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
               >
                 Scope
               </dt>
@@ -80,15 +80,15 @@ export default function ContactPage() {
             </div>
             <div>
               <dt
-                className="font-display font-bold uppercase text-amber"
-                style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
               >
                 Email
               </dt>
               <dd className="mt-2">
                 <a
                   href="mailto:admin@forexdrilling.com"
-                  className="font-sans text-deep-navy transition-colors duration-200 hover:text-amber"
+                  className="font-sans text-deep-navy transition-colors duration-200 hover:text-[var(--color-amber-dim)]"
                   style={{ fontSize: "16px" }}
                 >
                   admin@forexdrilling.com
@@ -107,8 +107,8 @@ export default function ContactPage() {
         <Reveal className="md:col-span-12" delay={180}>
           <div className="mt-4 flex flex-col gap-4 md:mt-8">
             <p
-              className="font-display font-bold uppercase text-amber"
-              style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+              className="font-display font-bold uppercase"
+              style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
             >
               Where we operate
             </p>

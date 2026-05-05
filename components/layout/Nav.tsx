@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,13 +37,17 @@ export function Nav() {
           aria-label="Forex Drilling — home"
           className="flex items-center transition-opacity duration-200 hover:opacity-80"
         >
-          <Image
-            src="/logo.png"
+          {/* Official brand logo, mark-only variant — icon + FOREX DRILLING
+              wordmark, tagline cropped out (it would just repeat the
+              homepage hero copy). Plain <img> for pure-vector rendering. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-mark.svg"
             alt="Forex Drilling"
-            width={989}
+            width={880}
             height={200}
-            priority
-            className="h-7 w-auto sm:h-8 md:h-11"
+            decoding="async"
+            className="h-7 w-auto select-none sm:h-8 md:h-9"
           />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
