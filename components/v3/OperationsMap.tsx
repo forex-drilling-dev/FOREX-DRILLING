@@ -53,7 +53,11 @@ export function OperationsMap({ className }: Props) {
       style: "https://tiles.openfreemap.org/styles/positron",
       center: [125, -3],
       zoom: 3.2,
-      attributionControl: { compact: true },
+      // Attribution disabled per client direction. Note: OpenFreeMap +
+      // OpenStreetMap data is licensed under ODbL which technically
+      // requires attribution; surface it elsewhere on the page (footer
+      // legal section) before going to production.
+      attributionControl: false,
       cooperativeGestures: true,
       pitchWithRotate: false,
       dragRotate: false,
@@ -106,15 +110,16 @@ export function OperationsMap({ className }: Props) {
             map.setPaintProperty(id, "text-halo-color", C_HALO);
             map.setPaintProperty(id, "text-halo-width", 1.2);
 
-            // Hide the duplicate OSM labels for the two cities we render
-            // ourselves so the custom amber labels read clearly. Only
-            // touch place / city / poi layers; leave country and ocean
-            // labels alone.
-            if (/place|poi|city|town/i.test(id) && !/country|continent|ocean|sea/i.test(id)) {
+            // Hide the duplicate OSM labels for the two locations we
+            // render ourselves. Singapore is a city-state, so it appears
+            // both as a city label AND a country label — we filter
+            // ALL place / poi / country layers to catch every variant.
+            // Continent / ocean / sea labels are still left alone so the
+            // surrounding cartography (Indonesia, Papua New Guinea,
+            // Malaysia, etc.) keeps showing.
+            if (/place|poi|city|town|country/i.test(id) && !/continent|ocean|sea/i.test(id)) {
               try {
                 const existing = map.getFilter(id);
-                // Expression that returns true when the feature is NOT
-                // one of the two cities we render ourselves.
                 const notDuplicate = [
                   "!",
                   [
