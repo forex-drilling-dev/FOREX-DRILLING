@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 168 168" aria-hidden="true">
+  <!-- Forex Drilling brand mark — extracted from the official charte
+       logo (logo.svg lines 69–72). Three ocre triangles around a navy
+       triangle pointing right, forming the company's "X" / drill icon.
+       Square viewBox so browsers render a balanced favicon at every size. -->
+  <polygon fill="#E3AA00" points="217.99 193.88 217.99 50.16 217.74 50.16 146.01 121.9 217.99 193.88"/>
+  <polygon fill="#E3AA00" points="167.58 50.16 74.27 50.16 120.92 96.82 167.58 50.16"/>
+  <polygon fill="#11284E" points="50.16 76.22 50.16 167.58 95.84 121.9 50.16 76.22"/>
+  <polygon fill="#E3AA00" points="50.16 217.74 50.16 217.99 191.93 217.99 120.92 146.98 50.16 217.74"/>
+</svg>
