@@ -54,8 +54,8 @@ function QmSection() {
           </Reveal>
           <ul className="flex flex-col gap-4 md:col-span-7">
             {qmItems.map((item) => (
-              <li key={item} className="flex items-start gap-4 border-t border-border pt-5">
-                <span className="flex shrink-0 pt-0.5" aria-hidden>
+              <li key={item} className="flex items-center gap-4 border-t border-border pt-5">
+                <span className="flex shrink-0" aria-hidden>
                   <DrillBitPin size={20} />
                 </span>
                 <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.55" }}>

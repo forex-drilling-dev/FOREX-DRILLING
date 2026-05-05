@@ -89,8 +89,8 @@ function CategorySection({
         {/* Bullet list — 2 cols on md+, 1 col on mobile */}
         <ul className="grid gap-x-12 gap-y-3 md:grid-cols-2">
           {items.map((item) => (
-            <li key={item} className="flex items-start gap-3 border-t border-border pt-4">
-              <span className="flex shrink-0 pt-0.5" aria-hidden>
+            <li key={item} className="flex items-center gap-3 border-t border-border pt-4">
+              <span className="flex shrink-0" aria-hidden>
                 <DrillBitPin size={20} />
               </span>
               <span

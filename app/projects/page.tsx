@@ -47,8 +47,8 @@ function DeliveryApproachSection() {
         <Reveal>
           <ul className="grid gap-5 md:grid-cols-2 md:gap-x-12">
             {deliveryFocus.map((item) => (
-              <li key={item} className="flex items-start gap-3 border-t border-border pt-5">
-                <span className="flex shrink-0 pt-0.5" aria-hidden>
+              <li key={item} className="flex items-center gap-3 border-t border-border pt-5">
+                <span className="flex shrink-0" aria-hidden>
                   <DrillBitPin size={20} />
                 </span>
                 <span

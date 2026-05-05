@@ -58,8 +58,8 @@ function CapabilitiesSection() {
             </div>
             <ul className="flex flex-col gap-4">
               {items.map((item) => (
-                <li key={item} className="flex items-start gap-3 border-t border-border pt-5">
-                  <span className="flex shrink-0 pt-0.5" aria-hidden>
+                <li key={item} className="flex items-center gap-3 border-t border-border pt-5">
+                  <span className="flex shrink-0" aria-hidden>
                     <DrillBitPin size={20} />
                   </span>
                   <span className="font-sans font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.55" }}>

@@ -9,7 +9,7 @@ type Props = {
 };
 
 /**
- * Section eyebrow — "01 // ABOUT US" pattern.
+ * Section eyebrow — "01 – ABOUT US" pattern.
  * Mono-styled tag used at the top of each major section.
  */
 export function SectionLabel({ number, label, className }: Props) {
@@ -25,7 +25,7 @@ export function SectionLabel({ number, label, className }: Props) {
         color: "var(--color-amber)",
       }}
     >
-      {number} <span className="text-deep-navy/40">//</span> {label}
+      {number} <span className="text-deep-navy/40">&ndash;</span> {label}
     </p>
   );
 }

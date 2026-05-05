@@ -97,8 +97,8 @@ export default async function ServiceDetailPage({ params }: Params) {
           </Reveal>
           <ul className="flex flex-col gap-4 md:col-span-7">
             {service.applications.map((a) => (
-              <li key={a} className="flex items-start gap-4 border-t border-border pt-4">
-                <span className="flex shrink-0 pt-0.5" aria-hidden>
+              <li key={a} className="flex items-center gap-4 border-t border-border pt-4">
+                <span className="flex shrink-0" aria-hidden>
                   <DrillBitPin size={20} />
                 </span>
                 <span
