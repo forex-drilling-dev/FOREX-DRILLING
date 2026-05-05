@@ -4,6 +4,7 @@ import {
   SectionLabel,
   PillarCard,
   Reveal,
+  SectionLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -121,6 +122,17 @@ export default function AboutPage() {
       <AboutHero />
       <WhoWeAre />
       <OperatingModel />
+      <NextPageStrip />
     </>
+  );
+}
+
+function NextPageStrip() {
+  return (
+    <section className="relative bg-deep py-14 md:py-20">
+      <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
+        <SectionLink href="/services" label="Services" />
+      </div>
+    </section>
   );
 }

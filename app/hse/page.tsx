@@ -5,6 +5,7 @@ import {
   QuoteBlock,
   ProtocolGrid,
   Reveal,
+  SectionLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -110,6 +111,17 @@ export default function HsePage() {
       <QuoteSection />
       <ProtocolsSection />
       <CommitmentSection />
+      <NextPageStrip />
     </>
+  );
+}
+
+function NextPageStrip() {
+  return (
+    <section className="relative bg-white py-14 md:py-20">
+      <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
+        <SectionLink href="/quality" label="Quality" />
+      </div>
+    </section>
   );
 }

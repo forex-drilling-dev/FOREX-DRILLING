@@ -4,8 +4,8 @@ import {
   SectionLabel,
   SectionHeading,
   DrillBitPin,
-  CtaBanner,
   Reveal,
+  SectionLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -187,12 +187,17 @@ export default function ServicesPage() {
         items={downholeItems}
       />
       <DataSection />
-      <CtaBanner
-        headline="Need a specific drilling method?"
-        body="Diamond, sonic, RC, directional, or a multi-method mix — tell us the scope and we&rsquo;ll come back with the right approach."
-        cta="Discuss your scope"
-        href="/contact"
-      />
+      <NextPageStrip />
     </>
+  );
+}
+
+function NextPageStrip() {
+  return (
+    <section className="relative bg-deep py-14 md:py-20">
+      <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
+        <SectionLink href="/fleet" label="Fleet" />
+      </div>
+    </section>
   );
 }

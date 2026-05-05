@@ -6,6 +6,7 @@ import {
   OverlayImageCard,
   DrillBitPin,
   Reveal,
+  SectionLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -147,6 +148,17 @@ export default function FleetPage() {
       <FleetHero />
       <CapabilitiesSection />
       <MaintenanceSection />
+      <NextPageStrip />
     </>
+  );
+}
+
+function NextPageStrip() {
+  return (
+    <section className="relative bg-deep py-14 md:py-20">
+      <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
+        <SectionLink href="/hse" label="HSE" />
+      </div>
+    </section>
   );
 }

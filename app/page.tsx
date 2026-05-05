@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import { blurPlaceholder, optimizedSrc } from "@/lib/images";
-import { cn } from "@/lib/utils";
 import {
   NavyBlob,
   YellowBadge,
@@ -12,7 +10,7 @@ import {
   CtaBanner,
   TaglineAnimated,
   HomeScrollSnap,
-  Reveal,
+  SectionLink,
 } from "@/components/v3";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -297,44 +295,6 @@ function TaglineStrip() {
       <TaglineAnimated />
       <SectionLink href="/about" label="About" />
     </section>
-  );
-}
-
-/**
- * Small amber underlined word + arrow that nudges the visitor to the
- * next page. Used at the bottom of homepage sections to keep the navigation
- * fluid without dropping a heavy CTA banner everywhere.
- */
-function SectionLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "group inline-flex items-center gap-2 font-display font-bold uppercase text-deep-navy",
-        "underline decoration-amber decoration-2 underline-offset-[6px]",
-        "transition-colors duration-200 hover:text-amber hover:decoration-amber",
-        "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber",
-      )}
-      style={{ fontSize: "13px", letterSpacing: "0.18em" }}
-    >
-      <span>{label}</span>
-      <svg
-        width="14"
-        height="10"
-        viewBox="0 0 14 10"
-        fill="none"
-        aria-hidden
-        className="transition-transform duration-200 group-hover:translate-x-1"
-      >
-        <path
-          d="M1 5h12m-4-4 4 4-4 4"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </Link>
   );
 }
 

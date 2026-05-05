@@ -34,6 +34,7 @@ export { CtaBanner }        from "./CtaBanner";
 
 // CTAs
 export { PrimaryButton }    from "./PrimaryButton";
+export { SectionLink }      from "./SectionLink";
 
 // Inner-page hero composition
 export { PageHero }         from "./PageHero";
