@@ -105,6 +105,33 @@ export function OperationsMap({ className }: Props) {
             map.setPaintProperty(id, "text-color", C_LABEL);
             map.setPaintProperty(id, "text-halo-color", C_HALO);
             map.setPaintProperty(id, "text-halo-width", 1.2);
+
+            // Hide the duplicate OSM labels for the two cities we render
+            // ourselves so the custom amber labels read clearly. Only
+            // touch place / city / poi layers; leave country and ocean
+            // labels alone.
+            if (/place|poi|city|town/i.test(id) && !/country|continent|ocean|sea/i.test(id)) {
+              try {
+                const existing = map.getFilter(id);
+                // Expression that returns true when the feature is NOT
+                // one of the two cities we render ourselves.
+                const notDuplicate = [
+                  "!",
+                  [
+                    "in",
+                    ["coalesce", ["get", "name:latin"], ["get", "name"], ""],
+                    ["literal", ["Singapore", "Port Moresby"]],
+                  ],
+                ] as unknown as maplibregl.FilterSpecification;
+
+                const merged = existing
+                  ? (["all", existing, notDuplicate] as unknown as maplibregl.FilterSpecification)
+                  : notDuplicate;
+                map.setFilter(id, merged);
+              } catch {
+                // some layers reject filter changes — ignore
+              }
+            }
           }
         } catch {
           // some layers don't accept certain paint keys — ignore quietly
@@ -225,10 +252,12 @@ function makeMarker(
   label.style.left = "0";
   label.style.top = "0";
   if (labelAt === "below") {
-    label.style.transform = "translate(-50%, 16px)";
+    // Offset further down so it clears any OSM city label that may still
+    // render at the marker position despite our filter.
+    label.style.transform = "translate(-50%, 26px)";
     label.style.textAlign = "center";
   } else {
-    label.style.transform = "translate(calc(-100% - 16px), -50%)";
+    label.style.transform = "translate(calc(-100% - 22px), -50%)";
     label.style.textAlign = "right";
   }
   label.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, monospace";
