@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# deploy artefacts (FTP upload bundle)
+forex-drilling-site.zip
+
 # production
 /build
 

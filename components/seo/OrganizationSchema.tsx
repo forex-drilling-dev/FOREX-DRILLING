@@ -20,7 +20,7 @@ const organizationSchema = {
   "@id": `${SITE_URL}/#organization`,
   name: "Forex Drilling",
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
+  logo: `${SITE_URL}/logo.svg`,
   description:
     "Specialty drilling contractor delivering safe, reliable and high-quality drilling services across the Asia-Pacific region.",
   email: "admin@forexdrilling.com",
