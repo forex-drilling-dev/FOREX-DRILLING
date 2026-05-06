@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     locale: "en_SG",
     url: "/",
   },
+  // Google Search Console — domain ownership verification.
+  // Renders as <meta name="google-site-verification" content="..." />.
+  verification: {
+    google: "ahtiFmTesApp0tL7Xu7j7YbcKysvJoQeRhJciQN8PI8",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
