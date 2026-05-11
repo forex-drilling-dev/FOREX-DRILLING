@@ -58,6 +58,15 @@ export default async function ServiceDetailPage({ params }: Params) {
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
+  // Compute prev / next service in the catalogue order — lets visitors
+  // walk through the 13 methods without going back to the index every
+  // time. The list wraps at the ends so there's always a target. The
+  // non-null assertion is safe: getService(slug) passed, the catalogue
+  // is non-empty by construction, and modulo keeps the index in range.
+  const currentIndex = services.findIndex((s) => s.slug === service.slug);
+  const prevService = services[(currentIndex - 1 + services.length) % services.length]!;
+  const nextService = services[(currentIndex + 1) % services.length]!;
+
   const heroPhoto = categoryHero[service.category];
 
   // Service detail uses one-line title (the service name itself), so we
@@ -165,6 +174,52 @@ export default async function ServiceDetailPage({ params }: Params) {
           </div>
         </section>
       )}
+
+      {/* Prev / Next service navigation — keeps the visitor browsing the
+          methods catalogue without forcing a trip back to /services. */}
+      <nav
+        aria-label="Service navigation"
+        className="relative border-y border-border bg-white"
+      >
+        <div className="mx-auto grid max-w-[1500px] grid-cols-2 px-6 md:px-14">
+          <Link
+            href={`/services/${prevService.slug}`}
+            className="group flex flex-col gap-2 border-r border-border py-8 pr-4 transition-colors hover:bg-deep md:py-10 md:pr-8"
+            aria-label={`Previous service: ${prevService.title}`}
+          >
+            <span
+              className="inline-flex items-center gap-2 font-display font-bold uppercase text-[var(--color-amber-dim)]"
+              style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+            >
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden className="transition-transform duration-200 group-hover:-translate-x-1">
+                <path d="M13 5H1m4-4L1 5l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Previous
+            </span>
+            <span className="font-display font-extrabold uppercase text-deep-navy" style={{ fontSize: "clamp(15px, 3.5vw, 18px)", letterSpacing: "0.02em", lineHeight: "1.2" }}>
+              {prevService.title}
+            </span>
+          </Link>
+          <Link
+            href={`/services/${nextService.slug}`}
+            className="group flex flex-col items-end gap-2 py-8 pl-4 text-right transition-colors hover:bg-deep md:py-10 md:pl-8"
+            aria-label={`Next service: ${nextService.title}`}
+          >
+            <span
+              className="inline-flex items-center gap-2 font-display font-bold uppercase text-[var(--color-amber-dim)]"
+              style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+            >
+              Next
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
+                <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="font-display font-extrabold uppercase text-deep-navy" style={{ fontSize: "clamp(15px, 3.5vw, 18px)", letterSpacing: "0.02em", lineHeight: "1.2" }}>
+              {nextService.title}
+            </span>
+          </Link>
+        </div>
+      </nav>
 
       <CtaBanner
         headline="Got a hole that needs this method?"
