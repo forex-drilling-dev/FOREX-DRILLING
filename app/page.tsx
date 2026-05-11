@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 import {
   NavyBlob,
@@ -298,12 +299,156 @@ function HeroStack() {
 }
 
 // ─── TAGLINE STRIP — full-viewport editorial moment with mask-reveal anim ───
+// Desktop only. On mobile it rendered as a near-empty 100vh white screen
+// because the animated text is small relative to viewport — the visitor
+// scrolled through dead space. The mobile journey now hits MobileHighlights
+// directly after the hero (denser, more useful content).
 
 function TaglineStrip() {
   return (
-    <section className="home-snap relative flex min-h-screen flex-col items-center justify-center gap-12 bg-white px-6 py-24 md:px-14">
+    <section className="home-snap relative hidden min-h-screen flex-col items-center justify-center gap-12 bg-white px-6 py-24 md:px-14 lg:flex">
       <TaglineAnimated />
       <SectionLink href="/about" label="About" />
+    </section>
+  );
+}
+
+// ─── MOBILE HIGHLIGHTS ──────────────────────────────────────────────────────
+// Mobile-only content block that fills the gap between hero and the bottom
+// CTA. Gives the visitor concrete value at-a-glance: 4 service categories,
+// where the company operates, and a path to /about. Hidden on lg+ — the
+// editorial TaglineStrip + scroll-snap experience belongs on desktop.
+
+const SERVICE_CATEGORIES = [
+  {
+    num: "01",
+    title: "Drilling",
+    summary: "Diamond, sonic, directional, RC and rotary methods.",
+    href: "/services#drilling",
+  },
+  {
+    num: "02",
+    title: "Instrumentation",
+    summary: "VWPs, inclinometers, monitoring systems installed and commissioned.",
+    href: "/services#instrumentation",
+  },
+  {
+    num: "03",
+    title: "Downhole",
+    summary: "Geophysical logging, borehole surveying, deviation control.",
+    href: "/services#downhole",
+  },
+  {
+    num: "04",
+    title: "Data & Digital",
+    summary: "Krux platform and MWD for accurate, structured field data.",
+    href: "/services#data",
+  },
+] as const;
+
+function MobileHighlights() {
+  return (
+    <section
+      aria-label="Highlights"
+      className="relative flex flex-col gap-10 bg-white px-5 pt-10 pb-12 lg:hidden"
+    >
+      {/* Services — 2×2 grid of compact category cards. */}
+      <div className="flex flex-col gap-4">
+        <p
+          className="font-display font-bold uppercase"
+          style={{ fontSize: "11px", letterSpacing: "0.22em", color: "var(--color-amber-dim)" }}
+        >
+          01 — What we deliver
+        </p>
+        <div className="grid grid-cols-2 gap-px bg-border">
+          {SERVICE_CATEGORIES.map((c) => (
+            <Link
+              key={c.num}
+              href={c.href}
+              className="group relative flex h-full flex-col gap-2 bg-white p-4 transition-colors duration-200 hover:bg-deep"
+            >
+              <span
+                className="font-display font-black"
+                style={{ fontSize: "22px", lineHeight: "1", color: "var(--color-amber-dim)" }}
+              >
+                {c.num}
+              </span>
+              <span
+                className="font-display font-extrabold uppercase text-deep-navy"
+                style={{ fontSize: "14px", letterSpacing: "0.04em", lineHeight: "1.15" }}
+              >
+                {c.title}
+              </span>
+              <span
+                className="font-sans text-muted"
+                style={{ fontSize: "12.5px", lineHeight: "1.45" }}
+              >
+                {c.summary}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Operations — compact card with the Singapore → Asia-Pacific cue. */}
+      <Link
+        href="/contact"
+        className="group flex flex-col gap-3 rounded-2xl bg-deep-navy px-5 py-6 transition-colors hover:bg-[color:var(--color-surface)]"
+        aria-label="Where we operate — open the contact page with the operations map"
+      >
+        <p
+          className="font-display font-bold uppercase text-amber"
+          style={{ fontSize: "11px", letterSpacing: "0.22em" }}
+        >
+          02 — Where we operate
+        </p>
+        <div className="flex items-center gap-3">
+          <span
+            className="font-mono uppercase text-on-navy"
+            style={{ fontSize: "13px", letterSpacing: "0.18em" }}
+          >
+            Singapore
+          </span>
+          <svg
+            width="32"
+            height="12"
+            viewBox="0 0 34 14"
+            fill="none"
+            aria-hidden
+            className="text-amber transition-transform duration-200 group-hover:translate-x-1"
+          >
+            <path d="M0 7 H30" stroke="currentColor" strokeWidth="1.4" strokeDasharray="2 2.5" />
+            <path d="M28 2 L33 7 L28 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          </svg>
+          <span
+            className="font-mono uppercase font-bold text-on-navy"
+            style={{ fontSize: "13px", letterSpacing: "0.18em" }}
+          >
+            Asia-Pacific
+          </span>
+        </div>
+        <p
+          className="font-sans text-on-navy-muted"
+          style={{ fontSize: "13.5px", lineHeight: "1.6" }}
+        >
+          Singapore headquarters, field operations in Papua New Guinea, and
+          mobile crews across the region.
+        </p>
+        <span
+          className="mt-1 inline-flex items-center gap-2 font-display font-bold uppercase text-amber"
+          style={{ fontSize: "11px", letterSpacing: "0.18em" }}
+        >
+          See the map
+          <svg width="12" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
+            <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </Link>
+
+      {/* Quick path to /about for visitors who want the story before the CTA. */}
+      <div className="flex justify-center pt-2">
+        <SectionLink href="/about" label="About" />
+      </div>
     </section>
   );
 }
@@ -319,6 +464,7 @@ export default function HomePage() {
       <h1 className="sr-only">Built on Drilling. Driven by Delivery.</h1>
       <HeroPoster />
       <HeroStack />
+      <MobileHighlights />
       <TaglineStrip />
       <CtaBanner
         headline="Send us your scope."
