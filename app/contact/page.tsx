@@ -6,6 +6,7 @@ import {
   BgGreyShape,
   Reveal,
   OperationsMap,
+  SectionLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -113,6 +114,14 @@ export default function ContactPage() {
               Where we operate
             </p>
             <OperationsMap />
+          </div>
+        </Reveal>
+
+        {/* Close the journey — /contact was a dead-end. Send the visitor
+            back to the homepage so the next exploration starts naturally. */}
+        <Reveal className="md:col-span-12" delay={240}>
+          <div className="mt-12 flex justify-center md:mt-16">
+            <SectionLink href="/" label="Back to home" />
           </div>
         </Reveal>
       </div>
