@@ -93,6 +93,13 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             {body}
           </p>
         </div>
+
+        {/* Soft navy → white transition under the panel so the hero
+            doesn't end on a hard seam against the first content section. */}
+        <div
+          aria-hidden
+          className="h-12 w-full bg-gradient-to-b from-deep-navy to-white"
+        />
       </div>
 
       {/* ─── Desktop — full-bleed editorial poster (lg+) ─────────── */}

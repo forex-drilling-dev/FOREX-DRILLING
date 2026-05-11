@@ -284,6 +284,15 @@ function HeroStack() {
           <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Groundwater</span>
         </div>
       </div>
+
+      {/* Soft navy → white transition. Without it the navy panel ends
+          on a hard horizontal seam against the next white section,
+          which reads as a CSS bug on mobile. 48px is enough to feel
+          like a fade, short enough to keep the hero compact. */}
+      <div
+        aria-hidden
+        className="h-12 w-full bg-gradient-to-b from-deep-navy to-white"
+      />
     </section>
   );
 }
