@@ -35,9 +35,8 @@ export function ProtocolGrid({ items, className }: Props) {
             {p.code}
           </p>
           <p
-            className="font-display font-medium uppercase"
+            className="font-display font-medium uppercase text-[12px] sm:text-[11px]"
             style={{
-              fontSize: "11px",
               letterSpacing: "0.12em",
               lineHeight: "1.4",
               color: "var(--color-muted)",
