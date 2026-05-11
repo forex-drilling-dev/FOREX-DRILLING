@@ -63,7 +63,9 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="font-sans text-sm font-medium text-on-navy-muted transition-colors duration-fast hover:text-amber"
+                    // 15px on mobile for readability, 14px on md+ to keep
+                    // the editorial rhythm of the desktop footer.
+                    className="block py-1 font-sans text-[15px] font-medium text-on-navy-muted transition-colors duration-fast hover:text-amber md:text-sm md:py-0"
                   >
                     {item.label}
                   </Link>

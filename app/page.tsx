@@ -113,7 +113,9 @@ function HeroPoster() {
         >
           <p
             className="font-mono uppercase text-on-navy-muted"
-            style={{ fontSize: "10.5px", letterSpacing: "0.22em" }}
+            // Bumped from 10.5px so the scope strip stays legible on mobile
+            // (audit found 10.5px too small under iOS dynamic type at 375px).
+            style={{ fontSize: "11.5px", letterSpacing: "0.22em" }}
           >
             <span className="text-amber">Mining</span>
             <span className="mx-2 opacity-50">·</span>
@@ -252,7 +254,9 @@ function HeroStack() {
         <div className="mt-5 border-t border-amber/30 pt-3.5">
           <p
             className="font-mono uppercase text-on-navy-muted flex flex-wrap gap-x-2 gap-y-1"
-            style={{ fontSize: "10px", letterSpacing: "0.18em" }}
+            // Bumped from 10px → 11.5px for mobile legibility (HeroStack
+            // only renders <lg, so the agency desktop figure is unaffected).
+            style={{ fontSize: "11.5px", letterSpacing: "0.18em" }}
           >
             <span className="text-amber">Mining</span>
             <span className="opacity-50">·</span>
