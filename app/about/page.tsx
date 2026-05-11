@@ -39,7 +39,7 @@ function AboutHero() {
 
 function WhoWeAre() {
   return (
-    <section className="relative bg-deep py-16 md:py-32">
+    <section className="relative bg-deep py-12 md:py-32">
       <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
         <Reveal className="flex flex-col gap-5 md:col-span-4">
           <SectionLabel number="01" label="Who We Are" />
@@ -85,7 +85,7 @@ function WhoWeAre() {
 
 function OperatingModel() {
   return (
-    <section className="relative bg-white py-16 md:py-32">
+    <section className="relative bg-white py-12 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="02" label="Operating Model" />

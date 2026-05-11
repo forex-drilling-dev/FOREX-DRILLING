@@ -43,7 +43,7 @@ function CapabilitiesSection() {
     "Rod and casing handling systems where applicable to improve safety and efficiency",
   ];
   return (
-    <section className="relative bg-deep py-16 md:py-32">
+    <section className="relative bg-deep py-12 md:py-32">
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
         <div className="grid gap-12 md:grid-cols-12 md:gap-20">
           {/* Left column — section label + intro + bullet list. Bullets sit
@@ -96,7 +96,7 @@ function CapabilitiesSection() {
 
 function MaintenanceSection() {
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-32">
+    <section className="relative overflow-hidden bg-white py-12 md:py-32">
       <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
         <div className="md:col-span-5 md:order-2">
           <div className="relative">

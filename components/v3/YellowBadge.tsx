@@ -4,39 +4,31 @@ import { cn } from "@/lib/utils";
 type Props = {
   children: ReactNode;
   className?: string;
+  /** Visual size — "sm" for compact mobile placement, "md" (default) for desktop hero. */
+  size?: "sm" | "md";
 };
 
 /**
- * Yellow asymmetric label that OVERLAPS the navy blob top-left.
+ * Yellow asymmetric label that overlaps the navy blob top-left.
  *
- * Exact spec from agency CSS:
- *   font-size: 32px
- *   font-weight: 900
- *   letter-spacing: 2px
- *   color: white
- *   padding: 12px 35px
- *   border-radius: 12px 30px 30px 12px   (squared left, rounded right)
- *   box-shadow: 0 4px 6px rgba(0,0,0,0.1)
- *
- * Positioning is the caller's job (typically absolute, top:80 left:50,
- * placed ABOVE the navy blob so it overlaps the blob's top edge — the
- * shadow then anchors it visually onto the blob).
- *
- * z-index must be ABOVE the navy blob in the parent stacking context.
+ * Agency desktop spec: ~22px label, large hero badge.
+ * Mobile "sm" variant: ~13px in a compact pill so it sits cleanly inside
+ * the new mobile banner card without dominating the layout.
  */
-export function YellowBadge({ children, className }: Props) {
+export function YellowBadge({ children, className, size = "md" }: Props) {
+  const isSm = size === "sm";
   return (
     <span
       className={cn(
         "inline-flex items-center bg-amber text-white",
         "font-display font-black uppercase",
-        "px-7 py-2.5",
+        isSm ? "px-3 py-1" : "px-7 py-2.5",
         className,
       )}
       style={{
-        fontSize: "22px",
+        fontSize: isSm ? "12px" : "22px",
         letterSpacing: "0.12em",
-        borderRadius: "10px 24px 24px 10px",
+        borderRadius: isSm ? "6px 14px 14px 6px" : "10px 24px 24px 10px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
       }}
     >

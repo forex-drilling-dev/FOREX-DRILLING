@@ -16,19 +16,28 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // Re-used eyebrow label style across the info dl — kept compact and
+  // amber-dim so the four facts read as data, not as four sub-sections.
+  const dtCls = "font-display font-bold uppercase";
+  const dtStyle = { fontSize: "10px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" } as const;
+
   return (
-    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+48px)] pb-32">
+    <section className="relative overflow-hidden bg-white pt-[calc(var(--spacing-nav)+24px)] pb-16 md:pt-[calc(var(--spacing-nav)+48px)] md:pb-32">
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
 
-      <div className="relative mx-auto grid grid-cols-1 max-w-[1500px] gap-16 px-6 md:grid-cols-12 md:gap-20 md:px-14">
-        {/* Left — info */}
-        <Reveal className="flex flex-col gap-8 md:col-span-5">
-          <YellowBadge className="self-start">CONTACT</YellowBadge>
+      <div className="relative mx-auto grid grid-cols-1 max-w-[1500px] gap-10 px-5 md:grid-cols-12 md:gap-20 md:px-14">
+        {/* Left — info. On mobile: tight badge + compact heading + denser
+            info grid (2 cols instead of stacked vertical to halve the
+            scroll height). On desktop: unchanged editorial rhythm. */}
+        <Reveal className="flex flex-col gap-5 md:col-span-5 md:gap-8">
+          <YellowBadge size="sm" className="self-start md:hidden">CONTACT</YellowBadge>
+          <YellowBadge className="hidden self-start md:inline-flex">CONTACT</YellowBadge>
+
           <SectionHeading as="h1" line1="Let&rsquo;s discuss" line2="your program." />
 
           <p
             className="font-sans"
-            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}
+            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.6", color: "var(--color-muted)" }}
           >
             Whether you have a program to discuss, a technical question, or want
             to understand how we can support your project, we&rsquo;re ready to engage.
@@ -36,61 +45,32 @@ export default function ContactPage() {
             you within one business day.
           </p>
 
-          <dl className="mt-2 flex flex-col gap-6 border-t border-border pt-8">
+          <dl className="mt-1 grid grid-cols-2 gap-x-4 gap-y-5 border-t border-border pt-6 md:flex md:flex-col md:gap-6 md:pt-8">
             <div>
-              <dt
-                className="font-display font-bold uppercase"
-                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
-              >
-                Headquarters
-              </dt>
-              <dd
-                className="mt-2 font-sans text-deep-navy"
-                style={{ fontSize: "16px" }}
-              >
+              <dt className={dtCls} style={dtStyle}>Headquarters</dt>
+              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
                 Singapore
               </dd>
             </div>
             <div>
-              <dt
-                className="font-display font-bold uppercase"
-                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
-              >
-                Presence
-              </dt>
-              <dd
-                className="mt-2 font-sans text-deep-navy"
-                style={{ fontSize: "16px" }}
-              >
+              <dt className={dtCls} style={dtStyle}>Presence</dt>
+              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
                 Singapore &amp; Papua New Guinea
               </dd>
             </div>
-            <div>
-              <dt
-                className="font-display font-bold uppercase"
-                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
-              >
-                Scope
-              </dt>
-              <dd
-                className="mt-2 font-sans text-deep-navy"
-                style={{ fontSize: "16px" }}
-              >
+            <div className="col-span-2">
+              <dt className={dtCls} style={dtStyle}>Scope</dt>
+              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
                 Mining · Exploration · Civil · Groundwater
               </dd>
             </div>
-            <div>
-              <dt
-                className="font-display font-bold uppercase"
-                style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
-              >
-                Email
-              </dt>
-              <dd className="mt-2">
+            <div className="col-span-2">
+              <dt className={dtCls} style={dtStyle}>Email</dt>
+              <dd className="mt-1 md:mt-2">
                 <a
                   href="mailto:admin@forexdrilling.com"
                   className="font-sans text-deep-navy transition-colors duration-200 hover:text-[var(--color-amber-dim)]"
-                  style={{ fontSize: "16px" }}
+                  style={{ fontSize: "15px" }}
                 >
                   admin@forexdrilling.com
                 </a>

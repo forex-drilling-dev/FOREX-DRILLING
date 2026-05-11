@@ -25,9 +25,10 @@ export function SectionHeading({ line1, line2, className, as: Tag = "h2" }: Prop
         className,
       )}
       style={{
-        // Editorial scale: dominant on mobile (≈ 36px at 375vw) yet bounded
-        // on desktop so it doesn't blow out the column rhythm.
-        fontSize: "clamp(34px, 9.5vw, 46px)",
+        // Mobile floor lowered from 34 → 24px so the heading stops eating
+        // half the screen on small viewports. Bounded at 46px desktop —
+        // the editorial column rhythm is unchanged at ≥1024px.
+        fontSize: "clamp(24px, 7vw, 46px)",
         letterSpacing: "-0.005em",
       }}
     >

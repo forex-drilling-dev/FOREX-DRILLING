@@ -226,69 +226,62 @@ function HeroStack() {
   return (
     <section
       aria-label="Hero"
-      className="home-snap relative mx-auto flex min-h-screen max-w-[460px] flex-col items-center justify-center gap-7 px-5 pt-[calc(var(--spacing-nav)+24px)] pb-16 lg:hidden"
+      className="relative flex w-full flex-col bg-white pt-[var(--spacing-nav)] lg:hidden"
     >
-      <NavyBlob
-        className="h-auto w-full"
-        style={{ padding: "36px 28px 36px 28px" }}
-      >
-        {/* Visual title only — see comment in HeroPoster. */}
+      {/* Banner photo — full width, no rounded card, full-bleed.
+          The drill pins are removed on mobile (they were decorative for the
+          desktop card-on-card composition and add visual clutter at small
+          sizes). */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <Image
+          src={optimizedSrc("/images/hero-night-site.jpg")}
+          alt="Multi-rig night drilling operation in Papua New Guinea"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+          placeholder="blur"
+          blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
+        />
+        {/* Soft navy fade so the eyebrow tag below reads cleanly. */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-deep-navy/55 to-transparent"
+        />
+        <div className="absolute bottom-3 left-4">
+          <YellowBadge size="sm">FOREX</YellowBadge>
+        </div>
+      </div>
+
+      {/* Navy panel — full-bleed, dense. No left margin, no oversized
+          padding. Title scales 22→28px, body tight. */}
+      <div className="relative bg-deep-navy px-5 py-7 sm:px-6 sm:py-8">
         <p
           aria-hidden="true"
-          className="font-display font-extrabold uppercase leading-[0.95] tracking-[-0.005em] text-on-navy text-balance"
-          style={{ fontSize: "clamp(30px, 8.5vw, 40px)" }}
+          className="font-display font-extrabold uppercase leading-[1.05] text-on-navy text-balance"
+          style={{ fontSize: "clamp(22px, 6.4vw, 28px)", letterSpacing: "0.3px" }}
         >
           Built on Drilling.
           <br />
           <span className="text-amber">Driven by Delivery.</span>
         </p>
         <p
-          className="mt-5 font-sans font-normal text-on-navy-muted"
-          style={{ fontSize: "15px", lineHeight: "1.65" }}
+          className="mt-3 font-sans font-normal text-on-navy-muted"
+          style={{ fontSize: "14px", lineHeight: "1.6" }}
         >
           Delivering safe, reliable and high-quality drilling services across
           the Asia-Pacific region.
         </p>
 
-        {/* Scope strip — verbatim brief categories */}
-        <div className="mt-5 border-t border-amber/30 pt-3.5">
-          <p
-            className="font-mono uppercase text-on-navy-muted flex flex-wrap gap-x-2 gap-y-1"
-            // Bumped from 10px → 11.5px for mobile legibility (HeroStack
-            // only renders <lg, so the agency desktop figure is unaffected).
-            style={{ fontSize: "11.5px", letterSpacing: "0.18em" }}
-          >
-            <span className="text-amber">Mining</span>
-            <span className="opacity-50">·</span>
-            <span className="text-amber">Exploration</span>
-            <span className="opacity-50">·</span>
-            <span className="text-amber">Civil</span>
-            <span className="opacity-50">·</span>
-            <span className="text-amber">Groundwater</span>
-          </p>
-        </div>
-      </NavyBlob>
-
-      {/* Multi-rig site image — featured, full width */}
-      <div className="relative w-full mt-2">
-        <div className="absolute -top-9 left-1/2 -translate-x-1/2 z-[6] flex gap-3">
-          <DrillBitPin size={32} className="rotate-180" />
-          <DrillBitPin size={32} />
-        </div>
-        <div
-          className="relative aspect-[2.3/1] w-full overflow-hidden rounded-xl"
-          style={{ boxShadow: "var(--shadow-image)" }}
-        >
-          <Image
-            src={optimizedSrc("/images/hero-night-site.jpg")}
-            alt="Multi-rig night drilling operation in Papua New Guinea"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-            placeholder="blur"
-            blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
-          />
+        {/* Scope strip — flex-wrap so it never overflows */}
+        <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-amber/30 pt-3.5">
+          <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Mining</span>
+          <span className="font-mono uppercase text-on-navy-muted opacity-50" style={{ fontSize: "11px" }}>·</span>
+          <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Exploration</span>
+          <span className="font-mono uppercase text-on-navy-muted opacity-50" style={{ fontSize: "11px" }}>·</span>
+          <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Civil</span>
+          <span className="font-mono uppercase text-on-navy-muted opacity-50" style={{ fontSize: "11px" }}>·</span>
+          <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Groundwater</span>
         </div>
       </div>
     </section>

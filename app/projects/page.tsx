@@ -26,7 +26,7 @@ const deliveryFocus = [
 
 function DeliveryApproachSection() {
   return (
-    <section className="relative bg-white py-16 md:py-32">
+    <section className="relative bg-white py-12 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-12 px-6 md:gap-16 md:px-14">
         <Reveal className="flex max-w-[820px] flex-col gap-6">
           <SectionLabel number="01" label="Project Delivery Approach" />

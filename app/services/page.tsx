@@ -71,7 +71,7 @@ function CategorySection({
   id, bg, number, label, line1, line2, body, items,
 }: CategorySectionProps) {
   return (
-    <section id={id} className={`relative scroll-mt-[100px] py-16 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
+    <section id={id} className={`relative scroll-mt-[100px] py-12 md:py-32 ${bg === "deep" ? "bg-deep" : "bg-white"}`}>
       <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:gap-14 md:px-14">
         {/* Header — full-width, label + heading on top so the bullet list
             below can spread into 2 cols. Avoids the empty left-column gap
@@ -109,7 +109,7 @@ function CategorySection({
 
 function DataSection() {
   return (
-    <section id="data" className="relative scroll-mt-[100px] bg-white py-16 md:py-32">
+    <section id="data" className="relative scroll-mt-[100px] bg-white py-12 md:py-32">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[820px]">
           <SectionLabel number="04" label="Data Acquisition & Digital" />
