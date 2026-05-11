@@ -53,11 +53,11 @@ export function OperationsMap({ className }: Props) {
       style: "https://tiles.openfreemap.org/styles/positron",
       center: [125, -3],
       zoom: 3.2,
-      // Attribution disabled per client direction. Note: OpenFreeMap +
-      // OpenStreetMap data is licensed under ODbL which technically
-      // requires attribution; surface it elsewhere on the page (footer
-      // legal section) before going to production.
-      attributionControl: false,
+      // Attribution surfaced via MapLibre's built-in control (collapsed
+      // by default; click the ⓘ to expand). OpenFreeMap + OpenStreetMap
+      // data is licensed under ODbL which requires attribution — this
+      // is the lightest legal-compliant surface.
+      attributionControl: { compact: true },
       cooperativeGestures: true,
       pitchWithRotate: false,
       dragRotate: false,
