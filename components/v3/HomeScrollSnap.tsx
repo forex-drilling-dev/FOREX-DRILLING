@@ -30,6 +30,11 @@ export function HomeScrollSnap() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Touch devices (phones, tablets) already have native momentum scroll and
+    // their own scroll-snap behaviour. Intercepting wheel/touch on them feels
+    // sluggish and fights the user — disable the custom snap there. Desktop
+    // visitors with a real pointing device keep the editorial section snap.
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
 
     let lockedUntil = 0; // performance.now() timestamp; wheel/touch ignored until then
     let animFrame = 0;
