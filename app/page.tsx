@@ -350,7 +350,10 @@ function MobileHighlights() {
   return (
     <section
       aria-label="Highlights"
-      className="relative flex flex-col gap-10 bg-white px-5 pt-10 pb-12 lg:hidden"
+      // No padding-top — the 48px navy→white fade above already provides
+      // the breathing room. An extra pt-10 here read as a "blank line"
+      // gap between the hero and the first content card.
+      className="relative flex flex-col gap-10 bg-white px-5 pb-12 lg:hidden"
     >
       {/* Services — 2×2 grid of compact category cards. */}
       <div className="flex flex-col gap-4">
