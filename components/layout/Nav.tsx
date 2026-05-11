@@ -35,7 +35,9 @@ export function Nav() {
         <Link
           href="/"
           aria-label="Forex Drilling — home"
-          className="flex items-center transition-opacity duration-200 hover:opacity-80"
+          // -mx-2 px-2 -my-3 py-3 expands the touch area to 44px+ tall on
+          // mobile without changing the visible logo position.
+          className="-mx-2 -my-3 flex min-h-11 items-center px-2 py-3 transition-opacity duration-200 hover:opacity-80"
         >
           {/* Official brand logo, mark-only variant — icon + FOREX DRILLING
               wordmark, tagline cropped out (it would just repeat the
@@ -71,7 +73,9 @@ export function Nav() {
         </nav>
         <button
           type="button"
-          className="md:hidden"
+          // 44×44 tap target (WCAG 2.5.5). -m-3 cancels the visual padding so
+          // the button looks the same to the eye but is touchable everywhere.
+          className="-m-3 inline-flex min-h-11 min-w-11 items-center justify-center p-3 md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -84,12 +88,14 @@ export function Nav() {
 
       {open && (
         <div className="md:hidden">
-          <Container className="flex flex-col gap-4 border-t border-border bg-white py-6 shadow-card">
+          <Container className="flex flex-col border-t border-border bg-white py-2 shadow-card">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-display text-sm font-bold uppercase tracking-[0.12em] text-deep-navy hover:text-amber"
+                // min-h-11 + py-3 gives a 44px+ tap target per WCAG 2.5.5
+                // while keeping the visual rhythm of the menu compact.
+                className="-mx-2 flex min-h-11 items-center px-2 py-3 font-display text-sm font-bold uppercase tracking-[0.12em] text-deep-navy hover:text-amber"
               >
                 {item.label}
               </Link>
