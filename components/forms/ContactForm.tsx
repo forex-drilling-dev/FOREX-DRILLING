@@ -91,8 +91,9 @@ export function ContactForm() {
           </span>
           <input
             {...register("name")}
+            type="text"
+            autoComplete="name"
             className={inputCls}
-           
             placeholder="Your full name"
             aria-invalid={errors.name ? "true" : "false"}
             aria-describedby={errors.name ? "name-error" : undefined}
@@ -131,8 +132,9 @@ export function ContactForm() {
           </span>
           <input
             {...register("company")}
+            type="text"
+            autoComplete="organization"
             className={inputCls}
-           
             placeholder="Organisation"
             aria-invalid={errors.company ? "true" : "false"}
             aria-describedby={errors.company ? "company-error" : undefined}
@@ -150,8 +152,9 @@ export function ContactForm() {
           </span>
           <input
             {...register("role")}
+            type="text"
+            autoComplete="organization-title"
             className={inputCls}
-           
             placeholder="Your position"
             aria-invalid={errors.role ? "true" : "false"}
             aria-describedby={errors.role ? "role-error" : undefined}
@@ -169,8 +172,9 @@ export function ContactForm() {
           </span>
           <input
             {...register("country")}
+            type="text"
+            autoComplete="country-name"
             className={inputCls}
-           
             placeholder="Project location"
             aria-invalid={errors.country ? "true" : "false"}
             aria-describedby={errors.country ? "country-error" : undefined}
