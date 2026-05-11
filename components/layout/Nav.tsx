@@ -75,11 +75,25 @@ export function Nav() {
           type="button"
           // 44×44 tap target (WCAG 2.5.5). -m-3 cancels the visual padding so
           // the button looks the same to the eye but is touchable everywhere.
-          className="-m-3 inline-flex min-h-11 min-w-11 items-center justify-center p-3 md:hidden"
+          className="-m-3 inline-flex min-h-11 min-w-11 items-center justify-center gap-2 p-3 md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
+          {/* Visual cue — universal hamburger / cross icon so the affordance
+              reads instantly. The text label stays for clarity at all
+              levels of brand familiarity and for screen reader fallback. */}
+          <span aria-hidden className="flex h-4 w-4 flex-col justify-center text-deep-navy">
+            {open ? (
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <path d="M3 3 L13 13 M13 3 L3 13" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <path d="M2 4 H14 M2 8 H14 M2 12 H14" />
+              </svg>
+            )}
+          </span>
           <span className="font-display text-xs font-bold uppercase tracking-[0.12em] text-deep-navy">
             {open ? "Close" : "Menu"}
           </span>
