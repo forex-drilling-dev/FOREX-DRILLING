@@ -28,8 +28,16 @@ type Props = {
  * so every hero shares the same spatial language as the homepage.
  */
 export function PageHero({ badge, line1, line2, body, photo }: Props) {
+  // Build the heading text once so screen readers get exactly one <h1>
+  // regardless of which responsive variant is currently rendered.
+  const headingText = line2 ? `${line1} ${line2}` : line1;
   return (
     <section className="relative w-full overflow-hidden bg-white">
+      {/* Single canonical <h1>. The mobile and desktop visual variants
+          below both use aria-hidden <p> so the static DOM exposes exactly
+          one heading per page (Lighthouse / axe / Search Console). */}
+      <h1 className="sr-only">{headingText}</h1>
+
       {/* ─── Mobile / tablet — stacked ─────────────────────────── */}
       <div className="relative flex flex-col gap-12 px-6 pt-[calc(var(--spacing-nav)+48px)] pb-16 md:px-14 lg:hidden">
         <YellowBadge className="self-start">{badge}</YellowBadge>
@@ -37,7 +45,8 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
           className="-mt-7 ml-3 h-auto w-full max-w-[580px]"
           style={{ padding: "60px 28px 50px 32px" }}
         >
-          <h1
+          <p
+            aria-hidden="true"
             className="font-display font-extrabold uppercase leading-[1.1] text-on-navy"
             style={{
               fontSize: "26px",
@@ -54,7 +63,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
                 </span>
               </>
             )}
-          </h1>
+          </p>
           <p
             className="mt-5 font-sans font-normal text-on-navy-muted"
             style={{ fontSize: "14px", lineHeight: "1.7", maxWidth: "300px" }}
@@ -97,7 +106,8 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             paddingBottom: "40px",
           }}
         >
-          <h1
+          <p
+            aria-hidden="true"
             className="font-display font-extrabold uppercase leading-[1.05] text-on-navy"
             style={{
               fontSize: "clamp(32px, 2.6vw, 44px)",
@@ -112,7 +122,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
                 <span className="text-amber">{line2}</span>
               </>
             )}
-          </h1>
+          </p>
           <p
             className="mt-7 font-sans font-normal text-on-navy-muted"
             style={{ fontSize: "15px", lineHeight: "1.7", maxWidth: "440px" }}
