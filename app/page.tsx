@@ -323,9 +323,18 @@ export default function HomePage() {
       <h1 className="sr-only">Built on Drilling. Driven by Delivery.</h1>
       <HeroPoster />
       <HeroStack />
-      {/* Mobile journey kept deliberately simple: hero → CTA. The editorial
-          TaglineStrip below is desktop-only (it renders as an empty 100vh
-          screen on phones since the animation is sized for ≥1024px). */}
+      {/* Mobile bridge: one quiet path to /about between the hero and the
+          CTA. Single purpose, same SectionLink pattern every other page
+          uses, so visitors recognise the affordance instantly. Desktop
+          gets this via the TaglineStrip below — no duplicate. */}
+      <section
+        aria-label="Discover"
+        className="flex justify-center bg-white px-5 py-10 lg:hidden"
+      >
+        <SectionLink href="/about" label="About" prefix="Discover" />
+      </section>
+      {/* Editorial TaglineStrip is desktop-only — it renders as an empty
+          100vh screen on phones since the animation is sized for ≥1024px. */}
       <TaglineStrip />
       <CtaBanner
         headline="Send us your scope."

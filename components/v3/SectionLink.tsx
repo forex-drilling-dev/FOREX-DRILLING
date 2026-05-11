@@ -34,8 +34,10 @@ export function SectionLink({ href, label, className, prefix }: Props) {
       )}
       <Link
         href={href}
+        // min-h-11 + py-3 gives a 44px tap target per WCAG 2.5.5 while
+        // keeping the visual line-height tight via leading-none.
         className={cn(
-          "group inline-flex items-center gap-2 font-display font-bold uppercase text-deep-navy",
+          "group inline-flex min-h-11 items-center gap-2 px-1 py-3 font-display font-bold uppercase leading-none text-deep-navy",
           "underline decoration-amber decoration-2 underline-offset-[6px]",
           "transition-colors duration-200 hover:text-amber hover:decoration-amber",
           "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber",
