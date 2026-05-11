@@ -72,8 +72,11 @@ export function ContactForm() {
     );
   }
 
+  // 16px on mobile is mandatory — iOS Safari auto-zooms on inputs < 16px,
+  // which breaks the layout when the user taps a field. Editorial 15px
+  // size kept on md+ where the auto-zoom doesn't apply.
   const inputCls =
-    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-[var(--color-amber-dim)]";
+    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-base text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-[var(--color-amber-dim)] md:text-[15px]";
   // amber-dim (#B58800) — passes WCAG AA on the white form bg.
   const labelCls =
     "font-display font-bold uppercase text-[var(--color-amber-dim)]";
@@ -89,7 +92,7 @@ export function ContactForm() {
           <input
             {...register("name")}
             className={inputCls}
-            style={{ fontSize: "15px" }}
+           
             placeholder="Your full name"
             aria-invalid={errors.name ? "true" : "false"}
             aria-describedby={errors.name ? "name-error" : undefined}
@@ -110,7 +113,7 @@ export function ContactForm() {
             type="email"
             autoComplete="email"
             className={inputCls}
-            style={{ fontSize: "15px" }}
+           
             placeholder="you@company.com"
             aria-invalid={errors.email ? "true" : "false"}
             aria-describedby={errors.email ? "email-error" : undefined}
@@ -129,7 +132,7 @@ export function ContactForm() {
           <input
             {...register("company")}
             className={inputCls}
-            style={{ fontSize: "15px" }}
+           
             placeholder="Organisation"
             aria-invalid={errors.company ? "true" : "false"}
             aria-describedby={errors.company ? "company-error" : undefined}
@@ -148,7 +151,7 @@ export function ContactForm() {
           <input
             {...register("role")}
             className={inputCls}
-            style={{ fontSize: "15px" }}
+           
             placeholder="Your position"
             aria-invalid={errors.role ? "true" : "false"}
             aria-describedby={errors.role ? "role-error" : undefined}
@@ -167,7 +170,7 @@ export function ContactForm() {
           <input
             {...register("country")}
             className={inputCls}
-            style={{ fontSize: "15px" }}
+           
             placeholder="Project location"
             aria-invalid={errors.country ? "true" : "false"}
             aria-describedby={errors.country ? "country-error" : undefined}
@@ -187,7 +190,7 @@ export function ContactForm() {
         <select
           {...register("scope")}
           className={cn(inputCls, "cursor-pointer appearance-none")}
-          style={{ fontSize: "15px" }}
+         
         >
           <option value="mining">Mining</option>
           <option value="exploration">Exploration</option>
@@ -205,7 +208,7 @@ export function ContactForm() {
           {...register("message")}
           rows={5}
           className={cn(inputCls, "resize-none")}
-          style={{ fontSize: "15px", lineHeight: "1.55" }}
+          style={{ lineHeight: "1.55" }}
           placeholder="Scope, location, timeline, key constraints…"
           aria-invalid={errors.message ? "true" : "false"}
           aria-describedby={errors.message ? "message-error" : undefined}
