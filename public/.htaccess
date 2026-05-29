@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────────────────
+# Security headers for the Forex Drilling static site (Apache / mod_headers).
+#
+# This file lives in public/ so `next build` (output: "export") copies it to
+# the root of out/, where it ships with the deployed files. It is applied
+# automatically by Apache — NO server-admin access required.
+#
+# • If the host runs Nginx or Caddy instead, this file is IGNORED — give the
+#   server admin the equivalent snippet in docs/security-headers.md.
+# • The CSP below was validated in a real browser against the live MapLibre
+#   map (/contact) and hydration (/) — 0 violations. Do not edit casually:
+#   removing `worker-src blob:` or the openfreemap origins breaks the map.
+# ─────────────────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; frame-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tiles.openfreemap.org https://images.unsplash.com; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src blob:; manifest-src 'self'"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), usb=()"
+
+  # HSTS only takes effect over HTTPS (ignored over HTTP — harmless).
+  # Conservative: apex only. Once every subdomain is HTTPS you can strengthen
+  # to: "max-age=63072000; includeSubDomains; preload"
+  Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
