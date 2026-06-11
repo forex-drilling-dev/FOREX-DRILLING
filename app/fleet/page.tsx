@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { blurPlaceholder, optimizedSrc } from "@/lib/images";
 import {
   PageHero,
   SectionLabel,
@@ -94,12 +95,14 @@ function CapabilitiesSection() {
   );
 }
 
-// Rig data sourced from the 2026 Capability Statement ("Our fleet —
-// Modern, versatile rigs", p.05). Update both together.
+// Rig data and photos sourced from the 2026 Capability Statement ("Our
+// fleet — Modern, versatile rigs", p.05). Update both together.
 const rigs = [
   {
     name: "MRS 200 DUO",
     meta: "Fleet: 1 unit · Royal Eijkelkamp",
+    image: "/images/rig-mrs-200-duo.jpg",
+    imageAlt: "MRS 200 DUO sonic/rotary rig with hydraulic rod handler, mast raised",
     points: [
       "Sonic + rotary coring in a single hole — no rig swap to prove bedrock",
       "Continuous, high-recovery sampling through fill, clay and mixed overburden",
@@ -110,6 +113,8 @@ const rigs = [
   {
     name: "LRS-275 DUO",
     meta: "Fleet: 2 units · Royal Eijkelkamp",
+    image: "/images/rig-lrs-275-duo.jpg",
+    imageAlt: "LRS-275 DUO dual-head crawler rig in transport position with ManipAll arm",
     points: [
       "Heavy dual-head platform for deeper, larger-diameter sonic and diamond core",
       "Clean, continuous recovery through overburden, then diamond core into rock",
@@ -120,6 +125,8 @@ const rigs = [
   {
     name: "Fraste Mito 8C",
     meta: "Fleet: 1 unit · Fraste",
+    image: "/images/rig-fraste-mito-8c.jpg",
+    imageAlt: "Fraste Mito 8C lightweight crawler rig with mast raised on grass",
     points: [
       "Lightweight crawler that reaches remote, tight or low-bearing ground",
       "Fast to mobilise — ideal rapid second rig or standalone for smaller scopes",
@@ -144,6 +151,19 @@ function RigsSection() {
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           {rigs.map((rig) => (
             <Reveal key={rig.name} className="flex flex-col gap-4">
+              {/* Photo from the Capability Statement — light grey frame like
+                  the PDF cards, 4/3 crop so the three cards stay aligned. */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-deep" style={{ boxShadow: "var(--shadow-card)" }}>
+                <Image
+                  src={optimizedSrc(rig.image)}
+                  alt={rig.imageAlt}
+                  fill
+                  sizes="(min-width:768px) 33vw, 100vw"
+                  className="object-cover"
+                  placeholder={blurPlaceholder(rig.image) ? "blur" : "empty"}
+                  blurDataURL={blurPlaceholder(rig.image)}
+                />
+              </div>
               <div className="border-b-2 border-amber pb-3">
                 <h3
                   className="font-display font-black uppercase text-deep-navy"
