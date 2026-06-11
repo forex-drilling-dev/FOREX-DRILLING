@@ -20,7 +20,7 @@ export function YellowBadge({ children, className, size = "md" }: Props) {
   return (
     <span
       className={cn(
-        "inline-flex items-center bg-amber text-white",
+        "inline-flex items-center bg-amber text-deep-navy",
         "font-display font-black uppercase",
         isSm ? "px-3 py-1" : "px-7 py-2.5",
         className,

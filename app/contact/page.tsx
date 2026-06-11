@@ -26,9 +26,9 @@ export default function ContactPage() {
       <BgGreyShape className="top-[80px] right-[-100px] hidden lg:block" />
 
       <div className="relative mx-auto grid grid-cols-1 max-w-[1500px] gap-10 px-5 md:grid-cols-12 md:gap-20 md:px-14">
-        {/* Left — info. On mobile: tight badge + compact heading + denser
-            info grid (2 cols instead of stacked vertical to halve the
-            scroll height). On desktop: unchanged editorial rhythm. */}
+        {/* Left — info. Two office addresses (HQ + operations) alongside scope
+            and email, stacked as a single editorial column on every breakpoint
+            — full-width addresses don't fit the old 2-col mobile grid. */}
         <Reveal className="flex flex-col gap-5 md:col-span-5 md:gap-8">
           <YellowBadge size="sm" className="self-start md:hidden">CONTACT</YellowBadge>
           <YellowBadge className="hidden self-start md:inline-flex">CONTACT</YellowBadge>
@@ -45,26 +45,32 @@ export default function ContactPage() {
             you within one business day.
           </p>
 
-          <dl className="mt-1 grid grid-cols-2 gap-x-4 gap-y-5 border-t border-border pt-6 md:flex md:flex-col md:gap-6 md:pt-8">
+          <dl className="mt-1 flex flex-col gap-5 border-t border-border pt-6 md:gap-6 md:pt-8">
             <div>
               <dt className={dtCls} style={dtStyle}>Headquarters</dt>
-              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
-                Singapore
+              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px", lineHeight: "1.65" }}>
+                1 North Bridge Road, #11-04<br />
+                High Street Centre<br />
+                Singapore 179094
               </dd>
             </div>
             <div>
-              <dt className={dtCls} style={dtStyle}>Presence</dt>
-              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
-                Singapore &amp; Papua New Guinea
+              <dt className={dtCls} style={dtStyle}>Operations</dt>
+              <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px", lineHeight: "1.65" }}>
+                Level 5, Avara Annex Building<br />
+                Brampton Street<br />
+                Port Moresby, Moresby South District<br />
+                National Capital District<br />
+                Papua New Guinea
               </dd>
             </div>
-            <div className="col-span-2">
+            <div>
               <dt className={dtCls} style={dtStyle}>Scope</dt>
               <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
                 Mining · Exploration · Civil · Groundwater
               </dd>
             </div>
-            <div className="col-span-2">
+            <div>
               <dt className={dtCls} style={dtStyle}>Email</dt>
               <dd className="mt-1 md:mt-2">
                 <a

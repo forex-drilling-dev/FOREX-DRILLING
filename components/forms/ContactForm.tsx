@@ -13,9 +13,15 @@ const schema = z.object({
   country: z.string().min(2, "Please provide your country"),
   scope:   z.enum(["mining", "exploration", "civil", "groundwater", "other"]),
   message: z.string().min(20, "Please share a few details (20+ chars)"),
+  // Honeypot — hidden from humans, filled by bots. Real users leave it empty.
+  website: z.string().optional(),
 });
 type FormValues = z.infer<typeof schema>;
 type Status = "idle" | "submitting" | "success" | "error";
+
+// Server-side endpoint that relays the enquiry via the Resend API.
+// Defaults to the PHP endpoint shipped at the site root (/contact.php).
+const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/contact.php";
 
 export function ContactForm() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
@@ -24,22 +30,16 @@ export function ContactForm() {
   });
   const [status, setStatus] = useState<Status>("idle");
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     setStatus("submitting");
     try {
-      const subject = `New enquiry — ${data.company} (${data.scope})`;
-      const body =
-        `Name: ${data.name}\n` +
-        `Email: ${data.email}\n` +
-        `Company: ${data.company}\n` +
-        `Role: ${data.role}\n` +
-        `Country: ${data.country}\n` +
-        `Scope: ${data.scope}\n\n` +
-        `${data.message}`;
-      const href = `mailto:admin@forexdrilling.com?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = href;
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+      if (!res.ok || !json?.ok) throw new Error("send_failed");
       setStatus("success");
       reset();
     } catch {
@@ -84,6 +84,16 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-8" noValidate>
+      {/* Honeypot — visually hidden, off-tab, ignored by humans. Bots that
+          fill it are silently dropped server-side. */}
+      <input
+        {...register("website")}
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       <div className="grid gap-8 md:grid-cols-2">
         <label className="flex flex-col gap-2">
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
@@ -229,7 +239,7 @@ export function ContactForm() {
           type="submit"
           disabled={status === "submitting"}
           className={cn(
-            "inline-flex items-center gap-2 bg-amber px-7 py-3.5 font-display font-bold uppercase text-white",
+            "inline-flex items-center gap-2 bg-amber px-7 py-3.5 font-display font-bold uppercase text-deep-navy",
             "transition-all duration-200 hover:bg-[var(--color-amber-dim)]",
             "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber",
             "disabled:cursor-not-allowed disabled:opacity-50",

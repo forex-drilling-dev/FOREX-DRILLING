@@ -3,9 +3,10 @@ import {
   PageHero,
   SectionLabel,
   SectionHeading,
-  DrillBitPin,
   Reveal,
   SectionLink,
+  ServiceItemsList,
+  type ServiceItem,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -31,29 +32,31 @@ function ServicesHero() {
   );
 }
 
-const drillingItems = [
-  "Diamond drilling",
-  "Sonic drilling",
-  "Directional drilling and coring",
-  "Horizontal drilling (including depressurisation)",
-  "Air and mud rotary drilling",
-  "Reverse circulation (RC) drilling",
-  "Standard Penetration Testing (SPT)",
-  "Push tube sampling",
-  "Pumping and packer testing",
-  "Downhole surveying (gyro, core orientation, deviation control)",
-  "Gas and hot ground drilling (H2S and well control)",
+// Each item with a slug opens an in-page detail modal with a short
+// explanation. Items without a slug render as plain text.
+const drillingItems: ServiceItem[] = [
+  { label: "Diamond drilling", slug: "diamond-drilling" },
+  { label: "Sonic drilling", slug: "sonic-drilling" },
+  { label: "Directional drilling and coring", slug: "directional-drilling" },
+  { label: "Horizontal drilling (including depressurisation)", slug: "horizontal-drilling" },
+  { label: "Air and mud rotary drilling", slug: "air-mud-rotary" },
+  { label: "Reverse circulation (RC) drilling", slug: "reverse-circulation" },
+  { label: "Standard Penetration Testing (SPT)", slug: "spt-push-tube" },
+  { label: "Push tube sampling", slug: "spt-push-tube" },
+  { label: "Pumping and packer testing", slug: "pumping-packer-testing" },
+  { label: "Downhole surveying (gyro, core orientation, deviation control)", slug: "downhole-surveying" },
+  { label: "Gas and hot ground drilling (H2S and well control)" },
 ];
-const instrumentationItems = [
-  "Vibrating Wire Piezometers (VWP)",
-  "Inclinometers",
-  "Standpipe piezometers",
-  "Monitoring systems installation and commissioning",
+const instrumentationItems: ServiceItem[] = [
+  { label: "Vibrating Wire Piezometers (VWP)", slug: "instrumentation-installation" },
+  { label: "Inclinometers", slug: "instrumentation-installation" },
+  { label: "Standpipe piezometers", slug: "instrumentation-installation" },
+  { label: "Monitoring systems installation and commissioning", slug: "instrumentation-installation" },
 ];
-const downholeItems = [
-  "Geophysical logging",
-  "Borehole surveying and deviation control",
-  "Borehole integrity verification",
+const downholeItems: ServiceItem[] = [
+  { label: "Geophysical logging", slug: "geophysical-logging" },
+  { label: "Borehole surveying and deviation control", slug: "downhole-surveying" },
+  { label: "Borehole integrity verification", slug: "geophysical-logging" },
 ];
 
 interface CategorySectionProps {
@@ -64,7 +67,7 @@ interface CategorySectionProps {
   line1: string;
   line2: string;
   body: string;
-  items: string[];
+  items: ServiceItem[];
 }
 
 function CategorySection({
@@ -86,22 +89,9 @@ function CategorySection({
           )}
         </Reveal>
 
-        {/* Bullet list — 2 cols on md+, 1 col on mobile */}
-        <ul className="grid gap-x-12 gap-y-3 md:grid-cols-2">
-          {items.map((item) => (
-            <li key={item} className="flex items-center gap-3 border-t border-border pt-4">
-              <span className="flex shrink-0" aria-hidden>
-                <DrillBitPin size={20} />
-              </span>
-              <span
-                className="font-sans font-medium text-deep-navy"
-                style={{ fontSize: "15px", lineHeight: "1.55" }}
-              >
-                {item}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {/* Bullet list — 2 cols on md+, 1 col on mobile. Items with a
+            detail page open an in-page modal (no navigation round-trip). */}
+        <ServiceItemsList items={items} />
       </div>
     </section>
   );

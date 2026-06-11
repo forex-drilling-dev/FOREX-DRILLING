@@ -94,6 +94,89 @@ function CapabilitiesSection() {
   );
 }
 
+// Rig data sourced from the 2026 Capability Statement ("Our fleet —
+// Modern, versatile rigs", p.05). Update both together.
+const rigs = [
+  {
+    name: "MRS 200 DUO",
+    meta: "Fleet: 1 unit · Royal Eijkelkamp",
+    points: [
+      "Sonic + rotary coring in a single hole — no rig swap to prove bedrock",
+      "Continuous, high-recovery sampling through fill, clay and mixed overburden",
+      "Compact footprint for tight and access-constrained sites",
+      "Hydraulic rod handler keeps crews' hands off the string",
+    ],
+  },
+  {
+    name: "LRS-275 DUO",
+    meta: "Fleet: 2 units · Royal Eijkelkamp",
+    points: [
+      "Heavy dual-head platform for deeper, larger-diameter sonic and diamond core",
+      "Clean, continuous recovery through overburden, then diamond core into rock",
+      "Remote ManipAll handling removes hands from the rod string",
+      "Angle drilling",
+    ],
+  },
+  {
+    name: "Fraste Mito 8C",
+    meta: "Fleet: 1 unit · Fraste",
+    points: [
+      "Lightweight crawler that reaches remote, tight or low-bearing ground",
+      "Fast to mobilise — ideal rapid second rig or standalone for smaller scopes",
+      "Diamond core and rotary drilling in one versatile platform — Sonic option available",
+      "One platform across geotech, water-bore, micropiling and horizontal scopes",
+    ],
+  },
+];
+
+function RigsSection() {
+  return (
+    <section className="relative bg-white py-12 md:py-32">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:gap-14 md:px-14">
+        <Reveal className="flex max-w-[820px] flex-col gap-5">
+          <SectionLabel number="02" label="Our Rigs" />
+          <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
+            Modern, multi-method drilling rigs, kept running by experienced
+            crews and a disciplined preventative-maintenance program.
+          </p>
+        </Reveal>
+
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+          {rigs.map((rig) => (
+            <Reveal key={rig.name} className="flex flex-col gap-4">
+              <div className="border-b-2 border-amber pb-3">
+                <h3
+                  className="font-display font-black uppercase text-deep-navy"
+                  style={{ fontSize: "clamp(20px, 5vw, 24px)", letterSpacing: "-0.005em", lineHeight: "1.1" }}
+                >
+                  {rig.name}
+                </h3>
+                <p
+                  className="mt-1.5 font-display font-bold uppercase"
+                  style={{ fontSize: "12px", letterSpacing: "0.14em", color: "var(--color-amber-dim)" }}
+                >
+                  {rig.meta}
+                </p>
+              </div>
+              <ul className="flex flex-col">
+                {rig.points.map((point, i) => (
+                  <li
+                    key={point}
+                    className={`px-4 py-3 font-sans ${i % 2 === 0 ? "bg-deep" : "bg-white"}`}
+                    style={{ fontSize: "14px", lineHeight: "1.6", color: "var(--color-muted)" }}
+                  >
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function MaintenanceSection() {
   return (
     <section className="relative overflow-hidden bg-white py-12 md:py-32">
@@ -117,7 +200,7 @@ function MaintenanceSection() {
         </div>
 
         <Reveal className="flex flex-col gap-8 md:col-span-7 md:order-1">
-          <SectionLabel number="02" label="Maintenance" />
+          <SectionLabel number="03" label="Maintenance" />
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}>
             Our equipment is supported by experienced crews, robust logistics,
             and a strong maintenance culture.
@@ -147,6 +230,7 @@ export default function FleetPage() {
     <>
       <FleetHero />
       <CapabilitiesSection />
+      <RigsSection />
       <MaintenanceSection />
       <NextPageStrip />
     </>

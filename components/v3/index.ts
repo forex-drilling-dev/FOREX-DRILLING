@@ -35,6 +35,9 @@ export { CtaBanner }        from "./CtaBanner";
 // CTAs
 export { PrimaryButton }    from "./PrimaryButton";
 export { SectionLink }      from "./SectionLink";
+export { HoverVideoLink }   from "./HoverVideoLink";
+export { ServiceItemsList } from "./ServiceItemsList";
+export type { ServiceItem } from "./ServiceItemsList";
 
 // Inner-page hero composition
 export { PageHero }         from "./PageHero";

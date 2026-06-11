@@ -49,7 +49,7 @@ export function Nav() {
             width={880}
             height={200}
             decoding="async"
-            className="h-7 w-auto select-none sm:h-8 md:h-9"
+            className="h-8 w-auto select-none sm:h-9 md:h-11"
           />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -62,7 +62,7 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "font-display text-xs font-bold uppercase tracking-[0.12em] transition-colors duration-fast",
+                  "font-display text-sm font-bold uppercase tracking-[0.12em] transition-colors duration-fast",
                   active ? "text-amber" : "text-deep-navy hover:text-amber",
                 )}
               >

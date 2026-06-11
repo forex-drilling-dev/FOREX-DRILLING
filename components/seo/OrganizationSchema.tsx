@@ -14,6 +14,24 @@ import { JsonLd } from "./JsonLd";
 
 const SITE_URL = "https://forex-drilling.com";
 
+// Adresses postales réelles des bureaux — source unique réutilisée dans les
+// schémas structurés pour le SEO local (résultats « près de moi », établissement).
+const singaporeAddress = {
+  "@type": "PostalAddress",
+  streetAddress: "1 North Bridge Road, #11-04, High Street Centre",
+  addressLocality: "Singapore",
+  postalCode: "179094",
+  addressCountry: "SG",
+};
+
+const papuaNewGuineaAddress = {
+  "@type": "PostalAddress",
+  streetAddress: "Level 5, Avara Annex Building, Brampton Street",
+  addressLocality: "Port Moresby",
+  addressRegion: "National Capital District",
+  addressCountry: "PG",
+};
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -24,11 +42,7 @@ const organizationSchema = {
   description:
     "Specialty drilling contractor delivering safe, reliable and high-quality drilling services across the Asia-Pacific region.",
   email: "admin@forexdrilling.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Singapore",
-    addressCountry: "SG",
-  },
+  address: singaporeAddress,
   areaServed: [
     { "@type": "Country", name: "Singapore" },
     { "@type": "Country", name: "Papua New Guinea" },
@@ -59,11 +73,7 @@ const localBusinessSchema = {
   image: `${SITE_URL}/opengraph-image`,
   email: "admin@forexdrilling.com",
   priceRange: "$$$",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Singapore",
-    addressCountry: "SG",
-  },
+  address: singaporeAddress,
   parentOrganization: { "@id": `${SITE_URL}/#organization` },
   serviceArea: [
     { "@type": "Country", name: "Singapore" },
@@ -121,11 +131,27 @@ const localBusinessSchema = {
   },
 };
 
+// Bureau opérationnel PNG — nœud distinct (chaque établissement = son propre
+// nœud, relié à l'organisation mère via parentOrganization) pour le SEO local
+// côté Papouasie-Nouvelle-Guinée.
+const pngOfficeSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#office-png`,
+  name: "Forex Drilling — Papua New Guinea",
+  url: SITE_URL,
+  email: "admin@forexdrilling.com",
+  address: papuaNewGuineaAddress,
+  parentOrganization: { "@id": `${SITE_URL}/#organization` },
+  areaServed: [{ "@type": "Country", name: "Papua New Guinea" }],
+};
+
 export function OrganizationSchema() {
   return (
     <>
       <JsonLd data={organizationSchema} />
       <JsonLd data={localBusinessSchema} />
+      <JsonLd data={pngOfficeSchema} />
     </>
   );
 }

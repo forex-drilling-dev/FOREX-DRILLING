@@ -6,6 +6,7 @@ import {
   ProtocolGrid,
   Reveal,
   SectionLink,
+  HoverVideoLink,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -89,9 +90,15 @@ function CommitmentSection() {
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             We are committed to continuously improving safety performance through
             the adoption of better practices, technologies, and equipment. This
-            includes the implementation of rod handling systems and other
-            innovations aimed at reducing manual handling, minimizing exposure
-            to hazards, and improving overall operational safety.
+            includes the implementation of{" "}
+            <HoverVideoLink
+              videoId="mOPGB88tMgU"
+              videoTitle="Rod handling system in operation"
+            >
+              rod handling systems
+            </HoverVideoLink>{" "}
+            and other innovations aimed at reducing manual handling, minimizing
+            exposure to hazards, and improving overall operational safety.
           </p>
           <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
             Environmental responsibility is integrated into our operations

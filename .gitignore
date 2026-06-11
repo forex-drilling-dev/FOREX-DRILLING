@@ -38,9 +38,18 @@ yarn-error.log*
 .env.local
 .env.*.local
 
+# contact form secret — placed on the server via FTP, never committed
+contact.secret.php
+public/contact.secret.php
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local tooling / assets non versionnés
+.claude/worktrees/
+.vscode/
+LIVRAISON-LOGO-FOREX-DRILLING/

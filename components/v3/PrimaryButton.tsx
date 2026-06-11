@@ -16,7 +16,7 @@ type Props = {
  * lift + arrow nudge on hover.
  *
  * Variants:
- *   amber          → primary CTA, yellow bg + white text
+ *   amber          → primary CTA, yellow bg + deep-navy text (WCAG AA on amber)
  *   navy           → secondary, navy bg + white text
  *   ghost-on-navy  → outline, used inside navy panels
  *   ghost-on-light → outline, used on white sections
@@ -24,7 +24,7 @@ type Props = {
 export function PrimaryButton({ href, children, variant = "amber", className }: Props) {
   const variants: Record<Variant, string> = {
     amber:
-      "bg-amber text-white hover:bg-[var(--color-amber-dim)]",
+      "bg-amber text-deep-navy hover:bg-[var(--color-amber-dim)]",
     navy:
       "bg-deep-navy text-on-navy hover:bg-surface",
     "ghost-on-navy":
