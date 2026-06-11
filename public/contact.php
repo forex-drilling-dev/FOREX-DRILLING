@@ -135,7 +135,16 @@ if (is_readable($secretPath)) {
     }
 }
 if ($contactTo === '') $contactTo = 'admin@forexdrilling.com';
-$fromEmail = getenv('CONTACT_FROM_EMAIL') ?: 'website@forexdrilling.com';
+// TODO : une fois forexdrilling.com vérifié dans Resend (resend.com/domains),
+// repasser le défaut à 'website@forexdrilling.com' (ou définir CONTACT_FROM
+// dans contact.secret.php). Tant que le domaine n'est pas vérifié, Resend
+// n'accepte QUE onboarding@resend.dev comme expéditeur, et UNIQUEMENT vers
+// l'adresse du compte Resend (admin@forexdrilling.com).
+$fromEmail = getenv('CONTACT_FROM_EMAIL') ?: '';
+if ($fromEmail === '' && isset($secret) && is_array($secret) && !empty($secret['CONTACT_FROM'])) {
+    $fromEmail = $secret['CONTACT_FROM'];
+}
+if ($fromEmail === '') $fromEmail = 'onboarding@resend.dev';
 
 if ($apiKey === '') {
     // Mauvaise config serveur : on logge mais on ne révèle rien au client.
