@@ -8,6 +8,7 @@ import {
   DrillBitPin,
   Reveal,
   SectionLink,
+  ImageLightbox,
 } from "@/components/v3";
 
 export const metadata: Metadata = {
@@ -151,19 +152,14 @@ function RigsSection() {
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           {rigs.map((rig) => (
             <Reveal key={rig.name} className="flex flex-col gap-4">
-              {/* Photo from the Capability Statement — light grey frame like
-                  the PDF cards, 4/3 crop so the three cards stay aligned. */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-deep" style={{ boxShadow: "var(--shadow-card)" }}>
-                <Image
-                  src={optimizedSrc(rig.image)}
-                  alt={rig.imageAlt}
-                  fill
-                  sizes="(min-width:768px) 33vw, 100vw"
-                  className="object-cover"
-                  placeholder={blurPlaceholder(rig.image) ? "blur" : "empty"}
-                  blurDataURL={blurPlaceholder(rig.image)}
-                />
-              </div>
+              {/* Photo from the Capability Statement — 4/3 crop in the card,
+                  click to open the full image in a lightbox. */}
+              <ImageLightbox
+                src={optimizedSrc(rig.image)}
+                alt={rig.imageAlt}
+                sizes="(min-width:768px) 33vw, 100vw"
+                blurDataURL={blurPlaceholder(rig.image)}
+              />
               <div className="border-b-2 border-amber pb-3">
                 <h3
                   className="font-display font-black uppercase text-deep-navy"

@@ -37,6 +37,7 @@ export { PrimaryButton }    from "./PrimaryButton";
 export { SectionLink }      from "./SectionLink";
 export { HoverVideoLink }   from "./HoverVideoLink";
 export { ServiceItemsList } from "./ServiceItemsList";
+export { ImageLightbox }    from "./ImageLightbox";
 export type { ServiceItem } from "./ServiceItemsList";
 
 // Inner-page hero composition
