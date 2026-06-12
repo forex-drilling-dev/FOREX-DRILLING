@@ -150,7 +150,10 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
 
         <div
           className="absolute top-[180px] z-[5]"
-          style={{ right: "clamp(60px, 7vw, 200px)" }}
+          // Explicit width: an absolutely-positioned box shrink-wraps, and
+          // the ring's max-width:100% resolves against it — without this
+          // the circle collapses to 0 (364 = size 320 + 2×22 ring offset).
+          style={{ right: "clamp(60px, 7vw, 200px)", width: "364px" }}
         >
           <CircleImageRing
             src={photo.src}

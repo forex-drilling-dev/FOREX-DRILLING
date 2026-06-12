@@ -210,7 +210,10 @@ function HeroPoster() {
           covered when the circle sat higher). */}
       <div
         className="absolute bottom-[60px] z-[5]"
-        style={{ left: "clamp(60px, 7vw, 160px)" }}
+        // Explicit width: abspos boxes shrink-wrap, and the ring's
+        // max-width:100% collapses to 0 inside one without it
+        // (296 = size 260 + 2×18 ring offset).
+        style={{ left: "clamp(60px, 7vw, 160px)", width: "296px" }}
       >
         <CircleImageRing
           src="/images/rig-vertical-operator.jpg"

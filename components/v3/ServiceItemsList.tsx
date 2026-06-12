@@ -145,24 +145,31 @@ function ServiceModal({ service, onClose }: { service: Service; onClose: () => v
           </svg>
         </button>
 
+        {/* Header framed like the fleet rig cards — label, title, amber rule */}
+        <div className="border-b-2 border-amber pb-4">
+          <p
+            className="font-display font-bold uppercase"
+            style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
+          >
+            {service.category}
+          </p>
+          <h3
+            id="service-modal-title"
+            className="mt-2 font-display font-black uppercase text-deep-navy"
+            style={{ fontSize: "clamp(22px, 5vw, 30px)", letterSpacing: "-0.005em", lineHeight: "1.1" }}
+          >
+            {service.title}
+          </h3>
+        </div>
+        {/* Lead summary framed like the Krux / MWD blocks (amber side bar) */}
         <p
-          className="font-display font-bold uppercase"
-          style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
+          className="mt-5 border-l-4 border-[var(--color-amber-dim)] pl-4 font-sans font-medium text-deep-navy"
+          style={{ fontSize: "15px", lineHeight: "1.6" }}
         >
-          {service.category}
-        </p>
-        <h3
-          id="service-modal-title"
-          className="mt-2 font-display font-black uppercase text-deep-navy"
-          style={{ fontSize: "clamp(22px, 5vw, 30px)", letterSpacing: "-0.005em", lineHeight: "1.1" }}
-        >
-          {service.title}
-        </h3>
-        {/* Short, factual explanation only — no navigation out of the page. */}
-        <p className="mt-4 font-sans font-medium text-deep-navy" style={{ fontSize: "15px", lineHeight: "1.6" }}>
           {service.summary}
         </p>
-        <p className="mt-3 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
+        {/* Short, factual explanation only — no navigation out of the page. */}
+        <p className="mt-4 font-sans" style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}>
           {service.body}
         </p>
       </div>
