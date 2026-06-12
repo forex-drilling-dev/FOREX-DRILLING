@@ -18,16 +18,19 @@ interface Props {
  * provides the OSM-derived vector tiles publicly, free of charge.
  *
  * Anchored coordinates:
- *   Singapore     1.35° N, 103.82° E   — HQ marker
- *   Port Moresby  9.44° S, 147.18° E   — Operations marker
+ *   Singapore     1.29° N, 103.85° E   — HQ marker (High Street Centre)
+ *   Port Moresby  9.48° S, 147.15° E   — Operations marker (Brampton St)
  *   Dashed amber line traces the great-circle Singapore → Port Moresby.
  *
  * Performance: lazy-init in a useEffect, single instance, cleaned up on
  * unmount. cooperativeGestures keeps Cmd/two-finger scroll required so
  * the map never traps page scroll.
  */
-const SINGAPORE: [number, number] = [103.82, 1.35];
-const PORT_MORESBY: [number, number] = [147.18, -9.44];
+// Anchored on the real office addresses (see /contact):
+//   HQ — 1 North Bridge Road, #11-04 High Street Centre, Singapore 179094
+//   Operations — Level 5, Avara Annex Building, Brampton Street, Port Moresby
+const SINGAPORE: [number, number] = [103.8500, 1.2903];
+const PORT_MORESBY: [number, number] = [147.1496, -9.4790];
 
 // Brand palette mirrors app/globals.css tokens
 const C_OCEAN     = "#11284E";       // --color-deep-navy
@@ -169,11 +172,11 @@ export function OperationsMap({ className }: Props) {
       });
 
       // Markers
-      new maplibregl.Marker({ element: makeMarker("SINGAPORE", "HQ · 1.35° N", "below") })
+      new maplibregl.Marker({ element: makeMarker("SINGAPORE", "HQ · 1.29° N", "below") })
         .setLngLat(SINGAPORE)
         .addTo(map);
 
-      new maplibregl.Marker({ element: makeMarker("PORT MORESBY", "OPERATIONS · 9.44° S", "left") })
+      new maplibregl.Marker({ element: makeMarker("PORT MORESBY", "OPERATIONS · 9.48° S", "left") })
         .setLngLat(PORT_MORESBY)
         .addTo(map);
 
