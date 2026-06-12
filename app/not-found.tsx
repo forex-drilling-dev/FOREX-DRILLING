@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { PrimaryButton } from "@/components/v3";
+import { PrimaryButton, Crosshair } from "@/components/v3";
 
 export const metadata: Metadata = { title: "404 · Page Not Found" };
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[100svh] items-center bg-white pt-[var(--spacing-nav)]">
+    <section className="relative flex min-h-[100svh] items-center bg-white pt-[var(--spacing-nav)]">
+      {/* Cartographic wink — a survey mark with no fix on this page */}
+      <div className="absolute top-[calc(var(--spacing-nav)+48px)] right-6 md:right-14">
+        <Crosshair size={36} coords="LOCATION UNKNOWN · NO FIX" />
+      </div>
       <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-6 md:px-14">
         <p
           className="font-display font-bold uppercase text-amber"

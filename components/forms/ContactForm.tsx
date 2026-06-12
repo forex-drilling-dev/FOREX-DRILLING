@@ -76,7 +76,7 @@ export function ContactForm() {
   // which breaks the layout when the user taps a field. Editorial 15px
   // size kept on md+ where the auto-zoom doesn't apply.
   const inputCls =
-    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-base text-deep-navy outline-none transition-colors placeholder:text-subtle focus:border-[var(--color-amber-dim)] md:text-[15px]";
+    "w-full border-b border-deep-navy/20 bg-transparent px-0 py-3.5 font-display text-base text-deep-navy outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-subtle focus:border-[var(--color-amber-dim)] focus:[box-shadow:0_10px_18px_-12px_color-mix(in_srgb,var(--color-amber)_50%,transparent)] md:text-[15px]";
   // amber-dim (#B58800) — passes WCAG AA on the white form bg.
   const labelCls =
     "font-display font-bold uppercase text-[var(--color-amber-dim)]";

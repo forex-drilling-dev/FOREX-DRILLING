@@ -219,6 +219,26 @@ header[data-nav] {
     border-top-left-radius: 60% 70%;
   }
 
+  /* ─── Animated underline — draws in left → right ─────────────────
+     Gradient-as-background trick: the amber line grows from 0% to 100%
+     width on hover (or via .draw-underline-active for persistent state).
+     Pair with .draw-underline-base for a faint resting line underneath. */
+  .draw-underline {
+    background-image: linear-gradient(var(--color-amber), var(--color-amber));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 2px;
+    transition: background-size 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .draw-underline:hover,
+  .group:hover .draw-underline,
+  .draw-underline-active {
+    background-size: 100% 2px;
+  }
+  .draw-underline-base {
+    box-shadow: inset 0 -2px 0 0 color-mix(in srgb, var(--color-amber) 35%, transparent);
+  }
+
   /* ─── Scroll parallax on hero photos ─────────────────────────────
      CSS scroll-driven animation — no JS. The image is over-scaled
      (1.12) so the upward drift never reveals container edges. Browsers
@@ -237,4 +257,10 @@ header[data-nav] {
 @keyframes parallax-drift {
   from { transform: translateY(0) scale(1.12); }
   to   { transform: translateY(-7%) scale(1.12); }
+}
+
+/* Mobile menu items — slide in from the left, staggered via inline delay. */
+@keyframes menu-item-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
 }

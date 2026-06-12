@@ -39,7 +39,7 @@ export function PrimaryButton({ href, children, variant = "amber", className }: 
       className={cn(
         "group inline-flex items-center gap-2 font-display font-bold uppercase",
         "px-7 py-3.5 transition-all duration-300 ease-out",
-        "hover:gap-3 hover:-translate-y-[2px]",
+        "hover:gap-3 hover:-translate-y-[2px] hover:shadow-deep",
         "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber",
         variants[variant],
         className,

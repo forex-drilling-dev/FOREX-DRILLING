@@ -61,9 +61,12 @@ export function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "font-display text-sm font-bold uppercase tracking-[0.12em] transition-colors duration-fast",
-                  active ? "text-amber" : "text-deep-navy hover:text-amber",
+                  "draw-underline pb-1 font-display text-sm font-bold uppercase tracking-[0.12em] transition-colors duration-fast",
+                  active
+                    ? "draw-underline-active text-amber"
+                    : "text-deep-navy hover:text-amber",
                 )}
               >
                 {item.label}
@@ -103,13 +106,16 @@ export function Nav() {
       {open && (
         <div className="md:hidden">
           <Container className="flex flex-col border-t border-border bg-white py-2 shadow-card">
-            {site.nav.map((item) => (
+            {site.nav.map((item, i) => (
               <Link
                 key={item.href}
                 href={item.href}
                 // min-h-11 + py-3 gives a 44px+ tap target per WCAG 2.5.5
                 // while keeping the visual rhythm of the menu compact.
                 className="-mx-2 flex min-h-11 items-center px-2 py-3 font-display text-sm font-bold uppercase tracking-[0.12em] text-deep-navy hover:text-amber"
+                // Staggered slide-in — 50ms per item, killed by the global
+                // prefers-reduced-motion rule in globals.css.
+                style={{ animation: "menu-item-in 300ms ease-out both", animationDelay: `${i * 50}ms` }}
               >
                 {item.label}
               </Link>

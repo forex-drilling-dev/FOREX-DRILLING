@@ -38,13 +38,13 @@ export function SectionLink({ href, label, className, prefix }: Props) {
         // keeping the visual line-height tight via leading-none.
         className={cn(
           "group inline-flex min-h-11 items-center gap-2 px-1 py-3 font-display font-bold uppercase leading-none text-deep-navy",
-          "underline decoration-amber decoration-2 underline-offset-[6px]",
-          "transition-colors duration-200 hover:text-amber hover:decoration-amber",
+          "transition-colors duration-200 hover:text-amber",
           "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber",
         )}
         style={{ fontSize: "13px", letterSpacing: "0.18em" }}
       >
-        <span>{label}</span>
+        {/* Faint resting line + amber line that draws in on hover */}
+        <span className="draw-underline draw-underline-base pb-[5px]">{label}</span>
         <svg
           width="14"
           height="10"
