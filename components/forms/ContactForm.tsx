@@ -6,6 +6,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { asiaPacificCountries, allCountries } from "@/content/countries";
 
+// "Other countries" excludes the Asia-Pacific group so no country is
+// listed twice in the dropdown.
+const asiaPacificCodes = new Set(asiaPacificCountries.map((c) => c.code));
+const otherCountries = allCountries.filter((c) => !asiaPacificCodes.has(c.code));
+
 const schema = z.object({
   name:    z.string().min(2, "Please provide your name"),
   email:   z.string().email("Please provide a valid email"),
@@ -204,8 +209,8 @@ export function ContactForm() {
                 </option>
               ))}
             </optgroup>
-            <optgroup label="All countries">
-              {allCountries.map((c) => (
+            <optgroup label="Other countries">
+              {otherCountries.map((c) => (
                 <option key={c.code} value={c.name}>
                   {c.flag} {c.name}
                 </option>

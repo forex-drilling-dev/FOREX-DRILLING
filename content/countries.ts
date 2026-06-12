@@ -1,6 +1,7 @@
 export type Country = { code: string; name: string; flag: string };
 
 // Generated from Intl.DisplayNames (en) + regional-indicator emoji.
+// Deprecated ISO alias codes (UK, BU, ZR, …) excluded — no duplicate names.
 // asiaPacific is shown first in the contact form — region of operations.
 export const asiaPacificCountries: Country[] = [
   {
@@ -162,11 +163,6 @@ export const allCountries: Country[] = [
     "flag": "🇦🇼"
   },
   {
-    "code": "AC",
-    "name": "Ascension Island",
-    "flag": "🇦🇨"
-  },
-  {
     "code": "AU",
     "name": "Australia",
     "flag": "🇦🇺"
@@ -220,11 +216,6 @@ export const allCountries: Country[] = [
     "code": "BJ",
     "name": "Benin",
     "flag": "🇧🇯"
-  },
-  {
-    "code": "DY",
-    "name": "Benin",
-    "flag": "🇩🇾"
   },
   {
     "code": "BM",
@@ -282,11 +273,6 @@ export const allCountries: Country[] = [
     "flag": "🇧🇫"
   },
   {
-    "code": "HV",
-    "name": "Burkina Faso",
-    "flag": "🇭🇻"
-  },
-  {
     "code": "BI",
     "name": "Burundi",
     "flag": "🇧🇮"
@@ -305,11 +291,6 @@ export const allCountries: Country[] = [
     "code": "CA",
     "name": "Canada",
     "flag": "🇨🇦"
-  },
-  {
-    "code": "IC",
-    "name": "Canary Islands",
-    "flag": "🇮🇨"
   },
   {
     "code": "CV",
@@ -332,11 +313,6 @@ export const allCountries: Country[] = [
     "flag": "🇨🇫"
   },
   {
-    "code": "EA",
-    "name": "Ceuta & Melilla",
-    "flag": "🇪🇦"
-  },
-  {
     "code": "TD",
     "name": "Chad",
     "flag": "🇹🇩"
@@ -355,11 +331,6 @@ export const allCountries: Country[] = [
     "code": "CX",
     "name": "Christmas Island",
     "flag": "🇨🇽"
-  },
-  {
-    "code": "CP",
-    "name": "Clipperton Island",
-    "flag": "🇨🇵"
   },
   {
     "code": "CC",
@@ -385,11 +356,6 @@ export const allCountries: Country[] = [
     "code": "CD",
     "name": "Congo - Kinshasa",
     "flag": "🇨🇩"
-  },
-  {
-    "code": "ZR",
-    "name": "Congo - Kinshasa",
-    "flag": "🇿🇷"
   },
   {
     "code": "CK",
@@ -435,11 +401,6 @@ export const allCountries: Country[] = [
     "code": "DK",
     "name": "Denmark",
     "flag": "🇩🇰"
-  },
-  {
-    "code": "DG",
-    "name": "Diego Garcia",
-    "flag": "🇩🇬"
   },
   {
     "code": "DJ",
@@ -520,11 +481,6 @@ export const allCountries: Country[] = [
     "code": "FR",
     "name": "France",
     "flag": "🇫🇷"
-  },
-  {
-    "code": "FX",
-    "name": "France",
-    "flag": "🇫🇽"
   },
   {
     "code": "GF",
@@ -877,11 +833,6 @@ export const allCountries: Country[] = [
     "flag": "🇲🇿"
   },
   {
-    "code": "BU",
-    "name": "Myanmar (Burma)",
-    "flag": "🇧🇺"
-  },
-  {
     "code": "MM",
     "name": "Myanmar (Burma)",
     "flag": "🇲🇲"
@@ -1065,11 +1016,6 @@ export const allCountries: Country[] = [
     "code": "ST",
     "name": "São Tomé & Príncipe",
     "flag": "🇸🇹"
-  },
-  {
-    "code": "CQ",
-    "name": "Sark",
-    "flag": "🇨🇶"
   },
   {
     "code": "SA",
@@ -1262,11 +1208,6 @@ export const allCountries: Country[] = [
     "flag": "🇹🇹"
   },
   {
-    "code": "TA",
-    "name": "Tristan da Cunha",
-    "flag": "🇹🇦"
-  },
-  {
     "code": "TN",
     "name": "Tunisia",
     "flag": "🇹🇳"
@@ -1317,11 +1258,6 @@ export const allCountries: Country[] = [
     "flag": "🇬🇧"
   },
   {
-    "code": "UK",
-    "name": "United Kingdom",
-    "flag": "🇺🇰"
-  },
-  {
     "code": "US",
     "name": "United States",
     "flag": "🇺🇸"
@@ -1335,11 +1271,6 @@ export const allCountries: Country[] = [
     "code": "UZ",
     "name": "Uzbekistan",
     "flag": "🇺🇿"
-  },
-  {
-    "code": "NH",
-    "name": "Vanuatu",
-    "flag": "🇳🇭"
   },
   {
     "code": "VU",
@@ -1357,11 +1288,6 @@ export const allCountries: Country[] = [
     "flag": "🇻🇪"
   },
   {
-    "code": "VD",
-    "name": "Vietnam",
-    "flag": "🇻🇩"
-  },
-  {
     "code": "VN",
     "name": "Vietnam",
     "flag": "🇻🇳"
@@ -1377,11 +1303,6 @@ export const allCountries: Country[] = [
     "flag": "🇪🇭"
   },
   {
-    "code": "YD",
-    "name": "Yemen",
-    "flag": "🇾🇩"
-  },
-  {
     "code": "YE",
     "name": "Yemen",
     "flag": "🇾🇪"
@@ -1390,11 +1311,6 @@ export const allCountries: Country[] = [
     "code": "ZM",
     "name": "Zambia",
     "flag": "🇿🇲"
-  },
-  {
-    "code": "RH",
-    "name": "Zimbabwe",
-    "flag": "🇷🇭"
   },
   {
     "code": "ZW",
