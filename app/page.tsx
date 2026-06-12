@@ -196,7 +196,7 @@ function HeroPoster() {
             alt="Multi-rig night drilling operation in Papua New Guinea"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
+            className="parallax-img object-cover"
             priority
             placeholder="blur"
             blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}
@@ -240,7 +240,7 @@ function HeroStack() {
           alt="Multi-rig night drilling operation in Papua New Guinea"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="parallax-img object-cover"
           priority
           placeholder="blur"
           blurDataURL={blurPlaceholder("/images/hero-night-site.jpg")}

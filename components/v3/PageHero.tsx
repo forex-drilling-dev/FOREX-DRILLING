@@ -51,7 +51,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
             alt={photo.alt}
             fill
             sizes="100vw"
-            className="object-cover"
+            className="parallax-img object-cover"
             priority
             placeholder="blur"
             blurDataURL={blurPlaceholder(photo.src)}

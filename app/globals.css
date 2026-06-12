@@ -218,4 +218,23 @@ header[data-nav] {
   .wave-yellow-br {
     border-top-left-radius: 60% 70%;
   }
+
+  /* ─── Scroll parallax on hero photos ─────────────────────────────
+     CSS scroll-driven animation — no JS. The image is over-scaled
+     (1.12) so the upward drift never reveals container edges. Browsers
+     without animation-timeline simply render a static image. */
+  @supports (animation-timeline: view()) {
+    .parallax-img {
+      animation: parallax-drift linear both;
+      animation-timeline: view();
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-img { animation: none !important; }
+  }
+}
+
+@keyframes parallax-drift {
+  from { transform: translateY(0) scale(1.12); }
+  to   { transform: translateY(-7%) scale(1.12); }
 }

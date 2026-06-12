@@ -53,8 +53,7 @@ export function ImageLightbox({ src, alt, sizes, blurDataURL, thumbAspect = "asp
         onClick={() => setOpen(true)}
         aria-label={`${alt} — view full size`}
         aria-haspopup="dialog"
-        className={`group relative ${thumbAspect} w-full cursor-zoom-in overflow-hidden rounded-xl bg-deep`}
-        style={{ boxShadow: "var(--shadow-card)" }}
+        className={`group relative ${thumbAspect} w-full cursor-zoom-in overflow-hidden rounded-xl bg-deep shadow-card transition-shadow duration-300 hover:shadow-deep`}
       >
         <Image
           src={src}
