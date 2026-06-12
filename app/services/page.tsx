@@ -43,21 +43,21 @@ const drillingItems: ServiceItem[] = [
   { label: "Air and mud rotary drilling", slug: "air-mud-rotary" },
   { label: "Reverse circulation (RC) drilling", slug: "reverse-circulation" },
   { label: "Standard Penetration Testing (SPT)", slug: "spt-push-tube" },
-  { label: "Push tube sampling", slug: "spt-push-tube" },
+  { label: "Push tube sampling", slug: "push-tube-sampling" },
   { label: "Pumping and packer testing", slug: "pumping-packer-testing" },
   { label: "Downhole surveying (gyro, core orientation, deviation control)", slug: "downhole-surveying" },
-  { label: "Gas and hot ground drilling (H2S and well control)" },
+  { label: "Gas and hot ground drilling (H2S and well control)", slug: "gas-hot-ground-drilling" },
 ];
 const instrumentationItems: ServiceItem[] = [
-  { label: "Vibrating Wire Piezometers (VWP)", slug: "instrumentation-installation" },
-  { label: "Inclinometers", slug: "instrumentation-installation" },
-  { label: "Standpipe piezometers", slug: "instrumentation-installation" },
-  { label: "Monitoring systems installation and commissioning", slug: "instrumentation-installation" },
+  { label: "Vibrating Wire Piezometers (VWP)", slug: "vibrating-wire-piezometers" },
+  { label: "Inclinometers", slug: "inclinometers" },
+  { label: "Standpipe piezometers", slug: "standpipe-piezometers" },
+  { label: "Monitoring systems installation and commissioning", slug: "monitoring-systems" },
 ];
 const downholeItems: ServiceItem[] = [
   { label: "Geophysical logging", slug: "geophysical-logging" },
   { label: "Borehole surveying and deviation control", slug: "downhole-surveying" },
-  { label: "Borehole integrity verification", slug: "geophysical-logging" },
+  { label: "Borehole integrity verification", slug: "borehole-integrity-verification" },
 ];
 
 interface CategorySectionProps {
