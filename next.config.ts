@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   output: "export",
   distDir: "out",
   trailingSlash: true,
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     unoptimized: true,
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],

@@ -104,32 +104,15 @@
   50%     { transform: translateY(-8px); }
 }
 
-/* ─── View transitions — soft cross-fade on route change ──────────── */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 350ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-::view-transition-old(root) {
-  animation-name: vt-fade-out;
-}
-::view-transition-new(root) {
-  animation-name: vt-fade-in;
-}
-@keyframes vt-fade-out {
-  to { opacity: 0; }
+/* ─── Page entrance — quiet fade-in on route change ────────────────
+   Applied by app/template.tsx, which remounts per navigation. Opacity
+   only — no transform, so navigating from a scrolled page never reads
+   as a "scroll back up" slide. */
+.page-enter {
+  animation: vt-fade-in 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes vt-fade-in {
   from { opacity: 0; }
-}
-
-/* The fixed nav stays visually stable across navigations */
-header[data-nav] {
-  view-transition-name: site-nav;
-}
-::view-transition-old(site-nav),
-::view-transition-new(site-nav) {
-  animation: none;
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */

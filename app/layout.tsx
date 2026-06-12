@@ -3,7 +3,6 @@ import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
-import { PageTransition } from "@/components/layout/PageTransition";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import "./globals.css";
 
@@ -45,9 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-black text-fore antialiased">
         <SkipLink />
         <Nav />
-        <main id="main">
-          <PageTransition>{children}</PageTransition>
-        </main>
+        <main id="main">{children}</main>
         <Footer />
         <OrganizationSchema />
       </body>

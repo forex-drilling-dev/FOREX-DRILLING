@@ -6,10 +6,23 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { asiaPacificCountries, allCountries } from "@/content/countries";
 
-// "Other countries" excludes the Asia-Pacific group so no country is
-// listed twice in the dropdown.
+// Search pool for the country combobox — Asia-Pacific (region of
+// operations) ranked first, then the rest of the world, no duplicates.
 const asiaPacificCodes = new Set(asiaPacificCountries.map((c) => c.code));
-const otherCountries = allCountries.filter((c) => !asiaPacificCodes.has(c.code));
+const countrySearchPool = [
+  ...asiaPacificCountries,
+  ...allCountries.filter((c) => !asiaPacificCodes.has(c.code)),
+];
+
+function matchCountries(query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return countrySearchPool.slice(0, 8); // empty field → AP shortlist
+  const starts = countrySearchPool.filter((c) => c.name.toLowerCase().startsWith(q));
+  const contains = countrySearchPool.filter(
+    (c) => !c.name.toLowerCase().startsWith(q) && c.name.toLowerCase().includes(q),
+  );
+  return [...starts, ...contains].slice(0, 8);
+}
 
 const schema = z.object({
   name:    z.string().min(2, "Please provide your name"),
@@ -30,11 +43,21 @@ type Status = "idle" | "submitting" | "success" | "error";
 const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/contact.php";
 
 export function ContactForm() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: { scope: "mining" },
   });
   const [status, setStatus] = useState<Status>("idle");
+
+  // Country combobox state — type-ahead suggestions under the field.
+  const [countryOpen, setCountryOpen] = useState(false);
+  const [countryHi, setCountryHi] = useState(0);
+  const countrySuggestions = matchCountries(watch("country") ?? "");
+  const pickCountry = (name: string) => {
+    setValue("country", name, { shouldValidate: true, shouldDirty: true });
+    setCountryOpen(false);
+  };
+  const countryReg = register("country");
 
   const onSubmit = handleSubmit(async (data) => {
     setStatus("submitting");
@@ -186,37 +209,90 @@ export function ContactForm() {
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Country *
           </span>
-          {/* Country picker — Asia-Pacific (region of operations) listed
-              first, then every country. Flags are regional-indicator emoji:
-              zero assets, rendered natively (Windows falls back to "SG"-style
-              letters, which still reads fine). The submitted value stays the
+          {/* Country combobox — type to filter, flag suggestions below.
+              Flags are regional-indicator emoji (zero assets; Windows shows
+              "PG"-style letters, still readable). Submitted value is the
               plain English country name so contact.php needs no change. */}
-          <select
-            {...register("country")}
-            autoComplete="country-name"
-            defaultValue=""
-            className={cn(inputCls, "cursor-pointer appearance-none")}
-            aria-invalid={errors.country ? "true" : "false"}
-            aria-describedby={errors.country ? "country-error" : undefined}
-          >
-            <option value="" disabled>
-              Select project location…
-            </option>
-            <optgroup label="Asia-Pacific">
-              {asiaPacificCountries.map((c) => (
-                <option key={c.code} value={c.name}>
-                  {c.flag} {c.name}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="Other countries">
-              {otherCountries.map((c) => (
-                <option key={c.code} value={c.name}>
-                  {c.flag} {c.name}
-                </option>
-              ))}
-            </optgroup>
-          </select>
+          <div className="relative">
+            <input
+              {...countryReg}
+              type="text"
+              role="combobox"
+              autoComplete="off"
+              placeholder="Type your project location…"
+              aria-expanded={countryOpen}
+              aria-controls="country-listbox"
+              aria-autocomplete="list"
+              aria-activedescendant={countryOpen ? `country-opt-${countryHi}` : undefined}
+              aria-invalid={errors.country ? "true" : "false"}
+              aria-describedby={errors.country ? "country-error" : undefined}
+              className={inputCls}
+              onChange={(e) => {
+                void countryReg.onChange(e);
+                setCountryOpen(true);
+                setCountryHi(0);
+              }}
+              onFocus={() => setCountryOpen(true)}
+              onBlur={(e) => {
+                void countryReg.onBlur(e);
+                setCountryOpen(false);
+              }}
+              onKeyDown={(e) => {
+                if (!countryOpen && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+                  setCountryOpen(true);
+                  return;
+                }
+                if (!countryOpen) return;
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setCountryHi((i) => Math.min(i + 1, countrySuggestions.length - 1));
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setCountryHi((i) => Math.max(i - 1, 0));
+                } else if (e.key === "Enter") {
+                  const c = countrySuggestions[countryHi];
+                  if (c) {
+                    e.preventDefault();
+                    pickCountry(c.name);
+                  }
+                } else if (e.key === "Escape") {
+                  setCountryOpen(false);
+                }
+              }}
+            />
+            {countryOpen && countrySuggestions.length > 0 && (
+              <ul
+                id="country-listbox"
+                role="listbox"
+                aria-label="Country suggestions"
+                className="absolute inset-x-0 top-full z-20 mt-1 max-h-72 overflow-y-auto rounded-lg border border-border bg-white py-1 shadow-deep"
+              >
+                {countrySuggestions.map((c, i) => (
+                  <li key={c.code} id={`country-opt-${i}`} role="option" aria-selected={i === countryHi}>
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      // pointerdown fires before the input's blur — selecting
+                      // a suggestion must win over the close-on-blur.
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        pickCountry(c.name);
+                      }}
+                      onMouseEnter={() => setCountryHi(i)}
+                      className={cn(
+                        "flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-left font-sans text-deep-navy",
+                        i === countryHi && "bg-deep",
+                      )}
+                      style={{ fontSize: "15px" }}
+                    >
+                      <span aria-hidden style={{ fontSize: "17px" }}>{c.flag}</span>
+                      {c.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           {errors.country && (
             <span id="country-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
               {errors.country.message}
