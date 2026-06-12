@@ -25,7 +25,8 @@ function ServicesHero() {
       body={
         <>
           A comprehensive range of drilling and associated services, supporting
-          mining, exploration, civil infrastructure, and groundwater programs.
+          mining, exploration, civil infrastructure, groundwater, and
+          geothermal programs.
         </>
       }
     />

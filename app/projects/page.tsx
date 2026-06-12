@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Project Delivery Approach — Forex Drilling's delivery model for mining, exploration, civil, and groundwater programs across the Asia-Pacific region.",
+    "Project Delivery Approach — Forex Drilling's delivery model for mining, exploration, civil, groundwater, and geothermal programs across the Asia-Pacific region.",
   // Hold the placeholder out of the index until real client case studies
   // are published.
   robots: { index: false, follow: true },

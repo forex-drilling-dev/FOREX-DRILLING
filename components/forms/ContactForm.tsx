@@ -11,7 +11,7 @@ const schema = z.object({
   company: z.string().min(2, "Please provide your company"),
   role:    z.string().min(2, "Please provide your role"),
   country: z.string().min(2, "Please provide your country"),
-  scope:   z.enum(["mining", "exploration", "civil", "groundwater", "other"]),
+  scope:   z.enum(["mining", "exploration", "civil", "groundwater", "geothermal", "other"]),
   message: z.string().min(20, "Please share a few details (20+ chars)"),
   // Honeypot — hidden from humans, filled by bots. Real users leave it empty.
   website: z.string().optional(),
@@ -210,6 +210,7 @@ export function ContactForm() {
           <option value="exploration">Exploration</option>
           <option value="civil">Civil</option>
           <option value="groundwater">Groundwater</option>
+          <option value="geothermal">Geothermal</option>
           <option value="other">Other</option>
         </select>
       </label>

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE = "https://forex-drilling.com";
+const BASE = "https://forexdrilling.com";
 
 export const dynamic = "force-static";
 

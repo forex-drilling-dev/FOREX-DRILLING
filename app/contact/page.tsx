@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div>
               <dt className={dtCls} style={dtStyle}>Scope</dt>
               <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px" }}>
-                Mining · Exploration · Civil · Groundwater
+                Mining · Exploration · Civil · Groundwater · Geothermal
               </dd>
             </div>
             <div>

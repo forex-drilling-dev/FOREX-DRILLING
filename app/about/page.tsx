@@ -25,8 +25,8 @@ function AboutHero() {
       body={
         <>
           Forex Drilling is a specialist drilling contractor supporting mining,
-          exploration, and civil projects with a broad range of drilling
-          services. Headquartered in Singapore and operating across the
+          exploration, civil, groundwater, and geothermal programs with a broad
+          range of drilling services. Headquartered in Singapore and operating across the
           Asia-Pacific region, the company is structured to deliver efficient,
           field-proven solutions in remote and challenging environments.
         </>

@@ -124,6 +124,8 @@ function HeroPoster() {
             <span className="text-amber">Civil</span>
             <span className="mx-2 opacity-50">·</span>
             <span className="text-amber">Groundwater</span>
+            <span className="mx-2 opacity-50">·</span>
+            <span className="text-amber">Geothermal</span>
           </p>
         </div>
       </NavyBlob>
@@ -282,6 +284,8 @@ function HeroStack() {
           <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Civil</span>
           <span className="font-mono uppercase text-on-navy-muted opacity-50" style={{ fontSize: "11px" }}>·</span>
           <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Groundwater</span>
+          <span className="font-mono uppercase text-on-navy-muted opacity-50" style={{ fontSize: "11px" }}>·</span>
+          <span className="font-mono uppercase text-amber" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>Geothermal</span>
         </div>
       </div>
 

@@ -82,7 +82,7 @@ export default function OgImage() {
             maxWidth: 640,
           }}
         >
-          Specialised drilling services across the Asia-Pacific region.
+          Specialty drilling services across the Asia-Pacific region.
           Based in Singapore, operating in Papua New Guinea.
         </div>
       </div>

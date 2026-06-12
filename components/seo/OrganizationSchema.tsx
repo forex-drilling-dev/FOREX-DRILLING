@@ -12,7 +12,7 @@
 
 import { JsonLd } from "./JsonLd";
 
-const SITE_URL = "https://forex-drilling.com";
+const SITE_URL = "https://forexdrilling.com";
 
 // Adresses postales réelles des bureaux — source unique réutilisée dans les
 // schémas structurés pour le SEO local (résultats « près de moi », établissement).
@@ -61,6 +61,7 @@ const organizationSchema = {
     "Mining drilling",
     "Exploration drilling",
     "Groundwater drilling",
+    "Geothermal drilling",
   ],
 };
 

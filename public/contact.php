@@ -108,7 +108,7 @@ $country = field($data, 'country');
 $scope   = field($data, 'scope');
 $message = field($data, 'message');
 
-$allowedScopes = ['mining', 'exploration', 'civil', 'groundwater', 'other'];
+$allowedScopes = ['mining', 'exploration', 'civil', 'groundwater', 'geothermal', 'other'];
 $errors = [];
 if (mb_strlen($name) < 2)                                   $errors[] = 'name';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))             $errors[] = 'email';
