@@ -4,13 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { asiaPacificCountries, allCountries } from "@/content/countries";
 
 const schema = z.object({
   name:    z.string().min(2, "Please provide your name"),
   email:   z.string().email("Please provide a valid email"),
   company: z.string().min(2, "Please provide your company"),
   role:    z.string().min(2, "Please provide your role"),
-  country: z.string().min(2, "Please provide your country"),
+  country: z.string().min(2, "Please select your country"),
   scope:   z.enum(["mining", "exploration", "civil", "groundwater", "geothermal", "other"]),
   message: z.string().min(20, "Please share a few details (20+ chars)"),
   // Honeypot — hidden from humans, filled by bots. Real users leave it empty.
@@ -180,15 +181,37 @@ export function ContactForm() {
           <span className={labelCls} style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
             Country *
           </span>
-          <input
+          {/* Country picker — Asia-Pacific (region of operations) listed
+              first, then every country. Flags are regional-indicator emoji:
+              zero assets, rendered natively (Windows falls back to "SG"-style
+              letters, which still reads fine). The submitted value stays the
+              plain English country name so contact.php needs no change. */}
+          <select
             {...register("country")}
-            type="text"
             autoComplete="country-name"
-            className={inputCls}
-            placeholder="Project location"
+            defaultValue=""
+            className={cn(inputCls, "cursor-pointer appearance-none")}
             aria-invalid={errors.country ? "true" : "false"}
             aria-describedby={errors.country ? "country-error" : undefined}
-          />
+          >
+            <option value="" disabled>
+              Select project location…
+            </option>
+            <optgroup label="Asia-Pacific">
+              {asiaPacificCountries.map((c) => (
+                <option key={c.code} value={c.name}>
+                  {c.flag} {c.name}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="All countries">
+              {allCountries.map((c) => (
+                <option key={c.code} value={c.name}>
+                  {c.flag} {c.name}
+                </option>
+              ))}
+            </optgroup>
+          </select>
           {errors.country && (
             <span id="country-error" role="alert" className={errCls} style={{ fontSize: "12px" }}>
               {errors.country.message}
