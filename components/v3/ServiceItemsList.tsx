@@ -145,17 +145,14 @@ function ServiceModal({ service, onClose }: { service: Service; onClose: () => v
           </svg>
         </button>
 
-        {/* Header framed like the fleet rig cards — label, title, amber rule */}
+        {/* Header framed like the fleet rig cards — title + amber rule.
+            No category badge: a service can be listed under a different
+            section than its intrinsic category (e.g. downhole surveying
+            under Drilling Services), and a mismatched badge reads as a bug. */}
         <div className="border-b-2 border-amber pb-4">
-          <p
-            className="font-display font-bold uppercase"
-            style={{ fontSize: "11px", letterSpacing: "0.18em", color: "var(--color-amber-dim)" }}
-          >
-            {service.category}
-          </p>
           <h3
             id="service-modal-title"
-            className="mt-2 font-display font-black uppercase text-deep-navy"
+            className="font-display font-black uppercase text-deep-navy"
             style={{ fontSize: "clamp(22px, 5vw, 30px)", letterSpacing: "-0.005em", lineHeight: "1.1" }}
           >
             {service.title}

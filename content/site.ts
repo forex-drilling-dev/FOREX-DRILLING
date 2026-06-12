@@ -1,6 +1,6 @@
 export const site = {
   name: "Forex Drilling",
-  tagline: "Specialized drilling services · Asia-Pacific",
+  tagline: "Specialty drilling services · Asia-Pacific",
   hq: "Singapore",
   operations: ["Papua New Guinea", "Asia-Pacific"],
   nav: [
