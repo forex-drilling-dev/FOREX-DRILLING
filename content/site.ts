@@ -10,6 +10,7 @@ export const site = {
     { label: "HSE", href: "/hse" },
     { label: "Quality", href: "/quality" },
     { label: "Projects", href: "/projects" },
+    { label: "News", href: "/news" },
     { label: "Contact", href: "/contact" },
   ],
   footer: {

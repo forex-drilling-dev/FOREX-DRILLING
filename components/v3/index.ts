@@ -38,6 +38,8 @@ export { SectionLink }      from "./SectionLink";
 export { HoverVideoLink }   from "./HoverVideoLink";
 export { ServiceItemsList } from "./ServiceItemsList";
 export { ImageLightbox }    from "./ImageLightbox";
+export { NewsCard }         from "./NewsCard";
+export { PortableBody }     from "./PortableBody";
 export type { ServiceItem } from "./ServiceItemsList";
 
 // Inner-page hero composition
