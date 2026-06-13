@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { YellowBadge, PortableBody, CtaBanner, SectionLink } from "@/components/v3";
+import { YellowBadge, PortableBody, SectionLink } from "@/components/v3";
 import { getNewsBySlug, getNewsSlugs } from "@/lib/news";
 import { urlForImage } from "@/lib/sanity";
 import { formatNewsDate } from "@/lib/date";
@@ -95,13 +95,6 @@ export default async function NewsArticlePage({ params }: Params) {
           <SectionLink href="/news" label="All news" prefix="Back to" />
         </div>
       </article>
-
-      <CtaBanner
-        headline="Talk to our team."
-        body="Have a program to discuss or a question about our operations? We respond within one business day."
-        cta="Start a conversation"
-        href="/contact"
-      />
     </>
   );
 }

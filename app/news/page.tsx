@@ -4,7 +4,6 @@ import {
   SectionLabel,
   Reveal,
   NewsCard,
-  CtaBanner,
   SectionLink,
 } from "@/components/v3";
 import { getAllNews } from "@/lib/news";
@@ -76,16 +75,9 @@ export default async function NewsPage() {
         </div>
       </section>
 
-      <CtaBanner
-        headline="Talk to our team."
-        body="Have a program to discuss or a question about our operations? We respond within one business day."
-        cta="Start a conversation"
-        href="/contact"
-      />
-
       <section className="relative bg-deep py-14 md:py-20">
         <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
-          <SectionLink href="/about" label="About" />
+          <SectionLink href="/contact" label="Contact" prefix="Get in touch" />
         </div>
       </section>
     </>
