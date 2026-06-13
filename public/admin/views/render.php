@@ -208,27 +208,21 @@ function render_edit(?array $article): void {
     <!-- Contenu -->
     <div class="field">
       <span class="field__label">Contenu de l’article</span>
-      <span class="field__hint">Écrivez normalement. Utilisez les boutons pour mettre en forme — l’aperçu à droite montre le rendu réel.</span>
-      <div class="md-toolbar" aria-label="Mise en forme">
-        <button type="button" data-md="bold" title="Gras"><strong>Gras</strong></button>
-        <button type="button" data-md="italic" title="Italique"><em>Italique</em></button>
+      <span class="field__hint">Écrivez directement ci-dessous, comme dans un document. Sélectionnez du texte puis cliquez sur un bouton pour le mettre en forme.</span>
+      <div class="md-toolbar" id="md-toolbar" aria-label="Mise en forme" role="toolbar">
+        <button type="button" data-md="bold" title="Gras (Ctrl+B)"><strong>Gras</strong></button>
+        <button type="button" data-md="italic" title="Italique (Ctrl+I)"><em>Italique</em></button>
+        <span class="md-sep" aria-hidden="true"></span>
         <button type="button" data-md="h2" title="Grand titre">Titre</button>
         <button type="button" data-md="h3" title="Sous-titre">Sous-titre</button>
         <button type="button" data-md="ul" title="Liste à puces">• Liste</button>
-        <button type="button" data-md="link" title="Lien">🔗 Lien</button>
         <button type="button" data-md="quote" title="Citation">❝ Citation</button>
+        <span class="md-sep" aria-hidden="true"></span>
+        <button type="button" data-md="link" title="Insérer un lien">🔗 Lien</button>
         <button type="button" data-md="image" title="Insérer une image">🖼 Image</button>
       </div>
-      <div class="md-pane">
-        <div>
-          <p class="md-col-label">Votre texte</p>
-          <textarea class="field__input md-input" name="body" id="md-input" rows="16" placeholder="Rédigez votre article ici…"><?= h($body) ?></textarea>
-        </div>
-        <div>
-          <p class="md-col-label">Aperçu</p>
-          <div class="md-preview" id="md-preview" aria-live="polite"></div>
-        </div>
-      </div>
+      <div class="wysiwyg" id="wysiwyg" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Contenu de l’article" data-placeholder="Rédigez votre article ici…"></div>
+      <textarea name="body" id="md-input" hidden><?= h($body) ?></textarea>
     </div>
 
     <!-- Actions -->
