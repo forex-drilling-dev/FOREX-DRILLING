@@ -107,6 +107,7 @@ function render_dashboard(array $items): void {
     <div class="empty">
       <p class="empty__title">Aucun article pour l’instant.</p>
       <p class="empty__sub">Créez le premier — il apparaîtra sur le site dès qu’il sera publié.</p>
+      <a class="btn btn--primary" href="/admin/?action=new">+ Créer le premier article</a>
     </div>
   <?php else: ?>
     <ul class="cards">
@@ -154,93 +155,89 @@ function render_edit(?array $article): void {
     $body    = $draft['body']     ?? ($article['body'] ?? '');
     $covUrl  = $draft['coverUrl'] ?? ($article['cover']['url'] ?? '');
     $covAlt  = $draft['coverAlt'] ?? ($article['cover']['alt'] ?? '');
-    $pubVal  = '';
-    $pubSrc  = $draft['pubInput'] ?? ($article['publishedAt'] ?? '');
-    if ($pubSrc !== '') { $ts = strtotime($pubSrc); if ($ts) $pubVal = gmdate('Y-m-d\TH:i', $ts); }
+    $isPub   = $status === 'published';
 
-    layout_head($isNew ? 'Nouvel article' : 'Édition');
+    layout_head($isNew ? 'Nouvel article' : 'Modifier');
     topbar();
     ?>
 <main class="wrap">
   <div class="page-head">
     <div>
-      <p class="eyebrow"><a class="back" href="/admin/">← Articles</a></p>
-      <h1 class="h1"><?= $isNew ? 'Nouvel article' : 'Édition' ?></h1>
+      <p class="eyebrow"><a class="back" href="/admin/">← Tous les articles</a></p>
+      <h1 class="h1"><?= $isNew ? 'Nouvel article' : 'Modifier l’article' ?></h1>
     </div>
   </div>
 
   <form class="editor" method="post" action="/admin/?action=save" id="editor-form">
     <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
     <input type="hidden" name="mode" value="<?= $isNew ? 'new' : 'edit' ?>">
+    <?php if (!$isNew): ?><input type="hidden" name="slug" value="<?= h($slug) ?>"><?php endif; ?>
     <input type="hidden" name="cover_url" id="cover_url" value="<?= h($covUrl) ?>">
 
-    <div class="editor__grid">
-      <section class="editor__main">
-        <label class="field">
-          <span class="field__label">Titre</span>
-          <input class="field__input" type="text" name="title" maxlength="160" required value="<?= h($title) ?>">
-        </label>
+    <p class="help">Remplissez les champs, puis cliquez sur <strong>Publier</strong> pour mettre l’article en ligne immédiatement, ou <strong>Enregistrer en brouillon</strong> pour le garder caché.</p>
 
-        <div class="field">
-          <span class="field__label">Corps (Markdown)</span>
-          <div class="md-toolbar" aria-label="Mise en forme">
-            <button type="button" data-md="bold" title="Gras">B</button>
-            <button type="button" data-md="italic" title="Italique"><em>I</em></button>
-            <button type="button" data-md="h2" title="Titre 2">H2</button>
-            <button type="button" data-md="h3" title="Titre 3">H3</button>
-            <button type="button" data-md="link" title="Lien">🔗</button>
-            <button type="button" data-md="ul" title="Liste">• Liste</button>
-            <button type="button" data-md="quote" title="Citation">❝</button>
-            <button type="button" data-md="image" title="Insérer une image">🖼 Image</button>
-          </div>
-          <div class="md-pane">
-            <textarea class="field__input md-input" name="body" id="md-input" rows="18" placeholder="Écrivez en Markdown…"><?= h($body) ?></textarea>
-            <div class="md-preview" id="md-preview" aria-live="polite"></div>
-          </div>
+    <!-- Titre -->
+    <label class="field">
+      <span class="field__label">Titre de l’article</span>
+      <input class="field__input field__input--title" type="text" name="title" maxlength="160" required value="<?= h($title) ?>" placeholder="Ex. Mobilisation d’une nouvelle foreuse en Papouasie">
+    </label>
+
+    <!-- Image de couverture -->
+    <div class="field">
+      <span class="field__label">Image principale</span>
+      <div class="cover">
+        <img class="cover__img" id="cover-img" src="<?= h($covUrl) ?>" alt="" <?= $covUrl === '' ? 'hidden' : '' ?>>
+        <p class="cover__empty" id="cover-empty" <?= $covUrl !== '' ? 'hidden' : '' ?>>Aucune image pour l’instant</p>
+      </div>
+      <input class="upload-input" type="file" id="cover-file" accept="image/png,image/jpeg,image/webp,image/avif">
+      <label class="btn btn--ghost btn--block" for="cover-file">📷 Choisir une image</label>
+      <label class="field" style="margin-top:12px;margin-bottom:0">
+        <span class="field__label">Description de l’image (pour l’accessibilité)</span>
+        <input class="field__input" type="text" name="cover_alt" id="cover_alt" value="<?= h($covAlt) ?>" placeholder="Ex. Foreuse sur un site au coucher du soleil">
+      </label>
+    </div>
+
+    <!-- Résumé -->
+    <label class="field">
+      <span class="field__label">Résumé court</span>
+      <span class="field__hint">Affiché sur la liste des actualités et lors du partage sur les réseaux.</span>
+      <textarea class="field__input" name="excerpt" rows="3" minlength="20" maxlength="300" required placeholder="Une ou deux phrases qui résument l’article."><?= h($excerpt) ?></textarea>
+    </label>
+
+    <!-- Contenu -->
+    <div class="field">
+      <span class="field__label">Contenu de l’article</span>
+      <span class="field__hint">Écrivez normalement. Utilisez les boutons pour mettre en forme — l’aperçu à droite montre le rendu réel.</span>
+      <div class="md-toolbar" aria-label="Mise en forme">
+        <button type="button" data-md="bold" title="Gras"><strong>Gras</strong></button>
+        <button type="button" data-md="italic" title="Italique"><em>Italique</em></button>
+        <button type="button" data-md="h2" title="Grand titre">Titre</button>
+        <button type="button" data-md="h3" title="Sous-titre">Sous-titre</button>
+        <button type="button" data-md="ul" title="Liste à puces">• Liste</button>
+        <button type="button" data-md="link" title="Lien">🔗 Lien</button>
+        <button type="button" data-md="quote" title="Citation">❝ Citation</button>
+        <button type="button" data-md="image" title="Insérer une image">🖼 Image</button>
+      </div>
+      <div class="md-pane">
+        <div>
+          <p class="md-col-label">Votre texte</p>
+          <textarea class="field__input md-input" name="body" id="md-input" rows="16" placeholder="Rédigez votre article ici…"><?= h($body) ?></textarea>
         </div>
-      </section>
-
-      <aside class="editor__side">
-        <div class="panel">
-          <span class="field__label">Statut</span>
-          <div class="radio-row">
-            <label class="radio"><input type="radio" name="status" value="draft" <?= $status !== 'published' ? 'checked' : '' ?>><span>Brouillon</span></label>
-            <label class="radio"><input type="radio" name="status" value="published" <?= $status === 'published' ? 'checked' : '' ?>><span>Publié</span></label>
-          </div>
+        <div>
+          <p class="md-col-label">Aperçu</p>
+          <div class="md-preview" id="md-preview" aria-live="polite"></div>
         </div>
+      </div>
+    </div>
 
-        <label class="field panel">
-          <span class="field__label">Slug (URL)</span>
-          <input class="field__input" type="text" name="slug" value="<?= h($slug) ?>" <?= $isNew ? 'placeholder="généré depuis le titre"' : 'readonly' ?>>
-          <?php if (!$isNew): ?><span class="field__hint">/news/<?= h($slug) ?>/</span><?php endif; ?>
-        </label>
-
-        <label class="field panel">
-          <span class="field__label">Date de publication</span>
-          <input class="field__input" type="datetime-local" name="publishedAt" value="<?= h($pubVal) ?>">
-        </label>
-
-        <label class="field panel">
-          <span class="field__label">Extrait (40–300)</span>
-          <textarea class="field__input" name="excerpt" rows="4" minlength="40" maxlength="300" required><?= h($excerpt) ?></textarea>
-        </label>
-
-        <div class="panel">
-          <span class="field__label">Image de couverture</span>
-          <div class="cover" id="cover-box">
-            <img class="cover__img" id="cover-img" src="<?= h($covUrl) ?>" alt="" <?= $covUrl === '' ? 'hidden' : '' ?>>
-            <p class="cover__empty" id="cover-empty" <?= $covUrl !== '' ? 'hidden' : '' ?>>Aucune image</p>
-          </div>
-          <input class="upload-input" type="file" id="cover-file" accept="image/png,image/jpeg,image/webp,image/avif">
-          <label class="btn btn--ghost btn--block" for="cover-file">Téléverser une image</label>
-          <label class="field">
-            <span class="field__label">Texte alternatif</span>
-            <input class="field__input" type="text" name="cover_alt" id="cover_alt" value="<?= h($covAlt) ?>" placeholder="Description de l’image">
-          </label>
-        </div>
-
-        <button class="btn btn--primary btn--block" type="submit">Enregistrer</button>
-      </aside>
+    <!-- Actions -->
+    <div class="actions">
+      <span class="status-now">
+        <?php if ($isNew): ?>Nouvel article<?php else: ?>État actuel : <?= $isPub ? 'En ligne' : 'Brouillon' ?><?php endif; ?>
+      </span>
+      <span class="spacer"></span>
+      <button class="btn btn--lg" type="submit" name="status" value="draft">Enregistrer en brouillon</button>
+      <button class="btn btn--primary btn--lg" type="submit" name="status" value="published"><?= $isPub ? 'Mettre à jour' : 'Publier' ?></button>
     </div>
   </form>
 </main>

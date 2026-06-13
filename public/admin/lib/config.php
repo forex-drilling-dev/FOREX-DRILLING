@@ -42,7 +42,7 @@ define('CMS_UPLOADS_URL', '/uploads/news');
 define('CMS_SLUG_RE',     '/^[a-z0-9-]{1,96}$/');
 define('CMS_MAX_UPLOAD',  6 * 1024 * 1024); // 6 Mo
 define('CMS_TITLE_MAX',   160);
-define('CMS_EXCERPT_MIN', 40);
+define('CMS_EXCERPT_MIN', 20);
 define('CMS_EXCERPT_MAX', 300);
 
 /** Types image autorisés → extension de sortie (SVG volontairement EXCLU : vecteur XSS). */
