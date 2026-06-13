@@ -1,92 +1,62 @@
-import type { PortableTextBlock } from "@portabletext/react";
-import type { SanityImageSource } from "@sanity/image-url";
-import { sanityClient } from "./sanity";
+/**
+ * News data layer — RUNTIME (client-side) reads of the self-hosted PHP CMS.
+ *
+ * The site is a static export; the news section is rendered client-side and
+ * fetches the PHP read API (same-origin `/api/news.php` in production, the
+ * value of NEXT_PUBLIC_NEWS_ENDPOINT). The API only ever returns PUBLISHED
+ * articles — drafts never leave the host. There is no build-time Sanity call.
+ */
 
-export type NewsImage = SanityImageSource & {
-  alt?: string;
-};
+const ENDPOINT = process.env.NEXT_PUBLIC_NEWS_ENDPOINT ?? "/api/news.php";
 
-/** A published news article as consumed by the static pages. */
-export type NewsArticle = {
-  _id: string;
-  title: string;
+export interface NewsCover {
+  url: string;
+  alt: string;
+}
+
+export interface NewsArticle {
+  id: string;
   slug: string;
-  publishedAt: string;
+  status: "draft" | "published";
+  title: string;
   excerpt: string;
-  coverImage?: NewsImage;
-  body?: PortableTextBlock[];
-};
-
-// Only published, slugged documents — newest first. The "published"
-// perspective on the client already drops drafts.*; the status gate lets an
-// editor hold a finished doc back.
-const PUBLISHED = `_type == "news" && status == "published" && defined(slug.current)`;
-
-const LIST_PROJECTION = `{
-  _id,
-  title,
-  "slug": slug.current,
-  publishedAt,
-  excerpt,
-  coverImage
-}`;
-
-// Neutral placeholder shown until the first real article is published.
-// It guarantees the /news/[slug] route always has at least one page, which
-// `output: export` requires (a dynamic route with zero params is a build
-// error). As soon as Sanity returns a published article, this disappears.
-const FALLBACK_NEWS: NewsArticle[] = [
-  {
-    _id: "fallback-welcome",
-    title: "Forex Drilling news is coming soon",
-    slug: "welcome",
-    publishedAt: "2026-01-01T00:00:00.000Z",
-    excerpt:
-      "Updates on our projects, fleet and operations across the Asia-Pacific will be published here. This placeholder is replaced automatically once the first article goes live in the CMS.",
-    body: [
-      {
-        _type: "block",
-        _key: "fallback-b1",
-        style: "normal",
-        markDefs: [],
-        children: [
-          {
-            _type: "span",
-            _key: "fallback-s1",
-            marks: [],
-            text: "This is a placeholder entry. Once an editor publishes the first article in the Sanity Studio and the site is rebuilt, real news appears here automatically.",
-          },
-        ],
-      },
-    ] as PortableTextBlock[],
-  },
-];
-
-/** All published articles, newest first. Falls back to the demo entry when
- *  Sanity has nothing (unconfigured or no published docs) so the static
- *  export always has at least one news page. */
-export async function getAllNews(): Promise<NewsArticle[]> {
-  if (!sanityClient) return FALLBACK_NEWS;
-  const articles = await sanityClient.fetch<NewsArticle[]>(
-    `*[${PUBLISHED}] | order(publishedAt desc) ${LIST_PROJECTION}`,
-  );
-  return articles.length > 0 ? articles : FALLBACK_NEWS;
+  publishedAt: string;
+  updatedAt?: string;
+  cover: NewsCover | null;
+  /** Markdown source. Present on single-article reads, omitted from the list. */
+  body?: string;
 }
 
-/** Slugs for generateStaticParams (derived from getAllNews, so always ≥1). */
-export async function getNewsSlugs(): Promise<string[]> {
-  const articles = await getAllNews();
-  return articles.map((a) => a.slug);
+function withSlug(endpoint: string, slug: string): string {
+  const sep = endpoint.includes("?") ? "&" : "?";
+  return `${endpoint}${sep}slug=${encodeURIComponent(slug)}`;
 }
 
-/** A single article by slug. Falls back to the demo entry by slug. */
-export async function getNewsBySlug(slug: string): Promise<NewsArticle | null> {
-  if (sanityClient) {
-    const article = await sanityClient.fetch<NewsArticle | null>(
-      `*[${PUBLISHED} && slug.current == $slug][0] ${LIST_PROJECTION.replace("}", ",\n  body\n}")}`,
-      { slug },
-    );
-    if (article) return article;
+/** All published articles, newest first. Returns [] on any failure. */
+export async function fetchNewsList(): Promise<NewsArticle[]> {
+  try {
+    const res = await fetch(ENDPOINT, { headers: { Accept: "application/json" } });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { articles?: NewsArticle[] };
+    return Array.isArray(data.articles) ? data.articles : [];
+  } catch (err) {
+    console.error("[news] list fetch failed", err);
+    return [];
   }
-  return FALLBACK_NEWS.find((a) => a.slug === slug) ?? null;
+}
+
+/** A single published article by slug, or null if missing/unpublished/error. */
+export async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null> {
+  if (!slug) return null;
+  try {
+    const res = await fetch(withSlug(ENDPOINT, slug), {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { article?: NewsArticle };
+    return data.article ?? null;
+  } catch (err) {
+    console.error("[news] article fetch failed", err);
+    return null;
+  }
 }

@@ -54,6 +54,9 @@ $coverRel = is_array($article['cover'] ?? null) ? (string)($article['cover']['ur
 $cover    = $coverRel !== '' ? $e((str_starts_with($coverRel, 'http') ? $coverRel : $origin . $coverRel)) : '';
 
 $tags  = "\n<title>{$title}</title>\n";
+// La coquille statique est en noindex (protège l'URL nue /news/article/) ; pour
+// un vrai article on la rend indexable.
+$tags .= "<meta name=\"robots\" content=\"index, follow\">\n";
 $tags .= "<meta name=\"description\" content=\"{$desc}\">\n";
 $tags .= "<link rel=\"canonical\" href=\"{$canon}\">\n";
 $tags .= "<meta property=\"og:type\" content=\"article\">\n";
@@ -68,9 +71,16 @@ if ($cover !== '') {
     $tags .= "<meta name=\"twitter:image\" content=\"{$cover}\">\n";
 }
 
-// Retire le <title> statique de la coquille puis injecte nos balises juste
-// après <head> (elles priment, sans casser le reste du document).
+// Retire les balises SEO génériques de la coquille (title, description, robots,
+// canonical, og:*, twitter:*) pour éviter tout doublon/conflit, puis injecte
+// celles de l'article. Le HTML brut servi aux scrapers sociaux (sans JS) est
+// ainsi propre et correct ; après hydratation React peut regérer ses balises,
+// mais les robots sociaux lisent le HTML initial — c'est l'objectif visé.
 $shell = preg_replace('#<title>.*?</title>#is', '', $shell, 1);
+$shell = preg_replace('#<meta[^>]+name=["\'](?:description|robots)["\'][^>]*>#i', '', $shell);
+$shell = preg_replace('#<link[^>]+rel=["\']canonical["\'][^>]*>#i', '', $shell);
+$shell = preg_replace('#<meta[^>]+property=["\']og:[^"\']*["\'][^>]*>#i', '', $shell);
+$shell = preg_replace('#<meta[^>]+name=["\']twitter:[^"\']*["\'][^>]*>#i', '', $shell);
 $shell = preg_replace('#(<head[^>]*>)#i', '$1' . $tags, $shell, 1);
 
 header('Content-Type: text/html; charset=utf-8');

@@ -3,10 +3,9 @@ import {
   PageHero,
   SectionLabel,
   Reveal,
-  NewsCard,
+  NewsList,
   SectionLink,
 } from "@/components/v3";
-import { getAllNews } from "@/lib/news";
 
 export const metadata: Metadata = {
   title: "News",
@@ -15,26 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/news" },
 };
 
-function EmptyState() {
-  return (
-    <Reveal className="flex max-w-[640px] flex-col gap-4">
-      <p
-        className="font-display font-extrabold uppercase text-deep-navy"
-        style={{ fontSize: "clamp(22px, 5vw, 32px)", lineHeight: "1.1" }}
-      >
-        Nothing to report yet.
-      </p>
-      <p className="font-sans" style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-muted)" }}>
-        Updates on our projects, fleet and operations will appear here. In the
-        meantime, reach out to discuss your program.
-      </p>
-    </Reveal>
-  );
-}
-
-export default async function NewsPage() {
-  const articles = await getAllNews();
-
+export default function NewsPage() {
   return (
     <>
       <PageHero
@@ -59,19 +39,7 @@ export default async function NewsPage() {
             <SectionLabel number="01" label="Latest" />
           </Reveal>
 
-          {articles.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article) => (
-                <li key={article._id}>
-                  <Reveal>
-                    <NewsCard article={article} />
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
-          )}
+          <NewsList />
         </div>
       </section>
 

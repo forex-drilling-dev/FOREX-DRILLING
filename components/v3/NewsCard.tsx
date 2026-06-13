@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { NewsArticle } from "@/lib/news";
-import { urlForImage } from "@/lib/sanity";
 import { formatNewsDate } from "@/lib/date";
 
 /**
- * News list card — cover (Sanity CDN), mono date, display title, muted
- * excerpt, amber arrow on hover. Mirrors the editorial language of the
- * fleet rig cards / SectionLink. Server component, zero client JS.
+ * News list card — cover (same-origin /uploads), mono date, display title,
+ * muted excerpt, amber arrow on hover. Mirrors the editorial language of the
+ * fleet rig cards / SectionLink.
  */
 export function NewsCard({ article }: { article: NewsArticle }) {
-  const cover = urlForImage(article.coverImage)?.width(900).url() ?? null;
-  const alt = article.coverImage?.alt ?? article.title;
+  const cover = article.cover?.url ?? null;
+  const alt = article.cover?.alt ?? article.title;
 
   return (
     <Link
