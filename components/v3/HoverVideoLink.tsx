@@ -16,12 +16,21 @@ type Props = {
  * mounted while the preview is open, so the page never loads YouTube
  * assets until the visitor asks for them.
  *
+ * Accessibility: opening via keyboard or click moves focus to the popup's
+ * close button (mouse-hover opens do NOT steal focus), Escape and the
+ * close button dismiss it, and focus is restored to the trigger on close.
+ *
  * Uses youtube-nocookie.com — keep public/.htaccess frame-src in sync.
  */
 export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLSpanElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const closeTimer = useRef<number | null>(null);
+  // Whether the current open was deliberate (click/keyboard) and should
+  // therefore move focus into the popup. Hover opens leave focus alone.
+  const focusInRef = useRef(false);
 
   const cancelClose = () => {
     if (closeTimer.current !== null) {
@@ -35,11 +44,19 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
     cancelClose();
     closeTimer.current = window.setTimeout(() => setOpen(false), 200);
   };
+  const close = (restoreFocus: boolean) => {
+    cancelClose();
+    setOpen(false);
+    if (restoreFocus) triggerRef.current?.focus();
+  };
 
   useEffect(() => {
     if (!open) return;
+    // Deliberate open → move focus to the close button so keyboard and
+    // screen-reader users land inside the dialog.
+    if (focusInRef.current) closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close(true);
     };
     const onPointerDown = (e: PointerEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
@@ -61,17 +78,26 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
       ref={wrapRef}
       className="relative inline"
       onMouseEnter={() => {
+        focusInRef.current = false;
         cancelClose();
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
     >
       <button
+        ref={triggerRef}
         type="button"
         aria-expanded={open}
+        aria-haspopup="dialog"
         aria-label={`${videoTitle} — show video preview`}
-        onClick={() => setOpen((v) => !v)}
-        onFocus={() => setOpen(true)}
+        onClick={() => {
+          focusInRef.current = true;
+          setOpen((v) => !v);
+        }}
+        onFocus={() => {
+          focusInRef.current = true;
+          setOpen(true);
+        }}
         className="inline cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-deep-navy underline decoration-amber decoration-2 underline-offset-4 transition-colors hover:text-[var(--color-amber-dim)]"
         style={{ font: "inherit", fontWeight: 500 }}
       >
@@ -81,12 +107,32 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
       {open && (
         <span
           role="dialog"
+          aria-modal="true"
           aria-label={videoTitle}
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
           className="absolute bottom-full left-1/2 z-40 mb-3 block w-[min(560px,90vw)] -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-white p-1.5"
           style={{ boxShadow: "var(--shadow-bubble)" }}
         >
+          <span className="mb-1.5 flex items-center justify-between gap-2 px-1.5 pt-1">
+            <span
+              className="font-mono uppercase text-[var(--color-amber-dim)]"
+              style={{ fontSize: "10px", letterSpacing: "0.18em" }}
+            >
+              {videoTitle}
+            </span>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={() => close(true)}
+              aria-label="Close video preview"
+              className="-m-1 inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-deep-navy transition-colors hover:bg-deep"
+            >
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+                <path d="M3 3 L13 13 M13 3 L3 13" />
+              </svg>
+            </button>
+          </span>
           <span className="block aspect-video w-full overflow-hidden rounded-lg bg-deep-navy">
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0`}
