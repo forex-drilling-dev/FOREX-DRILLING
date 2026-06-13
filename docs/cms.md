@@ -1,55 +1,102 @@
-# CMS — Sanity Studio (deployment & content guide)
+# CMS — self-hosted PHP (operations guide)
 
-The website is a **static export** (`next build` → `out/`, FTP'd to Apache). It has
-**no server runtime**, so the admin panel cannot live on the public host. The Studio is
-therefore deployed to **Sanity's own hosting**, and the website only **reads published
-content at build time**.
+The News section is powered by a **self-hosted CMS that runs on the existing
+Apache/PHP host (Yulpa)** — no third-party service. PHP code ships with the
+site (via `public/`); content is stored as JSON on the host and served at
+runtime, so **publishing is instant — no rebuild required**.
 
 ```
-forexdrilling.sanity.studio   ← the CMS (editors log in here, gated by Sanity auth)
-forex-drilling.com            ← the static site (NO /studio, no admin code, no tokens)
+forex-drilling.com/admin        ← editor panel (Apache Basic Auth + PHP login)
+forex-drilling.com/api/news.php ← public read API (published articles only)
+forex-drilling.com/news/        ← list (client-rendered, fetches the API)
+forex-drilling.com/news/<slug>/ ← article (article.php injects SEO/OG meta)
 ```
 
-## Why it's set up this way (security)
+## Architecture in one picture
 
-- **No admin SPA on the public host.** The Studio is never bundled into `out/`, so
-  `forex-drilling.com/studio` does not exist. Zero admin attack surface on our domain.
-- **No secrets in the build.** `lib/sanity.ts` reads with only the **public**
-  `projectId` / `dataset` and the `published` perspective — no API token. Drafts are
-  never readable without a token, so they cannot leak.
-- **Auth is Sanity's.** Access to the Studio = membership in the Sanity project
-  (Manage → Members). Remove an editor there to revoke access instantly.
-- **No CORS to manage.** `*.sanity.studio` is allowed by Sanity automatically, and the
-  site reads server-side at build time (no browser request to the Sanity API in prod).
-
-## One-time deploy of the Studio
-
-```bash
-sanity login          # if not already authenticated
-pnpm studio:deploy    # prompts once for a hostname → forexdrilling.sanity.studio
+```
+EDITOR → /admin (2 auth barriers) → writes cms-data/news/<slug>.json + uploads/news/*.jpg
+VISITOR → /news → fetch /api/news.php (published only)
+        → /news/<slug>/ → article.php (per-article meta) → shell → fetch body
 ```
 
-Editors then go to that URL and sign in. To run the Studio locally instead:
-`pnpm studio:dev` (http://localhost:3333).
+- **Code vs data:** PHP files live in `public/` and are redeployed every build.
+  **Content is NOT in the repo** — it lives in `cms-data/` and `uploads/` on the
+  host and must survive redeploys.
+- `cms-data/` is hardened with `.htaccess` (`Require all denied`) — never web
+  readable. Its location is one constant (`CMS_DATA_DIR` in
+  `admin/lib/config.php`, overridable via the env var) so it can be moved above
+  the web root if the host allows it.
 
-## Content model
+## First-run setup (once, on the host)
 
-One document type: **News article** (`sanity/schemaTypes/newsType.ts`). Fields:
-`title`, `slug`, `status` (Draft/Published), `publishedAt`, `excerpt`, `coverImage`
-(with required alt text), `body` (rich text). The schema is kept in sync with the
-build-time query in `lib/news.ts` — **rename a field in one place and you must rename
-it in the other**, or it silently disappears from the site.
+1. **Deploy** the site (`rm -rf out && pnpm build`, then FTP `out/`). This ships
+   `admin/`, `api/news.php`, `article.php`, `sitemap-news.php`, and the hardened
+   `cms-data/.htaccess` + `uploads/.htaccess`.
 
-## Publishing workflow (important)
+2. **Set the editor password** (PHP login — barrier 2). Generate a hash and put
+   it in `cms-data/config.secret.php` (next to the data, never in the repo):
+   ```bash
+   php -r "echo password_hash('YOUR_PASSWORD', PASSWORD_DEFAULT), PHP_EOL;"
+   ```
+   ```php
+   <?php // cms-data/config.secret.php
+   return ['PASSWORD_HASH' => '$2y$....'];
+   ```
+   (See `admin/lib/config.secret.example.php`.)
 
-Because the site is statically generated, **publishing in the Studio does not update the
-live site by itself**. An article goes live only when:
+3. **Enable Apache Basic Auth on `/admin` (barrier 1).** Easiest on Yulpa:
+   cPanel → **Directory Privacy** → protect the `admin` folder, add a user.
+   cPanel writes the correct `.htaccess` + `.htpasswd` automatically. (Manual
+   alternative: create a `.htpasswd` outside the web root and uncomment the
+   `AuthType Basic` block in `admin/.htaccess`, setting the absolute path.)
 
-1. The article's **Status = Published** in the Studio, and
-2. The site is **rebuilt and redeployed** (`rm -rf out && pnpm build`, then FTP `out/`).
+4. **Check write permissions:** the web user must be able to create
+   `cms-data/news/`, `cms-data/ratelimit/`, and `uploads/news/` (the code
+   `mkdir`s them; ensure the parent is writable).
 
-Until the first published article exists, `/news` shows a built-in placeholder so the
-static export always has at least one page (see `FALLBACK_NEWS` in `lib/news.ts`).
+## Security model (defense in depth, OWASP Top 10)
 
-> To make publishing trigger an automatic rebuild later, you'd need a build hook on a
-> CI/host that can run `next build` — not possible from the Apache host alone.
+- **Two auth barriers** on `/admin` and writes: Apache Basic Auth, then PHP
+  session (hashed password, `HttpOnly; Secure; SameSite=Strict` cookie).
+- **CSRF token** on every mutating action; **per-IP rate-limit** on login;
+  **audit log** at `cms-data/audit.log`.
+- **Uploads**: real-MIME checked (`getimagesize`), SVG rejected, random names,
+  PHP execution disabled in `uploads/` via `.htaccess`.
+- **Stored content is untrusted at render**: Markdown is sanitized
+  (`rehype-sanitize`) on the site and HTML-escaped in `article.php`.
+- **Slugs** are allowlisted (`^[a-z0-9-]{1,96}$`) → no path traversal; writes
+  are atomic under `flock`.
+
+Full mapping: `docs/superpowers/specs/2026-06-14-self-hosted-php-cms-design.md` §11b.
+
+## Editing workflow
+
+1. Go to `/admin`, sign in (both barriers).
+2. **New article** → title, body (Markdown toolbar + live preview), excerpt,
+   cover image (uploaded), date, status.
+3. Set **Status = Published** and save → the article is **live immediately** at
+   `/news/` and `/news/<slug>/`. No rebuild, no redeploy.
+4. Draft articles are never exposed by the API.
+
+## Deploy hygiene (important)
+
+- Always `rm -rf out && pnpm build` before FTP (clean export, zero source maps).
+- **FTP without "mirror/delete"** so the host's `cms-data/` and `uploads/` are
+  preserved. They are not part of the build artifact — deleting remote files
+  that aren't in `out/` would wipe all content and images.
+- Never place `cms-data/` or `uploads/` inside the repo or inside `out/`.
+
+## Backup
+
+Download `cms-data/` (all articles + audit log) and `uploads/` (images) by FTP.
+That is the complete content backup.
+
+## SEO note
+
+Article pages are client-rendered, but `article.php` injects per-article
+`<title>`/description/canonical/OpenGraph/Twitter tags into the served HTML, so
+**social link previews (LinkedIn, X, Facebook) and non-JS crawlers get correct
+per-article metadata**. `sitemap-news.php` lists all published articles for
+search engines. The bare `/news/article/` shell is kept out of the index via
+`robots.txt`.
