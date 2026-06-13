@@ -53,3 +53,5 @@ next-env.d.ts
 .claude/worktrees/
 .vscode/
 LIVRAISON-LOGO-FOREX-DRILLING/
+dist/
+.sanity/

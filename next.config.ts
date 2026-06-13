@@ -5,11 +5,9 @@ const nextConfig: NextConfig = {
   distDir: "out",
   trailingSlash: true,
   images: {
+    // Static export: images are not optimized at runtime. News cover/inline
+    // images are served same-origin from /uploads/news/ by the PHP CMS.
     unoptimized: true,
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "cdn.sanity.io" },
-    ],
     formats: ["image/avif", "image/webp"],
   },
 };

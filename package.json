@@ -8,15 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "prebuild": "node scripts/optimize-images.mjs",
-    "studio:dev": "sanity dev",
-    "studio:deploy": "sanity deploy"
+    "prebuild": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@portabletext/react": "^6.2.0",
-    "@sanity/client": "^7.22.1",
-    "@sanity/image-url": "^2.1.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
@@ -25,6 +20,9 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.73.1",
+    "react-markdown": "^10.1.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.5.0",
     "zod": "^4.3.6"
   },
@@ -38,7 +36,6 @@
     "eslint-config-next": "16.2.6",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "sanity": "^6.0.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
