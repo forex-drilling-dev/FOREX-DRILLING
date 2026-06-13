@@ -20,9 +20,11 @@
   --danger:    #C0392B;
   --ok:        #1E8E5A;
 
-  --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", Impact, sans-serif;
+  /* Mêmes polices que le site (Goldman / Parkinsans / IBM Plex Mono),
+     auto-hébergées dans assets/fonts/ — zéro CDN tiers. */
+  --font-display: "Goldman", Impact, system-ui, sans-serif;
+  --font-sans: "Parkinsans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius: 14px;
   --hair: 1px solid var(--border);
@@ -30,11 +32,14 @@
   --shadow-deep: 0 15px 30px rgba(16, 33, 66, 0.15);
 }
 
-/* Décommenter une fois les .woff2 déposés dans assets/fonts/ (zéro CDN tiers) :
-@font-face { font-family:"Barlow Condensed"; src:url("fonts/barlow-condensed-700.woff2") format("woff2"); font-weight:700; font-display:swap; }
-@font-face { font-family:"IBM Plex Mono"; src:url("fonts/ibm-plex-mono-400.woff2") format("woff2"); font-weight:400; font-display:swap; }
-@font-face { font-family:"Inter"; src:url("fonts/inter-400.woff2") format("woff2"); font-weight:400; font-display:swap; }
-*/
+/* Polices du site, auto-hébergées (sous-ensemble latin, copié depuis le build). */
+@font-face { font-family:"Goldman"; src:url("fonts/goldman-400.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"Goldman"; src:url("fonts/goldman-700.woff2") format("woff2"); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:"Parkinsans"; src:url("fonts/parkinsans-300.woff2") format("woff2"); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:"Parkinsans"; src:url("fonts/parkinsans-400.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"Parkinsans"; src:url("fonts/parkinsans-500.woff2") format("woff2"); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:"IBM Plex Mono"; src:url("fonts/ibm-plex-mono-400.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"IBM Plex Mono"; src:url("fonts/ibm-plex-mono-500.woff2") format("woff2"); font-weight:500; font-style:normal; font-display:swap; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
