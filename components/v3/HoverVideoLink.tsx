@@ -31,6 +31,9 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
   // Whether the current open was deliberate (click/keyboard) and should
   // therefore move focus into the popup. Hover opens leave focus alone.
   const focusInRef = useRef(false);
+  // Set while we programmatically restore focus to the trigger on close, so
+  // the trigger's onFocus handler doesn't immediately re-open the popup.
+  const suppressFocusOpen = useRef(false);
 
   const cancelClose = () => {
     if (closeTimer.current !== null) {
@@ -47,7 +50,14 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
   const close = (restoreFocus: boolean) => {
     cancelClose();
     setOpen(false);
-    if (restoreFocus) triggerRef.current?.focus();
+    if (restoreFocus) {
+      // Guard against the trigger's onFocus re-opening the popup.
+      suppressFocusOpen.current = true;
+      triggerRef.current?.focus();
+      window.setTimeout(() => {
+        suppressFocusOpen.current = false;
+      }, 0);
+    }
   };
 
   useEffect(() => {
@@ -95,6 +105,7 @@ export function HoverVideoLink({ videoId, videoTitle, children }: Props) {
           setOpen((v) => !v);
         }}
         onFocus={() => {
+          if (suppressFocusOpen.current) return;
           focusInRef.current = true;
           setOpen(true);
         }}
