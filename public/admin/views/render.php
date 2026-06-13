@@ -34,8 +34,9 @@ function layout_foot(bool $withJs = false): void {
 function topbar(): void {
     ?>
 <header class="topbar">
-  <a class="brand" href="/admin/">
-    <span class="brand__mark">FOREX</span><span class="brand__sub">DRILLING · CMS</span>
+  <a class="brand" href="/admin/" aria-label="Forex Drilling CMS — accueil">
+    <img class="brand__logo" src="/logo-mark.svg" alt="Forex Drilling" width="880" height="200">
+    <span class="brand__sub">CMS</span>
   </a>
   <nav class="topbar__nav">
     <a class="btn btn--ghost" href="/news/" target="_blank" rel="noopener">Voir le site ↗</a>
@@ -51,7 +52,7 @@ function render_login(): void {
     ?>
 <main class="auth">
   <form class="auth__card" method="post" action="/admin/?action=login" autocomplete="off">
-    <div class="auth__brand"><span class="brand__mark">FOREX</span><span class="brand__sub">DRILLING · CMS</span></div>
+    <div class="auth__brand"><img class="auth__logo" src="/logo-mark.svg" alt="Forex Drilling" width="880" height="200"><span class="brand__sub">CMS</span></div>
     <h1 class="auth__title">Connexion</h1>
     <label class="field">
       <span class="field__label">Mot de passe</span>
@@ -71,7 +72,7 @@ function render_setup(): void {
     ?>
 <main class="auth">
   <form class="auth__card" method="post" action="/admin/?action=setup" autocomplete="off">
-    <div class="auth__brand"><span class="brand__mark">FOREX</span><span class="brand__sub">DRILLING · CMS</span></div>
+    <div class="auth__brand"><img class="auth__logo" src="/logo-mark.svg" alt="Forex Drilling" width="880" height="200"><span class="brand__sub">CMS</span></div>
     <h1 class="auth__title">Première configuration</h1>
     <p class="auth__hint" style="text-align:left">Définissez le mot de passe de l’équipe éditoriale. Il sera stocké haché (jamais en clair) sur le serveur.</p>
     <label class="field">

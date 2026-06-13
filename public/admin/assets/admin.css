@@ -57,9 +57,10 @@ textarea:focus-visible, [tabindex]:focus-visible {
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
 /* ------------------------------------------------------------------ Brand */
-.brand { display: inline-flex; align-items: baseline; gap: 9px; text-decoration: none; }
-.brand__mark { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.04em; font-size: 22px; color: var(--deep-navy); text-transform: uppercase; }
-.brand__sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; color: var(--amber-dim); text-transform: uppercase; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand__logo { height: 34px; width: auto; display: block; }
+.brand__sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; color: var(--amber-dim); text-transform: uppercase; border-left: var(--hair); padding-left: 12px; line-height: 1.2; }
+.auth__logo { height: 40px; width: auto; display: block; }
 
 /* ----------------------------------------------------------------- Topbar */
 .topbar {
@@ -102,7 +103,7 @@ textarea:focus-visible, [tabindex]:focus-visible {
 /* ------------------------------------------------------------------- Auth */
 .auth { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: var(--bg-soft); }
 .auth__card { width: 100%; max-width: 420px; background: var(--bg); border: var(--hair); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; gap: 18px; box-shadow: var(--shadow-card); }
-.auth__brand { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.auth__brand { display: flex; flex-direction: row; gap: 12px; align-items: center; }
 .auth__title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: 26px; margin: 0; color: var(--deep-navy); }
 .auth__hint { font-family: var(--font-sans); font-size: 13px; color: var(--muted); margin: 0; text-align: center; }
 
