@@ -205,11 +205,13 @@ function MaintenanceSection() {
                 native aspect so the rig fills cleanly without cropping. */}
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-deep-navy" style={{ boxShadow: "var(--shadow-image)" }}>
               <Image
-                src="/images/drill-head-closeup.jpg"
+                src={optimizedSrc("/images/drill-head-closeup.jpg")}
                 alt="Close-up of an orange Forex Drilling rotary drill head with hydraulic lines"
                 fill
                 sizes="(min-width:768px) 40vw, 100vw"
                 className="object-cover"
+                placeholder={blurPlaceholder("/images/drill-head-closeup.jpg") ? "blur" : "empty"}
+                blurDataURL={blurPlaceholder("/images/drill-head-closeup.jpg")}
               />
             </div>
           </div>

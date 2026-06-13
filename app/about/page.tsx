@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Forex Drilling is a specialist drilling contractor supporting mining, exploration, and civil projects across the Asia-Pacific region.",
+    "Forex Drilling is a specialist drilling contractor supporting mining, exploration, civil, groundwater, and geothermal programs across the Asia-Pacific region. Headquartered in Singapore, operating in Papua New Guinea.",
 };
 
 // ─── HERO — shared full-bleed editorial poster (PageHero) ────────────────────

@@ -33,7 +33,7 @@ export function ServiceItemsList({ items }: Props) {
     <>
       <ul className="grid gap-x-12 gap-y-3 md:grid-cols-2">
         {items.map((item) => (
-          <li key={item.label} className="border-t border-border">
+          <li key={item.slug ?? item.label} className="border-t border-border">
             {item.slug ? (
               <button
                 type="button"

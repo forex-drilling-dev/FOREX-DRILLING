@@ -21,7 +21,10 @@ export const fontDisplay = Goldman({
 
 export const fontBody = Parkinsans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  // Only 400/500 are used in body copy; 300 kept as a light safety margin.
+  // 600/700/800 dropped — never referenced (each weight is a separate
+  // woff2 fetch on first paint).
+  weight: ["300", "400", "500"],
   variable: "--font-body-family",
   display: "swap",
 });
