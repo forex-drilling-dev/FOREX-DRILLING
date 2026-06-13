@@ -65,6 +65,30 @@ function render_login(): void {
     layout_foot();
 }
 
+// ----------------------------------------------------------------- SETUP
+function render_setup(): void {
+    layout_head('Configuration');
+    ?>
+<main class="auth">
+  <form class="auth__card" method="post" action="/admin/?action=setup" autocomplete="off">
+    <div class="auth__brand"><span class="brand__mark">FOREX</span><span class="brand__sub">DRILLING · CMS</span></div>
+    <h1 class="auth__title">Première configuration</h1>
+    <p class="auth__hint" style="text-align:left">Définissez le mot de passe de l’équipe éditoriale. Il sera stocké haché (jamais en clair) sur le serveur.</p>
+    <label class="field">
+      <span class="field__label">Mot de passe (10 caractères min.)</span>
+      <input class="field__input" type="password" name="password" minlength="10" autofocus required>
+    </label>
+    <label class="field">
+      <span class="field__label">Confirmer le mot de passe</span>
+      <input class="field__input" type="password" name="password2" minlength="10" required>
+    </label>
+    <button class="btn btn--primary btn--block" type="submit">Définir le mot de passe</button>
+  </form>
+</main>
+<?php
+    layout_foot();
+}
+
 // ------------------------------------------------------------- DASHBOARD
 function render_dashboard(array $items): void {
     layout_head('Tableau de bord');

@@ -29,6 +29,30 @@ function auth_password_hash(): ?string {
     return (is_array($secret) && !empty($secret['PASSWORD_HASH'])) ? (string) $secret['PASSWORD_HASH'] : null;
 }
 
+/** Aucun mot de passe défini → premier démarrage (écran de configuration). */
+function auth_needs_setup(): bool {
+    return auth_password_hash() === null;
+}
+
+/**
+ * Définit le mot de passe éditeur au premier démarrage : écrit le HASH (jamais
+ * le clair) dans cms-data/config.secret.php. Refuse d'écraser un secret existant
+ * (la config ne peut être posée qu'une fois ; pour changer ensuite, éditer/
+ * supprimer le fichier sur l'hôte). 10 caractères minimum.
+ */
+function auth_set_password(string $password): bool {
+    if (!auth_needs_setup()) return false;       // ne jamais écraser
+    if (strlen($password) < 10) return false;
+    if (!cms_ensure_dir(CMS_DATA_DIR)) return false;
+    $php = "<?php\nreturn " . var_export(['PASSWORD_HASH' => password_hash($password, PASSWORD_DEFAULT)], true) . ";\n";
+    $tmp = @tempnam(CMS_DATA_DIR, '.sec');
+    if ($tmp === false) return false;
+    if (@file_put_contents($tmp, $php) === false) { @unlink($tmp); return false; }
+    @chmod($tmp, 0600);
+    if (!@rename($tmp, CMS_SECRET_FILE)) { @unlink($tmp); return false; }
+    return true;
+}
+
 function auth_is_logged_in(): bool {
     auth_boot();
     return !empty($_SESSION['cms_authed']);

@@ -38,6 +38,37 @@ function cms_slugify(string $s): string {
 // — En-têtes anti-cache pour tout le panneau (jamais de page admin en cache).
 header('Cache-Control: no-store, max-age=0');
 
+// ===================== PREMIER DÉMARRAGE : CONFIGURATION ==================
+// Tant qu'aucun mot de passe n'est défini, tout mène à l'écran de setup.
+// (La 1re barrière Apache Basic Auth, si activée, protège déjà cet écran.)
+if (auth_needs_setup() && $action !== 'setup') {
+    redirect('/admin/?action=setup');
+}
+if ($action === 'setup') {
+    if (!auth_needs_setup()) redirect('/admin/?action=login'); // déjà configuré
+    if ($method === 'POST') {
+        $pw  = (string)($_POST['password'] ?? '');
+        $pw2 = (string)($_POST['password2'] ?? '');
+        if (strlen($pw) < 10) {
+            flash_set('error', 'Mot de passe : 10 caractères minimum.');
+            redirect('/admin/?action=setup');
+        }
+        if ($pw !== $pw2) {
+            flash_set('error', 'Les deux mots de passe ne correspondent pas.');
+            redirect('/admin/?action=setup');
+        }
+        if (auth_set_password($pw)) {
+            audit('setup_password');
+            flash_set('success', 'Mot de passe défini. Vous pouvez vous connecter.');
+            redirect('/admin/?action=login');
+        }
+        flash_set('error', 'Écriture impossible (dossier cms-data non inscriptible ?).');
+        redirect('/admin/?action=setup');
+    }
+    render_setup();
+    exit;
+}
+
 // =========================== ACTIONS PUBLIQUES ============================
 
 if ($action === 'login') {

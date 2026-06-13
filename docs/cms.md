@@ -34,16 +34,16 @@ VISITOR → /news → fetch /api/news.php (published only)
    `admin/`, `api/news.php`, `article.php`, `sitemap-news.php`, and the hardened
    `cms-data/.htaccess` + `uploads/.htaccess`.
 
-2. **Set the editor password** (PHP login — barrier 2). Generate a hash and put
-   it in `cms-data/config.secret.php` (next to the data, never in the repo):
-   ```bash
-   php -r "echo password_hash('YOUR_PASSWORD', PASSWORD_DEFAULT), PHP_EOL;"
-   ```
-   ```php
-   <?php // cms-data/config.secret.php
-   return ['PASSWORD_HASH' => '$2y$....'];
-   ```
-   (See `admin/lib/config.secret.example.php`.)
+2. **Set the editor password** (PHP login — barrier 2). Just open
+   `https://forex-drilling.com/admin` — on first visit (no password set yet) it
+   shows a **"first configuration" screen**. Enter a password (10+ chars) twice;
+   the CMS writes `cms-data/config.secret.php` itself (storing only the bcrypt
+   hash, never the plaintext) and then locks that screen permanently.
+
+   To change the password later, delete `cms-data/config.secret.php` on the host
+   and the setup screen reappears. (Manual alternative — generate the hash and
+   write the file yourself, see `admin/lib/config.secret.example.php`:
+   `php -r "echo password_hash('YOUR_PASSWORD', PASSWORD_DEFAULT);"`.)
 
 3. **Enable Apache Basic Auth on `/admin` (barrier 1).** Easiest on Yulpa:
    cPanel → **Directory Privacy** → protect the `admin` folder, add a user.
