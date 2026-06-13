@@ -50,19 +50,19 @@ if ($action === 'setup') {
         $pw  = (string)($_POST['password'] ?? '');
         $pw2 = (string)($_POST['password2'] ?? '');
         if (strlen($pw) < 10) {
-            flash_set('error', 'Mot de passe : 10 caractères minimum.');
+            flash_set('error', 'Password: 10 characters minimum.');
             redirect('/admin/?action=setup');
         }
         if ($pw !== $pw2) {
-            flash_set('error', 'Les deux mots de passe ne correspondent pas.');
+            flash_set('error', 'The two passwords do not match.');
             redirect('/admin/?action=setup');
         }
         if (auth_set_password($pw)) {
             audit('setup_password');
-            flash_set('success', 'Mot de passe défini. Vous pouvez vous connecter.');
+            flash_set('success', 'Password set. You can now sign in.');
             redirect('/admin/?action=login');
         }
-        flash_set('error', 'Écriture impossible (dossier cms-data non inscriptible ?).');
+        flash_set('error', 'Could not write the secret (is the cms-data folder writable?).');
         redirect('/admin/?action=setup');
     }
     render_setup();
@@ -77,7 +77,7 @@ if ($action === 'login') {
         if (!rl_ok('login', 5, 600)) {
             audit('login_ratelimited');
             http_response_code(429);
-            flash_set('error', 'Trop de tentatives. Réessayez dans quelques minutes.');
+            flash_set('error', 'Too many attempts. Please try again in a few minutes.');
             redirect('/admin/?action=login');
         }
         $pw = isset($_POST['password']) ? (string) $_POST['password'] : '';
@@ -86,7 +86,7 @@ if ($action === 'login') {
             redirect('/admin/');
         }
         audit('login_failed');
-        flash_set('error', 'Identifiants invalides.');
+        flash_set('error', 'Invalid credentials.');
         redirect('/admin/?action=login');
     }
     render_login();
@@ -140,17 +140,17 @@ if ($action === 'save' && $method === 'POST') {
 
     // Validation serveur (miroir de l'éditeur) — A03/A04.
     $errors = [];
-    if (mb_strlen($title) < 1 || mb_strlen($title) > CMS_TITLE_MAX) $errors[] = 'titre (1–' . CMS_TITLE_MAX . ')';
-    if (!cms_valid_slug($slug))                                     $errors[] = 'slug (a-z 0-9 tiret)';
-    if (!in_array($status, ['draft', 'published'], true))           $errors[] = 'statut';
-    if (mb_strlen($excerpt) < CMS_EXCERPT_MIN || mb_strlen($excerpt) > CMS_EXCERPT_MAX) $errors[] = 'extrait (' . CMS_EXCERPT_MIN . '–' . CMS_EXCERPT_MAX . ')';
-    if ($coverUrl !== '' && !preg_match('#^/uploads/news/[A-Za-z0-9._-]+$#', $coverUrl)) $errors[] = 'image (chemin invalide)';
-    if ($coverUrl !== '' && $coverAlt === '')                       $errors[] = 'texte alternatif de l’image';
+    if (mb_strlen($title) < 1 || mb_strlen($title) > CMS_TITLE_MAX) $errors[] = 'title (1–' . CMS_TITLE_MAX . ')';
+    if (!cms_valid_slug($slug))                                     $errors[] = 'slug (a-z 0-9 hyphen)';
+    if (!in_array($status, ['draft', 'published'], true))           $errors[] = 'status';
+    if (mb_strlen($excerpt) < CMS_EXCERPT_MIN || mb_strlen($excerpt) > CMS_EXCERPT_MAX) $errors[] = 'summary (' . CMS_EXCERPT_MIN . '–' . CMS_EXCERPT_MAX . ')';
+    if ($coverUrl !== '' && !preg_match('#^/uploads/news/[A-Za-z0-9._-]+$#', $coverUrl)) $errors[] = 'image (invalid path)';
+    if ($coverUrl !== '' && $coverAlt === '')                       $errors[] = 'image alternative text';
 
-    if ($isNew && cms_valid_slug($slug) && news_get($slug) !== null) $errors[] = 'slug déjà utilisé';
+    if ($isNew && cms_valid_slug($slug) && news_get($slug) !== null) $errors[] = 'slug already in use';
 
     if ($errors) {
-        flash_set('error', 'Champs invalides : ' . implode(', ', $errors) . '.');
+        flash_set('error', 'Invalid fields: ' . implode(', ', $errors) . '.');
         // On renvoie vers le formulaire en conservant la saisie via session.
         $_SESSION['cms_draft'] = compact('title','slug','status','excerpt','body','coverUrl','coverAlt','pubInput','isNew');
         redirect('/admin/?action=' . ($isNew ? 'new' : 'edit&slug=' . urlencode($slug)));
@@ -175,18 +175,18 @@ if ($action === 'save' && $method === 'POST') {
 
     if (news_save($doc)) {
         audit($isNew ? 'create' : 'update', $slug);
-        flash_set('success', 'Article enregistré (' . ($status === 'published' ? 'publié' : 'brouillon') . ').');
+        flash_set('success', 'Article saved (' . ($status === 'published' ? 'published' : 'draft') . ').');
         redirect('/admin/?action=edit&slug=' . urlencode($slug));
     }
-    flash_set('error', 'Échec de l’enregistrement.');
+    flash_set('error', 'Could not save the article.');
     redirect('/admin/?action=' . ($isNew ? 'new' : 'edit&slug=' . urlencode($slug)));
 }
 
 if ($action === 'delete' && $method === 'POST') {
     csrf_require($_POST['csrf'] ?? null);
     $slug = (string)($_POST['slug'] ?? '');
-    if (news_delete($slug)) { audit('delete', $slug); flash_set('success', 'Article supprimé.'); }
-    else                    { flash_set('error', 'Suppression impossible.'); }
+    if (news_delete($slug)) { audit('delete', $slug); flash_set('success', 'Article deleted.'); }
+    else                    { flash_set('error', 'Could not delete the article.'); }
     redirect('/admin/');
 }
 
@@ -198,7 +198,7 @@ if ($action === 'new') {
 if ($action === 'edit') {
     $slug = (string)($_GET['slug'] ?? '');
     $article = cms_valid_slug($slug) ? news_get($slug) : null;
-    if (!$article) { flash_set('error', 'Article introuvable.'); redirect('/admin/'); }
+    if (!$article) { flash_set('error', 'Article not found.'); redirect('/admin/'); }
     render_edit($article);
     exit;
 }

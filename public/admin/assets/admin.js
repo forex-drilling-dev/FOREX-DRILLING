@@ -96,9 +96,9 @@
     exec("formatBlock", cur === tag.toLowerCase() ? "P" : tag);
   }
   function insertLink() {
-    var url = window.prompt("Adresse du lien (https://…)", "https://");
+    var url = window.prompt("Link address (https://…)", "https://");
     if (!url) return;
-    if (!/^https?:\/\//i.test(url) && url.charAt(0) !== "/") { alert("Lien invalide."); return; }
+    if (!/^https?:\/\//i.test(url) && url.charAt(0) !== "/") { alert("Invalid link."); return; }
     var sel = window.getSelection();
     if (sel && sel.toString()) exec("createLink", url);
     else exec("insertHTML", '<a href="' + url.replace(/"/g, "&quot;") + '">' + url.replace(/</g, "&lt;") + "</a>");
@@ -162,7 +162,7 @@
     fi.addEventListener("change", function () {
       var f = fi.files && fi.files[0]; if (!f) return;
       uploadFile(f).then(function (res) {
-        if (!res.ok || !res.j.url) { alert("Échec de l’upload : " + (res.j.error || "inconnu")); return; }
+        if (!res.ok || !res.j.url) { alert("Upload failed: " + (res.j.error || "unknown")); return; }
         cb(res.j.url);
       });
     });
@@ -173,7 +173,7 @@
   if (coverFile) coverFile.addEventListener("change", function () {
     var f = coverFile.files && coverFile.files[0]; if (!f) return;
     uploadFile(f).then(function (res) {
-      if (!res.ok || !res.j.url) { alert("Échec de l’upload : " + (res.j.error || "inconnu")); return; }
+      if (!res.ok || !res.j.url) { alert("Upload failed: " + (res.j.error || "unknown")); return; }
       document.getElementById("cover_url").value = res.j.url;
       var img = document.getElementById("cover-img"); img.src = res.j.url; img.hidden = false;
       var empty = document.getElementById("cover-empty"); if (empty) empty.hidden = true;
