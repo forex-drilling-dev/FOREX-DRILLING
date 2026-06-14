@@ -1,24 +1,34 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { DrillBitPin } from "./DrillBitPin";
 
 type Props = {
   number: string;
   title: string;
   children: ReactNode;
   className?: string;
+  /** Float a decorative drill-bit pin above the card's top-right corner */
+  pin?: boolean;
 };
 
 /**
  * Editorial pillar card — for Versatility / Resilience / Reliability triads.
  *
  * Anatomy:
+ *   - Optional drill-bit pin floating above the top-right corner
  *   - Big yellow number/index top
  *   - Title in dark navy
  *   - Body paragraph in muted grey
- *   - Thin navy left border (4px) anchoring the card
+ *   - Thin amber left border (4px) anchoring the card
  *   - White bg with soft card shadow
  */
-export function PillarCard({ number, title, children, className }: Props) {
+export function PillarCard({
+  number,
+  title,
+  children,
+  className,
+  pin = false,
+}: Props) {
   return (
     <div
       className={cn(
@@ -28,6 +38,11 @@ export function PillarCard({ number, title, children, className }: Props) {
         className,
       )}
     >
+      {pin && (
+        <span className="absolute -top-5 right-6 z-10" aria-hidden>
+          <DrillBitPin size={26} />
+        </span>
+      )}
       <p
         className="font-display font-black text-amber"
         style={{ fontSize: "40px", lineHeight: "1", marginBottom: "16px" }}
