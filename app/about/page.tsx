@@ -190,13 +190,6 @@ function OperatingModel() {
                     {pillar.body}
                   </p>
                 </div>
-
-                {/* Spine node — desktop only. Navy reads on the ocre auger. */}
-                <span
-                  aria-hidden
-                  className="hidden h-3.5 w-3.5 rounded-full bg-deep-navy lg:col-start-2 lg:mx-auto lg:block"
-                  style={{ boxShadow: "0 0 0 5px var(--color-black)" }}
-                />
               </Reveal>
             );
           })}
