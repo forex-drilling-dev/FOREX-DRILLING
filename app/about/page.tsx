@@ -216,8 +216,8 @@ export default function AboutPage() {
           pause there and resume below. */}
       <div className="relative bg-deep">
         <CentralDrill />
-        <WhoWeAre />
         <PullQuote />
+        <WhoWeAre />
         <OperatingModel />
       </div>
       <NextPageStrip />
