@@ -48,9 +48,7 @@ export function CentralDrill() {
       className="pointer-events-none absolute inset-y-0 left-1/2 z-0 hidden -translate-x-1/2 lg:block"
       style={{ width: "clamp(150px, 14vw, 230px)" }}
     >
-      <div className="sticky top-0 h-screen w-full">
-        {desktop && <AugerCanvas progress={scrollYProgress} reduce={reduce} />}
-      </div>
+      {desktop && <AugerCanvas progress={scrollYProgress} reduce={reduce} />}
     </div>
   );
 }

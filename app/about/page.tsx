@@ -149,7 +149,7 @@ function OperatingModel() {
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
         <Reveal className="mb-16 flex justify-center">
           {/* Backing plate so the label stays readable over the spine. */}
-          <span className="bg-deep px-5 py-1">
+          <span className="bg-white px-5 py-1">
             <SectionLabel number="02" label="Operating Model" />
           </span>
         </Reveal>
@@ -195,7 +195,7 @@ function OperatingModel() {
                 <span
                   aria-hidden
                   className="hidden h-3.5 w-3.5 rounded-full bg-deep-navy lg:col-start-2 lg:mx-auto lg:block"
-                  style={{ boxShadow: "0 0 0 5px var(--color-deep)" }}
+                  style={{ boxShadow: "0 0 0 5px var(--color-black)" }}
                 />
               </Reveal>
             );
@@ -214,22 +214,25 @@ export default function AboutPage() {
           end to end. The spine sits behind (z-0); content sits above. The
           full-width pull-quote band occludes it, so the auger appears to
           pause there and resume below. */}
-      <div className="relative bg-deep">
+      <div className="relative bg-white">
         <CentralDrill />
         <PullQuote />
         <WhoWeAre />
         <OperatingModel />
+        <NextPageStrip />
       </div>
-      <NextPageStrip />
     </>
   );
 }
 
 function NextPageStrip() {
   return (
-    <section className="relative bg-deep py-14 md:py-20">
+    <section className="relative z-10 py-20 md:py-28">
       <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
-        <SectionLink href="/services" label="Services" />
+        {/* Backing plate so the link stays readable over the spine. */}
+        <span className="bg-white px-5 py-2">
+          <SectionLink href="/services" label="Services" />
+        </span>
       </div>
     </section>
   );
