@@ -24,17 +24,20 @@ const RADIAL = 8;
 const ROD_R = 0.17;
 const BLADE_R = 0.64;
 
+const TIP_H = 1.0; // length of the drill point
+const TIP_MARGIN = 0.45; // gap between the point and the canvas bottom
+
 /** Parametric helicoid — one continuous flight winding around the rod axis,
- *  built tall enough to fill the given world height. */
-function buildFlighting(worldHeight: number): BufferGeometry {
-  const turns = Math.max(4, Math.ceil(worldHeight / PITCH));
-  const height = turns * PITCH;
+ *  generated from yTop down to yBottom. */
+function buildFlighting(yTop: number, yBottom: number): BufferGeometry {
+  const span = yTop - yBottom;
+  const turns = Math.max(2, Math.ceil(span / PITCH));
   const uSteps = turns * SEG_PER_TURN;
   const positions: number[] = [];
   const indices: number[] = [];
   for (let i = 0; i <= uSteps; i++) {
     const u = (i / SEG_PER_TURN) * Math.PI * 2;
-    const y = height / 2 - (i / uSteps) * height;
+    const y = yTop - (i / uSteps) * span;
     for (let j = 0; j < RADIAL; j++) {
       const r = ROD_R + (BLADE_R - ROD_R) * (j / (RADIAL - 1));
       positions.push(Math.cos(u) * r, y, Math.sin(u) * r);
@@ -58,9 +61,18 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
   const group = useRef<Group>(null);
   const { size, invalidate } = useThree();
 
-  // Fill the full canvas height (+ a little overflow so the ends never show).
-  const worldH = size.height / ZOOM + 2 * PITCH;
-  const flighting = useMemo(() => buildFlighting(worldH), [worldH]);
+  // The spine overflows the top (enters from above) and ends in a point near
+  // the bottom of the canvas (= bottom of Operating Model, above the CTA).
+  const worldH = size.height / ZOOM;
+  const yTop = worldH / 2 + 2 * PITCH;
+  const yTipPoint = -worldH / 2 + TIP_MARGIN;
+  const yShaftBottom = yTipPoint + TIP_H;
+  const rodH = yTop - yShaftBottom;
+  const rodCenter = (yTop + yShaftBottom) / 2;
+  const flighting = useMemo(
+    () => buildFlighting(yTop, yShaftBottom),
+    [yTop, yShaftBottom],
+  );
 
   // On-demand rendering: re-render only while the page is scrolling.
   useEffect(() => {
@@ -86,8 +98,13 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
           side={DoubleSide}
         />
       </mesh>
-      <mesh>
-        <cylinderGeometry args={[ROD_R, ROD_R, worldH + 4, 24]} />
+      <mesh position={[0, rodCenter, 0]}>
+        <cylinderGeometry args={[ROD_R, ROD_R, rodH, 24]} />
+        <meshStandardMaterial color="#1c3a6b" metalness={0.55} roughness={0.38} />
+      </mesh>
+      {/* Drill point */}
+      <mesh position={[0, yTipPoint + TIP_H / 2, 0]} rotation={[Math.PI, 0, 0]}>
+        <coneGeometry args={[ROD_R * 1.7, TIP_H, 24]} />
         <meshStandardMaterial color="#1c3a6b" metalness={0.55} roughness={0.38} />
       </mesh>
     </group>

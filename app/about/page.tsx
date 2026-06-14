@@ -204,25 +204,24 @@ export default function AboutPage() {
           end to end. The spine sits behind (z-0); content sits above. The
           full-width pull-quote band occludes it, so the auger appears to
           pause there and resume below. */}
+      {/* Auger spine spans these sections and ends, point-down, at the bottom
+          of Operating Model — just above the Services strip below. */}
       <div className="relative bg-white">
         <CentralDrill />
         <PullQuote />
         <WhoWeAre />
         <OperatingModel />
-        <NextPageStrip />
       </div>
+      <NextPageStrip />
     </>
   );
 }
 
 function NextPageStrip() {
   return (
-    <section className="relative z-10 py-20 md:py-28">
+    <section className="relative bg-white py-16 md:py-20">
       <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
-        {/* Backing plate so the link stays readable over the spine. */}
-        <span className="bg-white px-5 py-2">
-          <SectionLink href="/services" label="Services" />
-        </span>
+        <SectionLink href="/services" label="Services" />
       </div>
     </section>
   );
