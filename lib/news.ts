@@ -32,11 +32,18 @@ function withSlug(endpoint: string, slug: string): string {
   return `${endpoint}${sep}slug=${encodeURIComponent(slug)}`;
 }
 
+/** True when the response is actually JSON. In `next dev` there is no PHP
+ *  runtime, so `/api/news.php` is served as raw source — skip it quietly
+ *  instead of throwing a JSON parse error in the console. */
+function isJson(res: Response): boolean {
+  return (res.headers.get("content-type") ?? "").includes("json");
+}
+
 /** All published articles, newest first. Returns [] on any failure. */
 export async function fetchNewsList(): Promise<NewsArticle[]> {
   try {
     const res = await fetch(ENDPOINT, { headers: { Accept: "application/json" } });
-    if (!res.ok) return [];
+    if (!res.ok || !isJson(res)) return [];
     const data = (await res.json()) as { articles?: NewsArticle[] };
     return Array.isArray(data.articles) ? data.articles : [];
   } catch (err) {
@@ -52,7 +59,7 @@ export async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null>
     const res = await fetch(withSlug(ENDPOINT, slug), {
       headers: { Accept: "application/json" },
     });
-    if (!res.ok) return null;
+    if (!res.ok || !isJson(res)) return null;
     const data = (await res.json()) as { article?: NewsArticle };
     return data.article ?? null;
   } catch (err) {
