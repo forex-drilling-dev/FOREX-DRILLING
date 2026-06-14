@@ -25,25 +25,28 @@ const ROD_R = 0.17;
 const BLADE_R = 0.64;
 
 const TIP_MARGIN = 0.45; // gap between the point and the canvas bottom
-const TAPER = 2.4; // length over which flight + core narrow to the point
+const TAPER = 2.4; // length over which the core narrows to the point
+const FLIGHT_TIP_GAP = 1.0; // bare (flight-free) length at the very point
 
 /** Parametric helicoid — one continuous flight winding around the rod axis,
- *  from yTop down to the point at yTip. Over the last `taperLen` the flight
- *  radius shrinks to zero so the spiral converges into the drill point. */
+ *  from yTop down to yFlightEnd. Between yFlightEnd and yTaperStart the flight
+ *  radius eases to zero; below yFlightEnd the point is a bare, symmetric cone
+ *  (so it never appears to "flatten" while the auger rotates). */
 function buildFlighting(
   yTop: number,
-  yTip: number,
-  taperLen: number,
+  yFlightEnd: number,
+  yTaperStart: number,
 ): BufferGeometry {
-  const span = yTop - yTip;
+  const span = yTop - yFlightEnd;
   const turns = Math.max(2, Math.ceil(span / PITCH));
   const uSteps = turns * SEG_PER_TURN;
+  const taperLen = yTaperStart - yFlightEnd;
   const positions: number[] = [];
   const indices: number[] = [];
   for (let i = 0; i <= uSteps; i++) {
     const u = (i / SEG_PER_TURN) * Math.PI * 2;
     const y = yTop - (i / uSteps) * span;
-    const s = Math.min(1, Math.max(0, (y - yTip) / taperLen));
+    const s = Math.min(1, Math.max(0, (y - yFlightEnd) / taperLen));
     const innerR = ROD_R * s;
     const outerR = BLADE_R * s;
     for (let j = 0; j < RADIAL; j++) {
@@ -75,12 +78,13 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
   const yTop = worldH / 2 + 2 * PITCH;
   const yTip = -worldH / 2 + TIP_MARGIN;
   const yTaperStart = yTip + TAPER;
+  const yFlightEnd = yTip + FLIGHT_TIP_GAP;
   const rodH = yTop - yTaperStart;
   const rodCenter = (yTop + yTaperStart) / 2;
   const coneCenter = (yTip + yTaperStart) / 2;
   const flighting = useMemo(
-    () => buildFlighting(yTop, yTip, TAPER),
-    [yTop, yTip],
+    () => buildFlighting(yTop, yFlightEnd, yTaperStart),
+    [yTop, yFlightEnd, yTaperStart],
   );
 
   // On-demand rendering: re-render only while the page is scrolling.
