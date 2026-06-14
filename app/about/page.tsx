@@ -4,12 +4,12 @@ import {
   SectionLabel,
   QuoteBlock,
   CircleImageRing,
-  DrillBitPin,
+  CentralDrill,
   Reveal,
   SectionLink,
 } from "@/components/v3";
 
-// Operating-model pillars — short triad, editorial column layout.
+// Operating-model pillars — short triad, arranged as a zigzag down the spine.
 const PILLARS = [
   {
     num: "01",
@@ -59,14 +59,13 @@ function AboutHero() {
   );
 }
 
-// ─── WHO WE ARE — asymmetric text + circle photo ────────────────────────────
+// ─── WHO WE ARE — text left of the spine, circle photo right ────────────────
 
 function WhoWeAre() {
   return (
-    <section className="relative bg-deep py-12 md:py-32">
-      <div className="mx-auto grid grid-cols-1 max-w-[1500px] items-center gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        {/* Text — left */}
-        <Reveal className="flex flex-col gap-6 md:col-span-7">
+    <section className="relative z-10 py-12 md:py-28">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-10 px-6 md:px-14 lg:grid-cols-[1fr_140px_1fr] lg:gap-0">
+        <Reveal className="flex flex-col gap-6 lg:pr-14">
           <SectionLabel number="01" label="Who We Are" />
           <p
             className="font-sans"
@@ -100,32 +99,15 @@ function WhoWeAre() {
           </p>
         </Reveal>
 
-        {/* Photo — right, with floating pins + faded index filigrane */}
-        <Reveal
-          from="right"
-          delay={120}
-          className="relative flex items-center justify-center md:col-span-5 md:justify-end"
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 select-none font-display font-black leading-none"
-            style={{ fontSize: "clamp(110px, 15vw, 190px)", color: "var(--color-deep-navy)", opacity: 0.06 }}
-          >
-            01
-          </span>
-          <div
-            className="absolute -top-6 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:left-auto md:right-10 md:translate-x-0"
-            aria-hidden
-          >
-            <DrillBitPin size={34} className="rotate-180" />
-            <DrillBitPin size={34} />
-          </div>
+        {/* Center lane — left clear for the drill spine on desktop. */}
+        <div aria-hidden className="hidden lg:block" />
+
+        <Reveal from="right" delay={120} className="flex justify-center lg:pl-14">
           <CircleImageRing
             src="/images/rig-vertical-clean.jpg"
             alt="Forex Drilling vertical rig on a prepared drill pad"
             size={300}
             ringOffset={18}
-            className="relative z-[1]"
           />
         </Reveal>
       </div>
@@ -133,64 +115,86 @@ function WhoWeAre() {
   );
 }
 
-// ─── PULL-QUOTE — navy bandeau, line reused from the copy above ──────────────
+// ─── PULL-QUOTE — navy node centred on the spine ────────────────────────────
 
 function PullQuote() {
   return (
-    <section className="relative bg-surface py-16 md:py-28">
-      <div className="mx-auto max-w-[1500px] px-6 md:px-14">
-        <QuoteBlock variant="dark" line1="We go beyond" line2="minimum requirements." />
+    <section className="relative z-20 px-6 py-6 md:px-14">
+      <div className="mx-auto max-w-[620px] rounded-2xl bg-surface px-8 py-12 text-center shadow-card">
+        <QuoteBlock
+          variant="dark"
+          line1="We go beyond"
+          line2="minimum requirements."
+          className="items-center text-center"
+        />
       </div>
     </section>
   );
 }
 
-// ─── OPERATING MODEL — editorial columns divided by hairlines ───────────────
+// ─── OPERATING MODEL — pillars zigzag along the spine ───────────────────────
 
 function OperatingModel() {
   return (
-    <section className="relative bg-white py-12 md:py-32">
-      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
-        <Reveal className="flex flex-col gap-5 max-w-[700px]">
-          <SectionLabel number="02" label="Operating Model" />
+    <section className="relative z-10 py-12 md:py-28">
+      <div className="mx-auto max-w-[1500px] px-6 md:px-14">
+        <Reveal className="mb-12 flex justify-center">
+          {/* Backing plate so the label stays readable over the spine. */}
+          <span className="bg-deep px-5 py-1">
+            <SectionLabel number="02" label="Operating Model" />
+          </span>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0">
-          {PILLARS.map((pillar, i) => (
-            <Reveal
-              key={pillar.title}
-              delay={i * 100}
-              className={
-                i === 0
-                  ? "flex flex-col gap-4 md:pr-12"
-                  : "flex flex-col gap-4 md:border-l md:border-border md:px-12"
-              }
-            >
-              <span
-                aria-hidden
-                className="font-display font-black leading-none"
-                style={{
-                  fontSize: "clamp(40px, 5vw, 48px)",
-                  color: "transparent",
-                  WebkitTextStroke: "1.5px var(--color-amber)",
-                }}
+        <div className="flex flex-col gap-10 lg:gap-4">
+          {PILLARS.map((pillar, i) => {
+            const left = i % 2 === 0;
+            return (
+              <Reveal
+                key={pillar.title}
+                delay={i * 80}
+                className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[1fr_140px_1fr]"
               >
-                {pillar.num}
-              </span>
-              <h3
-                className="font-display font-extrabold uppercase text-deep-navy"
-                style={{ fontSize: "18px", letterSpacing: "0.04em" }}
-              >
-                {pillar.title}
-              </h3>
-              <p
-                className="font-sans"
-                style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
-              >
-                {pillar.body}
-              </p>
-            </Reveal>
-          ))}
+                <div
+                  className={
+                    left
+                      ? "flex flex-col gap-3 lg:col-start-1 lg:items-end lg:text-right"
+                      : "flex flex-col gap-3 lg:col-start-3 lg:items-start"
+                  }
+                >
+                  <span
+                    aria-hidden
+                    className="font-display font-black leading-none"
+                    style={{
+                      fontSize: "clamp(36px, 4vw, 44px)",
+                      color: "transparent",
+                      WebkitTextStroke: "1.5px var(--color-amber)",
+                    }}
+                  >
+                    {pillar.num}
+                  </span>
+                  <h3
+                    className="font-display font-extrabold uppercase text-deep-navy"
+                    style={{ fontSize: "18px", letterSpacing: "0.04em" }}
+                  >
+                    {pillar.title}
+                  </h3>
+                  <p
+                    className="max-w-[46ch] font-sans"
+                    style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
+                  >
+                    {pillar.body}
+                  </p>
+                </div>
+
+                {/* Spine node — desktop only. */}
+                <span
+                  aria-hidden
+                  className="hidden h-3.5 w-3.5 rounded-full bg-amber lg:col-start-2 lg:mx-auto lg:block"
+                  style={{ boxShadow: "0 0 0 5px var(--color-deep)" }}
+                />
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -201,9 +205,15 @@ export default function AboutPage() {
   return (
     <>
       <AboutHero />
-      <WhoWeAre />
-      <PullQuote />
-      <OperatingModel />
+      {/* Body canvas — single continuous surface so the drill spine reads
+          end to end. The spine sits behind (z-0); content sits above. The
+          drill point lands at the bottom of this block, above the next strip. */}
+      <div className="relative overflow-hidden bg-deep">
+        <CentralDrill />
+        <WhoWeAre />
+        <PullQuote />
+        <OperatingModel />
+      </div>
       <NextPageStrip />
     </>
   );

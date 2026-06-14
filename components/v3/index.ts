@@ -51,3 +51,4 @@ export { Reveal }           from "./Reveal";
 export { StatCounter }      from "./StatCounter";
 export { TaglineAnimated }  from "./TaglineAnimated";
 export { HomeScrollSnap }   from "./HomeScrollSnap";
+export { CentralDrill }     from "./CentralDrill";
