@@ -147,11 +147,8 @@ function OperatingModel() {
   return (
     <section className="relative z-10 py-16 md:py-32">
       <div className="mx-auto max-w-[1500px] px-6 md:px-14">
-        <Reveal className="mb-16 flex justify-center">
-          {/* Backing plate so the label stays readable over the spine. */}
-          <span className="bg-white px-5 py-1">
-            <SectionLabel number="02" label="Operating Model" />
-          </span>
+        <Reveal className="mb-16">
+          <SectionLabel number="02" label="Operating Model" />
         </Reveal>
 
         <div className="flex flex-col gap-12 lg:gap-8">
