@@ -10,19 +10,46 @@ import {
 } from "framer-motion";
 
 /**
- * Central auger ("tarière") running down the middle of the About body — a
- * continuous navy core rod with helical ocre flights that protrude on both
- * sides. The flights travel downward as the page scrolls, reading as the
- * auger turning and boring deeper; scrolling up reverses it.
+ * Central auger ("tarière") down the middle of the About body — a shaded
+ * metallic core rod with helical ocre flights that protrude on both sides.
+ * The flights travel downward as the page scrolls, reading as the auger
+ * turning and boring deeper; scrolling up reverses it.
  *
- * - Decorative: aria-hidden, pointer-events-none, sits behind content (z-0).
+ * The auger is an illustrated, seamlessly-tiling SVG (gradients give the
+ * metal a 3-D twist) repeated vertically and translated on scroll. Brand
+ * colours are baked into the asset, like any illustration.
+ *
+ * - Decorative: aria-hidden, pointer-events-none, behind content (z-0).
  * - Desktop only (lg+); the body stacks and hides it on mobile.
- * - Only `transform` animates (the flight layer translates) — GPU, no layout
- *   shift. Static under prefers-reduced-motion.
- *
- * Must be the first child of a `position: relative` wrapper spanning the body
- * sections, with content given a higher z-index.
+ * - Only `transform` animates — GPU, no layout shift. Static under
+ *   prefers-reduced-motion.
  */
+
+// One seamless pitch of the auger: a tilted, gradient-shaded flighting disc.
+// Repeated and overlapped, the discs read as a continuous metal screw whose
+// outer edge is scalloped — a recognisable auger, not a striped ribbon.
+const PITCH = 18;
+const TILE = `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='${PITCH}' viewBox='0 0 200 ${PITCH}'>
+  <defs>
+    <linearGradient id='rod' x1='0' y1='0' x2='1' y2='0'>
+      <stop offset='0' stop-color='#0c1f42'/>
+      <stop offset='0.5' stop-color='#21407a'/>
+      <stop offset='1' stop-color='#0c1f42'/>
+    </linearGradient>
+    <linearGradient id='flight' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0' stop-color='#fbd877'/>
+      <stop offset='0.4' stop-color='#e3aa00'/>
+      <stop offset='1' stop-color='#7d5805'/>
+    </linearGradient>
+  </defs>
+  <rect x='86' width='28' height='${PITCH}' fill='url(#rod)'/>
+  <g transform='rotate(-7 100 9)'>
+    <ellipse cx='100' cy='13' rx='92' ry='10' fill='#000' opacity='0.15'/>
+    <ellipse cx='100' cy='9' rx='92' ry='11' fill='url(#flight)'/>
+  </g>
+</svg>`;
+const AUGER_URL = `url("data:image/svg+xml,${encodeURIComponent(TILE)}")`;
+
 export function CentralDrill() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -31,47 +58,30 @@ export function CentralDrill() {
     target: ref,
     offset: ["start start", "end end"],
   });
-  // Flight pitch is 46px; travel a whole number of pitches so the helix stays
-  // seamless across the full scroll range.
-  const travel = useTransform(scrollYProgress, [0, 1], [0, 46 * 22]);
+  // Travel a whole number of pitches so the helix stays seamless.
+  const travel = useTransform(scrollYProgress, [0, 1], [0, PITCH * 22]);
   const flightY = useSpring(travel, { stiffness: 80, damping: 26, mass: 0.4 });
-
-  // Pointed drill tip at the very bottom.
-  const tip = "polygon(0 0, 100% 0, 100% 97.5%, 50% 100%, 0 97.5%)";
 
   return (
     <div
       ref={ref}
       aria-hidden
       className="pointer-events-none absolute inset-y-0 left-1/2 z-0 hidden -translate-x-1/2 overflow-hidden lg:block"
-      style={{ width: "clamp(96px, 11vw, 160px)", clipPath: tip }}
+      style={{
+        width: "clamp(76px, 8vw, 124px)",
+        clipPath: "polygon(0 0, 100% 0, 100% 98.5%, 50% 100%, 0 98.5%)",
+      }}
     >
-      {/* Continuous core rod (navy, turned-metal shading), centred. */}
-      <div
-        className="absolute inset-y-0 left-1/2 -translate-x-1/2 rounded-t-full"
-        style={{
-          width: "34%",
-          background:
-            "linear-gradient(90deg, var(--color-deep-navy), var(--color-surface) 50%, var(--color-deep-navy))",
-        }}
-      >
-        <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-on-navy/20" />
-      </div>
-
-      {/* Helical flights — diagonal ocre blades that protrude past the rod and
-          travel downward on scroll. */}
       <motion.div
         className="absolute inset-x-0 -inset-y-48"
-        style={reduce ? undefined : { y: flightY }}
-      >
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(158deg, var(--color-amber) 0 17px, var(--color-amber-dim) 17px 22px, transparent 22px 46px)",
-          }}
-        />
-      </motion.div>
+        style={{
+          backgroundImage: AUGER_URL,
+          backgroundRepeat: "repeat-y",
+          backgroundSize: `100% ${PITCH}px`,
+          backgroundPosition: "center top",
+          ...(reduce ? {} : { y: flightY }),
+        }}
+      />
     </div>
   );
 }
