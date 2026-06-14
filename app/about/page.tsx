@@ -2,13 +2,34 @@ import type { Metadata } from "next";
 import {
   PageHero,
   SectionLabel,
-  PillarCard,
   QuoteBlock,
   CircleImageRing,
   DrillBitPin,
   Reveal,
   SectionLink,
 } from "@/components/v3";
+
+// Operating-model pillars — short triad, editorial column layout.
+const PILLARS = [
+  {
+    num: "01",
+    title: "Versatility",
+    body:
+      "We prioritise deploying crews and equipment capable of covering multiple scopes of work, reducing the need for multiple rigs on site. This improves efficiency, reduces downtime, and simplifies project execution in often complex environments.",
+  },
+  {
+    num: "02",
+    title: "Resilience",
+    body:
+      "Built into how we operate, through our people, our equipment, and our systems. We are structured to maintain performance under pressure, adapt to changing ground conditions, and continue delivering safely and reliably in challenging environments.",
+  },
+  {
+    num: "03",
+    title: "Reliability",
+    body:
+      "Structured preventative maintenance programs, regular inspections, and disciplined field practices ensure high rig availability, consistent productivity, and dependable project delivery.",
+  },
+] as const;
 
 export const metadata: Metadata = {
   title: "About",
@@ -124,41 +145,52 @@ function PullQuote() {
   );
 }
 
-// ─── OPERATING MODEL — 3 pillars with drill-pin accents ─────────────────────
+// ─── OPERATING MODEL — editorial columns divided by hairlines ───────────────
 
 function OperatingModel() {
   return (
-    <section className="relative overflow-hidden bg-white py-12 md:py-32">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -right-4 top-8 select-none font-display font-black leading-none"
-        style={{ fontSize: "clamp(140px, 20vw, 280px)", color: "var(--color-deep-navy)", opacity: 0.04 }}
-      >
-        02
-      </span>
-      <div className="relative mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
+    <section className="relative bg-white py-12 md:py-32">
+      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="02" label="Operating Model" />
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          <PillarCard pin number="01" title="Versatility">
-            We prioritise deploying crews and equipment capable of covering
-            multiple scopes of work, reducing the need for multiple rigs on
-            site. This improves efficiency, reduces downtime, and simplifies
-            project execution in often complex environments.
-          </PillarCard>
-          <PillarCard pin number="02" title="Resilience">
-            Built into how we operate, through our people, our equipment, and
-            our systems. We are structured to maintain performance under
-            pressure, adapt to changing ground conditions, and continue
-            delivering safely and reliably in challenging environments.
-          </PillarCard>
-          <PillarCard pin number="03" title="Reliability">
-            Structured preventative maintenance programs, regular inspections,
-            and disciplined field practices ensure high rig availability,
-            consistent productivity, and dependable project delivery.
-          </PillarCard>
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0">
+          {PILLARS.map((pillar, i) => (
+            <Reveal
+              key={pillar.title}
+              delay={i * 100}
+              className={
+                i === 0
+                  ? "flex flex-col gap-4 md:pr-12"
+                  : "flex flex-col gap-4 md:border-l md:border-border md:px-12"
+              }
+            >
+              <span
+                aria-hidden
+                className="font-display font-black leading-none"
+                style={{
+                  fontSize: "clamp(40px, 5vw, 48px)",
+                  color: "transparent",
+                  WebkitTextStroke: "1.5px var(--color-amber)",
+                }}
+              >
+                {pillar.num}
+              </span>
+              <h3
+                className="font-display font-extrabold uppercase text-deep-navy"
+                style={{ fontSize: "18px", letterSpacing: "0.04em" }}
+              >
+                {pillar.title}
+              </h3>
+              <p
+                className="font-sans"
+                style={{ fontSize: "14px", lineHeight: "1.65", color: "var(--color-muted)" }}
+              >
+                {pillar.body}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
