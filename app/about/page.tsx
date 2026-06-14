@@ -214,7 +214,7 @@ export default function AboutPage() {
           end to end. The spine sits behind (z-0); content sits above. The
           full-width pull-quote band occludes it, so the auger appears to
           pause there and resume below. */}
-      <div className="relative overflow-hidden bg-deep">
+      <div className="relative bg-deep">
         <CentralDrill />
         <WhoWeAre />
         <PullQuote />
