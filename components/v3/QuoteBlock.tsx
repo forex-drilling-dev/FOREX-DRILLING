@@ -7,18 +7,31 @@ type Props = {
   line2: string;
   /** Body paragraph below */
   children?: ReactNode;
+  /** "light" (default) for white/grey sections; "dark" for navy bandeaux */
+  variant?: "light" | "dark";
   className?: string;
 };
 
 /**
  * Editorial pull quote — for HSE / safety statements / mission lines.
  * Big condensed display with line 2 in ocre. Surrounded by negative space.
+ * `variant="dark"` flips the text to white for use on a navy bandeau.
  */
-export function QuoteBlock({ line1, line2, children, className }: Props) {
+export function QuoteBlock({
+  line1,
+  line2,
+  children,
+  variant = "light",
+  className,
+}: Props) {
+  const isDark = variant === "dark";
   return (
     <blockquote className={cn("flex flex-col gap-8", className)}>
       <p
-        className="font-display font-black uppercase text-deep-navy"
+        className={cn(
+          "font-display font-black uppercase",
+          isDark ? "text-on-navy" : "text-deep-navy",
+        )}
         style={{
           fontSize: "clamp(40px, 5.5vw, 80px)",
           lineHeight: "0.95",
@@ -32,7 +45,13 @@ export function QuoteBlock({ line1, line2, children, className }: Props) {
       {children && (
         <div
           className="font-sans max-w-[55ch]"
-          style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-muted)" }}
+          style={{
+            fontSize: "15px",
+            lineHeight: "1.7",
+            color: isDark
+              ? "var(--color-on-navy-muted)"
+              : "var(--color-muted)",
+          }}
         >
           {children}
         </div>
