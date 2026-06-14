@@ -27,7 +27,9 @@ export function CentralDrill() {
   const reduce = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    // Track until the spine has fully scrolled past the top, so it keeps
+    // turning right down to the tip rather than maxing out early.
+    offset: ["start start", "end start"],
   });
 
   // Only create the WebGL context on desktop — never on mobile, where the

@@ -98,7 +98,7 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
     const g = group.current;
     if (!g) return;
     const p = reduce ? 0 : progress.get();
-    g.rotation.y = p * Math.PI * 2 * 7; // seven turns across the scroll range
+    g.rotation.y = p * Math.PI * 2 * 12; // twelve turns across the scroll range
   });
 
   return (
