@@ -3,6 +3,9 @@ import {
   PageHero,
   SectionLabel,
   PillarCard,
+  QuoteBlock,
+  CircleImageRing,
+  DrillBitPin,
   Reveal,
   SectionLink,
 } from "@/components/v3";
@@ -35,19 +38,18 @@ function AboutHero() {
   );
 }
 
-// ─── WHO WE ARE — body paragraphs ───────────────────────────────────────────
+// ─── WHO WE ARE — asymmetric text + circle photo ────────────────────────────
 
 function WhoWeAre() {
   return (
     <section className="relative bg-deep py-12 md:py-32">
-      <div className="mx-auto grid grid-cols-1 max-w-[1500px] gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
-        <Reveal className="flex flex-col gap-5 md:col-span-4">
+      <div className="mx-auto grid grid-cols-1 max-w-[1500px] items-center gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-14">
+        {/* Text — left */}
+        <Reveal className="flex flex-col gap-6 md:col-span-7">
           <SectionLabel number="01" label="Who We Are" />
-        </Reveal>
-        <div className="flex flex-col gap-6 md:col-span-8">
           <p
             className="font-sans"
-            style={{ fontSize: "clamp(14px, 4vw, 16px)", lineHeight: "1.7", color: "var(--color-fore)" }}
+            style={{ fontSize: "clamp(16px, 4.5vw, 20px)", lineHeight: "1.6", color: "var(--color-fore)" }}
           >
             Our team combines strong operational experience with a clear
             understanding of geotechnical, hydrogeological, grade control,
@@ -75,36 +77,84 @@ function WhoWeAre() {
             consistently aim to go beyond minimum requirements to ensure
             successful outcomes.
           </p>
-        </div>
+        </Reveal>
+
+        {/* Photo — right, with floating pins + faded index filigrane */}
+        <Reveal
+          from="right"
+          delay={120}
+          className="relative flex items-center justify-center md:col-span-5 md:justify-end"
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 select-none font-display font-black leading-none"
+            style={{ fontSize: "clamp(110px, 15vw, 190px)", color: "var(--color-deep-navy)", opacity: 0.06 }}
+          >
+            01
+          </span>
+          <div
+            className="absolute -top-6 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:left-auto md:right-10 md:translate-x-0"
+            aria-hidden
+          >
+            <DrillBitPin size={34} className="rotate-180" />
+            <DrillBitPin size={34} />
+          </div>
+          <CircleImageRing
+            src="/images/rig-vertical-clean.jpg"
+            alt="Forex Drilling vertical rig on a prepared drill pad"
+            size={300}
+            ringOffset={18}
+            className="relative z-[1]"
+          />
+        </Reveal>
       </div>
     </section>
   );
 }
 
-// ─── OPERATING MODEL — 3 pillars detailed ──────────────────────────────────
+// ─── PULL-QUOTE — navy bandeau, line reused from the copy above ──────────────
+
+function PullQuote() {
+  return (
+    <section className="relative bg-surface py-16 md:py-28">
+      <div className="mx-auto max-w-[1500px] px-6 md:px-14">
+        <QuoteBlock variant="dark" line1="We go beyond" line2="minimum requirements." />
+      </div>
+    </section>
+  );
+}
+
+// ─── OPERATING MODEL — 3 pillars with drill-pin accents ─────────────────────
 
 function OperatingModel() {
   return (
-    <section className="relative bg-white py-12 md:py-32">
-      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
+    <section className="relative overflow-hidden bg-white py-12 md:py-32">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-4 top-8 select-none font-display font-black leading-none"
+        style={{ fontSize: "clamp(140px, 20vw, 280px)", color: "var(--color-deep-navy)", opacity: 0.04 }}
+      >
+        02
+      </span>
+      <div className="relative mx-auto flex max-w-[1500px] flex-col gap-14 px-6 md:px-14">
         <Reveal className="flex flex-col gap-5 max-w-[700px]">
           <SectionLabel number="02" label="Operating Model" />
         </Reveal>
 
         <div className="grid gap-5 md:grid-cols-3">
-          <PillarCard number="01" title="Versatility">
+          <PillarCard pin number="01" title="Versatility">
             We prioritise deploying crews and equipment capable of covering
             multiple scopes of work, reducing the need for multiple rigs on
             site. This improves efficiency, reduces downtime, and simplifies
             project execution in often complex environments.
           </PillarCard>
-          <PillarCard number="02" title="Resilience">
+          <PillarCard pin number="02" title="Resilience">
             Built into how we operate, through our people, our equipment, and
             our systems. We are structured to maintain performance under
             pressure, adapt to changing ground conditions, and continue
             delivering safely and reliably in challenging environments.
           </PillarCard>
-          <PillarCard number="03" title="Reliability">
+          <PillarCard pin number="03" title="Reliability">
             Structured preventative maintenance programs, regular inspections,
             and disciplined field practices ensure high rig availability,
             consistent productivity, and dependable project delivery.
@@ -115,12 +165,12 @@ function OperatingModel() {
   );
 }
 
-
 export default function AboutPage() {
   return (
     <>
       <AboutHero />
       <WhoWeAre />
+      <PullQuote />
       <OperatingModel />
       <NextPageStrip />
     </>
