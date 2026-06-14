@@ -24,13 +24,18 @@ const RADIAL = 8;
 const ROD_R = 0.17;
 const BLADE_R = 0.64;
 
-const TIP_H = 1.0; // length of the drill point
 const TIP_MARGIN = 0.45; // gap between the point and the canvas bottom
+const TAPER = 2.4; // length over which flight + core narrow to the point
 
 /** Parametric helicoid — one continuous flight winding around the rod axis,
- *  generated from yTop down to yBottom. */
-function buildFlighting(yTop: number, yBottom: number): BufferGeometry {
-  const span = yTop - yBottom;
+ *  from yTop down to the point at yTip. Over the last `taperLen` the flight
+ *  radius shrinks to zero so the spiral converges into the drill point. */
+function buildFlighting(
+  yTop: number,
+  yTip: number,
+  taperLen: number,
+): BufferGeometry {
+  const span = yTop - yTip;
   const turns = Math.max(2, Math.ceil(span / PITCH));
   const uSteps = turns * SEG_PER_TURN;
   const positions: number[] = [];
@@ -38,8 +43,11 @@ function buildFlighting(yTop: number, yBottom: number): BufferGeometry {
   for (let i = 0; i <= uSteps; i++) {
     const u = (i / SEG_PER_TURN) * Math.PI * 2;
     const y = yTop - (i / uSteps) * span;
+    const s = Math.min(1, Math.max(0, (y - yTip) / taperLen));
+    const innerR = ROD_R * s;
+    const outerR = BLADE_R * s;
     for (let j = 0; j < RADIAL; j++) {
-      const r = ROD_R + (BLADE_R - ROD_R) * (j / (RADIAL - 1));
+      const r = innerR + (outerR - innerR) * (j / (RADIAL - 1));
       positions.push(Math.cos(u) * r, y, Math.sin(u) * r);
     }
   }
@@ -61,17 +69,18 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
   const group = useRef<Group>(null);
   const { size, invalidate } = useThree();
 
-  // The spine overflows the top (enters from above) and ends in a point near
+  // The spine overflows the top (enters from above) and tapers to a point near
   // the bottom of the canvas (= bottom of Operating Model, above the CTA).
   const worldH = size.height / ZOOM;
   const yTop = worldH / 2 + 2 * PITCH;
-  const yTipPoint = -worldH / 2 + TIP_MARGIN;
-  const yShaftBottom = yTipPoint + TIP_H;
-  const rodH = yTop - yShaftBottom;
-  const rodCenter = (yTop + yShaftBottom) / 2;
+  const yTip = -worldH / 2 + TIP_MARGIN;
+  const yTaperStart = yTip + TAPER;
+  const rodH = yTop - yTaperStart;
+  const rodCenter = (yTop + yTaperStart) / 2;
+  const coneCenter = (yTip + yTaperStart) / 2;
   const flighting = useMemo(
-    () => buildFlighting(yTop, yShaftBottom),
-    [yTop, yShaftBottom],
+    () => buildFlighting(yTop, yTip, TAPER),
+    [yTop, yTip],
   );
 
   // On-demand rendering: re-render only while the page is scrolling.
@@ -98,13 +107,14 @@ function Auger({ progress, reduce }: AugerCanvasProps) {
           side={DoubleSide}
         />
       </mesh>
+      {/* Core rod */}
       <mesh position={[0, rodCenter, 0]}>
         <cylinderGeometry args={[ROD_R, ROD_R, rodH, 24]} />
         <meshStandardMaterial color="#1c3a6b" metalness={0.55} roughness={0.38} />
       </mesh>
-      {/* Drill point */}
-      <mesh position={[0, yTipPoint + TIP_H / 2, 0]} rotation={[Math.PI, 0, 0]}>
-        <coneGeometry args={[ROD_R * 1.7, TIP_H, 24]} />
+      {/* Core tapering to the point (continues the rod, no fat cone) */}
+      <mesh position={[0, coneCenter, 0]} rotation={[Math.PI, 0, 0]}>
+        <coneGeometry args={[ROD_R, TAPER, 24]} />
         <meshStandardMaterial color="#1c3a6b" metalness={0.55} roughness={0.38} />
       </mesh>
     </group>
