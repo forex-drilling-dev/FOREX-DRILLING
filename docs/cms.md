@@ -1,102 +1,56 @@
-# CMS — self-hosted PHP (operations guide)
+# CMS — Sanity (operations guide)
 
-The News section is powered by a **self-hosted CMS that runs on the existing
-Apache/PHP host (Yulpa)** — no third-party service. PHP code ships with the
-site (via `public/`); content is stored as JSON on the host and served at
-runtime, so **publishing is instant — no rebuild required**.
+The News section is powered by **Sanity**. The public site is a **static export**
+served from the Apache/PHP host (no Node runtime); news is fetched **client-side**
+in the browser from Sanity's public CDN, so publishing is **instant — no rebuild**.
 
-```
-forex-drilling.com/admin        ← editor panel (Apache Basic Auth + PHP login)
-forex-drilling.com/api/news.php ← public read API (published articles only)
-forex-drilling.com/news/        ← list (client-rendered, fetches the API)
-forex-drilling.com/news/<slug>/ ← article (article.php injects SEO/OG meta)
-```
+- Project ID: `rhvec802` · Dataset: `production`
+- Editing happens in the **Sanity-hosted Studio** (not on the Apache host).
+- Contact form still posts to the PHP relay `public/contact.php` (the only
+  server-side code path on this host).
 
-## Architecture in one picture
+## Content model
 
-```
-EDITOR → /admin (2 auth barriers) → writes cms-data/news/<slug>.json + uploads/news/*.jpg
-VISITOR → /news → fetch /api/news.php (published only)
-        → /news/<slug>/ → article.php (per-article meta) → shell → fetch body
-```
+`post` (`lib/sanity/schema/post.ts`): `title`, `slug` (from title), `status`
+(`draft`|`published`), `publishedAt`, `excerpt`, `cover` (image, hotspot),
+`body` (Portable Text: blocks + images). Only `status == "published"` posts with
+a slug appear on the site (`lib/sanity/queries.ts`).
 
-- **Code vs data:** PHP files live in `public/` and are redeployed every build.
-  **Content is NOT in the repo** — it lives in `cms-data/` and `uploads/` on the
-  host and must survive redeploys.
-- `cms-data/` is hardened with `.htaccess` (`Require all denied`) — never web
-  readable. Its location is one constant (`CMS_DATA_DIR` in
-  `admin/lib/config.php`, overridable via the env var) so it can be moved above
-  the web root if the host allows it.
+## How the frontend reads it
 
-## First-run setup (once, on the host)
+- `lib/sanity/client.ts` — `next-sanity` client, `useCdn: true` (anonymous public
+  reads from `rhvec802.apicdn.sanity.io`).
+- `lib/news.ts` — typed fetchers (`fetchNewsList`, `fetchNewsBySlug`, `fetchAllNewsSlugs`).
+- `/news/` → `components/v3/NewsList.tsx` fetches the list client-side.
+- `/news/<slug>/` → Apache rewrites to the static shell `app/news/article/page.tsx`,
+  which reads the slug from the URL and fetches the article client-side. Rewrite
+  lives in `public/.htaccess`.
+- Images: `lib/sanity/image.ts` `urlFor()` → `cdn.sanity.io` (allowed in the CSP).
 
-1. **Deploy** the site (`rm -rf out && pnpm build`, then FTP `out/`). This ships
-   `admin/`, `api/news.php`, `article.php`, `sitemap-news.php`, and the hardened
-   `cms-data/.htaccess` + `uploads/.htaccess`.
+## One-time setup (required for the live site to work)
 
-2. **Set the editor password** (PHP login — barrier 2). Just open
-   `https://forex-drilling.com/admin` — on first visit (no password set yet) it
-   shows a **"first configuration" screen**. Enter a password (10+ chars) twice;
-   the CMS writes `cms-data/config.secret.php` itself (storing only the bcrypt
-   hash, never the plaintext) and then locks that screen permanently.
+1. **Deploy the Studio** (interactive — pick a hostname, e.g. `forexdrilling`):
+   ```bash
+   pnpm deploy:studio        # → https://<hostname>.sanity.studio
+   ```
+2. **Allow the live site as a CORS origin** so the browser fetch is permitted
+   (manage.sanity.io → project `rhvec802` → API → CORS origins, or CLI):
+   ```bash
+   npx sanity cors add https://<your-production-domain> --no-credentials
+   ```
+   Use the real production domain (confirm hyphen vs no-hyphen). Anonymous public
+   reads need **no credentials**.
+3. **Make the `production` dataset public** (manage → API → Datasets) so anonymous
+   reads succeed.
 
-   To change the password later, delete `cms-data/config.secret.php` on the host
-   and the setup screen reappears. (Manual alternative — generate the hash and
-   write the file yourself, see `admin/lib/config.secret.example.php`:
-   `php -r "echo password_hash('YOUR_PASSWORD', PASSWORD_DEFAULT);"`.)
+## Env vars (optional overrides; defaults are baked in)
 
-3. **Enable Apache Basic Auth on `/admin` (barrier 1).** Easiest on Yulpa:
-   cPanel → **Directory Privacy** → protect the `admin` folder, add a user.
-   cPanel writes the correct `.htaccess` + `.htpasswd` automatically. (Manual
-   alternative: create a `.htpasswd` outside the web root and uncomment the
-   `AuthType Basic` block in `admin/.htaccess`, setting the absolute path.)
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` (default `rhvec802`)
+- `NEXT_PUBLIC_SANITY_DATASET` (default `production`)
+- `NEXT_PUBLIC_CONTACT_ENDPOINT` (default `/contact.php`)
 
-4. **Check write permissions:** the web user must be able to create
-   `cms-data/news/`, `cms-data/ratelimit/`, and `uploads/news/` (the code
-   `mkdir`s them; ensure the parent is writable).
+## Deploy hygiene
 
-## Security model (defense in depth, OWASP Top 10)
-
-- **Two auth barriers** on `/admin` and writes: Apache Basic Auth, then PHP
-  session (hashed password, `HttpOnly; Secure; SameSite=Strict` cookie).
-- **CSRF token** on every mutating action; **per-IP rate-limit** on login;
-  **audit log** at `cms-data/audit.log`.
-- **Uploads**: real-MIME checked (`getimagesize`), SVG rejected, random names,
-  PHP execution disabled in `uploads/` via `.htaccess`.
-- **Stored content is untrusted at render**: Markdown is sanitized
-  (`rehype-sanitize`) on the site and HTML-escaped in `article.php`.
-- **Slugs** are allowlisted (`^[a-z0-9-]{1,96}$`) → no path traversal; writes
-  are atomic under `flock`.
-
-Full mapping: `docs/superpowers/specs/2026-06-14-self-hosted-php-cms-design.md` §11b.
-
-## Editing workflow
-
-1. Go to `/admin`, sign in (both barriers).
-2. **New article** → title, body (Markdown toolbar + live preview), excerpt,
-   cover image (uploaded), date, status.
-3. Set **Status = Published** and save → the article is **live immediately** at
-   `/news/` and `/news/<slug>/`. No rebuild, no redeploy.
-4. Draft articles are never exposed by the API.
-
-## Deploy hygiene (important)
-
-- Always `rm -rf out && pnpm build` before FTP (clean export, zero source maps).
-- **FTP without "mirror/delete"** so the host's `cms-data/` and `uploads/` are
-  preserved. They are not part of the build artifact — deleting remote files
-  that aren't in `out/` would wipe all content and images.
-- Never place `cms-data/` or `uploads/` inside the repo or inside `out/`.
-
-## Backup
-
-Download `cms-data/` (all articles + audit log) and `uploads/` (images) by FTP.
-That is the complete content backup.
-
-## SEO note
-
-Article pages are client-rendered, but `article.php` injects per-article
-`<title>`/description/canonical/OpenGraph/Twitter tags into the served HTML, so
-**social link previews (LinkedIn, X, Facebook) and non-JS crawlers get correct
-per-article metadata**. `sitemap-news.php` lists all published articles for
-search engines. The bare `/news/article/` shell is kept out of the index via
-`robots.txt`.
+`next.config.ts` sets `distDir:"out"` (same folder the export writes to). Always
+`rm -rf out && pnpm build` before zipping/FTP so no dev source maps leak. A clean
+`output:"export"` build emits **zero** `.map` files (`find out -name '*.map'` → 0).
