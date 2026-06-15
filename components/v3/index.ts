@@ -25,6 +25,7 @@ export { SectionHeading }   from "./SectionHeading";
 export { QuoteBlock }       from "./QuoteBlock";
 
 // Content blocks
+export { PillarCard }       from "./PillarCard";
 export { ProtocolGrid }     from "./ProtocolGrid";
 export { StepRow }          from "./StepRow";
 export { MarqueeStrip }     from "./MarqueeStrip";
@@ -40,6 +41,7 @@ export { ImageLightbox }    from "./ImageLightbox";
 export { NewsCard }         from "./NewsCard";
 export { NewsList }         from "./NewsList";
 export { NewsBody }         from "./NewsBody";
+export { ArticleView }      from "./ArticleView";
 export type { ServiceItem } from "./ServiceItemsList";
 
 // Inner-page hero composition
@@ -50,4 +52,3 @@ export { Reveal }           from "./Reveal";
 export { StatCounter }      from "./StatCounter";
 export { TaglineAnimated }  from "./TaglineAnimated";
 export { HomeScrollSnap }   from "./HomeScrollSnap";
-export { CentralDrill }     from "./CentralDrill";
