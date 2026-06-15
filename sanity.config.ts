@@ -9,8 +9,6 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'rhvec802',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
-  basePath: '/admin',
-
   plugins: [structureTool()],
 
   schema: {
