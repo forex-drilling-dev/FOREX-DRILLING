@@ -29,12 +29,9 @@ export default function NewsArticleShell() {
 
   useEffect(() => {
     let active = true;
-    const slug = slugFromPath();
-    if (!slug) {
-      setState({ status: "notfound", article: null });
-      return;
-    }
-    fetchNewsBySlug(slug).then((article) => {
+    // An empty slug (bare /news/article/ shell) resolves to null → not-found,
+    // so the only setState happens in this async callback (never synchronously).
+    fetchNewsBySlug(slugFromPath()).then((article) => {
       if (!active) return;
       setState(article ? { status: "ready", article } : { status: "notfound", article: null });
     });
