@@ -1,5 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import type { PortableTextComponents } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
 
@@ -82,7 +83,7 @@ const components: PortableTextComponents = {
   },
 };
 
-export function NewsBody({ body }: { body: any }) {
+export function NewsBody({ body }: { body?: PortableTextBlock[] }) {
   if (!body) return null;
   return <PortableText value={body} components={components} />;
 }

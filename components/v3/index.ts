@@ -41,7 +41,6 @@ export { ImageLightbox }    from "./ImageLightbox";
 export { NewsCard }         from "./NewsCard";
 export { NewsList }         from "./NewsList";
 export { NewsBody }         from "./NewsBody";
-export { ArticleView }      from "./ArticleView";
 export type { ServiceItem } from "./ServiceItemsList";
 
 // Inner-page hero composition

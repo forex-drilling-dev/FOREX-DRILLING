@@ -1,14 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { NewsCard } from "./NewsCard";
 import { Reveal } from "./Reveal";
-import type { NewsArticle } from "@/lib/news";
+import { fetchNewsList, type NewsArticle } from "@/lib/news";
 
 /**
  * Client-rendered news list. The site is a static export, so the list is
- * fetched at runtime from the PHP read API (published articles only) — new
- * articles appear instantly, no rebuild. Shows a skeleton while loading and
- * a neutral empty state when there is nothing published yet.
+ * fetched at runtime in the browser from the Sanity CDN (published articles
+ * only) — new articles appear instantly, no rebuild. Shows a skeleton while
+ * loading and a neutral empty state when there is nothing published yet.
  */
 function Skeleton() {
   return (
@@ -44,7 +45,20 @@ function EmptyState() {
   );
 }
 
-export function NewsList({ articles }: { articles: NewsArticle[] }) {
+export function NewsList() {
+  const [articles, setArticles] = useState<NewsArticle[] | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetchNewsList().then((list) => {
+      if (active) setArticles(list);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  if (articles === null) return <Skeleton />;
   if (articles.length === 0) return <EmptyState />;
 
   return (
