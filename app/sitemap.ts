@@ -5,9 +5,9 @@ const BASE = "https://forexdrilling.com";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Static pages only. News articles live in the self-hosted CMS and are not
-  // known at build time, so they are listed by the runtime PHP sitemap
-  // (/sitemap-news.php), referenced from robots.txt.
+  // Static pages only. News articles are fetched client-side from Sanity and
+  // are not known at build time, so they are not listed here (accepted SEO
+  // trade-off of the client-side news model).
   // Service details live in an in-page modal on /services — no detail URLs.
   return [
     { url: BASE,               priority: 1.0, changeFrequency: "monthly" as const },
