@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   PageHero,
   SectionLabel,
-  QuoteBlock,
   CircleImageRing,
   CentralDrill,
   Reveal,
@@ -43,18 +42,10 @@ function AboutHero() {
   return (
     <PageHero
       badge="ABOUT"
-      line1="About"
-      line2="Forex Drilling."
+      line1="We go beyond"
+      line2="minimum requirements."
       photo={{ src: "/images/rig-forest.jpg", alt: "Drilling rig in forested terrain" }}
-      body={
-        <>
-          Forex Drilling is a specialist drilling contractor supporting mining,
-          exploration, civil, groundwater, and geothermal programs with a broad
-          range of drilling services. Headquartered in Singapore and operating across the
-          Asia-Pacific region, the company is structured to deliver efficient,
-          field-proven solutions in remote and challenging environments.
-        </>
-      }
+      body={null}
     />
   );
 }
@@ -75,34 +66,47 @@ function WhoWeAre() {
             understanding of geotechnical, hydrogeological, grade control,
             structural geology, resource geology, and exploration requirements.
           </p>
-          <p
-            className="font-sans"
-            style={{ fontSize: "clamp(15px, 4vw, 16px)", lineHeight: "1.75", color: "var(--color-fore)" }}
-          >
-            Each drilling program is executed with the objective of producing
-            reliable, high-quality geological data that supports high-confidence
-            geological interpretation. This data underpins geotechnical,
-            environmental, groundwater, grade control, and resource modelling,
-            and informs critical engineering decisions.
-          </p>
-          <p
-            className="font-sans"
-            style={{ fontSize: "clamp(15px, 4vw, 16px)", lineHeight: "1.75", color: "var(--color-fore)" }}
-          >
-            We work closely with our clients from early stages through
-            execution. This includes understanding project constraints,
-            identifying risks, and proposing practical, solution-driven
-            approaches &mdash; from selecting the right drilling methods to
-            delivering fully integrated or turnkey projects when required. We
-            consistently aim to go beyond minimum requirements to ensure
-            successful outcomes.
-          </p>
+          
+          <div className="mt-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-2 rounded-2xl bg-deep p-6">
+              <h4 className="font-display font-bold uppercase tracking-wide text-amber" style={{ fontSize: "14px" }}>
+                High-Quality Data
+              </h4>
+              <p className="font-sans" style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}>
+                Executing programs to produce reliable data for high-confidence interpretation and modelling.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 rounded-2xl bg-deep p-6">
+              <h4 className="font-display font-bold uppercase tracking-wide text-amber" style={{ fontSize: "14px" }}>
+                Critical Engineering
+              </h4>
+              <p className="font-sans" style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}>
+                Data that underpins geotechnical, environmental, groundwater, and resource decisions.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 rounded-2xl bg-deep p-6">
+              <h4 className="font-display font-bold uppercase tracking-wide text-amber" style={{ fontSize: "14px" }}>
+                Integrated Solutions
+              </h4>
+              <p className="font-sans" style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}>
+                Proposing practical, solution-driven approaches&mdash;from selecting methods to turnkey projects.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 rounded-2xl bg-deep p-6">
+              <h4 className="font-display font-bold uppercase tracking-wide text-amber" style={{ fontSize: "14px" }}>
+                Beyond Minimums
+              </h4>
+              <p className="font-sans" style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}>
+                Working closely with clients to identify risks and exceed standard requirements for successful outcomes.
+              </p>
+            </div>
+          </div>
         </Reveal>
 
         {/* Center lane — left clear for the drill spine on desktop. */}
         <div aria-hidden className="hidden lg:block" />
 
-        <Reveal from="right" delay={120} className="flex justify-center lg:pl-16">
+        <Reveal from="right" delay={120} className="hidden justify-center lg:flex lg:pl-16">
           <div className="relative">
             {/* Navy backing panel — gives the photo visual mass. */}
             <span
@@ -124,22 +128,7 @@ function WhoWeAre() {
   );
 }
 
-// ─── PULL-QUOTE — full-width navy band; the auger passes behind it ───────────
 
-function PullQuote() {
-  return (
-    <section className="relative z-10 bg-surface py-20 md:py-32">
-      <div className="mx-auto max-w-[900px] px-6 text-center md:px-14">
-        <QuoteBlock
-          variant="dark"
-          line1="We go beyond"
-          line2="minimum requirements."
-          className="items-center text-center"
-        />
-      </div>
-    </section>
-  );
-}
 
 // ─── OPERATING MODEL — pillars zigzag along the spine ───────────────────────
 
@@ -199,16 +188,15 @@ function OperatingModel() {
 export default function AboutPage() {
   return (
     <>
-      <AboutHero />
-      {/* Body canvas — single continuous surface so the drill spine reads
-          end to end. The spine sits behind (z-0); content sits above. The
-          full-width pull-quote band occludes it, so the auger appears to
-          pause there and resume below. */}
-      {/* Auger spine spans these sections and ends, point-down, at the bottom
-          of Operating Model — just above the Services strip below. */}
       <div className="relative bg-white">
-        <CentralDrill />
-        <PullQuote />
+        <div className="absolute inset-x-0 bottom-0 top-[var(--spacing-nav)] pointer-events-none">
+          <CentralDrill />
+        </div>
+        
+        <div className="relative z-10">
+          <AboutHero />
+        </div>
+
         <WhoWeAre />
         <OperatingModel />
       </div>

@@ -36,7 +36,7 @@ type Props = {
 export function PageHero({ badge, line1, line2, body, photo }: Props) {
   const headingText = line2 ? `${line1} ${line2}` : line1;
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section className="relative w-full overflow-hidden">
       {/* Single canonical <h1>. The visual variants both use aria-hidden
           so the static DOM exposes exactly one heading per page. */}
       <h1 className="sr-only">{headingText}</h1>
@@ -103,7 +103,7 @@ export function PageHero({ badge, line1, line2, body, photo }: Props) {
       </div>
 
       {/* ─── Desktop — full-bleed editorial poster (lg+) ─────────── */}
-      <div className="relative hidden h-[680px] pt-[var(--spacing-nav)] lg:block">
+      <div className={`relative hidden pt-[var(--spacing-nav)] lg:block ${body ? "h-[680px]" : "h-[640px]"}`}>
         <BgGreyShape className="top-[120px] right-[-50px]" />
 
         <div

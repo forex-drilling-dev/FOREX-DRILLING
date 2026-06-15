@@ -33,7 +33,7 @@ export function QuoteBlock({
           isDark ? "text-on-navy" : "text-deep-navy",
         )}
         style={{
-          fontSize: "clamp(30px, 5.5vw, 80px)",
+          fontSize: "clamp(28px, 4vw, 56px)",
           lineHeight: "0.95",
           letterSpacing: "-0.005em",
         }}
