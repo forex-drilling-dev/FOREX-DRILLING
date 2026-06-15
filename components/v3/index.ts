@@ -25,7 +25,6 @@ export { SectionHeading }   from "./SectionHeading";
 export { QuoteBlock }       from "./QuoteBlock";
 
 // Content blocks
-export { PillarCard }       from "./PillarCard";
 export { ProtocolGrid }     from "./ProtocolGrid";
 export { StepRow }          from "./StepRow";
 export { MarqueeStrip }     from "./MarqueeStrip";
@@ -51,3 +50,4 @@ export { Reveal }           from "./Reveal";
 export { StatCounter }      from "./StatCounter";
 export { TaglineAnimated }  from "./TaglineAnimated";
 export { HomeScrollSnap }   from "./HomeScrollSnap";
+export { CentralDrill }     from "./CentralDrill";
