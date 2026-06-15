@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { NewsCard } from "./NewsCard";
 import { Reveal } from "./Reveal";
-import { fetchNewsList, type NewsArticle } from "@/lib/news";
+import type { NewsArticle } from "@/lib/news";
 
 /**
  * Client-rendered news list. The site is a static export, so the list is
@@ -45,30 +44,13 @@ function EmptyState() {
   );
 }
 
-export function NewsList() {
-  const [loading, setLoading] = useState(true);
-  const [articles, setArticles] = useState<NewsArticle[]>([]);
-
-  useEffect(() => {
-    let active = true;
-    fetchNewsList().then((list) => {
-      if (active) {
-        setArticles(list);
-        setLoading(false);
-      }
-    });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  if (loading) return <Skeleton />;
+export function NewsList({ articles }: { articles: NewsArticle[] }) {
   if (articles.length === 0) return <EmptyState />;
 
   return (
     <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {articles.map((article) => (
-        <li key={article.id || article.slug}>
+        <li key={article._id || article.slug}>
           <Reveal>
             <NewsCard article={article} />
           </Reveal>

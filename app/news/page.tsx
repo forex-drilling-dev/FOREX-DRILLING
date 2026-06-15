@@ -5,6 +5,7 @@ import {
   Reveal,
   NewsList,
 } from "@/components/v3";
+import { fetchNewsList } from "@/lib/news";
 
 export const metadata: Metadata = {
   title: "News",
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/news" },
 };
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const articles = await fetchNewsList();
+
   return (
     <>
       <PageHero
@@ -38,7 +41,7 @@ export default function NewsPage() {
             <SectionLabel number="01" label="Latest" />
           </Reveal>
 
-          <NewsList />
+          <NewsList articles={articles} />
         </div>
       </section>
     </>

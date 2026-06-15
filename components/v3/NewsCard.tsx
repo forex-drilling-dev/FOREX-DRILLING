@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { NewsArticle } from "@/lib/news";
 import { formatNewsDate } from "@/lib/date";
+import { urlFor } from "@/lib/sanity/image";
 
 /**
  * News list card — cover (same-origin /uploads), mono date, display title,
@@ -9,8 +10,8 @@ import { formatNewsDate } from "@/lib/date";
  * fleet rig cards / SectionLink.
  */
 export function NewsCard({ article }: { article: NewsArticle }) {
-  const cover = article.cover?.url ?? null;
-  const alt = article.cover?.alt ?? article.title;
+  const cover = article.cover ? urlFor(article.cover).width(800).url() : null;
+  const alt = article.title;
 
   return (
     <Link

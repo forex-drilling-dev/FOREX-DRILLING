@@ -39,8 +39,8 @@ type FormValues = z.infer<typeof schema>;
 type Status = "idle" | "submitting" | "success" | "error";
 
 // Server-side endpoint that relays the enquiry via the Resend API.
-// Defaults to the PHP endpoint shipped at the site root (/contact.php).
-const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/contact.php";
+// Defaults to the native Next.js API route.
+const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/api/contact";
 
 export function ContactForm() {
   const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<FormValues>({
