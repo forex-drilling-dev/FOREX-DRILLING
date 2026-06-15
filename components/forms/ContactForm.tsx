@@ -38,9 +38,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 type Status = "idle" | "submitting" | "success" | "error";
 
-// Server-side endpoint that relays the enquiry via the Resend API.
-// Defaults to the native Next.js API route.
-const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/api/contact";
+// Server-side endpoint that relays the enquiry via the Resend API. The site is
+// a static export on Apache/PHP, so there is no Node runtime — the relay is the
+// PHP script that ships in public/ (contact.php), not a Next.js API route.
+const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/contact.php";
 
 export function ContactForm() {
   const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<FormValues>({
