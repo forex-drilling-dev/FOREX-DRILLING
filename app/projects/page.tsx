@@ -113,7 +113,7 @@ function NextPageStrip() {
   return (
     <section className="relative bg-deep py-14 md:py-20">
       <div className="mx-auto flex max-w-[1500px] justify-center px-6 md:px-14">
-        <SectionLink href="/contact" label="Contact" />
+        <SectionLink href="/news" label="News" />
       </div>
     </section>
   );

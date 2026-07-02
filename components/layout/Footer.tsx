@@ -49,7 +49,6 @@ export function Footer() {
             />
             <p className="mt-6 max-w-sm font-sans text-sm font-normal leading-relaxed text-on-navy-muted">
               Specialised drilling services across the Asia-Pacific region.
-              Singapore headquarters, Papua New Guinea field operations.
             </p>
           </div>
 
@@ -79,12 +78,9 @@ export function Footer() {
             <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-amber">
               Contact
             </p>
-            <p className="mt-5 font-sans text-sm font-normal text-on-navy-muted">
-              {site.footer.address}
-            </p>
             <a
               href={`mailto:${site.footer.email}`}
-              className="mt-2 block font-sans text-sm font-medium text-on-navy transition-colors duration-fast hover:text-amber"
+              className="mt-5 block font-sans text-sm font-medium text-on-navy transition-colors duration-fast hover:text-amber"
             >
               {site.footer.email}
             </a>

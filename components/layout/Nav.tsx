@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/content/site";
+import { AnimatedLogoMark } from "@/components/motion/AnimatedLogoMark";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
@@ -18,9 +19,13 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  // Close the mobile menu on navigation — state adjusted during render
+  // (not in an effect) per react-hooks/set-state-in-effect.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <header
@@ -41,16 +46,9 @@ export function Nav() {
         >
           {/* Official brand logo, mark-only variant — icon + FOREX DRILLING
               wordmark, tagline cropped out (it would just repeat the
-              homepage hero copy). Plain <img> for pure-vector rendering. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-mark.svg"
-            alt="Forex Drilling"
-            width={880}
-            height={200}
-            decoding="async"
-            className="h-8 w-auto select-none sm:h-9 md:h-11"
-          />
+              homepage hero copy). Plays the logo build animation once per
+              session, then settles on the static /logo-mark.svg. */}
+          <AnimatedLogoMark className="h-8 w-auto select-none sm:h-9 md:h-11" />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {site.nav.map((item) => {

@@ -55,7 +55,7 @@ export default function ContactPage() {
               </dd>
             </div>
             <div>
-              <dt className={dtCls} style={dtStyle}>Operations</dt>
+              <dt className={dtCls} style={dtStyle}>Subsidiary</dt>
               <dd className="mt-1 font-sans text-deep-navy md:mt-2" style={{ fontSize: "15px", lineHeight: "1.65" }}>
                 Level 5, Avara Annex Building<br />
                 Brampton Street<br />

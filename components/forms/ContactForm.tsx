@@ -16,7 +16,7 @@ const countrySearchPool = [
 
 function matchCountries(query: string) {
   const q = query.trim().toLowerCase();
-  if (!q) return countrySearchPool.slice(0, 8); // empty field → AP shortlist
+  if (!q) return []; // empty field → no list; suggestions start at the first letter
   const starts = countrySearchPool.filter((c) => c.name.toLowerCase().startsWith(q));
   const contains = countrySearchPool.filter(
     (c) => !c.name.toLowerCase().startsWith(q) && c.name.toLowerCase().includes(q),

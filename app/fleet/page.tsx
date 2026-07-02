@@ -128,6 +128,7 @@ const rigs = [
     meta: "Fleet: 1 unit · Fraste",
     image: "/images/rig-fraste-mito-8c.jpg",
     imageAlt: "Fraste Mito 8C lightweight crawler rig with mast raised on grass",
+    imagePosition: "center bottom",
     points: [
       "Lightweight crawler that reaches remote, tight or low-bearing ground",
       "Fast to mobilise — ideal rapid second rig or standalone for smaller scopes",
@@ -159,6 +160,7 @@ function RigsSection() {
                 alt={rig.imageAlt}
                 sizes="(min-width:768px) 33vw, 100vw"
                 blurDataURL={blurPlaceholder(rig.image)}
+                thumbPosition={rig.imagePosition}
               />
               <div className="border-b-2 border-amber pb-3">
                 <h3

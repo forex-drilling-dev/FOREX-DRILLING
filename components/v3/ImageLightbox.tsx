@@ -12,6 +12,8 @@ type Props = {
   blurDataURL?: string;
   /** Tailwind aspect class for the thumbnail frame, e.g. "aspect-[4/3]". */
   thumbAspect?: string;
+  /** CSS object-position for the cover-cropped thumbnail (default "center"). */
+  thumbPosition?: string;
 };
 
 /**
@@ -19,7 +21,7 @@ type Props = {
  * the services detail modal (navy blurred backdrop, white rounded frame,
  * scroll lock, Escape / backdrop / X to close).
  */
-export function ImageLightbox({ src, alt, sizes, blurDataURL, thumbAspect = "aspect-[4/3]" }: Props) {
+export function ImageLightbox({ src, alt, sizes, blurDataURL, thumbAspect = "aspect-[4/3]", thumbPosition = "center" }: Props) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -61,6 +63,7 @@ export function ImageLightbox({ src, alt, sizes, blurDataURL, thumbAspect = "asp
           fill
           sizes={sizes}
           className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+          style={{ objectPosition: thumbPosition }}
           placeholder={blurDataURL ? "blur" : "empty"}
           blurDataURL={blurDataURL}
         />

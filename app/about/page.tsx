@@ -3,7 +3,6 @@ import {
   PageHero,
   SectionLabel,
   CircleImageRing,
-  CentralDrill,
   Reveal,
   SectionLink,
 } from "@/components/v3";
@@ -42,8 +41,8 @@ function AboutHero() {
   return (
     <PageHero
       badge="ABOUT"
-      line1="We go beyond"
-      line2="minimum requirements."
+      line1="Built on Drilling."
+      line2="Driven by Delivery."
       photo={{ src: "/images/rig-forest.jpg", alt: "Drilling rig in forested terrain" }}
       body={null}
     />
@@ -55,12 +54,12 @@ function AboutHero() {
 function WhoWeAre() {
   return (
     <section className="relative z-10 py-16 md:py-32">
-      <div className="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-12 px-6 md:px-14 lg:grid-cols-[1fr_220px_1fr] lg:gap-0">
-        <Reveal className="flex flex-col gap-6 lg:pr-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-12 px-6 md:px-14 lg:grid-cols-2 lg:gap-20">
+        <Reveal className="flex flex-col gap-6">
           <SectionLabel number="01" label="Who We Are" />
           <p
             className="font-sans font-medium"
-            style={{ fontSize: "clamp(17px, 4.5vw, 22px)", lineHeight: "1.55", color: "var(--color-fore)" }}
+            style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}
           >
             Our team combines strong operational experience with a clear
             understanding of geotechnical, hydrogeological, grade control,
@@ -73,7 +72,7 @@ function WhoWeAre() {
                 High-Quality Data
               </h4>
               <p className="font-sans" style={{ fontSize: "15px", lineHeight: "1.6", color: "var(--color-fore)" }}>
-                Executing programs to produce reliable data for high-confidence interpretation and modelling.
+                Executing drilling programs to produce reliable data for high-confidence interpretation and modelling.
               </p>
             </div>
             <div className="flex flex-col gap-2 rounded-2xl bg-deep p-6">
@@ -103,10 +102,7 @@ function WhoWeAre() {
           </div>
         </Reveal>
 
-        {/* Center lane — left clear for the drill spine on desktop. */}
-        <div aria-hidden className="hidden lg:block" />
-
-        <Reveal from="right" delay={120} className="hidden justify-center lg:flex lg:pl-16">
+        <Reveal from="right" delay={120} className="hidden justify-center lg:flex">
           <div className="relative">
             {/* Navy backing panel — gives the photo visual mass. */}
             <span
@@ -140,41 +136,58 @@ function OperatingModel() {
           <SectionLabel number="02" label="Operating Model" />
         </Reveal>
 
-        <div className="flex flex-col gap-12 lg:gap-8">
+        <div className="relative flex flex-col gap-12 lg:gap-8">
+          {/* Center spine — vertical hairline running down the middle */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-border lg:block"
+          />
           {PILLARS.map((pillar, i) => {
             const left = i % 2 === 0;
             return (
-              <Reveal
-                key={pillar.title}
-                delay={i * 80}
-                className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[1fr_220px_1fr]"
-              >
-                <div
-                  className={
-                    left
-                      ? "flex flex-col gap-3 lg:col-start-1 lg:items-end lg:pr-20 lg:text-right"
-                      : "flex flex-col gap-3 lg:col-start-3 lg:items-start lg:pl-20"
-                  }
-                >
+              <Reveal key={pillar.title} delay={i * 80} className="flex flex-col gap-3">
+                {/* Header row — number + spine dot, vertically centered together */}
+                <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[1fr_220px_1fr]">
                   <span
                     aria-hidden
-                    className="font-display font-black leading-none text-amber"
+                    className={
+                      left
+                        ? "font-display font-black leading-none text-amber lg:col-start-1 lg:row-start-1 lg:pr-20 lg:text-right"
+                        : "font-display font-black leading-none text-amber lg:col-start-3 lg:row-start-1 lg:pl-20"
+                    }
                     style={{ fontSize: "clamp(40px, 5vw, 54px)" }}
                   >
                     {pillar.num}
                   </span>
-                  <h3
-                    className="font-display font-extrabold uppercase text-deep-navy"
-                    style={{ fontSize: "20px", letterSpacing: "0.04em" }}
+                  <span
+                    aria-hidden
+                    className="hidden lg:col-start-2 lg:row-start-1 lg:flex lg:justify-center"
                   >
-                    {pillar.title}
-                  </h3>
-                  <p
-                    className="max-w-[42ch] font-sans"
-                    style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-fore)" }}
+                    <span className="h-3.5 w-3.5 rounded-full bg-amber ring-4 ring-white" />
+                  </span>
+                </div>
+                {/* Body row — title + copy aligned under the number */}
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_220px_1fr]">
+                  <div
+                    className={
+                      left
+                        ? "flex flex-col gap-3 lg:col-start-1 lg:items-end lg:pr-20 lg:text-right"
+                        : "flex flex-col gap-3 lg:col-start-3 lg:items-start lg:pl-20"
+                    }
                   >
-                    {pillar.body}
-                  </p>
+                    <h3
+                      className="font-display font-extrabold uppercase text-deep-navy"
+                      style={{ fontSize: "20px", letterSpacing: "0.04em" }}
+                    >
+                      {pillar.title}
+                    </h3>
+                    <p
+                      className="max-w-[42ch] font-sans"
+                      style={{ fontSize: "15px", lineHeight: "1.7", color: "var(--color-fore)" }}
+                    >
+                      {pillar.body}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             );
@@ -189,14 +202,7 @@ export default function AboutPage() {
   return (
     <>
       <div className="relative bg-white">
-        <div className="absolute inset-x-0 bottom-0 top-[var(--spacing-nav)] pointer-events-none">
-          <CentralDrill />
-        </div>
-        
-        <div className="relative z-10">
-          <AboutHero />
-        </div>
-
+        <AboutHero />
         <WhoWeAre />
         <OperatingModel />
       </div>
